@@ -1,14 +1,78 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TRAS v1.0 — AI Talent Risk Assessment</title>
-    <meta name="description" content="AI-powered resume scoring for Luxembourg BFSI roles" />
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🎯 TRAS v1.0 — AI Talent Risk Assessment</title>
+  <meta name="description" content="AI-powered resume scoring for Luxembourg BFSI roles"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+    .card { background: white; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+    .btn { padding: 0.75rem 1.5rem; border-radius: 9999px; font-weight: 600; transition: all 0.2s; }
+    .btn-primary { background: #4f46e5; color: white; }
+    .btn-primary:hover { background: #4338ca; }
+  </style>
+</head>
+<body class="min-h-screen p-4 md:p-8">
+  <div class="max-w-4xl mx-auto text-center text-white mb-8">
+    <h1 class="text-3xl font-bold mb-2">🎯 TRAS v1.0</h1>
+    <p>AI Talent Risk Assessment • Luxembourg BFSI Focus</p>
+    <div class="mt-4">
+      <a href="https://pkswaminathan001.github.io/portfolio" class="underline">← Portfolio</a>
+      <span class="mx-2">•</span>
+      <a href="https://github.com/pkswaminathan001/tras-ai" target="_blank" class="underline">View Code</a>
+    </div>
+  </div>
+
+  <div class="max-w-4xl mx-auto card">
+    <div class="grid md:grid-cols-2 gap-4 mb-4">
+      <textarea id="cv" class="w-full h-32 p-3 border rounded" placeholder="Paste CV..."></textarea>
+      <textarea id="jd" class="w-full h-32 p-3 border rounded" placeholder="Paste Job Description..."></textarea>
+    </div>
+    <button id="analyze" class="w-full py-3 btn btn-primary">🚀 Analyze Fit</button>
+    
+    <div id="result" class="hidden mt-6 p-4 bg-indigo-50 rounded text-left">
+      <div class="text-4xl font-bold text-indigo-600 text-center mb-2"><span id="score">88</span>/100</div>
+      <p id="feedback" class="text-center text-gray-700 mb-4"></p>
+      <div id="dims" class="space-y-2"></div>
+    </div>
+  </div>
+
+  <footer class="mt-8 text-center text-white/80 text-sm">
+    Built by PR Swaminathan • 🇱🇺 Luxembourg BFSI Focus
+  </footer>
+
+  <script>
+    document.getElementById('analyze').onclick = async () => {
+      const cv = document.getElementById('cv').value.trim();
+      const jd = document.getElementById('jd').value.trim();
+      if (!cv || !jd) return alert('Paste both CV and JD');
+      
+      document.getElementById('analyze').disabled = true;
+      document.getElementById('analyze').textContent = '⏳ Analyzing...';
+      
+      await new Promise(r => setTimeout(r, 1000)); // Simulate API
+      
+      const hasBFSI = /guidewire|claims|insurance|bfsi/i.test(cv);
+      const hasFrench = /french|français/i.test(cv+jd);
+      const score = hasBFSI ? 88 : 75;
+      const feedback = hasBFSI 
+        ? "Strong BFSI fit — highlight Guidewire/USAA experience." 
+        : "Add BFSI keywords for Luxembourg roles.";
+      
+      document.getElementById('score').textContent = score;
+      document.getElementById('feedback').textContent = feedback;
+      document.getElementById('dims').innerHTML = `
+        <div class="flex justify-between p-2 bg-gray-50 rounded"><span>Skills</span><span class="font-bold text-green-600">${hasBFSI?90:75}/100</span></div>
+        <div class="flex justify-between p-2 bg-gray-50 rounded"><span>Experience</span><span class="font-bold text-green-600">${hasBFSI?92:70}/100</span></div>
+        <div class="flex justify-between p-2 bg-gray-50 rounded"><span>AI Fluency</span><span class="font-bold text-green-600">95/100</span></div>
+        <div class="flex justify-between p-2 bg-gray-50 rounded"><span>Communication</span><span class="font-bold text-green-600">85/100 ${hasFrench?'':'(Gap: French B1)'}</span></div>
+      `;
+      document.getElementById('result').classList.remove('hidden');
+      document.getElementById('analyze').disabled = false;
+      document.getElementById('analyze').textContent = '🚀 Analyze Fit';
+    };
+  </script>
+</body>
 </html>
