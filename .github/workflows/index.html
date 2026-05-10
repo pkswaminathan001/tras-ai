@@ -5,73 +5,410 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>🎯 TRAS v1.0 — AI Talent Risk Assessment</title>
   <meta name="description" content="AI-powered resume scoring for Luxembourg BFSI roles"/>
+  
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- AOS Animations -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  
+  <!-- Typed.js -->
+  <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+  
+  <!-- Vanilla Tilt -->
+  <script src="https://unpkg.com/vanilla-tilt@1.8.0/dist/vanilla-tilt.min.js"></script>
+  
+  <!-- Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  
+  <!-- jsPDF for Export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  
+  <!-- Particles.js -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  
   <style>
-    body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-    .card { background: white; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-    .btn { padding: 0.75rem 1.5rem; border-radius: 9999px; font-weight: 600; transition: all 0.2s; }
-    .btn-primary { background: #4f46e5; color: white; }
-    .btn-primary:hover { background: #4338ca; }
+    /* Animated Gradient */
+    body {
+      background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4f46e5);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      min-height: 100vh;
+      color: white;
+      transition: background 0.3s, color 0.3s;
+    }
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    /* Glassmorphism Card */
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      color: #1f2937;
+      transform-style: preserve-3d;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    /* Buttons */
+    .btn {
+      padding: 0.875rem 2rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: white;
+      box-shadow: 0 10px 25px rgba(79, 70, 229, 0.4);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 20px 40px rgba(79, 70, 229, 0.6); }
+    .btn-primary:active { transform: translateY(0); }
+    
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255,255,255,0.3);
+      transition: all 0.3s;
+    }
+    .badge:hover { background: rgba(255, 255, 255, 0.4); transform: translateY(-2px); }
+    
+    /* Keyword Highlights */
+    .keyword-highlight { padding: 0.1rem 0.3rem; border-radius: 0.25rem; font-weight: 600; }
+    .kw-bfsi { background: #dbeafe; color: #1e40af; }
+    .kw-compliance { background: #ede9fe; color: #5b21b6; }
+    .kw-french { background: #fef3c7; color: #92400e; }
+    .kw-lux { background: #fee2e2; color: #991b1b; }
+    
+    /* Particles */
+    #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+    
+    /* Result Animation */
+    #result { animation: slideUp 0.5s ease-out; }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    
+    /* Modal */
+    .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 100; padding: 1rem; }
+    .modal.active { display: flex; }
+    .modal-content { background: white; color: #1f2937; border-radius: 1.5rem; max-width: 600px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 2rem; position: relative; }
+    
+    /* Dark Mode */
+    .dark body { background: linear-gradient(-45deg, #1e1b4b, #312e81, #4c1d95, #1e1b4b); color: #f1f5f9; }
+    .dark .card { background: rgba(30, 27, 75, 0.95); color: #f1f5f9; }
+    .dark .badge { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); }
+    .dark textarea { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); color: white; }
   </style>
 </head>
-<body class="min-h-screen p-4 md:p-8">
-  <div class="max-w-4xl mx-auto text-center text-white mb-8">
-    <h1 class="text-3xl font-bold mb-2">🎯 TRAS v1.0</h1>
-    <p>AI Talent Risk Assessment • Luxembourg BFSI Focus</p>
-    <div class="mt-4">
-      <a href="https://pkswaminathan001.github.io/portfolio" class="underline">← Portfolio</a>
-      <span class="mx-2">•</span>
-      <a href="https://github.com/pkswaminathan001/tras-ai" target="_blank" class="underline">View Code</a>
+<body class="p-4 md:p-8">
+  <!-- Particles Background -->
+  <div id="particles-js"></div>
+  
+  <div class="max-w-5xl mx-auto">
+    <!-- Hero -->
+    <header class="text-center mb-10" data-aos="fade-down" data-aos-duration="1000">
+      <h1 class="text-4xl md:text-5xl font-bold mb-3">🎯 <span id="typed-headline"></span></h1>
+      <p class="text-lg md:text-xl opacity-90 mb-4">AI Talent Risk Assessment • Luxembourg BFSI Focus</p>
+      
+      <div class="flex flex-wrap justify-center gap-2 mb-6">
+        <span class="badge">🇱🇺 Seeking Luxembourg Roles</span>
+        <span class="badge">🇪🇺 EU Blue Card Eligible</span>
+        <span class="badge">🇫🇷 French: A2 → B1</span>
+      </div>
+      
+      <div class="flex flex-wrap justify-center gap-3">
+        <a href="https://pkswaminathan001.github.io/portfolio" class="badge hover:bg-white/30">← Portfolio</a>
+        <a href="https://github.com/pkswaminathan001/tras-ai" target="_blank" class="badge hover:bg-white/30">View Code</a>
+        <button id="openTechModal" class="badge hover:bg-white/30 cursor-pointer">⚙️ How It Works</button>
+        <button id="themeToggle" class="badge hover:bg-white/30 cursor-pointer">🌙</button>
+      </div>
+    </header>
+
+    <!-- Main Card -->
+    <div class="card mx-auto max-w-4xl" data-aos="fade-up" data-aos-delay="400" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.1">
+      <!-- Inputs -->
+      <div class="grid md:grid-cols-2 gap-6 mb-6">
+        <div>
+          <label class="block font-semibold mb-2 text-gray-800">📄 Paste CV Text</label>
+          <textarea id="cv" class="w-full h-36 p-4 border-2 border-gray-200 rounded-xl focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition resize-none bg-gray-50" placeholder="Example: Prompt Engineer with BFSI experience..."></textarea>
+        </div>
+        <div>
+          <label class="block font-semibold mb-2 text-gray-800">💼 Paste Job Description</label>
+          <textarea id="jd" class="w-full h-36 p-4 border-2 border-gray-200 rounded-xl focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition resize-none bg-gray-50" placeholder="Example: AI Business Analyst at Deloitte Luxembourg..."></textarea>
+        </div>
+      </div>
+
+      <!-- Analyze Button -->
+      <button id="analyze" class="w-full py-4 btn btn-primary text-lg" data-aos="zoom-in" data-aos-delay="500">🚀 Analyze Fit</button>
+
+      <!-- Keyword Preview (Added Dynamically) -->
+      <div id="keywordPreview" class="hidden mt-4 p-4 bg-gray-50 rounded-xl border border-gray-200"></div>
+
+      <!-- Results -->
+      <div id="result" class="hidden mt-8 p-6 bg-gradient-to-br from-indigo-50 via-white to-purple-50 rounded-2xl border border-indigo-100">
+        <div class="text-center mb-6 pb-4 border-b border-indigo-100">
+          <div class="text-6xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+            <span id="score">0</span><span class="text-3xl text-gray-400 font-normal">/100</span>
+          </div>
+          <div class="text-gray-500 font-medium uppercase tracking-widest text-sm mt-2">Overall Fit Score</div>
+          <div id="verdict" class="mt-2 text-lg font-bold"></div>
+          <div id="luxFit" class="mt-1 text-sm text-gray-500"></div>
+        </div>
+        
+        <div class="space-y-3 mb-6" id="dimensions"></div>
+        
+        <div id="feedback" class="p-4 bg-white rounded-xl border-l-4 border-indigo-500 shadow-sm font-medium text-gray-800"></div>
+        
+        <!-- Action Buttons -->
+        <div class="mt-6 flex flex-wrap gap-3 justify-center">
+          <button id="resetBtn" class="px-5 py-2.5 text-gray-600 hover:bg-gray-100 rounded-xl transition font-medium">🔄 New Analysis</button>
+          <a href="https://pkswaminathan001.github.io/portfolio" class="px-5 py-2.5 btn btn-primary">💼 View Portfolio</a>
+          <button id="exportBtn" class="px-5 py-2.5 bg-gray-800 text-white rounded-xl hover:bg-gray-900 transition font-medium">📄 Export PDF</button>
+          <button id="shareBtn" class="px-5 py-2.5 bg-green-500 text-white rounded-xl hover:bg-green-600 transition font-medium">📤 Share on LinkedIn</button>
+        </div>
+        
+        <!-- Privacy Note -->
+        <p class="mt-4 text-xs text-center text-gray-400">🔐 All analysis happens in your browser. No data is stored or sent.</p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-12 text-center opacity-80 text-sm pb-8" data-aos="fade-up" data-aos-delay="600">
+      <p>Built with ❤️ by <strong>PR Swaminathan</strong> • Prompt Engineer | AI Business Analyst</p>
+      <p class="mt-1">🇱🇺 Optimized for Luxembourg BFSI/AI roles • French: Basic (Learning)</p>
+      <div class="mt-3 flex justify-center gap-4">
+        <a href="mailto:prswaminathan001@gmail.com" class="hover:underline">📧 Email</a>
+        <a href="https://linkedin.com/in/prswaminathan" target="_blank" class="hover:underline">💼 LinkedIn</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Tech Modal -->
+  <div id="techModal" class="modal">
+    <div class="modal-content">
+      <button id="closeModal" class="absolute top-4 right-4 text-2xl text-gray-400 hover:text-gray-600">&times;</button>
+      <h3 class="text-2xl font-bold mb-4 text-gray-800">⚙️ How TRAS Works</h3>
+      <div class="space-y-4 text-gray-700 text-sm">
+        <div class="p-4 bg-indigo-50 rounded-xl">
+          <h4 class="font-semibold mb-2">🎯 Architecture</h4>
+          <pre class="text-xs bg-gray-100 p-3 rounded overflow-x-auto">[Input] → [Keyword Scanner] → [Mock/Claude Logic] → [Score] → [Results + PDF]</pre>
+        </div>
+        <div class="p-4 bg-green-50 rounded-xl">
+          <h4 class="font-semibold mb-2">🇱🇺 Luxembourg BFSI Logic</h4>
+          <ul class="list-disc list-inside space-y-1">
+            <li>Regex: <code>guidewire|claims|kyc|aml|compliance</code></li>
+            <li>French detection: <code>french|français|b1|b2</code></li>
+            <li>Weighted scoring: Skills 30%, Experience 25%, Education 15%, AI 20%, Communication 10%</li>
+          </ul>
+        </div>
+        <div class="p-4 bg-purple-50 rounded-xl">
+          <h4 class="font-semibold mb-2">🛠️ Tech Stack</h4>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-2 py-1 bg-gray-200 rounded text-xs">HTML5</span>
+            <span class="px-2 py-1 bg-gray-200 rounded text-xs">Tailwind CSS</span>
+            <span class="px-2 py-1 bg-gray-200 rounded text-xs">Vanilla JS</span>
+            <span class="px-2 py-1 bg-gray-200 rounded text-xs">AOS</span>
+            <span class="px-2 py-1 bg-gray-200 rounded text-xs">jsPDF</span>
+            <span class="px-2 py-1 bg-gray-200 rounded text-xs">GitHub Pages</span>
+          </div>
+        </div>
+        <div class="p-4 bg-yellow-50 rounded-xl">
+          <h4 class="font-semibold mb-2">🔐 Privacy</h4>
+          <p>All analysis happens in your browser. No data is sent to servers. GDPR-compliant.</p>
+        </div>
+      </div>
+      <div class="mt-6 text-right">
+        <button id="closeModal2" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">Got it!</button>
+      </div>
     </div>
   </div>
 
-  <div class="max-w-4xl mx-auto card">
-    <div class="grid md:grid-cols-2 gap-4 mb-4">
-      <textarea id="cv" class="w-full h-32 p-3 border rounded" placeholder="Paste CV..."></textarea>
-      <textarea id="jd" class="w-full h-32 p-3 border rounded" placeholder="Paste Job Description..."></textarea>
-    </div>
-    <button id="analyze" class="w-full py-3 btn btn-primary">🚀 Analyze Fit</button>
-    
-    <div id="result" class="hidden mt-6 p-4 bg-indigo-50 rounded text-left">
-      <div class="text-4xl font-bold text-indigo-600 text-center mb-2"><span id="score">88</span>/100</div>
-      <p id="feedback" class="text-center text-gray-700 mb-4"></p>
-      <div id="dims" class="space-y-2"></div>
-    </div>
-  </div>
-
-  <footer class="mt-8 text-center text-white/80 text-sm">
-    Built by PR Swaminathan • 🇱🇺 Luxembourg BFSI Focus
-  </footer>
-
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
+    // Initialize
+    AOS.init({ duration: 800, once: true, offset: 50, easing: 'ease-out-cubic' });
+    
+    // Typed.js
+    new Typed('#typed-headline', {
+      strings: ['TRAS v1.0', 'AI Talent Risk', 'Luxembourg BFSI', 'No API Key Needed'],
+      typeSpeed: 50, backSpeed: 30, backDelay: 2000, loop: true
+    });
+    
+    // Vanilla Tilt
+    VanillaTilt.init(document.querySelectorAll("[data-tilt]"), { max: 5, speed: 400, glare: true, "max-glare": 0.1, scale: 1.01 });
+    
+    // Particles
+    particlesJS('particles-js', {
+      particles: { number: { value: 40, density: { enable: true, value_area: 800 } }, color: { value: "#ffffff" }, shape: { type: "circle" }, opacity: { value: 0.15, random: true }, size: { value: 3, random: true }, line_linked: { enable: true, distance: 150, color: "#ffffff", opacity: 0.1, width: 1 }, move: { enable: true, speed: 1, direction: "none", random: true, out_mode: "out" } },
+      interactivity: { detect_on: "canvas", events: { onhover: { enable: true, mode: "repulse" } }, modes: { repulse: { distance: 120, duration: 0.4 } } },
+      retina_detect: true
+    });
+    
+    // Dark Mode Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      html.classList.add('dark'); themeToggle.textContent = '☀️';
+    }
+    themeToggle.onclick = () => {
+      html.classList.toggle('dark');
+      localStorage.theme = html.classList.contains('dark') ? 'dark' : 'light';
+      themeToggle.textContent = html.classList.contains('dark') ? '☀️' : '🌙';
+    };
+    
+    // Modal Logic
+    const modal = document.getElementById('techModal');
+    const openModal = document.getElementById('openTechModal');
+    const closeModals = [document.getElementById('closeModal'), document.getElementById('closeModal2')];
+    openModal.onclick = () => modal.classList.add('active');
+    closeModals.forEach(btn => btn.onclick = () => modal.classList.remove('active'));
+    modal.onclick = (e) => { if (e.target === modal) modal.classList.remove('active'); };
+    
+    // Luxembourg Keyword Scanner
+    function highlightLuxKeywords(text) {
+      const keywords = [
+        { term: /guidewire/gi, cls: 'kw-bfsi', label: 'Guidewire' },
+        { term: /claims|insurance|bfsi|usaa/gi, cls: 'kw-bfsi', label: 'BFSI' },
+        { term: /kyc|aml|compliance/gi, cls: 'kw-compliance', label: 'Compliance' },
+        { term: /french|français|b1|b2|c1/gi, cls: 'kw-french', label: 'French' },
+        { term: /luxembourg|lu|bgl|spuerkeess|foyer/gi, cls: 'kw-lux', label: 'Luxembourg' }
+      ];
+      let result = text;
+      keywords.forEach(({ term, cls, label }) => {
+        result = result.replace(term, match => `<span class="keyword-highlight ${cls}" title="${label}">${match}</span>`);
+      });
+      return result;
+    }
+    
+    function renderKeywordPreview(cv, jd) {
+      const preview = document.createElement('div');
+      preview.className = 'text-sm space-y-2';
+      preview.innerHTML = `
+        <h4 class="font-semibold text-gray-700">🇱🇺 Luxembourg Keyword Scan</h4>
+        <div class="grid md:grid-cols-2 gap-3">
+          <div><span class="font-medium text-gray-600">CV:</span><div class="mt-1">${highlightLuxKeywords(cv.substring(0, 150) + '...')}</div></div>
+          <div><span class="font-medium text-gray-600">JD:</span><div class="mt-1">${highlightLuxKeywords(jd.substring(0, 150) + '...')}</div></div>
+        </div>
+      `;
+      return preview;
+    }
+    
+    // Export as PDF
+    async function exportAsPDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      const score = document.getElementById('score').textContent;
+      const verdict = document.getElementById('verdict').textContent;
+      const feedback = document.getElementById('feedback').textContent;
+      
+      doc.setFontSize(18); doc.text('🎯 TRAS Analysis Report', 20, 20);
+      doc.setFontSize(12); doc.text(`Generated: ${new Date().toLocaleDateString()}`, 20, 30);
+      doc.text(`Fit Score: ${score}/100`, 20, 45);
+      doc.text(`Verdict: ${verdict}`, 20, 55);
+      doc.text('Feedback:', 20, 70);
+      doc.setFontSize(10);
+      const split = doc.splitTextToSize(feedback, 170);
+      doc.text(split, 20, 80);
+      doc.text('🇱🇺 Optimized for Luxembourg BFSI roles', 20, 120);
+      doc.text('Built by PR Swaminathan • https://pkswaminathan001.github.io/portfolio', 20, 130);
+      doc.save(`TRAS_Analysis_${new Date().toISOString().split('T')[0]}.pdf`);
+    }
+    
+    // Main Analysis Logic
     document.getElementById('analyze').onclick = async () => {
       const cv = document.getElementById('cv').value.trim();
       const jd = document.getElementById('jd').value.trim();
-      if (!cv || !jd) return alert('Paste both CV and JD');
+      if (!cv || !jd) {
+        document.querySelector('.card').animate([{ transform: 'translateX(0)' }, { transform: 'translateX(-10px)' }, { transform: 'translateX(10px)' }, { transform: 'translateX(0)' }], { duration: 300 });
+        return alert('🎯 Please paste both CV and Job Description');
+      }
       
-      document.getElementById('analyze').disabled = true;
-      document.getElementById('analyze').textContent = '⏳ Analyzing...';
+      const btn = document.getElementById('analyze');
+      btn.disabled = true; btn.innerHTML = '<span class="animate-pulse">⏳ Analyzing...</span>';
+      await new Promise(r => setTimeout(r, 1500));
       
-      await new Promise(r => setTimeout(r, 1000)); // Simulate API
+      // Smart mock analysis
+      const hasBFSI = /guidewire|claims|insurance|bfsi|usaa|kyc|aml|compliance/i.test(cv);
+      const hasFrench = /french|français|b1|b2|c1/i.test(cv + jd);
+      const hasAI = /prompt|claude|llm|ai automation|rag|vector/i.test(cv);
       
-      const hasBFSI = /guidewire|claims|insurance|bfsi/i.test(cv);
-      const hasFrench = /french|français/i.test(cv+jd);
-      const score = hasBFSI ? 88 : 75;
-      const feedback = hasBFSI 
-        ? "Strong BFSI fit — highlight Guidewire/USAA experience." 
-        : "Add BFSI keywords for Luxembourg roles.";
+      const fitScore = hasBFSI && hasAI ? 92 : hasBFSI ? 86 : hasAI ? 78 : 72;
+      const verdict = fitScore >= 85 ? '✅ Strong match — apply now!' : fitScore >= 70 ? '🟡 Good fit — tailor keywords' : '🔴 Stretch role — address gaps first';
+      const feedback = hasBFSI ? "✨ Strong BFSI domain fit. Highlight Guidewire/USAA/compliance for Luxembourg roles." : "💡 Add BFSI keywords (Guidewire, claims, KYC/AML) for Luxembourg finance opportunities.";
+      const luxFit = hasBFSI && hasFrench ? '🇱🇺 Strong Luxembourg Fit' : hasBFSI ? '🟡 Add French for Luxembourg' : '🔴 BFSI keywords needed for Luxembourg';
       
-      document.getElementById('score').textContent = score;
+      // Render
+      document.getElementById('score').textContent = fitScore;
+      document.getElementById('verdict').textContent = verdict;
+      document.getElementById('verdict').className = `mt-2 text-lg font-bold ${fitScore >= 85 ? 'text-green-600' : fitScore >= 70 ? 'text-yellow-600' : 'text-red-600'}`;
+      document.getElementById('luxFit').textContent = luxFit;
       document.getElementById('feedback').textContent = feedback;
-      document.getElementById('dims').innerHTML = `
-        <div class="flex justify-between p-2 bg-gray-50 rounded"><span>Skills</span><span class="font-bold text-green-600">${hasBFSI?90:75}/100</span></div>
-        <div class="flex justify-between p-2 bg-gray-50 rounded"><span>Experience</span><span class="font-bold text-green-600">${hasBFSI?92:70}/100</span></div>
-        <div class="flex justify-between p-2 bg-gray-50 rounded"><span>AI Fluency</span><span class="font-bold text-green-600">95/100</span></div>
-        <div class="flex justify-between p-2 bg-gray-50 rounded"><span>Communication</span><span class="font-bold text-green-600">85/100 ${hasFrench?'':'(Gap: French B1)'}</span></div>
-      `;
+      
+      // Dimensions
+      const dims = [
+        { label: '🔧 Skills Match', score: hasAI ? 94 : 76, gaps: hasAI ? [] : ['Prompt engineering'] },
+        { label: '📈 Experience', score: hasBFSI ? 95 : 72, gaps: hasBFSI ? [] : ['BFSI domain'] },
+        { label: '🎓 Education', score: 90, gaps: [] },
+        { label: '🤖 AI Fluency', score: hasAI ? 96 : 65, gaps: hasAI ? [] : ['Multi-LLM workflows'] },
+        { label: '✍️ Communication', score: 87, gaps: hasFrench ? [] : ['French (B1) recommended'] }
+      ];
+      document.getElementById('dimensions').innerHTML = dims.map((d, i) => `
+        <div class="flex justify-between items-center p-4 bg-white rounded-xl shadow-sm border border-gray-100" style="animation: slideUp 0.4s ease-out ${i * 0.1}s both">
+          <span class="font-semibold text-gray-700">${d.label}</span>
+          <div class="text-right">
+            <span class="font-bold ${d.score >= 80 ? 'text-green-600' : d.score >= 60 ? 'text-yellow-600' : 'text-red-600'} text-lg">${d.score}/100</span>
+            ${d.gaps.length > 0 ? `<div class="text-xs text-gray-500 mt-1">Gaps: ${d.gaps.join(', ')}</div>` : `<span class="text-xs text-green-500 mt-1 block">✅ Aligned</span>`}
+          </div>
+        </div>
+      `).join('');
+      
+      // Keyword preview
+      const preview = renderKeywordPreview(cv, jd);
+      const previewContainer = document.getElementById('keywordPreview');
+      previewContainer.innerHTML = ''; previewContainer.appendChild(preview);
+      previewContainer.classList.remove('hidden');
+      
+      // Show results + confetti
       document.getElementById('result').classList.remove('hidden');
-      document.getElementById('analyze').disabled = false;
-      document.getElementById('analyze').textContent = '🚀 Analyze Fit';
+      document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (fitScore >= 85) confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#667eea', '#764ba2', '#10b981'] });
+      
+      btn.disabled = false; btn.innerHTML = '🚀 Analyze Fit';
+    };
+    
+    // Reset
+    document.getElementById('resetBtn').onclick = () => {
+      document.getElementById('cv').value = '';
+      document.getElementById('jd').value = '';
+      document.getElementById('result').classList.add('hidden');
+      document.getElementById('keywordPreview').classList.add('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+    
+    // Export PDF
+    document.getElementById('exportBtn').onclick = exportAsPDF;
+    
+    // LinkedIn Share
+    document.getElementById('shareBtn').onclick = () => {
+      const score = document.getElementById('score').textContent;
+      const verdict = document.getElementById('verdict').textContent;
+      const text = `🎯 TRAS Analysis: ${score}/100 fit for Luxembourg BFSI role!\n✅ Verdict: ${verdict}\n🔗 Try it: https://pkswaminathan001.github.io/tras-ai/\n#LuxembourgJobs #AI #PromptEngineering #BFSI`;
+      const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent('https://pkswaminathan001.github.io/tras-ai/')}&text=${encodeURIComponent(text)}`;
+      if (navigator.share) { navigator.share({ title: 'TRAS Result', text, url: window.location.href }); }
+      else { window.open(url, '_blank', 'width=600,height=700'); }
+      confetti({ particleCount: 50, angle: 60, spread: 80, origin: { x: 1 } });
     };
   </script>
 </body>
