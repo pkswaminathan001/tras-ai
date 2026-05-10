@@ -1,3 +1,7 @@
+[![Luxembourg Focus](https://img.shields.io/badge/Luxembourg-BFSI-blue)](https://jobs.lu)
+[![Live Demo](https://img.shields.io/badge/Demo-Live-success)](https://pkswaminathan001.github.io/portfolio)
+[![Open to Work](https://img.shields.io/badge/Open_to_Work-Luxembourg/EU-green)](https://linkedin.com/in/prswaminathan)
+[![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
 ## 🎯 For Recruiters & Hiring Managers
 | Question | Answer |
 |----------|--------|
