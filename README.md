@@ -1,3 +1,14 @@
+## 🎯 For Recruiters & Hiring Managers
+| Question | Answer |
+|----------|--------|
+| **What does this do?** | Auto-analyzes CV fit against EU job descriptions using GitHub Actions + Multi-LLM |
+| **Why Luxembourg?** | Optimized prompts for BFSI roles: Guidewire, claims, compliance, French keywords |
+| **Live demo?** | ✅ [Portfolio](https://pkswaminathan001.github.io/portfolio) • [TRAS Demo](https://pkswaminathan001.github.io/tras-ai/) |
+| **Code quality?** | Clean YAML/Python/React • No secrets committed • Free-tier friendly |
+| **Can I test it?** | Yes! Open an Issue with CV+JD → workflow auto-analyzes (see "How to Use") |
+| **Hire me for?** | Prompt Engineering, AI Ops, Business Analysis, BFSI Automation |
+
+📬 **Contact**: prswaminathan001@gmail.com • [LinkedIn](https://linkedin.com/in/prswaminathan)
 # 👋 Hi, I'm PR Swaminathan
 
 > **Prompt Engineer | AI Business Analyst | BFSI Domain Expert**  
