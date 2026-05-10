@@ -1,71 +1,28 @@
-# 🚀 Deploy TRAS v1.0 to GitHub Pages
-# Advanced workflow with caching, concurrency control, and secure env handling
-
-name: 🚀 Deploy TRAS v1.0 to GitHub Pages
-
+name: 🚀 Deploy TRAS v1.0 (Static HTML)
 on:
   push:
     branches: [main]
-  workflow_dispatch: # Allows manual trigger from GitHub UI
-
-# Prevent duplicate deployments from concurrent pushes
-concurrency:
-  group: "pages-deploy-${{ github.ref }}"
-  cancel-in-progress: true
-
-# Required permissions for GitHub Pages & OIDC token
+  workflow_dispatch:
 permissions:
   contents: read
   pages: write
   id-token: write
-
-# Environment variables for consistency across steps
-env:
-  NODE_VERSION: '20'
-  CACHE_DEPENDENCY_PATH: 'package-lock.json'
-  BUILD_OUTPUT_DIR: './dist'
-
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 jobs:
-  build-and-deploy:
-    name: 🛠️ Build & Deploy
-    runs-on: ubuntu-latest
+  deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
+    runs-on: ubuntu-latest
     steps:
-      - name: 📥 Checkout Repository
+      - name: 📥 Checkout
         uses: actions/checkout@v4
-
-      - name: 📦 Setup Node.js with Caching
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
-          cache-dependency-path: ${{ env.CACHE_DEPENDENCY_PATH }}
-
-      - name: 📦 Install Dependencies (Clean & Fast)
-        run: npm ci --ignore-scripts
-
-      - name: 🔍 Lint Code (Optional - Skip if no linter configured)
-        run: npm run lint || true
-
-      - name: 🧪 Run Tests (Optional - Skip if no tests configured)
-        run: npm test || true
-
-      - name: 🏗️ Build Production Bundle
-        run: npm run build
-        env:
-          NODE_ENV: production
-          # 🔐 Add API keys here when ready (never commit them)
-          # VITE_CLAUDE_API_KEY: ${{ secrets.VITE_CLAUDE_API_KEY }}
-
-      - name: 📤 Upload Build Artifact
+      - name: 📤 Upload to GitHub Pages
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{ env.BUILD_OUTPUT_DIR }}
-          retention-days: 1
-
-      - name: 🌐 Deploy to GitHub Pages
+          path: '.'  # Deploy root folder directly (no build!)
+      - name: 🌐 Deploy
         id: deployment
         uses: actions/deploy-pages@v4
