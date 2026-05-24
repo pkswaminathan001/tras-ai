@@ -88,6 +88,24 @@
     .skill-badge.bg-blue-600 { background: #2563eb; }
     .skill-badge.bg-purple-600 { background: #7c3aed; }
     
+    /* Navigation specific */
+    .nav-link {
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      background: rgba(255,255,255,0.15);
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: white;
+      transition: all 0.3s;
+      text-decoration: none;
+      backdrop-filter: blur(4px);
+    }
+    .nav-link:hover {
+      background: rgba(255,255,255,0.3);
+      transform: scale(1.05);
+    }
+    
     /* Keyword Highlights */
     .keyword-highlight { padding: 0.1rem 0.3rem; border-radius: 0.25rem; font-weight: 600; }
     .kw-bfsi { background: #dbeafe; color: #1e40af; }
@@ -111,6 +129,7 @@
     .dark body { background: linear-gradient(-45deg, #1e1b4b, #312e81, #4c1d95, #1e1b4b); color: #f1f5f9; }
     .dark .card { background: rgba(30, 27, 75, 0.95); color: #f1f5f9; }
     .dark .skill-badge { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); }
+    .dark .nav-link { background: rgba(255,255,255,0.1); }
     .dark textarea { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); color: white; }
     .dark #keywordPreview { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); }
   </style>
@@ -125,16 +144,23 @@
       <h1 class="text-4xl md:text-5xl font-bold mb-3">🎯 <span id="typed-headline"></span></h1>
       <p class="text-lg md:text-xl opacity-90 mb-4">AI Talent Risk Assessment • Luxembourg BFSI Focus</p>
       
+      <!-- 🌐 NAVIGATION MENU - LINKS TO ALL PROJECTS -->
+      <div class="flex flex-wrap justify-center gap-3 mb-6" data-aos="fade-down" data-aos-delay="100">
+        <a href="https://pkswaminathan001.github.io/portfolio" class="nav-link">🏠 Portfolio Home</a>
+        <a href="https://pkswaminathan001.github.io/ai-email-campaign-generator" class="nav-link">📧 Email Generator</a>
+        <a href="https://pkswaminathan001.github.io/ai-social-ad-creator" class="nav-link">📱 Social Ad Creator</a>
+        <a href="#" id="marketingZapLink" class="nav-link">📝 Marketing Zap (Form)</a>
+      </div>
+      
       <!-- Luxembourg Badges -->
       <div class="flex flex-wrap justify-center gap-2 mb-6">
-        <span class="skill-badge bg-green-600" data-aos="fade-up" data-aos-delay="100">🇱🇺 Seeking Luxembourg</span>
-        <span class="skill-badge bg-blue-600" data-aos="fade-up" data-aos-delay="200">🇪🇺 EU Blue Card</span>
-        <span class="skill-badge bg-purple-600" data-aos="fade-up" data-aos-delay="300">🇫🇷 French: A2→B1</span>
+        <span class="skill-badge bg-green-600" data-aos="fade-up" data-aos-delay="200">🇱🇺 Seeking Luxembourg</span>
+        <span class="skill-badge bg-blue-600" data-aos="fade-up" data-aos-delay="300">🇪🇺 EU Blue Card</span>
+        <span class="skill-badge bg-purple-600" data-aos="fade-up" data-aos-delay="400">🇫🇷 French: A2→B1</span>
       </div>
       
       <!-- Action Badges -->
       <div class="flex flex-wrap justify-center gap-3 mb-6">
-        <a href="https://pkswaminathan001.github.io/portfolio" class="skill-badge hover:scale-105 transition" data-aos="fade-up" data-aos-delay="400">← Portfolio</a>
         <a href="https://github.com/pkswaminathan001/tras-ai" target="_blank" class="skill-badge hover:scale-105 transition" data-aos="fade-up" data-aos-delay="500">View Code</a>
         <button id="openTechModal" class="skill-badge hover:scale-105 transition cursor-pointer" data-aos="fade-up" data-aos-delay="600">⚙️ How It Works</button>
         <button id="themeToggle" class="skill-badge hover:scale-105 transition cursor-pointer" data-aos="fade-up" data-aos-delay="700">🌙</button>
@@ -283,6 +309,12 @@
       closeModals.forEach(btn => { if (btn) btn.onclick = () => modal.classList.remove('active'); });
       modal.onclick = (e) => { if (e.target === modal) modal.classList.remove('active'); };
     }
+    
+    // Marketing Zap Link - Replace with your actual Google Form link
+    document.getElementById('marketingZapLink').onclick = (e) => {
+      e.preventDefault();
+      alert('📝 Marketing Automation Zap\n\nSubmit your request via Google Form:\nhttps://forms.gle/YOUR_FORM_ID\n\n(Replace with your actual form link after creating it)');
+    };
     
     // 🇱🇺 Luxembourg Keyword Scanner
     function highlightLuxKeywords(text) {
