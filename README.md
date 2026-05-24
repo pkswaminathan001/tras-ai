@@ -1,13 +1,12 @@
 # 👋 Hi, I'm PR Swaminathan
 
 > **Prompt Engineer | AI Business Analyst | BFSI Domain Expert**  
-> 🇱🇺 Targeting AI/Operations roles in Luxembourg • Open to Remote EU  
-> **🇱🇺 Visa Status:** EU Blue Card eligible — employer applies online (~4 weeks)
+> 🇱🇺🇳🇱🇮🇪 Targeting AI/Operations roles in Luxembourg • Netherlands • Ireland  
+> **🇪🇺 Visa Status:** EU Blue Card (LU) / HSM (NL) / Critical Skills (IE) eligible — employer applies online (~4 weeks)
 
-[![Luxembourg Focus](https://img.shields.io/badge/Luxembourg-BFSI-blue)](https://jobs.lu)
+[![EU Focus](https://img.shields.io/badge/EU-BFSI_Ready-blue)](https://pkswaminathan001.github.io/portfolio)
 [![Live Demo](https://img.shields.io/badge/Demo-Portfolio-success)](https://pkswaminathan001.github.io/portfolio)
-[![Open to Work](https://img.shields.io/badge/Open_to_Work-Luxembourg/EU-green)](https://linkedin.com/in/prswaminathan)
-[![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
+[![Open to Work](https://img.shields.io/badge/Open_to_Work-EU-green)](https://linkedin.com/in/prswaminathan)
 
 ---
 
@@ -16,7 +15,7 @@
 | Question | Answer |
 |----------|--------|
 | **What does this do?** | Auto-analyzes CV fit against EU job descriptions using GitHub Actions + Multi-LLM |
-| **Why Luxembourg?** | Optimized prompts for BFSI roles: Guidewire, claims, compliance, French keywords |
+| **Why Luxembourg/NL/IE?** | BFSI hubs with strong visa sponsorship paths for AI/automation roles |
 | **Live demo?** | ✅ [Portfolio](https://pkswaminathan001.github.io/portfolio) • [TRAS Demo](https://pkswaminathan001.github.io/tras-ai/) *(Mock demo — real AI via GitHub Issues)* |
 | **Code quality?** | Clean YAML/Python/React • No secrets committed • Free-tier friendly |
 | **Can I test it?** | Yes! Open an Issue with CV+JD → workflow auto-analyzes |
@@ -30,7 +29,7 @@
 
 | Project | Tech Stack | Status |
 |---------|------------|--------|
-| **Luxembourg Job Hunter AI** | GitHub Actions + Multi-LLM | ✅ [Live Demo](https://pkswaminathan001.github.io/portfolio) |
+| **EU Job Hunter AI** | GitHub Actions + Multi-LLM | ✅ [Live Demo](https://pkswaminathan001.github.io/portfolio) |
 | **TRAS v1.0** | React + Claude API | 🔥 [Mock Demo](https://pkswaminathan001.github.io/tras-ai/) — real AI via GitHub Issues |
 | **No-Code Automation** | Zapier, Google Apps Script | 📅 Available for freelance |
 
@@ -46,12 +45,15 @@
 
 ---
 
-## 🇱🇺 Why Luxembourg?
+## 🇪🇺 Why Luxembourg, Netherlands & Ireland?
 
-- **BFSI Hub:** Home to Europe's largest banks, funds, and insurers
-- **English-friendly:** Most companies use English as working language
-- **High salaries:** Competitive compensation + EU Blue Card benefits
-- **My fit:** Guidewire experience + claims automation + French keywords
+| Country | Key Advantage | Visa Path |
+|---------|---------------|-----------|
+| **Luxembourg** | BFSI hub, high salaries, English-friendly | EU Blue Card |
+| **Netherlands** | Fast-growing AI/automation scene | HSM (Kennismigrant) |
+| **Ireland** | Tech & finance hub, English-speaking | Critical Skills Permit |
+
+**My fit:** Guidewire + claims automation + multi-country visa eligibility
 
 ---
 
@@ -63,5 +65,5 @@
 
 ---
 
-*Built with ❤️ for the Luxembourg job market*  
-🇫🇷 **French:** A1 (learning) — committed to reaching B1 within 6 months of arrival
+*Built with ❤️ for the EU job market*  
+🇫🇷 **French:** A1 (learning) — committed to B1 within 6 months
