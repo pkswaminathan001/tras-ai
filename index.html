@@ -3,40 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PR Swaminathan | AI Workflow Architect | EU Visa Ready</title>
-  <meta name="description" content="AI Workflow Architect specializing in LLM pipelines, prompt engineering, and EU visa sponsorship. 40% efficiency gains."/>
+  <title>PR Swaminathan | Prompt Engineering Specialist | EU Visa Ready</title>
+  <meta name="description" content="Prompt Engineering Specialist with 40% efficiency gains. EU visa ready for Luxembourg, Netherlands, Ireland."/>
   
-  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- AOS Animations -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   
   <style>
-    /* Dark Gradient Background */
     body {
       background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
       min-height: 100vh;
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
     }
     
-    /* Glassmorphism Card */
     .glass-card {
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(12px);
       border-radius: 1.5rem;
       border: 1px solid rgba(255, 255, 255, 0.1);
       transition: all 0.3s ease;
     }
     .glass-card:hover {
-      border-color: rgba(99, 102, 241, 0.5);
+      border-color: rgba(139, 92, 246, 0.5);
       transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
     }
     
-    /* Gradient Text */
     .gradient-text {
       background: linear-gradient(135deg, #a855f7, #6366f1, #06b6d4);
       background-size: 200% auto;
@@ -50,52 +43,48 @@
       100% { background-position: 200% 50%; }
     }
     
-    /* Skill Badges */
     .skill-badge {
       display: inline-block;
-      padding: 0.5rem 1.25rem;
+      padding: 0.4rem 1rem;
       background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.2));
       border: 1px solid rgba(99, 102, 241, 0.4);
       border-radius: 999px;
-      font-size: 0.875rem;
+      font-size: 0.75rem;
       font-weight: 500;
       color: #e0e7ff;
       transition: all 0.3s;
     }
     .skill-badge:hover {
       background: linear-gradient(135deg, #6366f1, #a855f7);
-      border-color: transparent;
       transform: scale(1.05);
     }
     
-    /* Country Badges */
     .country-badge {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.5rem 1rem;
-      background: rgba(255, 255, 255, 0.1);
+      padding: 0.5rem 1.25rem;
+      background: rgba(255, 255, 255, 0.08);
       border-radius: 999px;
       font-weight: 600;
       font-size: 0.9rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
     
-    /* Buttons */
     .btn-primary {
       background: linear-gradient(135deg, #6366f1, #a855f7);
-      border: none;
       padding: 0.875rem 2rem;
       border-radius: 9999px;
       font-weight: 700;
       color: white;
       transition: all 0.3s;
-      cursor: pointer;
       display: inline-block;
       text-decoration: none;
+      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
     }
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
+      box-shadow: 0 8px 25px rgba(99, 102, 241, 0.6);
     }
     
     .btn-outline {
@@ -110,11 +99,10 @@
       text-decoration: none;
     }
     .btn-outline:hover {
-      background: rgba(168, 85, 247, 0.2);
+      background: rgba(168, 85, 247, 0.15);
       transform: translateY(-2px);
     }
     
-    /* Section Headers */
     .section-header {
       font-size: 1.8rem;
       font-weight: 700;
@@ -127,20 +115,15 @@
       position: absolute;
       bottom: -8px;
       left: 0;
-      width: 50%;
+      width: 60px;
       height: 3px;
       background: linear-gradient(90deg, #6366f1, #a855f7);
       border-radius: 999px;
     }
     
-    /* Table Styling */
-    .custom-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
     .custom-table td {
       padding: 1rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       vertical-align: top;
     }
     .custom-table td:first-child {
@@ -149,7 +132,16 @@
       width: 35%;
     }
     
-    /* Scrollbar */
+    .nav-link {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    .nav-link:hover {
+      color: #a855f7;
+    }
+    
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: #1e1b4b; }
     ::-webkit-scrollbar-thumb { background: #6366f1; border-radius: 10px; }
@@ -158,15 +150,16 @@
 <body class="text-gray-200">
 
   <!-- Navigation -->
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-md border-b border-white/10">
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-black/40 backdrop-blur-md border-b border-white/10">
     <div class="max-w-6xl mx-auto px-6 py-4 flex flex-wrap justify-between items-center">
       <span class="text-xl font-bold gradient-text">PR Swaminathan</span>
-      <div class="flex gap-6 text-sm">
-        <a href="#about" class="hover:text-indigo-300 transition">About</a>
-        <a href="#expertise" class="hover:text-indigo-300 transition">Expertise</a>
-        <a href="#projects" class="hover:text-indigo-300 transition">Projects</a>
-        <a href="#visa" class="hover:text-indigo-300 transition">Visa</a>
-        <a href="https://pkswaminathan001.github.io/tras-ai" target="_blank" class="hover:text-indigo-300 transition">TRAS-AI →</a>
+      <div class="flex gap-5 text-sm">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#expertise" class="nav-link">Expertise</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#visa" class="nav-link">Visa & Relocation</a>
+        <a href="https://pkswaminathan001.github.io/tras-ai" target="_blank" class="nav-link">TRAS-AI →</a>
       </div>
     </div>
   </nav>
@@ -175,17 +168,18 @@
     
     <!-- Hero Section -->
     <div class="text-center mb-16" data-aos="fade-down">
-      <div class="inline-block mb-4 px-4 py-1 bg-indigo-500/20 rounded-full text-indigo-300 text-sm font-semibold border border-indigo-400/30">
-        ✅ Eligible for HSM (NL) / Critical Skills (IE) / EU Blue Card (LU) — Sponsorship Required
+      <div class="inline-block mb-4 px-4 py-1.5 bg-indigo-500/10 rounded-full text-indigo-300 text-sm font-semibold border border-indigo-400/30">
+        ⚠️ Eligible for HSM (NL) / Critical Skills (IE) / EU Blue Card (LU) — Sponsorship Required
       </div>
-      <h1 class="text-5xl md:text-7xl font-bold mb-6">
-        <span class="gradient-text">AI Workflow Architect</span>
+      
+      <h1 class="text-5xl md:text-6xl font-bold mb-6">
+        <span class="gradient-text">Prompt Engineering Specialist</span>
       </h1>
-      <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
-        Architecting AI workflows that reduce manual processing by 40%. Bridging LLM evaluation, prompt design, and insurance automation for European enterprises.
+      
+      <p class="text-lg text-gray-300 max-w-3xl mx-auto mb-8 leading-relaxed">
+        Architecting AI workflows that reduce manual processing by <strong class="text-green-400">40%</strong>. Bridging LLM evaluation, prompt design, and insurance automation for European enterprises.
       </p>
       
-      <!-- Country Tags -->
       <div class="flex flex-wrap justify-center gap-3 mb-8">
         <span class="country-badge"><i class="fas fa-flag-checkered text-green-400"></i> Luxembourg</span>
         <span class="country-badge"><i class="fas fa-wind text-orange-400"></i> Netherlands</span>
@@ -193,46 +187,44 @@
         <span class="country-badge"><i class="fas fa-clock text-blue-400"></i> CET/BST Overlap Ready</span>
       </div>
       
-      <!-- CTA Buttons -->
       <div class="flex flex-wrap justify-center gap-4">
-        <a href="https://pkswaminathan001.github.io/tras-ai" class="btn-primary">🎯 Try TRAS-AI Demo</a>
-        <a href="https://pkswaminathan001.github.io/ai-email-campaign-generator" class="btn-outline">📧 Email Generator</a>
-        <a href="https://pkswaminathan001.github.io/ai-social-ad-creator" class="btn-outline">📱 Ad Creator</a>
+        <a href="https://pkswaminathan001.github.io/tras-ai" class="btn-primary"><i class="fas fa-chart-line mr-2"></i> Sponsorship-Ready Roles</a>
+        <a href="https://pkswaminathan001.github.io/tras-ai" class="btn-outline"><i class="fas fa-play-circle mr-2"></i> Live AI Demos</a>
       </div>
     </div>
 
-    <!-- About Me -->
+    <!-- About -->
     <div id="about" class="glass-card p-8 mb-12" data-aos="fade-up">
       <h2 class="section-header">About Me</h2>
       <p class="text-gray-300 leading-relaxed mb-4">
-        <strong>Prompt Engineer & AI Workflow Specialist</strong> with 2+ years of production experience in US enterprise insurance. I design, test, and deploy LLM pipelines that turn unstructured data into structured, actionable outputs. At <strong class="text-indigo-300">HCL (USAA)</strong>, I reduced manual claims intake by <strong class="text-green-400">40%</strong> through systematic prompt evaluation and Guidewire integration.
+        <strong class="text-indigo-300">Prompt Engineer & AI Workflow Specialist</strong> with 2+ years of production experience in US enterprise insurance. I design, test, and deploy LLM pipelines that turn unstructured data into structured, actionable outputs.
       </p>
       <p class="text-gray-300 leading-relaxed">
-        My expertise lies in <strong>AI behavior design, output validation, and no-code/low-code orchestration</strong> (n8n, Zapier, Voiceflow). I bridge technical AI capabilities with business ROI, making me ideal for EU InsurTech, FinTech, and AI Transformation roles.
+        At <strong class="text-indigo-300">HCL Technologies (USAA Insurance)</strong>, I reduced manual claims intake by <strong class="text-green-400">40%</strong> through systematic prompt evaluation and Guidewire integration. I bridge technical AI capabilities with business ROI, making me ideal for EU InsurTech, FinTech, and AI Transformation roles.
       </p>
     </div>
 
-    <!-- For Recruiters Table -->
+    <!-- Recruiters Table -->
     <div class="glass-card p-8 mb-12" data-aos="fade-up" data-aos-delay="100">
       <h2 class="section-header">🎯 For Recruiters & Hiring Managers</h2>
-      <table class="custom-table">
-        <tr><td>What I deliver</td><td>40% efficiency gains via LLM pipelines & workflow automation</td></tr>
-        <tr><td>Domain expertise</td><td>Insurance Claims, Guidewire (GWCC), GDPR-compliant AI design</td></tr>
-        <tr><td>Visa path</td><td>Kennismigrant (NL), Critical Skills (IE), EU Blue Card (LU) — employer applies online, ~2-4 weeks</td></tr>
-        <tr><td>Tech style</td><td>Prompt architecture, structured JSON, n8n/Zapier, API orchestration (no heavy coding required)</td></tr>
+      <table class="custom-table w-full">
+        <tr><td class="font-semibold">What I deliver</td><td>40% efficiency gains via LLM pipelines & workflow automation</td></tr>
+        <tr><td class="font-semibold">Domain expertise</td><td>Insurance Claims, Guidewire (GWCC), GDPR-compliant AI design</td></tr>
+        <tr><td class="font-semibold">Visa path</td><td>Kennismigrant (NL), Critical Skills (IE), EU Blue Card (LU) — employer applies online, ~2-4 weeks</td></tr>
+        <tr><td class="font-semibold">Tech style</td><td>Prompt architecture, structured JSON, n8n/Zapier, API orchestration (no heavy coding required)</td></tr>
       </table>
     </div>
 
-    <!-- Core Expertise -->
+    <!-- Expertise -->
     <div id="expertise" class="grid md:grid-cols-4 gap-6 mb-12">
       <div class="glass-card p-6 text-center" data-aos="flip-left"><i class="fas fa-robot text-4xl text-indigo-400 mb-3"></i><h3 class="font-bold text-lg mb-2">Prompt & LLM Eng</h3><p class="text-xs text-gray-400">Chain-of-thought, few-shot, JSON schema, multi-model</p></div>
-      <div class="glass-card p-6 text-center" data-aos="flip-left" data-aos-delay="100"><i class="fas fa-bolt text-4xl text-cyan-400 mb-3"></i><h3 class="font-bold text-lg mb-2">AI Workflow Automation</h3><p class="text-xs text-gray-400">n8n, Zapier, Make.com, Voiceflow, API orchestration</p></div>
-      <div class="glass-card p-6 text-center" data-aos="flip-left" data-aos-delay="200"><i class="fas fa-shield-alt text-4xl text-purple-400 mb-3"></i><h3 class="font-bold text-lg mb-2">Domain & Compliance</h3><p class="text-xs text-gray-400">Guidewire, GDPR-aware PII handling, evaluation frameworks</p></div>
-      <div class="glass-card p-6 text-center" data-aos="flip-left" data-aos-delay="300"><i class="fas fa-chart-line text-4xl text-emerald-400 mb-3"></i><h3 class="font-bold text-lg mb-2">Business & Communication</h3><p class="text-xs text-gray-400">ROI translation, KPI dashboards, stakeholder alignment</p></div>
+      <div class="glass-card p-6 text-center" data-aos="flip-left" data-aos-delay="100"><i class="fas fa-bolt text-4xl text-cyan-400 mb-3"></i><h3 class="font-bold text-lg mb-2">AI Workflow Automation</h3><p class="text-xs text-gray-400">n8n, Zapier, Make.com, Voiceflow</p></div>
+      <div class="glass-card p-6 text-center" data-aos="flip-left" data-aos-delay="200"><i class="fas fa-shield-alt text-4xl text-purple-400 mb-3"></i><h3 class="font-bold text-lg mb-2">Domain & Compliance</h3><p class="text-xs text-gray-400">Guidewire, GDPR-aware PII handling</p></div>
+      <div class="glass-card p-6 text-center" data-aos="flip-left" data-aos-delay="300"><i class="fas fa-chart-line text-4xl text-emerald-400 mb-3"></i><h3 class="font-bold text-lg mb-2">Business & Communication</h3><p class="text-xs text-gray-400">ROI translation, KPI dashboards</p></div>
     </div>
 
     <!-- Experience -->
-    <div class="glass-card p-8 mb-12" data-aos="fade-up">
+    <div id="experience" class="glass-card p-8 mb-12" data-aos="fade-up">
       <h2 class="section-header">Professional Experience</h2>
       <div class="mb-6">
         <h3 class="text-xl font-bold text-indigo-300">Prompt Engineer & AI Workflow Specialist</h3>
@@ -261,19 +253,19 @@
         <i class="fas fa-search text-3xl text-indigo-400 mb-3"></i>
         <h3 class="text-xl font-bold mb-2">🇱🇺 Luxembourg Job Hunter AI</h3>
         <p class="text-gray-400 text-sm mb-3">Automates CV-JD matching for EU finance roles. Outputs fit scores, keyword gaps, and tailored cover letters.</p>
-        <div class="flex gap-2 flex-wrap"><span class="skill-badge text-xs">GitHub Actions</span><span class="skill-badge text-xs">Qwen</span><span class="skill-badge text-xs">Prompt Eng</span></div>
-        <a href="https://pkswaminathan001.github.io/portfolio" class="inline-block mt-4 text-indigo-400 hover:text-indigo-300 text-sm">Live Demo →</a>
+        <div class="flex gap-2 flex-wrap"><span class="skill-badge">GitHub Actions</span><span class="skill-badge">Qwen</span><span class="skill-badge">Prompt Eng</span></div>
+        <a href="#" class="inline-block mt-4 text-indigo-400 hover:text-indigo-300 text-sm">Live Demo →</a>
       </div>
       <div class="glass-card p-6" data-aos="zoom-in" data-aos-delay="100">
         <i class="fas fa-chart-simple text-3xl text-purple-400 mb-3"></i>
         <h3 class="text-xl font-bold mb-2">🎯 TRAS v1.0</h3>
         <p class="text-gray-400 text-sm mb-3">AI Talent Risk Assessment. Scores resumes vs job descriptions across 5 weighted dimensions.</p>
-        <div class="flex gap-2 flex-wrap"><span class="skill-badge text-xs">HTML/JS</span><span class="skill-badge text-xs">Tailwind</span><span class="skill-badge text-xs">GitHub Pages</span></div>
+        <div class="flex gap-2 flex-wrap"><span class="skill-badge">HTML/JS</span><span class="skill-badge">Tailwind</span><span class="skill-badge">GitHub Pages</span></div>
         <a href="https://pkswaminathan001.github.io/tras-ai" class="inline-block mt-4 text-indigo-400 hover:text-indigo-300 text-sm">Live Demo →</a>
       </div>
     </div>
 
-    <!-- Visa Sponsorship -->
+    <!-- Visa -->
     <div id="visa" class="glass-card p-8 mb-12" data-aos="fade-up">
       <h2 class="section-header">Visa Sponsorship Path</h2>
       <div class="grid md:grid-cols-3 gap-6">
@@ -286,8 +278,8 @@
 
     <!-- Let's Work Together -->
     <div class="text-center" data-aos="fade-up">
-      <h2 class="text-3xl font-bold mb-4">Let's Work Together</h2>
-      <p class="text-gray-300 mb-6">I'm actively seeking Prompt Engineering, AI Workflow, or AI Solutions Consultant roles in the Netherlands, Ireland, or Luxembourg.</p>
+      <h2 class="text-3xl font-bold mb-4 gradient-text">Let's Connect</h2>
+      <p class="text-gray-300 mb-6">Open to Prompt Engineering, AI Workflow, or AI Solutions Consultant roles in NL, IE, or LU.</p>
       <div class="flex flex-wrap justify-center gap-4">
         <a href="mailto:prswaminathan001@gmail.com" class="btn-primary"><i class="fas fa-envelope mr-2"></i> prswaminathan001@gmail.com</a>
         <a href="https://linkedin.com/in/prswaminathan" target="_blank" class="btn-outline"><i class="fab fa-linkedin mr-2"></i> LinkedIn</a>
@@ -297,6 +289,6 @@
   </main>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script> AOS.init({ duration: 800, once: true }); </script>
+  <script> AOS.init({ duration: 800, once: true, offset: 50 }); </script>
 </body>
 </html>
