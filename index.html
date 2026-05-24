@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🔥 TRAS v2.0 — BEAST MODE AI Talent Risk Assessment</title>
-  <meta name="description" content="Advanced AI resume scoring with Deep Dive, Chatbot, Compare, and Visualizations"/>
+  <title>PR Swaminathan | AI Workflow Architect | EU Visa Ready</title>
+  <meta name="description" content="AI Workflow Architect specializing in LLM pipelines, prompt engineering, and EU visa sponsorship. 40% efficiency gains."/>
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -12,407 +12,291 @@
   <!-- AOS Animations -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   
-  <!-- Chart.js for Visualizations -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-  
-  <!-- Typed.js -->
-  <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
-  
-  <!-- Vanilla Tilt -->
-  <script src="https://unpkg.com/vanilla-tilt@1.8.0/dist/vanilla-tilt.min.js"></script>
-  
-  <!-- Confetti -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  
-  <!-- jsPDF for Export -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  
-  <!-- Particles.js -->
-  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   
   <style>
-    /* Animated Gradient */
+    /* Dark Gradient Background */
     body {
-      background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4f46e5);
-      background-size: 400% 400%;
-      animation: gradientShift 15s ease infinite;
+      background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
       min-height: 100vh;
-      color: white;
-      transition: background 0.3s, color 0.3s;
-    }
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
     }
     
     /* Glassmorphism Card */
-    .card {
-      background: rgba(255, 255, 255, 0.95);
+    .glass-card {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
       border-radius: 1.5rem;
-      padding: 2rem;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-      color: #1f2937;
-      transform-style: preserve-3d;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+    .glass-card:hover {
+      border-color: rgba(99, 102, 241, 0.5);
+      transform: translateY(-4px);
+    }
+    
+    /* Gradient Text */
+    .gradient-text {
+      background: linear-gradient(135deg, #a855f7, #6366f1, #06b6d4);
+      background-size: 200% auto;
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: shine 3s linear infinite;
+    }
+    @keyframes shine {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+    
+    /* Skill Badges */
+    .skill-badge {
+      display: inline-block;
+      padding: 0.5rem 1.25rem;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.2));
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      border-radius: 999px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #e0e7ff;
+      transition: all 0.3s;
+    }
+    .skill-badge:hover {
+      background: linear-gradient(135deg, #6366f1, #a855f7);
+      border-color: transparent;
+      transform: scale(1.05);
+    }
+    
+    /* Country Badges */
+    .country-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.9rem;
     }
     
     /* Buttons */
-    .btn {
+    .btn-primary {
+      background: linear-gradient(135deg, #6366f1, #a855f7);
+      border: none;
       padding: 0.875rem 2rem;
       border-radius: 9999px;
       font-weight: 700;
-      transition: all 0.2s ease;
-      cursor: pointer;
-      border: none;
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, #4f46e5, #7c3aed);
       color: white;
-      box-shadow: 0 10px 25px rgba(79, 70, 229, 0.4);
-    }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 20px 40px rgba(79, 70, 229, 0.6); }
-    .btn-primary:active { transform: translateY(0); }
-    
-    /* Badges */
-    .skill-badge, .nav-link {
-      display: inline-block;
-      padding: 0.4rem 1rem;
-      border-radius: 999px;
-      font-weight: 600;
-      font-size: 0.8rem;
       transition: all 0.3s;
+      cursor: pointer;
+      display: inline-block;
       text-decoration: none;
     }
-    .skill-badge {
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      color: white;
-      border: 1px solid rgba(255,255,255,0.3);
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
     }
-    .nav-link {
-      background: rgba(255,255,255,0.15);
-      color: white;
-      backdrop-filter: blur(4px);
+    
+    .btn-outline {
+      background: transparent;
+      border: 2px solid #a855f7;
+      padding: 0.875rem 2rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      color: #e0e7ff;
+      transition: all 0.3s;
+      display: inline-block;
+      text-decoration: none;
     }
-    .skill-badge:hover, .nav-link:hover { transform: scale(1.05); }
+    .btn-outline:hover {
+      background: rgba(168, 85, 247, 0.2);
+      transform: translateY(-2px);
+    }
     
-    /* Keyword Highlights */
-    .keyword-highlight { padding: 0.1rem 0.3rem; border-radius: 0.25rem; font-weight: 600; }
-    .kw-bfsi { background: #dbeafe; color: #1e40af; }
-    .kw-compliance { background: #ede9fe; color: #5b21b6; }
-    .kw-french { background: #fef3c7; color: #92400e; }
-    .kw-lux { background: #fee2e2; color: #991b1b; }
+    /* Section Headers */
+    .section-header {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
+    }
+    .section-header:after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 50%;
+      height: 3px;
+      background: linear-gradient(90deg, #6366f1, #a855f7);
+      border-radius: 999px;
+    }
     
-    #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
-    #result { animation: slideUp 0.5s ease-out; }
-    @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    /* Table Styling */
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .custom-table td {
+      padding: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      vertical-align: top;
+    }
+    .custom-table td:first-child {
+      font-weight: 600;
+      color: #a855f7;
+      width: 35%;
+    }
     
-    /* Modals */
-    .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 100; padding: 1rem; }
-    .modal.active { display: flex; }
-    .modal-content { background: white; color: #1f2937; border-radius: 1.5rem; max-width: 700px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 2rem; position: relative; }
-    
-    /* Chatbot */
-    #aiCoach { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
-    #chatWindow { position: absolute; bottom: 60px; right: 0; width: 320px; background: white; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); overflow: hidden; display: none; }
-    
-    /* Dark Mode */
-    .dark body { background: linear-gradient(-45deg, #1e1b4b, #312e81, #4c1d95, #1e1b4b); color: #f1f5f9; }
-    .dark .card { background: rgba(30, 27, 75, 0.95); color: #f1f5f9; }
-    .dark .skill-badge { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); }
-    .dark .nav-link { background: rgba(255,255,255,0.1); }
-    .dark textarea { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); color: white; }
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #1e1b4b; }
+    ::-webkit-scrollbar-thumb { background: #6366f1; border-radius: 10px; }
   </style>
 </head>
-<body class="p-4 md:p-8">
-  <div id="particles-js"></div>
-  
-  <div class="max-w-5xl mx-auto">
-    <header class="text-center mb-10" data-aos="fade-down">
-      <h1 class="text-4xl md:text-5xl font-bold mb-3">🔥 <span id="typed-headline"></span></h1>
-      <p class="text-lg md:text-xl opacity-90 mb-4">BEAST MODE • AI Talent Risk Assessment • Luxembourg BFSI</p>
+<body class="text-gray-200">
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-md border-b border-white/10">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex flex-wrap justify-between items-center">
+      <span class="text-xl font-bold gradient-text">PR Swaminathan</span>
+      <div class="flex gap-6 text-sm">
+        <a href="#about" class="hover:text-indigo-300 transition">About</a>
+        <a href="#expertise" class="hover:text-indigo-300 transition">Expertise</a>
+        <a href="#projects" class="hover:text-indigo-300 transition">Projects</a>
+        <a href="#visa" class="hover:text-indigo-300 transition">Visa</a>
+        <a href="https://pkswaminathan001.github.io/tras-ai" target="_blank" class="hover:text-indigo-300 transition">TRAS-AI →</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-6xl mx-auto px-6 pt-28 pb-16">
+    
+    <!-- Hero Section -->
+    <div class="text-center mb-16" data-aos="fade-down">
+      <div class="inline-block mb-4 px-4 py-1 bg-indigo-500/20 rounded-full text-indigo-300 text-sm font-semibold border border-indigo-400/30">
+        ✅ Eligible for HSM (NL) / Critical Skills (IE) / EU Blue Card (LU) — Sponsorship Required
+      </div>
+      <h1 class="text-5xl md:text-7xl font-bold mb-6">
+        <span class="gradient-text">AI Workflow Architect</span>
+      </h1>
+      <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+        Architecting AI workflows that reduce manual processing by 40%. Bridging LLM evaluation, prompt design, and insurance automation for European enterprises.
+      </p>
       
-      <div class="flex flex-wrap justify-center gap-3 mb-6" data-aos="fade-down" data-aos-delay="100">
-        <a href="https://pkswaminathan001.github.io/portfolio" class="nav-link">🏠 Portfolio</a>
-        <a href="https://pkswaminathan001.github.io/ai-email-campaign-generator" class="nav-link">📧 Email Gen</a>
-        <a href="https://pkswaminathan001.github.io/ai-social-ad-creator" class="nav-link">📱 Ad Creator</a>
+      <!-- Country Tags -->
+      <div class="flex flex-wrap justify-center gap-3 mb-8">
+        <span class="country-badge"><i class="fas fa-flag-checkered text-green-400"></i> Luxembourg</span>
+        <span class="country-badge"><i class="fas fa-wind text-orange-400"></i> Netherlands</span>
+        <span class="country-badge"><i class="fas fa-music text-emerald-400"></i> Ireland</span>
+        <span class="country-badge"><i class="fas fa-clock text-blue-400"></i> CET/BST Overlap Ready</span>
       </div>
       
-      <div class="flex flex-wrap justify-center gap-2 mb-6">
-        <span class="skill-badge" style="background:#059669">🇱🇺 Luxembourg</span>
-        <span class="skill-badge" style="background:#2563eb">🇪🇺 EU Blue Card</span>
-        <span class="skill-badge" style="background:#7c3aed">🇫🇷 French A2→B1</span>
-      </div>
-      
-      <div class="flex flex-wrap justify-center gap-3">
-        <button id="openTechModal" class="skill-badge cursor-pointer">⚙️ How It Works</button>
-        <button id="themeToggle" class="skill-badge cursor-pointer">🌙</button>
-      </div>
-    </header>
-
-    <!-- Main Card -->
-    <div class="card mx-auto max-w-4xl" data-aos="fade-up" data-tilt data-tilt-max="5">
-      <div class="grid md:grid-cols-2 gap-6 mb-6">
-        <div>
-          <label class="block font-semibold mb-2">📄 Paste CV Text</label>
-          <textarea id="cv" class="w-full h-36 p-4 border-2 rounded-xl resize-none bg-gray-50 dark:bg-gray-800" placeholder="Paste your CV here..."></textarea>
-        </div>
-        <div>
-          <label class="block font-semibold mb-2">💼 Paste Job Description</label>
-          <textarea id="jd" class="w-full h-36 p-4 border-2 rounded-xl resize-none bg-gray-50 dark:bg-gray-800" placeholder="Paste job description here..."></textarea>
-        </div>
-      </div>
-
-      <div class="flex gap-3 mb-4">
-        <button id="analyze" class="flex-1 py-4 btn btn-primary text-lg">🚀 Analyze Fit</button>
-        <button id="compareBtn" class="px-6 py-4 bg-purple-600 text-white rounded-xl font-bold hover:bg-purple-700 transition">🔄 Compare</button>
-      </div>
-
-      <div id="keywordPreview" class="hidden mt-4 p-4 bg-gray-50 rounded-xl"></div>
-
-      <div id="result" class="hidden mt-8 p-6 bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl">
-        <div class="text-center mb-6">
-          <div class="text-6xl font-bold"><span id="score">0</span><span class="text-3xl text-gray-400">/100</span></div>
-          <div class="text-gray-500 text-sm mt-2">Overall Fit Score</div>
-          <div id="verdict" class="mt-2 text-lg font-bold"></div>
-          <div id="luxFit" class="text-sm text-gray-500"></div>
-        </div>
-        
-        <canvas id="radarChart" width="400" height="400" style="max-height: 300px; margin: 0 auto;"></canvas>
-        <div id="dimensions" class="space-y-3 my-6"></div>
-        <div id="feedback" class="p-4 bg-white rounded-xl border-l-4 border-indigo-500"></div>
-        
-        <div class="mt-6 flex flex-wrap gap-3 justify-center">
-          <button id="resetBtn" class="px-5 py-2.5 text-gray-600 hover:bg-gray-100 rounded-xl">🔄 Reset</button>
-          <button id="deepDiveBtn" class="px-5 py-2.5 bg-indigo-100 text-indigo-700 rounded-xl hover:bg-indigo-200">🔍 Deep Dive</button>
-          <button id="exportBtn" class="px-5 py-2.5 bg-gray-800 text-white rounded-xl">📄 Export PDF</button>
-          <button id="shareBtn" class="px-5 py-2.5 bg-green-500 text-white rounded-xl">📤 Share</button>
-        </div>
-        <p class="mt-4 text-xs text-center text-gray-400">🔐 All analysis in browser. GDPR-compliant.</p>
+      <!-- CTA Buttons -->
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="https://pkswaminathan001.github.io/tras-ai" class="btn-primary">🎯 Try TRAS-AI Demo</a>
+        <a href="https://pkswaminathan001.github.io/ai-email-campaign-generator" class="btn-outline">📧 Email Generator</a>
+        <a href="https://pkswaminathan001.github.io/ai-social-ad-creator" class="btn-outline">📱 Ad Creator</a>
       </div>
     </div>
 
-    <footer class="mt-12 text-center opacity-80 text-sm pb-8">
-      <p>Built with ❤️ by <strong>PR Swaminathan</strong> • BEAST MODE ACTIVE</p>
-      <p>🇱🇺 Luxembourg BFSI/AI • French A1→B1 committed</p>
-    </footer>
-  </div>
+    <!-- About Me -->
+    <div id="about" class="glass-card p-8 mb-12" data-aos="fade-up">
+      <h2 class="section-header">About Me</h2>
+      <p class="text-gray-300 leading-relaxed mb-4">
+        <strong>Prompt Engineer & AI Workflow Specialist</strong> with 2+ years of production experience in US enterprise insurance. I design, test, and deploy LLM pipelines that turn unstructured data into structured, actionable outputs. At <strong class="text-indigo-300">HCL (USAA)</strong>, I reduced manual claims intake by <strong class="text-green-400">40%</strong> through systematic prompt evaluation and Guidewire integration.
+      </p>
+      <p class="text-gray-300 leading-relaxed">
+        My expertise lies in <strong>AI behavior design, output validation, and no-code/low-code orchestration</strong> (n8n, Zapier, Voiceflow). I bridge technical AI capabilities with business ROI, making me ideal for EU InsurTech, FinTech, and AI Transformation roles.
+      </p>
+    </div>
 
-  <!-- Deep Dive Modal -->
-  <div id="deepDiveModal" class="modal">
-    <div class="modal-content">
-      <button id="closeDeepDive" class="absolute top-4 right-4 text-2xl">&times;</button>
-      <h3 class="text-2xl font-bold mb-4">🔍 DEEP DIVE ANALYSIS</h3>
-      <div class="space-y-4 text-sm">
-        <div class="p-3 bg-blue-50 rounded"><strong>📊 JD Sentiment:</strong> <span id="sentiment">-</span></div>
-        <div class="p-3 bg-yellow-50 rounded"><strong>🔑 Missing Keywords:</strong> <span id="missingKeywords">-</span></div>
-        <div class="p-3 bg-green-50 rounded"><strong>💰 Salary Benchmark (LUX):</strong> <span id="salary">-</span></div>
-        <div class="p-3 bg-purple-50 rounded"><strong>🎤 Predicted Interview Qs:</strong> <span id="questions">-</span></div>
-        <div class="p-3 bg-red-50 rounded"><strong>⚠️ Top 3 Gaps to Fix:</strong> <span id="gaps">-</span></div>
+    <!-- For Recruiters Table -->
+    <div class="glass-card p-8 mb-12" data-aos="fade-up" data-aos-delay="100">
+      <h2 class="section-header">🎯 For Recruiters & Hiring Managers</h2>
+      <table class="custom-table">
+        <tr><td>What I deliver</td><td>40% efficiency gains via LLM pipelines & workflow automation</td></tr>
+        <tr><td>Domain expertise</td><td>Insurance Claims, Guidewire (GWCC), GDPR-compliant AI design</td></tr>
+        <tr><td>Visa path</td><td>Kennismigrant (NL), Critical Skills (IE), EU Blue Card (LU) — employer applies online, ~2-4 weeks</td></tr>
+        <tr><td>Tech style</td><td>Prompt architecture, structured JSON, n8n/Zapier, API orchestration (no heavy coding required)</td></tr>
+      </table>
+    </div>
+
+    <!-- Core Expertise -->
+    <div id="expertise" class="grid md:grid-cols-4 gap-6 mb-12">
+      <div class="glass-card p-6 text-center" data-aos="flip-left"><i class="fas fa-robot text-4xl text-indigo-400 mb-3"></i><h3 class="font-bold text-lg mb-2">Prompt & LLM Eng</h3><p class="text-xs text-gray-400">Chain-of-thought, few-shot, JSON schema, multi-model</p></div>
+      <div class="glass-card p-6 text-center" data-aos="flip-left" data-aos-delay="100"><i class="fas fa-bolt text-4xl text-cyan-400 mb-3"></i><h3 class="font-bold text-lg mb-2">AI Workflow Automation</h3><p class="text-xs text-gray-400">n8n, Zapier, Make.com, Voiceflow, API orchestration</p></div>
+      <div class="glass-card p-6 text-center" data-aos="flip-left" data-aos-delay="200"><i class="fas fa-shield-alt text-4xl text-purple-400 mb-3"></i><h3 class="font-bold text-lg mb-2">Domain & Compliance</h3><p class="text-xs text-gray-400">Guidewire, GDPR-aware PII handling, evaluation frameworks</p></div>
+      <div class="glass-card p-6 text-center" data-aos="flip-left" data-aos-delay="300"><i class="fas fa-chart-line text-4xl text-emerald-400 mb-3"></i><h3 class="font-bold text-lg mb-2">Business & Communication</h3><p class="text-xs text-gray-400">ROI translation, KPI dashboards, stakeholder alignment</p></div>
+    </div>
+
+    <!-- Experience -->
+    <div class="glass-card p-8 mb-12" data-aos="fade-up">
+      <h2 class="section-header">Professional Experience</h2>
+      <div class="mb-6">
+        <h3 class="text-xl font-bold text-indigo-300">Prompt Engineer & AI Workflow Specialist</h3>
+        <p class="text-sm text-gray-400 mb-2">HCL Technologies — USAA Insurance Project • Jan 2023 – Present</p>
+        <ul class="list-disc list-inside text-gray-300 space-y-1 text-sm">
+          <li>Designed multi-model LLM pipeline → 40% manual processing reduction</li>
+          <li>Built evaluation framework for GPT-4, Claude, Gemini</li>
+          <li>Created failure-mode checklists → 25% rework reduction</li>
+          <li>CET/BST overlap ready</li>
+        </ul>
       </div>
-      <button id="closeDeepDive2" class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded">Close</button>
+      <div>
+        <h3 class="text-xl font-bold text-indigo-300">AI Workflow Developer (Independent)</h3>
+        <p class="text-sm text-gray-400 mb-2">TRAS v1.0 — AI Talent Risk Assessment • 2024–2025</p>
+        <ul class="list-disc list-inside text-gray-300 space-y-1 text-sm">
+          <li>Prompt architecture with structured JSON parsing</li>
+          <li>Weighted scoring: skills, experience, education, AI fluency, communication</li>
+          <li>Tech: HTML/JS, Tailwind CSS, GitHub Pages, jsPDF</li>
+        </ul>
+      </div>
     </div>
-  </div>
 
-  <!-- Tech Modal -->
-  <div id="techModal" class="modal">
-    <div class="modal-content">
-      <button id="closeModal" class="absolute top-4 right-4 text-2xl">&times;</button>
-      <h3 class="text-2xl font-bold mb-4">⚙️ BEAST MODE FEATURES</h3>
-      <ul class="space-y-2 text-gray-700">
-        <li>✅ CV vs JD Smart Scoring (Mock AI)</li>
-        <li>✅ Deep Dive: Sentiment, Salary, Interview Qs</li>
-        <li>✅ Compare Two Jobs Side-by-Side</li>
-        <li>✅ AI Coach Chatbot (Ask anything!)</li>
-        <li>✅ Radar Chart Visualization</li>
-        <li>✅ PDF Export + LinkedIn Share</li>
-        <li>✅ Dark Mode + Animations</li>
-      </ul>
-      <button id="closeModal2" class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded">Got it!</button>
+    <!-- Projects -->
+    <div id="projects" class="grid md:grid-cols-2 gap-6 mb-12">
+      <div class="glass-card p-6" data-aos="zoom-in">
+        <i class="fas fa-search text-3xl text-indigo-400 mb-3"></i>
+        <h3 class="text-xl font-bold mb-2">🇱🇺 Luxembourg Job Hunter AI</h3>
+        <p class="text-gray-400 text-sm mb-3">Automates CV-JD matching for EU finance roles. Outputs fit scores, keyword gaps, and tailored cover letters.</p>
+        <div class="flex gap-2 flex-wrap"><span class="skill-badge text-xs">GitHub Actions</span><span class="skill-badge text-xs">Qwen</span><span class="skill-badge text-xs">Prompt Eng</span></div>
+        <a href="https://pkswaminathan001.github.io/portfolio" class="inline-block mt-4 text-indigo-400 hover:text-indigo-300 text-sm">Live Demo →</a>
+      </div>
+      <div class="glass-card p-6" data-aos="zoom-in" data-aos-delay="100">
+        <i class="fas fa-chart-simple text-3xl text-purple-400 mb-3"></i>
+        <h3 class="text-xl font-bold mb-2">🎯 TRAS v1.0</h3>
+        <p class="text-gray-400 text-sm mb-3">AI Talent Risk Assessment. Scores resumes vs job descriptions across 5 weighted dimensions.</p>
+        <div class="flex gap-2 flex-wrap"><span class="skill-badge text-xs">HTML/JS</span><span class="skill-badge text-xs">Tailwind</span><span class="skill-badge text-xs">GitHub Pages</span></div>
+        <a href="https://pkswaminathan001.github.io/tras-ai" class="inline-block mt-4 text-indigo-400 hover:text-indigo-300 text-sm">Live Demo →</a>
+      </div>
     </div>
-  </div>
 
-  <!-- AI Coach Chatbot -->
-  <div id="aiCoach">
-    <button id="toggleChat" class="bg-gradient-to-r from-indigo-600 to-purple-600 border-none rounded-full py-3 px-5 text-white font-bold cursor-pointer shadow-lg">💬 AI Coach</button>
-    <div id="chatWindow">
-      <div class="bg-gradient-to-r from-indigo-600 to-purple-600 p-3 text-white font-bold">AI Career Coach</div>
-      <div id="chatMessages" style="height: 300px; overflow-y: auto; padding: 10px; font-size: 13px; color: #333;"></div>
-      <input type="text" id="chatInput" placeholder="Ask about your fit..." class="w-full p-3 border-t border-gray-200">
+    <!-- Visa Sponsorship -->
+    <div id="visa" class="glass-card p-8 mb-12" data-aos="fade-up">
+      <h2 class="section-header">Visa Sponsorship Path</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div><i class="fas fa-wind text-2xl text-orange-400 mb-2"></i><h3 class="font-bold text-lg">🇳🇱 Netherlands</h3><p class="text-sm text-gray-400">Highly Skilled Migrant (Kennismigrant). Salary threshold met. Recognized sponsors: ING, Aegon, NN, Cognizant, Infosys.</p></div>
+        <div><i class="fas fa-music text-2xl text-emerald-400 mb-2"></i><h3 class="font-bold text-lg">🇮🇪 Ireland</h3><p class="text-sm text-gray-400">Critical Skills Employment Permit. AI/Tech on eligible list. Fast processing, family reunification after 12 months.</p></div>
+        <div><i class="fas fa-flag-checkered text-2xl text-green-400 mb-2"></i><h3 class="font-bold text-lg">🇱🇺 Luxembourg</h3><p class="text-sm text-gray-400">EU Blue Card / Salaried Worker Permit. Finance hub, high salaries, English-friendly in Big 4 & Tech.</p></div>
+      </div>
+      <p class="mt-6 text-center text-gray-400 text-sm">📩 Happy to provide visa documentation templates, salary thresholds, and recognized sponsor lists upon request.</p>
     </div>
-  </div>
+
+    <!-- Let's Work Together -->
+    <div class="text-center" data-aos="fade-up">
+      <h2 class="text-3xl font-bold mb-4">Let's Work Together</h2>
+      <p class="text-gray-300 mb-6">I'm actively seeking Prompt Engineering, AI Workflow, or AI Solutions Consultant roles in the Netherlands, Ireland, or Luxembourg.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="mailto:prswaminathan001@gmail.com" class="btn-primary"><i class="fas fa-envelope mr-2"></i> prswaminathan001@gmail.com</a>
+        <a href="https://linkedin.com/in/prswaminathan" target="_blank" class="btn-outline"><i class="fab fa-linkedin mr-2"></i> LinkedIn</a>
+      </div>
+      <p class="mt-6 text-gray-500 text-sm">🌍 Based in India • CET/BST overlap ready • Open to hybrid relocation</p>
+    </div>
+  </main>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init({ duration: 800, once: true });
-    new Typed('#typed-headline', { strings: ['TRAS v2.0', 'BEAST MODE', 'AI Talent Risk', 'Luxembourg Ready'], typeSpeed: 50, backSpeed: 30, loop: true });
-    VanillaTilt.init(document.querySelectorAll("[data-tilt]"), { max: 5, speed: 400 });
-    
-    particlesJS('particles-js', { particles: { number: { value: 40 }, color: { value: "#ffffff" }, opacity: { value: 0.15 }, size: { value: 3 }, move: { speed: 1 } }, interactivity: { events: { onhover: { enable: true, mode: "repulse" } } } });
-    
-    // Dark Mode
-    const themeToggle = document.getElementById('themeToggle');
-    const html = document.documentElement;
-    if (localStorage.theme === 'dark') html.classList.add('dark');
-    themeToggle.onclick = () => { html.classList.toggle('dark'); localStorage.theme = html.classList.contains('dark') ? 'dark' : 'light'; themeToggle.textContent = html.classList.contains('dark') ? '☀️' : '🌙'; };
-    
-    // Modal Logic
-    const techModal = document.getElementById('techModal');
-    document.getElementById('openTechModal').onclick = () => techModal.classList.add('active');
-    document.querySelectorAll('#closeModal, #closeModal2').forEach(btn => btn.onclick = () => techModal.classList.remove('active'));
-    
-    // Chatbot
-    const chatWindow = document.getElementById('chatWindow');
-    document.getElementById('toggleChat').onclick = () => chatWindow.style.display = chatWindow.style.display === 'none' ? 'block' : 'none';
-    document.getElementById('chatInput').onkeypress = (e) => {
-      if (e.key === 'Enter') {
-        const msg = e.target.value;
-        const chatDiv = document.getElementById('chatMessages');
-        chatDiv.innerHTML += `<div><strong>You:</strong> ${msg}</div>`;
-        const cv = document.getElementById('cv').value;
-        const jd = document.getElementById('jd').value;
-        setTimeout(() => {
-          let reply = '';
-          if (msg.toLowerCase().includes('french')) reply = '🇫🇷 French B1 is recommended. Start Duolingo today — Luxembourg values French!';
-          else if (msg.toLowerCase().includes('guidewire')) reply = '✅ You have Guidewire experience (USAA). HIGHLIGHT this for Luxembourg insurance roles.';
-          else if (msg.toLowerCase().includes('salary')) reply = '💰 Luxembourg AI roles: €55k-€85k depending on experience. You have 2+ years, target €65k+.';
-          else reply = 'Based on your CV, focus on adding BFSI keywords. Your 40% efficiency gain is your strongest selling point.';
-          chatDiv.innerHTML += `<div><strong>Coach:</strong> ${reply}</div>`;
-          chatDiv.scrollTop = chatDiv.scrollHeight;
-        }, 300);
-        e.target.value = '';
-      }
-    };
-    
-    let radarChart = null;
-    let compareMode = false;
-    let firstJD = '';
-    
-    function calculateFitScore(cv, jd) {
-      const hasBFSI = /guidewire|claims|insurance|bfsi|usaa|kyc|aml|compliance/i.test(cv);
-      const hasFrench = /french|français|b1|b2|c1/i.test(cv + jd);
-      const hasAI = /prompt|claude|llm|ai automation|rag|vector/i.test(cv);
-      return hasBFSI && hasAI ? 92 : hasBFSI ? 86 : hasAI ? 78 : 72;
-    }
-    
-    function updateRadarChart(scores) {
-      const ctx = document.getElementById('radarChart').getContext('2d');
-      if (radarChart) radarChart.destroy();
-      radarChart = new Chart(ctx, {
-        type: 'radar', data: { labels: ['Skills', 'Experience', 'Education', 'AI Fluency', 'Communication'], datasets: [{ label: 'Your Profile', data: scores, backgroundColor: 'rgba(102, 126, 234, 0.2)', borderColor: '#4f46e5', pointBackgroundColor: '#4f46e5' }] },
-        options: { responsive: true, maintainAspectRatio: true, scales: { r: { min: 0, max: 100, ticks: { stepSize: 20 } } } }
-      });
-    }
-    
-    function showDeepDive(cv, jd, score) {
-      const sentiment = jd.includes('urgent') ? '🔥 Urgent hire' : (jd.includes('culture') ? '🤝 Culture-focused' : '📈 Growth role');
-      const cvWords = cv.toLowerCase().split(/\s+/);
-      const jdWords = jd.toLowerCase().split(/\s+/);
-      const missing = [...new Set(jdWords.filter(w => w.length > 5 && !cvWords.includes(w)).slice(0, 5))].join(', ');
-      const salary = score > 80 ? '€65k-€85k' : (score > 60 ? '€50k-€65k' : '€40k-€50k');
-      const questions = score > 80 ? 'Tell me about your 40% efficiency gain. How do you evaluate LLMs? Why Luxembourg?' : 'Why AI? How is your French? What do you know about Luxembourg finance?';
-      const gaps = score > 80 ? 'Minor: French B1' : (score > 60 ? 'Add BFSI keywords, French A1' : 'Major: No BFSI/Guidewire experience, French missing');
-      document.getElementById('sentiment').innerText = sentiment;
-      document.getElementById('missingKeywords').innerText = missing || 'None significant';
-      document.getElementById('salary').innerText = salary + ' / year';
-      document.getElementById('questions').innerText = questions;
-      document.getElementById('gaps').innerText = gaps;
-      document.getElementById('deepDiveModal').style.display = 'flex';
-    }
-    
-    document.getElementById('compareBtn').onclick = () => {
-      if (!compareMode) {
-        firstJD = document.getElementById('jd').value;
-        if (!firstJD) return alert('Paste first job description');
-        document.getElementById('jd').style.border = '3px solid #8b5cf6';
-        compareMode = true;
-        document.getElementById('compareBtn').innerHTML = '📊 Compare Now';
-        alert('Now paste the SECOND job description and click Compare Now');
-      } else {
-        const secondJD = document.getElementById('jd').value;
-        if (!secondJD) return alert('Paste second job description');
-        const cv = document.getElementById('cv').value;
-        const score1 = calculateFitScore(cv, firstJD);
-        const score2 = calculateFitScore(cv, secondJD);
-        alert(`📊 COMPARISON RESULT:\n\nJob 1 Score: ${score1}/100\nJob 2 Score: ${score2}/100\n\n${score1 > score2 ? '✅ Job 1 is a better fit' : '✅ Job 2 is a better fit'}\n\nRecommendation: ${score1 > 70 || score2 > 70 ? 'Apply to the higher-scoring role!' : 'Work on BFSI keywords first.'}`);
-        compareMode = false;
-        document.getElementById('jd').style.border = '';
-        document.getElementById('compareBtn').innerHTML = '🔄 Compare Jobs';
-      }
-    };
-    
-    document.getElementById('analyze').onclick = async () => {
-      const cv = document.getElementById('cv').value.trim();
-      const jd = document.getElementById('jd').value.trim();
-      if (!cv || !jd) return alert('🔥 Paste both CV and Job Description!');
-      
-      const btn = document.getElementById('analyze');
-      btn.disabled = true; btn.innerHTML = '<span class="animate-pulse">⚡ BEAST MODE ANALYZING...</span>';
-      await new Promise(r => setTimeout(r, 1500));
-      
-      const hasBFSI = /guidewire|claims|insurance|bfsi|usaa|kyc|aml|compliance/i.test(cv);
-      const hasFrench = /french|français|b1|b2|c1/i.test(cv + jd);
-      const hasAI = /prompt|claude|llm|ai automation|rag|vector/i.test(cv);
-      const fitScore = hasBFSI && hasAI ? 92 : hasBFSI ? 86 : hasAI ? 78 : 72;
-      const verdict = fitScore >= 85 ? '✅ Strong match — Apply NOW!' : fitScore >= 70 ? '🟡 Good fit — Tailor keywords' : '🔴 Stretch role — Address gaps';
-      const feedback = hasBFSI ? "✨ Strong BFSI domain fit. Highlight Guidewire/USAA/compliance for Luxembourg." : "💡 Add BFSI keywords (Guidewire, claims, KYC/AML).";
-      const luxFit = hasBFSI && hasFrench ? '🇱🇺 Excellent Luxembourg Fit' : hasBFSI ? '🟡 Add French for Luxembourg' : '🔴 BFSI keywords needed';
-      
-      document.getElementById('score').textContent = fitScore;
-      document.getElementById('verdict').textContent = verdict;
-      document.getElementById('luxFit').textContent = luxFit;
-      document.getElementById('feedback').textContent = feedback;
-      
-      const dims = [
-        { label: '🔧 Skills', score: hasAI ? 94 : 76, gaps: hasAI ? [] : ['Prompt engineering'] },
-        { label: '📈 Experience', score: hasBFSI ? 95 : 72, gaps: hasBFSI ? [] : ['BFSI domain'] },
-        { label: '🎓 Education', score: 90, gaps: [] },
-        { label: '🤖 AI Fluency', score: hasAI ? 96 : 65, gaps: hasAI ? [] : ['Multi-LLM'] },
-        { label: '✍️ Communication', score: 87, gaps: hasFrench ? [] : ['French B1'] }
-      ];
-      document.getElementById('dimensions').innerHTML = dims.map(d => `<div class="flex justify-between p-3 bg-white rounded shadow"><span>${d.label}</span><span class="font-bold">${d.score}/100</span></div>`).join('');
-      updateRadarChart(dims.map(d => d.score));
-      
-      document.getElementById('result').classList.remove('hidden');
-      document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
-      if (fitScore >= 85) confetti({ particleCount: 150, spread: 80 });
-      
-      btn.disabled = false; btn.innerHTML = '🚀 Analyze Fit';
-    };
-    
-    document.getElementById('deepDiveBtn').onclick = () => {
-      const cv = document.getElementById('cv').value;
-      const jd = document.getElementById('jd').value;
-      const score = parseInt(document.getElementById('score').textContent);
-      if (!cv || !jd) return alert('Run analysis first!');
-      showDeepDive(cv, jd, score);
-    };
-    
-    document.getElementById('resetBtn').onclick = () => {
-      document.getElementById('cv').value = '';
-      document.getElementById('jd').value = '';
-      document.getElementById('result').classList.add('hidden');
-      document.getElementById('keywordPreview').classList.add('hidden');
-    };
-    
-    document.getElementById('exportBtn').onclick = async () => {
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF();
-      doc.setFontSize(18); doc.text('🔥 TRAS BEAST MODE Report', 20, 20);
-      doc.setFontSize(12); doc.text(`Score: ${document.getElementById('score').textContent}/100`, 20, 40);
-      doc.text(`Verdict: ${document.getElementById('verdict').textContent}`, 20, 50);
-      doc.text(`Feedback: ${document.getElementById('feedback').textContent}`, 20, 70);
-      doc.save(`TRAS_Report_${new Date().toISOString().split('T')[0]}.pdf`);
-    };
-    
-    document.getElementById('shareBtn').onclick = () => {
-      const score = document.getElementById('score').textContent;
-      const text = `🔥 TRAS BEAST MODE: ${score}/100 fit for Luxembourg BFSI!\nTry it: https://pkswaminathan001.github.io/tras-ai/`;
-      window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent('https://pkswaminathan001.github.io/tras-ai/')}&text=${encodeURIComponent(text)}`, '_blank');
-    };
-    
-    document.getElementById('closeDeepDive')?.addEventListener('click', () => document.getElementById('deepDiveModal').style.display = 'none');
-    document.getElementById('closeDeepDive2')?.addEventListener('click', () => document.getElementById('deepDiveModal').style.display = 'none');
-  </script>
+  <script> AOS.init({ duration: 800, once: true }); </script>
 </body>
 </html>
