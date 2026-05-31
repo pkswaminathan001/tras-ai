@@ -30,8 +30,7 @@
 | Project | Tech Stack | Status |
 |---------|------------|--------|
 | **EU Job Hunter AI** | GitHub Actions + Multi-LLM | ✅ [Live Demo](https://pkswaminathan001.github.io/portfolio) |
-| **TRAS v1.0** | React + Claude API | 🔥 [Mock Demo](https://pkswaminathan001.github.io/tras-ai/) — real AI via GitHub Issues |
-| **No-Code Automation** | Zapier, Google Apps Script | 📅 Available for freelance |
+| **TRAS** | HTML/CSS/JS + Chart.js | 🔥 [Live Demo](https://pkswaminathan001.github.io/tras-ai/) — Multi-dimensional scoring || **No-Code Automation** | Zapier, Google Apps Script | 📅 Available for freelance |
 
 ---
 
