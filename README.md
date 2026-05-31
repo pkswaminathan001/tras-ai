@@ -1,6 +1,6 @@
 # 👋 Hi, I'm PR Swaminathan
 
-> **Prompt Engineer | AI Business Analyst | BFSI Domain Expert**  
+> **Business Analyst | Insurance Operations | Guidewire | AI-Powered Process Automation | BFSI Domain Expert**  
 > 🇱🇺🇳🇱🇮🇪 Targeting AI/Operations roles in Luxembourg • Netherlands • Ireland  
 > **🇪🇺 Visa Status:** EU Blue Card (LU) / HSM (NL) / Critical Skills (IE) eligible — employer applies online (~4 weeks)
 
