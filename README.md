@@ -15,7 +15,7 @@
 | Question | Answer |
 |----------|--------|
 | **What does this do?** | Auto-analyzes CV fit using GitHub Actions + Multi-LLM orchestration (GPT-4, Claude, Gemini, Qwen-Max) |
-| **LLM experience?** | 2+ years production — 40% processing reduction, 99.2% accuracy across 6,000+ transactions at USAA (HCL) |
+| **LLM experience?** | 2+ years production — 40% processing reduction, 99.2% accuracy across 6,000+ transactions at **USAA (via HCL Technologies)** |
 | **Domain expertise?** | Insurance Operations (Guidewire Claims Center, USAA), BFSI, KYC/AML, claims processing |
 | **Live demo?** | ✅ [Portfolio](https://pkswaminathan001.github.io/portfolio) • [TRAS Demo](https://pkswaminathan001.github.io/tras-ai/) — React + Claude API + structured JSON evaluation |
 | **Can I test it?** | Yes! Open a GitHub Issue with CV+JD → multi-LLM workflow auto-analyzes |
@@ -25,13 +25,21 @@
 
 ---
 
+## 🏦 Enterprise Client
+
+![USAA](https://img.shields.io/badge/Client-USAA-003A70?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0xMiAyQzYuNDggMiAyIDYuNDggMiAxMnM0LjQ4IDEwIDEwIDEwIDEwLTQuNDggMTAtMTBTMTcuNTIgMiAxMiAyem0tMSAxNy45M2MtMy45NS0uNDktNy0zLjg1LTctNy45MyAwLS40NS4wNC0uODkuMTEtMS4zMWg2LjkydjkuMjR6bTItOS4yNEg2LjExYy0uMjctLjY3LjY0LTEuMjkgMS4wOC0xLjg0aDQuODF2MS44NHptMC0ySDcuMmMuNTctLjUxIDEuMjMtLjkyIDEuOTQtMS4yMmgzLjg2djEuMjJ6bTItMkg5di0xLjIyaDEuNWMuNTUgMCAxIC40NSAxIDF2MS4yMnptMCAyLjIydjEuODRoNC44MWMtLjI3LS42Ny0uNjQtMS4yOS0xLjA4LTEuODRIMTN6bS0yIDkuMjR2LTkuMjRINi4xMWMtLjA0LjM3LS4wNi43NS0uMDYgMS4xMyAwIDMuMzYgMS43NyA2LjMzIDQuNDcgOC4wNXoiLz48L3N2Zz4=)](https://www.usaa.com)
+
+*Insurance Claims AI Pipeline — deployed on USAA project via HCL Technologies*
+
+---
+
 ## 🔍 What I Build
 
 | Project | Tech Stack | LLM / GenAI Integration |
 |---------|------------|--------------------------|
 | **EU Job Hunter AI** | GitHub Actions + Python | Multi-LLM orchestration (GPT-4, Claude, Qwen-Max) for CV-JD fit analysis |
 | **TRAS v1.0** | React + Claude API + Chart.js | Multi-turn LLM evaluation, structured JSON output, 5-dimension scoring |
-| **Insurance Claims AI Pipeline** | GPT-4, Claude, Gemini + Guidewire | Production GenAI pipeline — chain-of-thought prompting, 40% faster processing |
+| **Insurance Claims AI Pipeline** | GPT-4, Claude, Gemini + Guidewire | Production GenAI pipeline for USAA — chain-of-thought prompting, 40% faster processing |
 | **No-Code Automation** | Zapier, Google Apps Script | Available for freelance |
 
 ---
@@ -80,7 +88,7 @@
 | **Netherlands** | Fast-growing AI/automation scene | HSM (Kennismigrant) |
 | **Ireland** | Tech & finance hub, English-speaking | Critical Skills Permit |
 
-**My fit:** Production LLM experience + Insurance Operations (Guidewire/USAA) + Business Analysis + multi-country visa eligibility
+**My fit:** Production LLM experience + Insurance Operations (USAA/Guidewire) + Business Analysis + multi-country visa eligibility
 
 ---
 
