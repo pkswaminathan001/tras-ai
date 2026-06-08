@@ -27,7 +27,7 @@
 
 ## 🏦 Enterprise Client
 
-![USAA](https://img.shields.io/badge/Client-USAA-003A70?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0xMiAyQzYuNDggMiAyIDYuNDggMiAxMnM0LjQ4IDEwIDEwIDEwIDEwLTQuNDggMTAtMTBTMTcuNTIgMiAxMiAyem0tMSAxNy45M2MtMy45NS0uNDktNy0zLjg1LTctNy45MyAwLS40NS4wNC0uODkuMTEtMS4zMWg2LjkydjkuMjR6bTItOS4yNEg2LjExYy0uMjctLjY3LjY0LTEuMjkgMS4wOC0xLjg0aDQuODF2MS44NHptMC0ySDcuMmMuNTctLjUxIDEuMjMtLjkyIDEuOTQtMS4yMmgzLjg2djEuMjJ6bTItMkg5di0xLjIyaDEuNWMuNTUgMCAxIC40NSAxIDF2MS4yMnptMCAyLjIydjEuODRoNC44MWMtLjI3LS42Ny0uNjQtMS4yOS0xLjA4LTEuODRIMTN6bS0yIDkuMjR2LTkuMjRINi4xMWMtLjA0LjM3LS4wNi43NS0uMDYgMS4xMyAwIDMuMzYgMS43NyA2LjMzIDQuNDcgOC4wNXoiLz48L3N2Zz4=)](https://www.usaa.com)
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/USAA_logo.svg/2560px-USAA_logo.svg.png" alt="USAA" width="120">
 
 *Insurance Claims AI Pipeline — deployed on USAA project via HCL Technologies*
 
