@@ -1,7 +1,7 @@
 # 👋 Hi, I'm PR Swaminathan
 
-> **Business Analyst | Insurance Operations | Guidewire | AI-Powered Process Automation | BFSI Domain Expert**  
-> 🇱🇺🇳🇱🇮🇪 Targeting AI/Operations roles in Luxembourg • Netherlands • Ireland  
+> **AI/ML Engineer | Business Analyst | Insurance Operations | LLM Evaluation & GenAI Pipeline Automation**  
+> 🇱🇺🇳🇱🇮🇪 Targeting AI/ML, AI Operations & Business Analysis roles in Luxembourg • Netherlands • Ireland  
 > **🇪🇺 Visa Status:** EU Blue Card (LU) / HSM (NL) / Critical Skills (IE) eligible — employer applies online (~4 weeks)
 
 [![EU Focus](https://img.shields.io/badge/EU-BFSI_Ready-blue)](https://pkswaminathan001.github.io/portfolio)
@@ -14,12 +14,12 @@
 
 | Question | Answer |
 |----------|--------|
-| **What does this do?** | Auto-analyzes CV fit against EU job descriptions using GitHub Actions + Multi-LLM |
-| **Why Luxembourg/NL/IE?** | BFSI hubs with strong visa sponsorship paths for AI/automation roles |
-| **Live demo?** | ✅ [Portfolio](https://pkswaminathan001.github.io/portfolio) • [TRAS Demo](https://pkswaminathan001.github.io/tras-ai/) *(Mock demo — real AI via GitHub Issues)* |
-| **Code quality?** | Clean YAML/Python/React • No secrets committed • Free-tier friendly |
-| **Can I test it?** | Yes! Open an Issue with CV+JD → workflow auto-analyzes |
-| **Hire me for?** | Prompt Engineering, AI Ops, Business Analysis, BFSI Automation |
+| **What does this do?** | Auto-analyzes CV fit using GitHub Actions + Multi-LLM orchestration (GPT-4, Claude, Gemini, Qwen-Max) |
+| **LLM experience?** | 2+ years production — 40% processing reduction, 99.2% accuracy across 6,000+ transactions at USAA (HCL) |
+| **Domain expertise?** | Insurance Operations (Guidewire Claims Center, USAA), BFSI, KYC/AML, claims processing |
+| **Live demo?** | ✅ [Portfolio](https://pkswaminathan001.github.io/portfolio) • [TRAS Demo](https://pkswaminathan001.github.io/tras-ai/) — React + Claude API + structured JSON evaluation |
+| **Can I test it?** | Yes! Open a GitHub Issue with CV+JD → multi-LLM workflow auto-analyzes |
+| **Hire me for?** | AI/ML Engineer, Business Analyst, Prompt Engineer, Insurance Operations, LLM Evaluation, BFSI Automation |
 
 📬 **Contact**: prswaminathan001@gmail.com • [LinkedIn](https://linkedin.com/in/prswaminathan)
 
@@ -27,20 +27,48 @@
 
 ## 🔍 What I Build
 
-| Project | Tech Stack | Status |
-|---------|------------|--------|
-| **EU Job Hunter AI** | GitHub Actions + Multi-LLM | ✅ [Live Demo](https://pkswaminathan001.github.io/portfolio) |
-| **TRAS** | HTML/CSS/JS + Chart.js | 🔥 [Live Demo](https://pkswaminathan001.github.io/tras-ai/) — Multi-dimensional scoring || **No-Code Automation** | Zapier, Google Apps Script | 📅 Available for freelance |
+| Project | Tech Stack | LLM / GenAI Integration |
+|---------|------------|--------------------------|
+| **EU Job Hunter AI** | GitHub Actions + Python | Multi-LLM orchestration (GPT-4, Claude, Qwen-Max) for CV-JD fit analysis |
+| **TRAS v1.0** | React + Claude API + Chart.js | Multi-turn LLM evaluation, structured JSON output, 5-dimension scoring |
+| **Insurance Claims AI Pipeline** | GPT-4, Claude, Gemini + Guidewire | Production GenAI pipeline — chain-of-thought prompting, 40% faster processing |
+| **No-Code Automation** | Zapier, Google Apps Script | Available for freelance |
 
 ---
 
-## 💼 Domain Expertise
+## 🏆 Key Achievements
 
-| Area | Tools/Experience |
-|------|-----------------|
-| **BFSI/Insurance** | Guidewire, claims ops, KYC/AML, USAA project (HCL) |
-| **AI/ML Ops** | Claude API, Qwen, prompt engineering, RAG concepts |
-| **Automation** | GitHub Actions, Python scripting, Google Apps Script |
+- 🚀 **40% Processing Time Reduction** — First-ever AI automation on USAA insurance project (HCL Technologies), permanently adopted by operations team
+- ✅ **99.2% Claims Accuracy** — Maintained across 6,000+ insurance transactions with zero critical errors
+- 🔍 **Multi-Model Evaluation** — Benchmarked GPT-4, Claude, and Gemini on accuracy, latency, and output consistency
+- 📉 **25% Rework Reduction** — Built AI evaluation frameworks reducing analyst errors across the team
+- 📋 **98% On-Time BGV Delivery** — Screened 300+ candidates across all five background verification check types
+
+---
+
+## 💼 Domain & Technical Skills
+
+| Category | Tools & Techniques |
+|----------|---------------------|
+| **Insurance Operations** | Guidewire Claims Center (GWCC), USAA Insurance Operations, Claims Processing, Policy Administration |
+| **Business Analysis** | Process mapping, KPI dashboards (Excel advanced), stakeholder management, QC frameworks |
+| **BFSI Domain** | KYC/AML, Background Verification (BGV), Risk Assessment, Compliance |
+| **Large Language Models (LLMs)** | GPT-4, Claude (API), Gemini, Qwen-Max — production deployment, evaluation & benchmarking |
+| **Prompt Engineering** | Chain-of-Thought, Few-Shot, Role Prompting, Structured Output Design |
+| **Generative AI** | Multi-model orchestration, RAG concepts, AI governance, auditability & responsible AI |
+| **Deep Learning & NLP** | Transformer architectures, LLM internals, chatbot development (IBM Watsonx) |
+| **Cloud AI Services** | Claude API, GPT-4 API, Gemini API — cloud-based GenAI pipeline integration |
+| **Automation** | GitHub Actions, n8n, Zapier, Google Apps Script, Python scripting |
+
+---
+
+## 💼 Experience Snapshot
+
+| Role | Organization | Key Work |
+|------|-------------|----------|
+| **AI Workflow & Automation Lead** | HCL Technologies (USAA Insurance Project) | Architected production LLM pipeline; 40% processing reduction; 99.2% accuracy across 6,000+ claims |
+| **Process Associate — Claims Operations** | HCL Technologies (USAA Insurance Project) | Guidewire claims processing, data validation, KPI tracking & reporting |
+| **Talent Acquisition (HR Intern)** | Linux Laboratory Pvt Ltd | 98% on-time BGV delivery across 300+ candidates; data-driven shortlisting |
 
 ---
 
@@ -52,7 +80,15 @@
 | **Netherlands** | Fast-growing AI/automation scene | HSM (Kennismigrant) |
 | **Ireland** | Tech & finance hub, English-speaking | Critical Skills Permit |
 
-**My fit:** Guidewire + claims automation + multi-country visa eligibility
+**My fit:** Production LLM experience + Insurance Operations (Guidewire/USAA) + Business Analysis + multi-country visa eligibility
+
+---
+
+## 📜 Certifications
+
+- Google Cloud — Introduction to Generative AI
+- IBM Watsonx Assistant Chatbot (2025)
+- Google Workspace AI Workshop (2025)
 
 ---
 
@@ -61,8 +97,9 @@
 - 🔗 [LinkedIn](https://linkedin.com/in/prswaminathan)
 - 📧 prswaminathan001@gmail.com
 - 🌐 [Portfolio](https://pkswaminathan001.github.io/portfolio)
+- 🐙 [GitHub](https://github.com/pkswaminathan001)
 
 ---
 
-*Built with ❤️ for the EU job market*  
+*Built for the EU AI/ML & Insurance Operations job market*  
 🇫🇷 **French:** A1 (learning) — committed to B1 within 6 months
