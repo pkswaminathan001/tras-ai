@@ -27,9 +27,8 @@
 
 ## 🏦 Enterprise Client
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/USAA_logo.svg/2560px-USAA_logo.svg.png" alt="USAA" width="120">
-
-*Insurance Claims AI Pipeline — deployed on USAA project via HCL Technologies*
+> **🏦 USAA** — Fortune 100 Insurance & Financial Services  
+> *Insurance Claims AI Pipeline deployed via HCL Technologies*
 
 ---
 
