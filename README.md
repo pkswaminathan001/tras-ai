@@ -17,7 +17,7 @@
 | **What does this do?** | Auto-analyzes CV fit using GitHub Actions + Multi-LLM orchestration (GPT-4, Claude, Gemini, Qwen-Max) |
 | **LLM experience?** | 2+ years production — 40% processing reduction, 99.2% accuracy across 6,000+ transactions at **USAA (via HCL Technologies)** |
 | **Domain expertise?** | Insurance Operations (Guidewire Claims Center, USAA), BFSI, KYC/AML, claims processing |
-| **Live demo?** | ✅ [Portfolio](https://pkswaminathan001.github.io/portfolio) • [TRAS Demo](https://pkswaminathan001.github.io/tras-ai/) — React + Claude API + structured JSON evaluation |
+| **Live demo?** | ✅ [Portfolio](https://pkswaminathan001.github.io/portfolio) • [TRAS v2.0 Demo](https://pkswaminathan001.github.io/tras-ai/) — React + Claude API + structured JSON evaluation |
 | **Can I test it?** | Yes! Open a GitHub Issue with CV+JD → multi-LLM workflow auto-analyzes |
 | **Hire me for?** | AI/ML Engineer, Business Analyst, Prompt Engineer, Insurance Operations, LLM Evaluation, BFSI Automation |
 
@@ -34,12 +34,12 @@
 
 ## 🔍 What I Build
 
-| Project | Tech Stack | LLM / GenAI Integration |
-|---------|------------|--------------------------|
-| **EU Job Hunter AI** | GitHub Actions + Python | Multi-LLM orchestration (GPT-4, Claude, Qwen-Max) for CV-JD fit analysis |
-| **TRAS v1.0** | React + Claude API + Chart.js | Multi-turn LLM evaluation, structured JSON output, 5-dimension scoring |
-| **Insurance Claims AI Pipeline** | GPT-4, Claude, Gemini + Guidewire | Production GenAI pipeline for USAA — chain-of-thought prompting, 40% faster processing |
-| **No-Code Automation** | Zapier, Google Apps Script | Available for freelance |
+| Project | Tech Stack | LLM / GenAI Integration | Demo |
+|---------|------------|--------------------------|------|
+| **EU Job Hunter AI** | GitHub Actions + Python | Multi-LLM orchestration (GPT-4, Claude, Qwen-Max) for CV-JD fit analysis | [Try It](https://github.com/pkswaminathan001/Luxembourg/issues/new) |
+| **TRAS v2.0** 🔥 | React + Claude API + Chart.js | Multi-turn LLM evaluation, structured JSON output, 5-dimension scoring | [Live Demo](https://pkswaminathan001.github.io/tras-ai/) |
+| **Insurance Claims AI Pipeline** | GPT-4, Claude, Gemini + Guidewire | Production GenAI pipeline for USAA — chain-of-thought prompting, 40% faster processing | Enterprise (HCL/USAA) |
+| **No-Code Automation** | Zapier, Google Apps Script | Available for freelance | — |
 
 ---
 
@@ -50,6 +50,16 @@
 - 🔍 **Multi-Model Evaluation** — Benchmarked GPT-4, Claude, and Gemini on accuracy, latency, and output consistency
 - 📉 **25% Rework Reduction** — Built AI evaluation frameworks reducing analyst errors across the team
 - 📋 **98% On-Time BGV Delivery** — Screened 300+ candidates across all five background verification check types
+
+---
+
+## 🚀 Production Deployments
+
+| Deployment | Client | Scale | Status |
+|------------|--------|-------|--------|
+| **Insurance Claims AI Pipeline** | USAA (via HCL Technologies) | 6,000+ transactions | ✅ Live in Operations |
+| **TRAS v2.0** | Public | Live demo | ✅ Public Access |
+| **EU Job Hunter AI** | Public | GitHub Actions — auto-triggered | ✅ Live |
 
 ---
 
@@ -81,11 +91,11 @@
 
 ## 🇪🇺 Why Luxembourg, Netherlands & Ireland?
 
-| Country | Key Advantage | Visa Path |
-|---------|---------------|-----------|
-| **Luxembourg** | BFSI hub, high salaries, English-friendly | EU Blue Card |
-| **Netherlands** | Fast-growing AI/automation scene | HSM (Kennismigrant) |
-| **Ireland** | Tech & finance hub, English-speaking | Critical Skills Permit |
+| Country | Key Advantage | Visa Path | Example Sponsors |
+|---------|---------------|-----------|-------------------|
+| **Luxembourg** | BFSI hub, high salaries, English-friendly | EU Blue Card | Deloitte, PwC, AXA, BGL BNP Paribas |
+| **Netherlands** | Fast-growing AI/automation scene | HSM (Kennismigrant) | ING, Rabobank, NN, Aegon, Adyen |
+| **Ireland** | Tech & finance hub, English-speaking | Critical Skills Permit | Google, Meta, Stripe, Accenture |
 
 **My fit:** Production LLM experience + Insurance Operations (USAA/Guidewire) + Business Analysis + multi-country visa eligibility
 
