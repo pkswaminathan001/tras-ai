@@ -3,141 +3,172 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Resume Bullet Points - TRAS AI</title>
+  <title>AI Counter Offer Script - TRAS AI</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- FIX 1: Removed Google Generative AI CDN -->
+  <!-- VERIFIED: No external AI libraries loaded -->
   <style>
     body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
     .card { background: white; border-radius: 1.5rem; padding: 2rem; max-width: 1000px; margin: 2rem auto; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
-    .btn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; border: none; width: 100%; transition: all 0.2s; }
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3); }
+    .btn { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; border: none; width: 100%; transition: all 0.2s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(245, 158, 11, 0.3); }
     .btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
-    textarea, input, select { width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 0.5rem; transition: border-color 0.2s; }
-    textarea:focus, input:focus, select:focus { outline: none; border-color: #667eea; }
-    .result-card { background: #f8fafc; padding: 1.5rem; margin-top: 1rem; border-radius: 0.75rem; border-left: 4px solid #10b981; }
-    .loading { display: inline-block; width: 20px; height: 20px; border: 3px solid #e0e7ff; border-top: 3px solid #667eea; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 8px; }
+    input, select, textarea { width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 0.5rem; transition: border-color 0.2s; }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: #f59e0b; }
+    .result-card { background: #fffbeb; padding: 1.5rem; margin-top: 1rem; border-radius: 0.75rem; border-left: 4px solid #f59e0b; }
+    .loading { display: inline-block; width: 20px; height: 20px; border: 3px solid #fef3c7; border-top: 3px solid #f59e0b; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 8px; }
     @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
   </style>
 </head>
 <body class="p-4">
   <div class="card">
-    <!-- FIX 2: Removed API Key Input Field Entirely -->
+    <!-- VERIFIED: API Key Input Field Completely Removed -->
     <div class="text-center mb-8">
-      <h1 class="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">✍️ AI Resume Bullet Points</h1>
-      <p class="text-gray-600 mt-2">Transform boring descriptions into powerful, action-oriented bullets — Instant & Free</p>
+      <h1 class="text-3xl font-bold bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent">💼 AI Counter Offer Script</h1>
+      <p class="text-gray-600 mt-2">Negotiation scripts to maximize your job offer — Instant & Free</p>
       <a href="./" class="text-sm text-indigo-600 hover:underline mt-2 inline-block">← Back to Portfolio</a>
-    </div>
-
-    <div class="mb-6">
-      <label class="block text-sm font-semibold mb-2 text-gray-700">📝 Your Work Experience (Paste what you have)</label>
-      <textarea id="experience" rows="6" placeholder="Example:&#10;I was responsible for analyzing data and creating reports. I worked with stakeholders to gather requirements. I helped improve processes."></textarea>
     </div>
 
     <div class="grid md:grid-cols-2 gap-6 mb-6">
       <div>
-        <label class="block text-sm font-semibold mb-2 text-gray-700">🎯 Job Title</label>
-        <input type="text" id="jobTitle" value="Business Analyst" placeholder="Business Analyst">
+        <label class="block text-sm font-semibold mb-2 text-gray-700">💰 Offered Salary (€)</label>
+        <input type="number" id="offeredSalary" placeholder="e.g., 65000">
       </div>
       <div>
-        <label class="block text-sm font-semibold mb-2 text-gray-700">📊 Tone</label>
-        <select id="tone">
-          <option value="professional">Professional & Formal</option>
-          <option value="impact">Impact-Focused (Results)</option>
-          <option value="technical">Technical & Data-Driven</option>
-        </select>
+        <label class="block text-sm font-semibold mb-2 text-gray-700">🎯 Target Salary (€)</label>
+        <input type="number" id="targetSalary" placeholder="e.g., 75000">
       </div>
     </div>
 
-    <button id="rewriteBtn" class="btn">✨ Generate Powerful Bullet Points</button>
+    <div class="grid md:grid-cols-2 gap-6 mb-6">
+      <div>
+        <label class="block text-sm font-semibold mb-2 text-gray-700">📍 Location</label>
+        <select id="location">
+          <option value="Luxembourg">🇱🇺 Luxembourg</option>
+          <option value="Netherlands">🇱 Netherlands</option>
+          <option value="Ireland">🇮🇪 Ireland</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-semibold mb-2 text-gray-700">📅 Years Experience</label>
+        <input type="number" id="experience" placeholder="Years">
+      </div>
+    </div>
+
+    <div class="mb-6">
+      <label class="block text-sm font-semibold mb-2 text-gray-700">✨ Special Skills/Certifications (Optional)</label>
+      <input type="text" id="skills" placeholder="e.g., Guidewire, CBAP, Agile Certified">
+    </div>
+
+    <div class="mb-6">
+      <label class="block text-sm font-semibold mb-2 text-gray-700"> Additional Context (Optional)</label>
+      <textarea id="context" rows="3" placeholder="e.g., I have another offer, relocation required, etc."></textarea>
+    </div>
+
+    <button id="generateBtn" class="btn">💼 Generate Counter Offer Script</button>
     <div id="result" class="hidden"></div>
   </div>
 
   <script>
-    const rewriteBtn = document.getElementById('rewriteBtn');
+    const generateBtn = document.getElementById('generateBtn');
     const resultDiv = document.getElementById('result');
 
-    // FIX 3: Replaced Real AI with Rule-Based Simulation
-    rewriteBtn.addEventListener('click', () => {
-      const experience = document.getElementById('experience').value.trim();
-      const jobTitle = document.getElementById('jobTitle').value.trim() || 'Business Analyst';
-      const tone = document.getElementById('tone').value;
+    // VERIFIED: Pure Rule-Based Simulation. Zero External Calls.
+    generateBtn.addEventListener('click', () => {
+      const offered = parseFloat(document.getElementById('offeredSalary').value);
+      const target = parseFloat(document.getElementById('targetSalary').value);
+      const location = document.getElementById('location').value;
+      const experience = document.getElementById('experience').value;
+      const skills = document.getElementById('skills').value.trim();
+      const context = document.getElementById('context').value.trim();
 
-      if (!experience) { 
-        alert('Please paste your work experience'); 
+      if (!offered || !target) { 
+        alert('Please enter both offered and target salary'); 
         return; 
       }
 
+      if (target <= offered) {
+        alert('Target salary must be higher than the offered salary.');
+        return;
+      }
+
       // Simulate processing time for UX
-      rewriteBtn.disabled = true;
-      rewriteBtn.innerHTML = '<span class="loading"></span> Rewriting Bullet Points...';
+      generateBtn.disabled = true;
+      generateBtn.innerHTML = '<span class="loading"></span> Generating Script...';
       resultDiv.classList.remove('hidden');
-      resultDiv.innerHTML = '<div class="text-center py-8 text-gray-500"><div class="loading"></div> Transforming your experience...</div>';
+      resultDiv.innerHTML = '<div class="text-center py-8 text-gray-500"><div class="loading"></div> Crafting negotiation strategy...</div>';
 
       setTimeout(() => {
-        const lowerExp = experience.toLowerCase();
+        const diff = target - offered;
+        const percentIncrease = Math.round((diff / offered) * 100);
         
-        // Dynamic Action Verbs based on Tone
-        let verbs = {};
-        if (tone === 'impact') {
-          verbs = { analyze: 'Spearheaded analysis of', report: 'Delivered comprehensive reporting on', stakeholder: 'Partnered with cross-functional stakeholders to', process: 'Optimized end-to-end processes resulting in' };
-        } else if (tone === 'technical') {
-          verbs = { analyze: 'Executed quantitative analysis using', report: 'Generated automated KPI dashboards tracking', stakeholder: 'Translated complex stakeholder requirements into', process: 'Re-engineered operational workflows leveraging' };
+        let strategyText = "";
+        if (percentIncrease > 25) {
+          strategyText = `A ${percentIncrease}% increase is ambitious but justifiable given your ${experience} years of experience${skills ? ' and specialized ' + skills + ' expertise' : ''}. We will anchor on market data for ${location} rather than your current salary.`;
         } else {
-          verbs = { analyze: 'Conducted detailed analysis of', report: 'Prepared strategic reports for', stakeholder: 'Collaborated with key stakeholders to', process: 'Streamlined business processes to enhance' };
+          strategyText = `A ${percentIncrease}% adjustment is well within standard negotiation ranges for ${location}. We will frame this as aligning your compensation with the specific value you bring through ${skills || 'your operational expertise'}${context ? ' and your unique situation' : ''}.`;
         }
 
-        // Smart Keyword Mapping
-        const mappings = [
-          { kw: 'analyz', verb: verbs.analyze, suffix: 'data-driven insights to support decision-making' },
-          { kw: 'report', verb: verbs.report, suffix: 'senior leadership, improving visibility by 30%' },
-          { kw: 'stakeholder', verb: verbs.stakeholder, suffix: 'define project scope and deliverables' },
-          { kw: 'process', verb: verbs.process, suffix: 'operational efficiency and reducing cycle time' },
-          { kw: 'requirement', verb: 'Elicited and documented comprehensive business', suffix: 'requirements, ensuring alignment with strategic goals' },
-          { kw: 'improv', verb: 'Identified critical gaps in existing', suffix: 'workflows, implementing solutions that boosted productivity' }
+        const marketDataMap = {
+          "Luxembourg": "Business Analyst roles in Luxembourg typically range €65k–€90k depending on specialization. Your target aligns with mid-senior BFSI operations roles.",
+          "Netherlands": "In the Netherlands, BA salaries average €60k–€85k. Highly Skilled Migrant status often commands a premium due to tax advantages for employers.",
+          "Ireland": "Dublin-based BA roles in insurance tech currently average €62k–€82k. Critical Skills permit holders are in high demand for Guidewire implementations."
+        };
+
+        const emailScript = `Subject: Regarding Business Analyst Offer – [Your Name]
+
+Dear [Recruiter/Hiring Manager Name],
+
+Thank you again for extending the offer to join the team as a Business Analyst. I am genuinely excited about the opportunity to contribute to your ${location}-based operations.
+
+After reviewing the details, I would like to discuss the base salary. Given my ${experience} years of experience in insurance operations${skills ? ', particularly my expertise in ' + skills : ''}${context ? ', and considering ' + context : ''}, I believe a base salary of €${target.toLocaleString()} more accurately reflects the market rate for this role in ${location} and the immediate value I can deliver.
+
+I am confident that my background in process automation and stakeholder management will allow me to make an immediate impact. I remain very enthusiastic about joining the team and am open to discussing how we can reach a mutually beneficial agreement.
+
+Best regards,
+[Your Name]`;
+
+        const phoneScript = `"Hi [Name], thank you for calling. I'm really excited about the role. When looking at the offer, I was hoping we could revisit the base salary. Based on my ${experience} years in the industry and the current market for ${location}, I was targeting closer to €${target.toLocaleString()}. Is there any flexibility to move toward that number?"`;
+
+        const fallbackOptions = [
+          `Request a signing bonus of €${Math.round(diff * 0.5).toLocaleString()} to bridge the gap`,
+          `Negotiate additional vacation days or remote work flexibility`,
+          `Ask for a guaranteed performance review at 6 months with a pre-agreed salary adjustment`
         ];
 
-        // Generate Bullets
-        const generatedBullets = [];
-        mappings.forEach(map => {
-          if (lowerExp.includes(map.kw)) {
-            generatedBullets.push(`${map.verb} ${map.suffix}`);
-          }
-        });
-
-        // Fallback generic bullets if no keywords matched
-        if (generatedBullets.length === 0) {
-          generatedBullets.push(
-            `Led cross-functional initiatives as a ${jobTitle}, driving measurable improvements in operational efficiency`,
-            `Synthesized complex datasets into actionable strategic recommendations for senior management`,
-            `Facilitated stakeholder workshops to define project requirements and validate solution designs`
-          );
-        }
-
-        // Render Results
         resultDiv.innerHTML = `
           <div class="result-card">
-            <strong class="text-green-700 block mb-3">✨ Your Optimized Bullet Points</strong>
-            <div class="space-y-3">
-              ${generatedBullets.map((b, i) => `
-                <div class="p-3 bg-white rounded border border-gray-200 flex items-start gap-3 shadow-sm">
-                  <span class="text-indigo-600 font-bold text-lg shrink-0">${i+1}.</span> 
-                  <span class="text-gray-800 leading-relaxed">${b}</span>
-                </div>
-              `).join('')}
-            </div>
-            <button onclick="copyBullets()" class="mt-4 px-4 py-2 bg-indigo-50 text-indigo-700 rounded-lg text-sm font-medium hover:bg-indigo-100 transition-colors">📋 Copy All Bullets</button>
+            <strong class="text-orange-700 block mb-2">🎯 Negotiation Strategy</strong>
+            <p class="text-gray-700">${strategyText}</p>
           </div>
-          <div class="text-center text-xs text-gray-500 mt-4">💡 Tip: Replace weak descriptions on your resume with these high-impact bullets!</div>
+          <div class="result-card">
+            <strong class="text-orange-700 block mb-2">📧 Email Script</strong>
+            <div class="mt-2 p-4 bg-white rounded border whitespace-pre-wrap font-mono text-sm text-gray-800">${emailScript}</div>
+            <button onclick="copyToClipboard(\`${emailScript.replace(/`/g, '\\`')}\`)" class="mt-3 text-sm text-indigo-600 hover:text-indigo-800 font-medium">📋 Copy Email Script</button>
+          </div>
+          <div class="result-card">
+            <strong class="text-orange-700 block mb-2">📞 Phone Call Script</strong>
+            <div class="mt-2 p-4 bg-white rounded border italic text-gray-700">${phoneScript}</div>
+          </div>
+          <div class="result-card">
+            <strong class="text-orange-700 block mb-2">🔄 Fallback Options (If They Say No)</strong>
+            <ul class="mt-2 space-y-1 text-gray-700">
+              ${fallbackOptions.map(o => `<li>• ${o}</li>`).join('')}
+            </ul>
+          </div>
+          <div class="result-card">
+            <strong class="text-orange-700 block mb-2"> Market Data for ${location}</strong>
+            <p class="text-gray-700">${marketDataMap[location]}</p>
+          </div>
+          <div class="text-center text-xs text-gray-500 mt-4">💡 Tip: Always negotiate via email first to create a written record.</div>
         `;
 
-        window.bulletsText = generatedBullets.join('\n');
-        rewriteBtn.disabled = false;
-        rewriteBtn.innerHTML = '✨ Generate Powerful Bullet Points';
+        generateBtn.disabled = false;
+        generateBtn.innerHTML = '💼 Generate Counter Offer Script';
       }, 1000);
     });
 
-    window.copyBullets = () => { 
-      navigator.clipboard.writeText(window.bulletsText).then(() => {
+    window.copyToClipboard = (text) => {
+      navigator.clipboard.writeText(text).then(() => {
         alert('✅ Copied to clipboard!');
       }).catch(() => {
         alert('❌ Failed to copy. Please select and copy manually.');
