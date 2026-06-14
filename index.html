@@ -195,10 +195,6 @@
     .portfolio-badge { display: inline-block; background: #0071e3; color: white; border-radius: 20px; padding: 4px 12px; font-size: 0.7rem; margin-left: 8px; text-decoration: none; }
     .portfolio-badge:hover { background: #005bb5; }
     
-    /* Video Container */
-    .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 16px; }
-    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-    
     /* Testimonial Cards */
     .testimonial-card { background: #f5f5f7; border-radius: 20px; padding: 24px; text-align: center; transition: transform 0.3s; }
     body.dark-mode .testimonial-card { background: #16213e; }
@@ -250,17 +246,6 @@
       <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
         <a href="#ai-programs" class="btn-primary">Explore 12 Free AI Tools →</a>
         <a href="#projects" class="btn-outline">View Projects</a>
-      </div>
-    </div>
-
-    <!-- Demo Video Section -->
-    <div class="container reveal">
-      <div class="glass-card p-6 mb-20" style="background: #f5f5f7; border-radius: 28px;">
-        <h3 class="text-2xl font-semibold mb-4 text-center gradient-text">📺 Watch: How to Use TRAS AI Tools</h3>
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="TRAS AI Tutorial" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <p class="text-center text-gray-500 mt-3">Step-by-step guide to getting your free API key and using all 12 tools</p>
       </div>
     </div>
 
@@ -345,7 +330,7 @@
         <div class="ai-card"><div class="ai-icon">💼</div><div class="badge-new">✨ Negotiation</div><h3>Counter Offer Script</h3><p>Salary negotiation scripts and counter-offer templates.</p><a href="counteroffer.html" class="ai-link">Get Script →</a></div>
       </div>
       
-      <!-- REMOVED: API Key Input Box - Now just informational text -->
+      <!-- Informational text about API key (no input box) -->
       <div style="text-align: center; margin-top: 24px;">
         <p class="text-sm text-gray-500">🔑 Each tool requires a free <strong>Google Gemini API key</strong>. <a href="https://aistudio.google.com" target="_blank" class="text-indigo-600">Get yours here</a> (free tier: 60 requests/min). Your key stays in your browser and is never shared.</p>
       </div>
@@ -416,103 +401,4 @@
       <div class="section-header"><h2>Core Expertise</h2></div>
       <div class="grid-4">
         <div class="card"><i class="fas fa-chart-line" style="font-size:24px;margin-bottom:16px;color:#0071e3;"></i><h3>Business Analysis</h3><p>Requirements gathering, process mapping, stakeholder management</p></div>
-        <div class="card"><i class="fas fa-robot" style="font-size:24px;margin-bottom:16px;color:#0071e3;"></i><h3>AI Workflow Automation</h3><p>LLM pipelines, prompt engineering, workflow orchestration</p></div>
-        <div class="card"><i class="fas fa-shield-alt" style="font-size:24px;margin-bottom:16px;color:#0071e3;"></i><h3>BFSI Operations</h3><p>Insurance claims, Guidewire, KYC/AML compliance</p></div>
-        <div class="card"><i class="fas fa-chart-simple" style="font-size:24px;margin-bottom:16px;color:#0071e3;"></i><h3>Process Optimization</h3><p>KPI tracking, QC frameworks, efficiency analysis</p></div>
-      </div>
-    </section>
-
-    <!-- Experience -->
-    <section id="experience" class="container reveal">
-      <div class="card"><h2>Professional Experience</h2>
-        <div style="margin-bottom:32px;"><h3>Process Associate — AI Workflow & Automation Lead</h3><div class="meta-text">HCL Technologies — USAA Insurance Project • Jan 2023 – Present</div><ul class="experience-list"><li>First AI automation → 40% reduction in manual claims processing time</li><li>99.2% claims accuracy maintained across 6,000+ transactions</li><li>QC frameworks reducing rework errors by 25% across analyst team</li></ul></div>
-        <div><h3>AI Workflow Developer (Independent)</h3><div class="meta-text">TRAS — 12+ Resume-to-Job Match Tools • 2024–2025</div><ul class="experience-list"><li>Built 12+ web-based tools with Google Gemini API for Business Analyst roles</li><li>ATS compatibility, skill gap analysis, resume improvement, interview prep</li></ul></div>
-      </div>
-    </section>
-
-    <!-- Projects -->
-    <section id="projects" class="container reveal">
-      <div class="section-header"><h2>Featured Projects</h2></div>
-      <div class="grid-2">
-        <div class="card"><i class="fas fa-chart-simple" style="font-size:24px;margin-bottom:16px;color:#0071e3;"></i><h3>🎯 TRAS AI</h3><p>12+ Gemini-powered tools for job seekers.</p><div style="display:flex;gap:8px;margin:16px 0;"><span class="badge">Gemini API</span><span class="badge">12 Tools</span></div><a href="#ai-programs" style="color:#0071e3;font-weight:500;">Explore All Tools →</a></div>
-        <div class="card"><i class="fas fa-search" style="font-size:24px;margin-bottom:16px;color:#0071e3;"></i><h3>🇪🇺 EU Job Hunter AI</h3><p>GitHub Actions workflow for EU roles.</p><div style="display:flex;gap:8px;margin:16px 0;"><span class="badge">GitHub Actions</span><span class="badge">Python</span></div><a href="https://github.com/pkswaminathan001/Luxembourg" target="_blank" style="color:#0071e3;font-weight:500;">View Repository →</a></div>
-      </div>
-    </section>
-
-    <!-- Visa -->
-    <section id="visa" class="container reveal">
-      <div class="section-header"><h2>Visa Sponsorship Path</h2></div>
-      <div class="grid-3">
-        <div class="card"><i class="fas fa-wind" style="font-size:24px;margin-bottom:16px;color:#0071e3;"></i><h3>🇳🇱 Netherlands</h3><p>Highly Skilled Migrant (Kennismigrant). Sponsors: ING, Rabobank, NN, Aegon, Adyen.</p></div>
-        <div class="card"><i class="fas fa-music" style="font-size:24px;margin-bottom:16px;color:#0071e3;"></i><h3>🇮🇪 Ireland</h3><p>Critical Skills Employment Permit. AI on eligible list.</p></div>
-        <div class="card"><i class="fas fa-flag-checkered" style="font-size:24px;margin-bottom:16px;color:#0071e3;"></i><h3>🇱🇺 Luxembourg</h3><p>EU Blue Card. Finance hub, English-friendly.</p></div>
-      </div>
-    </section>
-
-    <!-- Connect -->
-    <section class="container reveal" style="text-align: center;">
-      <div class="card"><h2>Let's Connect</h2><p style="margin:16px 0 32px;">Open to Business Analyst, Process Analyst, or Operations Analyst roles in Luxembourg, Netherlands, or Ireland.</p>
-        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 16px;">
-          <a href="mailto:prswaminathan001@gmail.com" class="btn-primary"><i class="fas fa-envelope"></i> prswaminathan001@gmail.com</a>
-          <a href="https://linkedin.com/in/prswaminathan" target="_blank" class="btn-outline"><i class="fab fa-linkedin"></i> LinkedIn</a>
-          <a href="https://github.com/pkswaminathan001" target="_blank" class="btn-outline"><i class="fab fa-github"></i> GitHub</a>
-        </div>
-        <p style="margin-top: 32px; color: #6e6e73; font-size: 0.8rem;">🌍 Based in India • CET/BST overlap ready • Open to hybrid relocation</p>
-        <p style="margin-top: 16px; font-size: 0.8rem;">
-          🌐 <a href="https://pkswaminathan001.github.io/tras-ai/" style="color:#0071e3; text-decoration:none;">Portfolio: pkswaminathan001.github.io/tras-ai/</a>
-        </p>
-      </div>
-    </section>
-  </main>
-
-  <footer class="container">
-    <p>© 2026 PR Swaminathan. 12+ Free AI Tools for Business Analysts. Powered by Google Gemini.</p>
-    <p style="margin-top: 8px; font-size: 0.75rem;">
-      🌐 <a href="https://pkswaminathan001.github.io/tras-ai/" style="color:#0071e3;">Portfolio</a> | 
-      <a href="https://github.com/pkswaminathan001" style="color:#0071e3;">GitHub</a> | 
-      <a href="https://linkedin.com/in/prswaminathan" style="color:#0071e3;">LinkedIn</a>
-    </p>
-  </footer>
-
-  <script>
-    // Scroll Reveal
-    const reveals = document.querySelectorAll('.reveal');
-    function reveal() { 
-      reveals.forEach(el => { 
-        if(el.getBoundingClientRect().top < window.innerHeight - 100) 
-          el.classList.add('active'); 
-      }); 
-    }
-    window.addEventListener('scroll', reveal);
-    reveal();
-    
-    // Dark/Light Mode Toggle
-    function toggleTheme() {
-      const body = document.body;
-      const icon = document.getElementById('themeIcon');
-      
-      if (body.classList.contains('light-mode')) {
-        body.classList.remove('light-mode');
-        body.classList.add('dark-mode');
-        icon.classList.remove('fa-moon');
-        icon.classList.add('fa-sun');
-        localStorage.setItem('theme', 'dark');
-      } else {
-        body.classList.remove('dark-mode');
-        body.classList.add('light-mode');
-        icon.classList.remove('fa-sun');
-        icon.classList.add('fa-moon');
-        localStorage.setItem('theme', 'light');
-      }
-    }
-    
-    // Load saved theme
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      document.body.classList.remove('light-mode');
-      document.body.classList.add('dark-mode');
-      document.getElementById('themeIcon')?.classList.replace('fa-moon', 'fa-sun');
-    }
-  </script>
-</body>
-</html>
+        <div class="card"><i class="fas fa-robot" style="font-size:24px;margin-bottom:16px;color:#
