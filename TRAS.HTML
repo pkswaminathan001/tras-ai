@@ -3,68 +3,102 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TRAS AI - Business Analyst Resume Analyzer</title>
+  <title>TRAS AI - Smart Resume Analyzer with Gemini AI</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/@google/generative-ai@0.21.0/dist/index.min.js"></script>
   <style>
     body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
-    .card { background: white; border-radius: 1.5rem; padding: 2rem; max-width: 1200px; margin: 2rem auto; }
-    .btn { background: #4f46e5; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; border: none; width: 100%; transition: all 0.2s; }
-    .btn:hover { transform: translateY(-2px); background: #6366f1; }
-    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
-    textarea { width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 0.5rem; min-height: 180px; font-family: monospace; font-size: 0.85rem; }
-    .result-card { background: #f8fafc; padding: 1rem; margin: 0.75rem 0; border-radius: 0.5rem; border-left: 4px solid #4f46e5; }
-    .loading { display: inline-block; width: 20px; height: 20px; border: 3px solid #f3f3f3; border-top: 3px solid #4f46e5; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 8px; }
+    .card { background: white; border-radius: 1.5rem; padding: 2rem; max-width: 1200px; margin: 2rem auto; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+    .btn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; border: none; width: 100%; transition: all 0.2s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    textarea { width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 0.5rem; min-height: 200px; font-family: monospace; font-size: 0.85rem; transition: border 0.2s; }
+    textarea:focus { outline: none; border-color: #667eea; box-shadow: 0 0 0 3px rgba(102,126,234,0.1); }
+    .result-card { background: #f8fafc; padding: 1rem; margin: 0.75rem 0; border-radius: 0.5rem; border-left: 4px solid #667eea; }
+    .loading { display: inline-block; width: 20px; height: 20px; border: 3px solid #f3f3f3; border-top: 3px solid #667eea; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 8px; }
     @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     .badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.7rem; font-weight: 600; margin: 0.2rem; background: #e0e7ff; color: #3730a3; }
     .api-input { background: #fef9c3; border: 1px solid #eab308; }
+    .feature-badge { background: #667eea; color: white; padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.7rem; margin-left: 0.5rem; }
   </style>
 </head>
 <body class="p-4">
   <div class="card">
     <div class="text-center mb-6">
-      <h1 class="text-2xl font-bold">🤖 TRAS AI</h1>
-      <p class="text-gray-600">Business Analyst Resume-to-Job Analyzer</p>
-      <a href="./" class="text-sm text-indigo-600 hover:underline">← Back to Portfolio</a>
+      <h1 class="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">🤖 TRAS AI</h1>
+      <p class="text-gray-600 mt-1">AI-Powered Resume-to-Job Analyzer for Business Analyst Roles</p>
+      <div class="flex justify-center gap-2 mt-2">
+        <span class="feature-badge">🚀 Powered by Google Gemini AI</span>
+        <span class="feature-badge">🎯 Smart Matching</span>
+        <span class="feature-badge">📊 ATS Optimization</span>
+      </div>
+      <a href="./" class="text-sm text-indigo-600 hover:underline mt-2 inline-block">← Back to Portfolio</a>
     </div>
     
-    <div class="mb-4 p-3 bg-amber-50 rounded-lg border border-amber-200">
-      <label class="block text-sm font-semibold mb-1">🔑 Google Gemini API Key</label>
-      <input type="password" id="apiKey" class="w-full p-2 border rounded-md api-input" placeholder="Get free key from aistudio.google.com">
-      <p class="text-xs text-gray-500 mt-1">Free tier: 60 requests/minute. Your key stays in your browser.</p>
+    <div class="mb-4 p-4 bg-gradient-to-r from-amber-50 to-yellow-50 rounded-lg border border-amber-200">
+      <label class="block text-sm font-semibold mb-1 flex items-center">
+        🔑 <span class="ml-1">Google Gemini API Key</span>
+        <span class="text-xs text-gray-500 ml-2">(FREE from aistudio.google.com)</span>
+      </label>
+      <input type="password" id="apiKey" class="w-full p-2 border rounded-md api-input" placeholder="Paste your Gemini API key here...">
+      <p class="text-xs text-gray-500 mt-1">✅ Free tier: 60 requests/minute | 🔐 Your key stays in your browser | 🧠 AI analyzes context, not just keywords</p>
     </div>
     
     <div class="grid md:grid-cols-2 gap-4 mb-4">
       <div>
         <label class="block text-sm font-semibold mb-1">📄 Your Resume/CV</label>
-        <textarea id="resume" placeholder="Paste your resume here..."></textarea>
+        <textarea id="resume" placeholder="Paste your resume here...&#10;&#10;Example:&#10;Business Analyst with 5+ years experience in insurance domain. Skilled in requirements gathering, stakeholder management, Agile methodologies, and process improvement. Led automation projects achieving 40% efficiency gains."></textarea>
       </div>
       <div>
         <label class="block text-sm font-semibold mb-1">💼 Job Description</label>
-        <textarea id="jobdesc" placeholder="Paste the job description here..."></textarea>
+        <textarea id="jobdesc" placeholder="Paste the job description here...&#10;&#10;Example:&#10;Seeking Business Analyst for Guidewire implementation. Must have insurance claims experience, strong analytical skills, and ability to work with stakeholders. Knowledge of Agile and KPI metrics required."></textarea>
       </div>
     </div>
     
-    <button id="analyzeBtn" class="btn">🚀 Analyze with Gemini AI</button>
+    <button id="analyzeBtn" class="btn">🤖 Analyze with Gemini AI</button>
     <div id="results" class="mt-6 hidden"></div>
+    
+    <div class="mt-4 text-center text-xs text-gray-400">
+      <p>💡 Pro tip: The more detailed your resume and job description, the better the AI analysis!</p>
+    </div>
   </div>
 
   <script>
     const analyzeBtn = document.getElementById('analyzeBtn');
     const resultsDiv = document.getElementById('results');
     const apiKeyInput = document.getElementById('apiKey');
+    const resumeTextarea = document.getElementById('resume');
+    const jobTextarea = document.getElementById('jobdesc');
+    
+    // Load saved API key from localStorage
+    const savedKey = localStorage.getItem('gemini_api_key');
+    if (savedKey) {
+      apiKeyInput.value = savedKey;
+    }
+    
+    apiKeyInput.addEventListener('change', () => {
+      if (apiKeyInput.value.trim()) {
+        localStorage.setItem('gemini_api_key', apiKeyInput.value.trim());
+      }
+    });
     
     analyzeBtn.addEventListener('click', async () => {
-      const resume = document.getElementById('resume').value.trim();
-      const job = document.getElementById('jobdesc').value.trim();
+      const resume = resumeTextarea.value.trim();
+      const job = jobTextarea.value.trim();
       const apiKey = apiKeyInput.value.trim();
       
-      if (!resume || !job) { alert('Please paste both resume and job description'); return; }
-      if (!apiKey) { alert('Get a free Gemini API key from aistudio.google.com'); return; }
+      if (!resume || !job) { 
+        alert('📝 Please paste both resume and job description'); 
+        return; 
+      }
+      if (!apiKey) { 
+        alert('🔑 Get your FREE Gemini API key from aistudio.google.com\n\n1. Go to aistudio.google.com\n2. Click "Get API Key"\n3. Copy and paste it here'); 
+        return; 
+      }
       
       analyzeBtn.disabled = true;
-      analyzeBtn.innerHTML = '<span class="loading"></span> AI Analyzing...';
-      resultsDiv.innerHTML = '<div class="text-center py-8"><div class="loading"></div> Gemini AI is analyzing...</div>';
+      analyzeBtn.innerHTML = '<span class="loading"></span> 🧠 AI is analyzing your resume against the job description...';
+      resultsDiv.innerHTML = '<div class="text-center py-8"><div class="loading"></div> <span class="text-gray-600">Gemini AI is reading, comparing, and generating insights...</span></div>';
       resultsDiv.classList.remove('hidden');
       
       try {
@@ -72,59 +106,151 @@
         const genAI = new GoogleGenerativeAI(apiKey);
         const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
         
-        const prompt = `You are an expert hiring consultant for Business Analyst roles in Luxembourg, Netherlands, and Ireland.
+        const prompt = `You are an expert AI hiring consultant specializing in Business Analyst roles for Luxembourg, Netherlands, and Ireland markets.
+        
+Analyze this RESUME and JOB DESCRIPTION carefully.
+
 RESUME:
 ${resume}
+
 JOB DESCRIPTION:
 ${job}
-Return ONLY valid JSON. No other text. Use this exact format:
+
+Return ONLY valid JSON. No explanations, no markdown, no other text. Use this exact format:
 {
   "matchScore": 0-100,
   "atsScore": 0-100,
-  "roleFit": "Strong Fit/Good Fit/Potential/Gap",
-  "interviewProbability": "High/Medium/Low",
-  "strengths": ["strength1", "strength2", "strength3"],
-  "missingKeywords": ["keyword1", "keyword2", "keyword3"],
-  "resumeRewrites": ["suggestion1", "suggestion2"],
-  "linkedinHeadline": "generated headline for Business Analyst",
-  "professionalSummary": "generated summary",
-  "coverLetterHook": "short paragraph",
-  "salaryRange": "€XXk-€XXk",
-  "interviewQuestions": ["q1", "q2"]
-}`;
+  "roleFit": "Strong Fit",
+  "interviewProbability": "High",
+  "strengths": ["Strength 1", "Strength 2", "Strength 3", "Strength 4"],
+  "missingKeywords": ["Keyword 1", "Keyword 2", "Keyword 3", "Keyword 4"],
+  "resumeRewrites": ["Specific suggestion 1", "Specific suggestion 2", "Specific suggestion 3"],
+  "linkedinHeadline": "Optimized LinkedIn headline for this role",
+  "professionalSummary": "3-sentence professional summary tailored to this job",
+  "coverLetterHook": "1-2 sentence opening for cover letter",
+  "salaryRange": "€45k-€70k",
+  "interviewQuestions": ["Question 1", "Question 2", "Question 3", "Question 4"]
+}
+
+Make sure scores are realistic based on actual match quality. Be specific and actionable.`;
         
         const result = await model.generateContent(prompt);
         const response = await result.response;
         let text = response.text();
-        text = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
-        const data = JSON.parse(text);
+        
+        // Clean up markdown formatting
+        text = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').replace(/```\n?/g, '').trim();
+        
+        let data;
+        try {
+          data = JSON.parse(text);
+        } catch (parseError) {
+          console.error('Raw AI response:', text);
+          throw new Error('AI returned invalid JSON. Please try again.');
+        }
+        
+        // Validate required fields
+        const requiredFields = ['matchScore', 'atsScore', 'roleFit', 'interviewProbability', 'strengths', 'missingKeywords', 'resumeRewrites', 'linkedinHeadline', 'professionalSummary', 'coverLetterHook', 'salaryRange', 'interviewQuestions'];
+        for (const field of requiredFields) {
+          if (!data[field]) {
+            data[field] = field === 'strengths' || field === 'missingKeywords' || field === 'resumeRewrites' || field === 'interviewQuestions' ? [] : 'N/A';
+          }
+        }
+        
+        // Determine badge color based on match score
+        const scoreColor = data.matchScore >= 80 ? 'text-green-600' : data.matchScore >= 65 ? 'text-blue-600' : data.matchScore >= 50 ? 'text-yellow-600' : 'text-red-600';
+        
+        let recommendation = '';
+        if (data.matchScore >= 80) recommendation = '🎉 Excellent Match! Strongly recommend interviewing this candidate.';
+        else if (data.matchScore >= 65) recommendation = '👍 Good Match! Solid potential with minor adjustments.';
+        else if (data.matchScore >= 50) recommendation = '📋 Potential Match! Needs resume tailoring to meet requirements.';
+        else recommendation = '⚠️ Significant Gap! Consider major resume revision or different roles.';
         
         resultsDiv.innerHTML = `
           <div class="text-center mb-6">
-            <div class="text-6xl font-bold text-indigo-600">${data.matchScore}<span class="text-2xl text-gray-400">/100</span></div>
+            <div class="text-6xl font-bold ${scoreColor}">${data.matchScore}<span class="text-2xl text-gray-400">/100</span></div>
             <div class="text-lg font-semibold mt-1">${data.roleFit}</div>
-            <div class="flex justify-center gap-3 mt-2">
-              <span class="badge">ATS: ${data.atsScore}</span>
-              <span class="badge">Interview: ${data.interviewProbability}</span>
-              <span class="badge">${data.salaryRange}</span>
+            <div class="text-sm text-gray-600 mt-1">${recommendation}</div>
+            <div class="flex justify-center gap-3 mt-3 flex-wrap">
+              <span class="badge">📊 ATS Score: ${data.atsScore}</span>
+              <span class="badge">🎯 Interview: ${data.interviewProbability}</span>
+              <span class="badge">💰 ${data.salaryRange}</span>
             </div>
           </div>
-          <div class="result-card"><strong>✅ Strengths</strong><br>${data.strengths.map(s => `✓ ${s}`).join('<br>')}</div>
-          <div class="result-card"><strong>📌 Missing Keywords (Add to Resume)</strong><br>${data.missingKeywords.map(k => `• ${k}`).join('<br>')}</div>
-          <div class="result-card"><strong>✏️ Resume Rewrite Suggestions</strong><br>${data.resumeRewrites.map(r => `→ ${r}`).join('<br>')}</div>
-          <div class="result-card"><strong>💼 LinkedIn Headline</strong><br>${data.linkedinHeadline}</div>
-          <div class="result-card"><strong>📝 Professional Summary</strong><br>${data.professionalSummary}</div>
-          <div class="result-card"><strong>✍️ Cover Letter Hook</strong><br>${data.coverLetterHook}</div>
-          <div class="result-card"><strong>🎤 Interview Questions</strong><br>${data.interviewQuestions.map(q => `📌 ${q}`).join('<br>')}</div>
-          <div class="text-center text-xs text-gray-500 mt-4">🔐 Powered by Google Gemini AI. Your key stays in your browser.</div>
+          
+          <div class="result-card" style="border-left-color: #10b981;">
+            <strong class="text-green-700">✅ STRENGTHS (What you're doing right)</strong><br>
+            ${data.strengths.map(s => `✓ ${s}`).join('<br>')}
+          </div>
+          
+          <div class="result-card" style="border-left-color: #f59e0b;">
+            <strong class="text-yellow-700">📌 MISSING KEYWORDS (Add these to your resume)</strong><br>
+            ${data.missingKeywords.map(k => `<span class="badge" style="background:#fef3c7; color:#92400e;">${k}</span>`).join(' ')}
+          </div>
+          
+          <div class="result-card" style="border-left-color: #3b82f6;">
+            <strong class="text-blue-700">✏️ RESUME REWRITE SUGGESTIONS</strong><br>
+            ${data.resumeRewrites.map((r, i) => `${i+1}. ${r}`).join('<br>')}
+          </div>
+          
+          <div class="result-card" style="border-left-color: #8b5cf6;">
+            <strong class="text-purple-700">💼 LINKEDIN HEADLINE</strong><br>
+            <span class="text-gray-800">${data.linkedinHeadline}</span>
+            <button onclick="copyToClipboard('${data.linkedinHeadline.replace(/'/g, "\\'")}')" class="text-xs text-indigo-600 ml-2 hover:underline">📋 Copy</button>
+          </div>
+          
+          <div class="result-card" style="border-left-color: #8b5cf6;">
+            <strong class="text-purple-700">📝 PROFESSIONAL SUMMARY</strong><br>
+            <span class="text-gray-800">${data.professionalSummary}</span>
+            <button onclick="copyToClipboard('${data.professionalSummary.replace(/'/g, "\\'")}')" class="text-xs text-indigo-600 ml-2 hover:underline">📋 Copy</button>
+          </div>
+          
+          <div class="result-card" style="border-left-color: #8b5cf6;">
+            <strong class="text-purple-700">✍️ COVER LETTER HOOK</strong><br>
+            <span class="text-gray-800">${data.coverLetterHook}</span>
+            <button onclick="copyToClipboard('${data.coverLetterHook.replace(/'/g, "\\'")}')" class="text-xs text-indigo-600 ml-2 hover:underline">📋 Copy</button>
+          </div>
+          
+          <div class="result-card" style="border-left-color: #ef4444;">
+            <strong class="text-red-700">🎤 INTERVIEW PREP QUESTIONS</strong><br>
+            ${data.interviewQuestions.map((q, i) => `${i+1}. ${q}`).join('<br>')}
+          </div>
+          
+          <div class="text-center text-xs text-gray-500 mt-4 pt-4 border-t">
+            <p>🔐 Powered by <strong>Google Gemini AI</strong> | Your API key stays in your browser | Analysis is contextual and AI-generated</p>
+            <p class="mt-1">💡 For best results, paste complete resume and job description with skills, experience, and requirements</p>
+          </div>
         `;
+        
       } catch (error) {
-        resultsDiv.innerHTML = `<div class="result-card bg-red-50 border-l-red-500"><strong>❌ Error:</strong> ${error.message}<br><br>Make sure your API key is valid at <a href="https://aistudio.google.com/" target="_blank" class="text-indigo-600">Google AI Studio</a></div>`;
+        console.error('AI Error:', error);
+        resultsDiv.innerHTML = `
+          <div class="result-card bg-red-50 border-l-red-500">
+            <strong class="text-red-700">❌ AI Analysis Error</strong><br><br>
+            <span class="text-gray-700">${error.message}</span><br><br>
+            <div class="bg-gray-100 p-3 rounded mt-2">
+              <strong>🔧 Troubleshooting:</strong><br>
+              1. Make sure your API key is valid at <a href="https://aistudio.google.com/" target="_blank" class="text-indigo-600">Google AI Studio</a><br>
+              2. Check that you have billing enabled (free tier works)<br>
+              3. Try again in a few seconds (rate limit is 60/min)<br>
+              4. Make sure your resume and job description are not too long
+            </div>
+          </div>
+        `;
       } finally {
         analyzeBtn.disabled = false;
-        analyzeBtn.innerHTML = '🚀 Analyze with Gemini AI';
+        analyzeBtn.innerHTML = '🤖 Analyze with Gemini AI';
       }
     });
+    
+    // Helper function for copy to clipboard
+    window.copyToClipboard = (text) => {
+      navigator.clipboard.writeText(text).then(() => {
+        alert('✅ Copied to clipboard!');
+      }).catch(() => {
+        alert('❌ Could not copy. Select and copy manually.');
+      });
+    };
   </script>
 </body>
 </html>
