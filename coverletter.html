@@ -3,28 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Cover Letter Generator - No API Key Required</title>
+  <title>TRAS AI - Resume Analyzer (No API Key Required)</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
-    .card { background: white; border-radius: 1.5rem; padding: 2rem; max-width: 1000px; margin: 2rem auto; }
+    .card { background: white; border-radius: 1.5rem; padding: 2rem; max-width: 1200px; margin: 2rem auto; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
     .btn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; border: none; width: 100%; transition: all 0.2s; }
     .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
-    textarea { width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 0.5rem; min-height: 150px; font-family: monospace; font-size: 0.85rem; }
+    textarea { width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 0.5rem; min-height: 200px; font-family: monospace; font-size: 0.85rem; }
     .result-card { background: #f8fafc; padding: 1rem; margin: 0.75rem 0; border-radius: 0.5rem; border-left: 4px solid #10b981; }
+    .badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.7rem; font-weight: 600; margin: 0.2rem; background: #dcfce7; color: #166534; }
     .demo-btn { background: #10b981; color: white; padding: 8px 16px; border-radius: 8px; border: none; cursor: pointer; font-size: 0.8rem; margin-bottom: 10px; }
     .demo-btn:hover { background: #059669; }
-    .no-api-badge { display: inline-block; background: #dcfce7; color: #166534; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; margin-left: 10px; }
   </style>
 </head>
 <body class="p-4">
   <div class="card">
     <div class="text-center mb-6">
-      <h1 class="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">📝 AI Cover Letter Generator</h1>
-      <p class="text-gray-600">Generate personalized cover letters - <strong class="text-green-600">No API Key Required!</strong> <span class="no-api-badge">✅ Works Instantly</span></p>
-      <a href="./" class="text-sm text-indigo-600 hover:underline">← Back to Portfolio</a>
+      <h1 class="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">🤖 TRAS AI</h1>
+      <p class="text-gray-600 mt-1">AI-Powered Resume-to-Job Analyzer - <strong class="text-green-600">No API Key Required!</strong></p>
+      <a href="./" class="text-sm text-indigo-600 hover:underline mt-2 inline-block">← Back to Portfolio</a>
     </div>
-
+    
     <div class="grid md:grid-cols-2 gap-4 mb-4">
       <div>
         <label class="block text-sm font-semibold mb-1">📄 Your Resume/CV</label>
@@ -37,46 +37,36 @@
         <button class="demo-btn mt-2" onclick="loadDemoJob()">📋 Load Demo Job</button>
       </div>
     </div>
-
-    <div class="mb-4">
-      <label class="block text-sm font-semibold mb-1">🎨 Cover Letter Style</label>
-      <select id="style" class="w-full p-2 border rounded-md">
-        <option value="professional">Professional & Formal</option>
-        <option value="enthusiastic">Enthusiastic & Energetic</option>
-        <option value="concise">Concise & Direct</option>
-      </select>
-    </div>
-
-    <button id="generateBtn" class="btn">✍️ Generate Cover Letter (Free - No API Key)</button>
-    <div id="result" class="mt-6 hidden"></div>
+    
+    <button id="analyzeBtn" class="btn">🚀 Analyze Match (Free - No API Key)</button>
+    <div id="results" class="mt-6 hidden"></div>
   </div>
 
   <script>
     function loadDemoResume() {
-      document.getElementById('resume').value = "Business Analyst with MBA and 5+ years experience in insurance operations. Skilled in requirements gathering, stakeholder management, Agile methodologies, and process improvement. Led automation projects achieving 40% efficiency gains across 6,000+ transactions. Experience with Guidewire Claims Center.";
+      document.getElementById('resume').value = "Business Analyst with 5+ years experience in insurance domain at HCL Technologies. Skilled in requirements gathering, stakeholder management, Agile methodologies, and process improvement. Led automation projects achieving 40% efficiency gains across 6,000+ transactions. Maintained 99.2% accuracy. Experience with Guidewire Claims Center.";
     }
     
     function loadDemoJob() {
-      document.getElementById('jobdesc').value = "We are seeking a Business Analyst for our Guidewire implementation project. Must have insurance claims experience, strong analytical skills, and ability to work with stakeholders. Knowledge of Agile methodologies and KPI metrics required.";
+      document.getElementById('jobdesc').value = "We are seeking a Business Analyst for our Guidewire implementation project. Must have insurance claims experience, strong analytical skills, and ability to work with stakeholders. Knowledge of Agile methodologies and KPI metrics required. Experience with process automation is a plus.";
     }
-
-    document.getElementById('generateBtn').onclick = () => {
+    
+    document.getElementById('analyzeBtn').onclick = () => {
       const resume = document.getElementById('resume').value.trim();
       const job = document.getElementById('jobdesc').value.trim();
-      const style = document.getElementById('style').value;
       
       if (!resume || !job) {
         alert('Please paste both resume and job description (or click Load Demo buttons)');
         return;
       }
       
-      const generateBtn = document.getElementById('generateBtn');
-      const resultDiv = document.getElementById('result');
+      const analyzeBtn = document.getElementById('analyzeBtn');
+      const resultsDiv = document.getElementById('results');
       
-      generateBtn.disabled = true;
-      generateBtn.innerHTML = '✍️ Generating Cover Letter...';
-      resultDiv.classList.remove('hidden');
-      resultDiv.innerHTML = '<div class="text-center py-8">📝 Writing your personalized cover letter...</div>';
+      analyzeBtn.disabled = true;
+      analyzeBtn.innerHTML = '🔍 Analyzing...';
+      resultsDiv.classList.remove('hidden');
+      resultsDiv.innerHTML = '<div class="text-center py-8">🔍 Analyzing your resume against the job description...</div>';
       
       setTimeout(() => {
         const resumeLower = resume.toLowerCase();
@@ -86,103 +76,100 @@
         const hasInsurance = resumeLower.includes('insurance') || resumeLower.includes('claims');
         const hasAgile = resumeLower.includes('agile');
         const hasStakeholder = resumeLower.includes('stakeholder');
-        const hasEfficiency = resumeLower.includes('40%') || resumeLower.includes('efficiency');
-        const hasMba = resumeLower.includes('mba');
+        const hasAutomation = resumeLower.includes('automation') || resumeLower.includes('40%');
         
-        let coverLetter = '';
+        let matchScore = 50;
+        if (hasGuidewire) matchScore += 15;
+        if (hasInsurance) matchScore += 10;
+        if (hasAgile) matchScore += 8;
+        if (hasStakeholder) matchScore += 7;
+        if (hasAutomation) matchScore += 10;
+        matchScore = Math.min(100, matchScore);
         
-        if (style === 'professional') {
-          coverLetter = `Dear Hiring Manager,
-
-I am writing to express my strong interest in the Business Analyst position at your organization. With an MBA and extensive experience in insurance operations, I am confident in my ability to contribute effectively to your team.
-
-`;
-        } else if (style === 'enthusiastic') {
-          coverLetter = `Dear Hiring Manager,
-
-I was thrilled to discover the Business Analyst opening at your company! As a passionate problem-solver with an MBA and proven track record in insurance operations, I would love to bring my energy and expertise to your team.
-
-`;
-        } else {
-          coverLetter = `Dear Hiring Manager,
-
-I am applying for the Business Analyst position. My background includes an MBA and experience in insurance operations. I am confident I can deliver results for your organization.
-
-`;
-        }
+        const atsScore = Math.min(100, matchScore + 5);
         
-        // Add domain expertise
-        if (hasInsurance) {
-          coverLetter += `My background includes working with insurance claims and operations, giving me deep domain expertise that would be immediately valuable to your organization. `;
-        }
+        let roleFit = '';
+        if (matchScore >= 80) roleFit = 'Strong Fit';
+        else if (matchScore >= 65) roleFit = 'Good Fit';
+        else if (matchScore >= 50) roleFit = 'Potential';
+        else roleFit = 'Gap Detected';
         
-        // Add Guidewire experience
-        if (hasGuidewire) {
-          coverLetter += `I have hands-on experience with Guidewire, which I understand is central to your technology stack. `;
-        }
+        let interviewProbability = '';
+        if (matchScore >= 80) interviewProbability = 'High';
+        else if (matchScore >= 60) interviewProbability = 'Medium';
+        else interviewProbability = 'Low';
         
-        // Add achievements
-        if (hasEfficiency) {
-          coverLetter += `In my previous role, I led automation initiatives that resulted in a 40% reduction in processing time while maintaining 99.2% accuracy across 6,000+ transactions. `;
-        }
+        let salaryRange = '';
+        if (matchScore >= 80) salaryRange = '€65k-€85k';
+        else if (matchScore >= 60) salaryRange = '€55k-€70k';
+        else salaryRange = '€45k-€60k';
         
-        // Add Agile/stakeholder experience
-        if (hasAgile || hasStakeholder) {
-          coverLetter += `I bring strong skills in requirements gathering, stakeholder management, and Agile methodologies. `;
-        }
+        const strengths = [];
+        if (hasGuidewire) strengths.push('✅ Guidewire experience - highly valued');
+        if (hasInsurance) strengths.push('✅ Insurance domain expertise');
+        if (hasAgile) strengths.push('✅ Agile methodology experience');
+        if (hasStakeholder) strengths.push('✅ Stakeholder management skills');
+        if (hasAutomation) strengths.push('✅ Process automation results (40% efficiency)');
+        if (strengths.length === 0) strengths.push('📌 Add more relevant keywords from the job description');
         
-        // Add MBA
-        if (hasMba) {
-          coverLetter += `My MBA has equipped me with strategic thinking and business acumen that complement my technical analysis skills. `;
-        }
+        const missingKeywords = [];
+        if (!hasGuidewire && jobLower.includes('guidewire')) missingKeywords.push('Guidewire');
+        if (!hasInsurance && (jobLower.includes('insurance') || jobLower.includes('claims'))) missingKeywords.push('Insurance/Claims');
+        if (!hasAgile && jobLower.includes('agile')) missingKeywords.push('Agile');
+        if (!hasStakeholder && jobLower.includes('stakeholder')) missingKeywords.push('Stakeholder Management');
         
-        // Closing based on style
-        if (style === 'professional') {
-          coverLetter += `
-
-I am particularly drawn to this role because it aligns perfectly with my skills and career aspirations. I look forward to discussing how my background can benefit your organization.
-
-Thank you for your consideration.
-
-Sincerely,
-[Your Name]`;
-        } else if (style === 'enthusiastic') {
-          coverLetter += `
-
-I am genuinely excited about the opportunity to contribute to your team. I would love to schedule a conversation to discuss how my experience can help drive your business forward.
-
-Thank you for your time and consideration!
-
-Best regards,
-[Your Name]`;
-        } else {
-          coverLetter += `
-
-I would welcome the opportunity to discuss my qualifications further.
-
-Thank you for your consideration.
-
-Sincerely,
-[Your Name]`;
-        }
+        const resumeRewrites = [];
+        if (!hasGuidewire && jobLower.includes('guidewire')) resumeRewrites.push('Add Guidewire experience to your resume');
+        if (!hasInsurance) resumeRewrites.push('Highlight insurance/claims domain experience more prominently');
+        if (!hasAutomation) resumeRewrites.push('Quantify your achievements with percentages and numbers');
         
-        resultDiv.innerHTML = `
-          <div class="result-card">
-            <strong class="text-green-700">📝 Your Cover Letter</strong>
-            <div class="mt-3 p-4 bg-white rounded-lg border whitespace-pre-wrap">${coverLetter}</div>
-            <button onclick="copyToClipboard()" class="mt-3 text-sm text-indigo-600 hover:underline">📋 Copy to Clipboard</button>
+        const scoreColor = matchScore >= 80 ? 'text-green-600' : matchScore >= 65 ? 'text-blue-600' : matchScore >= 50 ? 'text-yellow-600' : 'text-red-600';
+        
+        let recommendation = '';
+        if (matchScore >= 80) recommendation = '🎉 Excellent Match! Strongly recommend interviewing.';
+        else if (matchScore >= 65) recommendation = '👍 Good Match! Solid potential with minor adjustments.';
+        else if (matchScore >= 50) recommendation = '📋 Potential Match! Needs resume tailoring.';
+        else recommendation = '⚠️ Significant Gap! Consider major resume revision.';
+        
+        resultsDiv.innerHTML = `
+          <div class="text-center mb-6">
+            <div class="text-6xl font-bold ${scoreColor}">${matchScore}<span class="text-2xl text-gray-400">/100</span></div>
+            <div class="text-lg font-semibold mt-1">${roleFit}</div>
+            <div class="text-sm text-gray-600 mt-1">${recommendation}</div>
+            <div class="flex justify-center gap-3 mt-3 flex-wrap">
+              <span class="badge">📊 ATS Score: ${atsScore}</span>
+              <span class="badge">🎯 Interview: ${interviewProbability}</span>
+              <span class="badge">💰 ${salaryRange}</span>
+            </div>
           </div>
-          <div class="text-center text-xs text-gray-500 mt-4">💡 Tip: Customize the company name and specific achievements for best results!</div>
+          
+          <div class="result-card" style="border-left-color: #10b981;">
+            <strong class="text-green-700">✅ STRENGTHS</strong><br>
+            ${strengths.join('<br>')}
+          </div>
+          
+          ${missingKeywords.length > 0 ? `
+          <div class="result-card" style="border-left-color: #f59e0b;">
+            <strong class="text-yellow-700">📌 MISSING KEYWORDS</strong><br>
+            ${missingKeywords.map(k => `• ${k}`).join('<br>')}
+          </div>
+          ` : ''}
+          
+          ${resumeRewrites.length > 0 ? `
+          <div class="result-card" style="border-left-color: #3b82f6;">
+            <strong class="text-blue-700">✏️ RESUME REWRITE SUGGESTIONS</strong><br>
+            ${resumeRewrites.map((r, i) => `${i+1}. ${r}`).join('<br>')}
+          </div>
+          ` : ''}
+          
+          <div class="text-center text-xs text-gray-500 mt-4 pt-4 border-t">
+            <p>🚀 <strong>No API Key Required!</strong> This analysis runs entirely in your browser.</p>
+          </div>
         `;
-        window.coverLetterText = coverLetter;
-        generateBtn.disabled = false;
-        generateBtn.innerHTML = '✍️ Generate Cover Letter (Free - No API Key)';
+        
+        analyzeBtn.disabled = false;
+        analyzeBtn.innerHTML = '🚀 Analyze Match (Free - No API Key)';
       }, 800);
-    };
-    
-    window.copyToClipboard = () => {
-      navigator.clipboard.writeText(window.coverLetterText);
-      alert('✅ Copied to clipboard!');
     };
   </script>
 </body>
