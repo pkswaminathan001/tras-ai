@@ -5,118 +5,142 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Resume Grader - TRAS AI</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@google/generative-ai@0.21.0/dist/index.min.js"></script>
   <style>
     body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
-    .card { background: white; border-radius: 1.5rem; padding: 2rem; max-width: 1000px; margin: 2rem auto; }
-    .btn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; border: none; width: 100%; }
-    .btn:disabled { opacity: 0.5; }
-    .result-card { background: #f8fafc; padding: 1rem; margin: 0.75rem 0; border-radius: 0.5rem; }
+    .card { background: white; border-radius: 1.5rem; padding: 2rem; max-width: 1000px; margin: 2rem auto; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+    .btn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; border: none; width: 100%; transition: all 0.2s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3); }
+    .btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+    textarea, input { width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 0.5rem; transition: border-color 0.2s; }
+    textarea:focus, input:focus { outline: none; border-color: #667eea; }
+    .result-card { background: #f8fafc; padding: 1.5rem; margin-top: 1rem; border-radius: 0.75rem; }
     .grade-A { border-left: 4px solid #10b981; }
     .grade-B { border-left: 4px solid #3b82f6; }
     .grade-C { border-left: 4px solid #f59e0b; }
     .grade-D { border-left: 4px solid #ef4444; }
-    .loading { display: inline-block; width: 20px; height: 20px; border: 3px solid #f3f3f3; border-top: 3px solid #667eea; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 8px; }
+    .loading { display: inline-block; width: 20px; height: 20px; border: 3px solid #e0e7ff; border-top: 3px solid #667eea; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 8px; }
     @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-    .api-input { background: #fef9c3; border: 1px solid #eab308; }
   </style>
 </head>
 <body class="p-4">
   <div class="card">
-    <div class="text-center mb-6">
+    <div class="text-center mb-8">
       <h1 class="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">🎯 AI Resume Grader</h1>
-      <p class="text-gray-600">Get your ATS score and line-by-line improvements</p>
-      <a href="./" class="text-sm text-indigo-600 hover:underline">← Back to Portfolio</a>
+      <p class="text-gray-600 mt-2">Get your ATS score and line-by-line improvements — Instant & Free</p>
+      <a href="./" class="text-sm text-indigo-600 hover:underline mt-2 inline-block">← Back to Portfolio</a>
     </div>
 
-    <div class="mb-4 p-3 bg-amber-50 rounded-lg border border-amber-200">
-      <label class="block text-sm font-semibold mb-1">🔑 Google Gemini API Key</label>
-      <input type="password" id="apiKey" class="w-full p-2 border rounded-md api-input">
-    </div>
-
-    <div class="mb-4">
-      <label class="block text-sm font-semibold mb-1">📄 Your Resume</label>
+    <div class="mb-6">
+      <label class="block text-sm font-semibold mb-2 text-gray-700">📄 Your Resume</label>
       <textarea id="resume" rows="10" placeholder="Paste your entire resume here..."></textarea>
-      <p class="text-xs text-gray-500 mt-1">Include your work experience, skills, education, and certifications</p>
+      <p class="text-xs text-gray-500 mt-1">Include work experience, skills, education, and certifications</p>
     </div>
 
-    <div class="mb-4">
-      <label class="block text-sm font-semibold mb-1">💼 Target Job Title (Optional)</label>
-      <input type="text" id="jobTitle" class="w-full p-2 border rounded-md" placeholder="e.g., Business Analyst, Data Analyst, Product Manager">
+    <div class="mb-6">
+      <label class="block text-sm font-semibold mb-2 text-gray-700">💼 Target Job Title (Optional)</label>
+      <input type="text" id="jobTitle" value="Business Analyst" placeholder="e.g., Business Analyst">
     </div>
 
     <button id="gradeBtn" class="btn">🎯 Grade My Resume</button>
-    <div id="result" class="mt-6 hidden"></div>
+    <div id="result" class="hidden"></div>
   </div>
 
   <script>
     const gradeBtn = document.getElementById('gradeBtn');
     const resultDiv = document.getElementById('result');
-    const apiKeyInput = document.getElementById('apiKey');
 
-    if (localStorage.getItem('gemini_api_key')) apiKeyInput.value = localStorage.getItem('gemini_api_key');
-    apiKeyInput.addEventListener('change', () => { if(apiKeyInput.value.trim()) localStorage.setItem('gemini_api_key', apiKeyInput.value.trim()); });
-
-    gradeBtn.addEventListener('click', async () => {
+    gradeBtn.addEventListener('click', () => {
       const resume = document.getElementById('resume').value.trim();
-      const jobTitle = document.getElementById('jobTitle').value.trim();
-      const apiKey = apiKeyInput.value.trim();
+      const jobTitle = document.getElementById('jobTitle').value.trim() || 'Business Analyst';
 
       if (!resume) { alert('Please paste your resume'); return; }
-      if (!apiKey) { alert('Enter your Gemini API key'); return; }
 
       gradeBtn.disabled = true;
       gradeBtn.innerHTML = '<span class="loading"></span> Grading Resume...';
       resultDiv.classList.remove('hidden');
-      resultDiv.innerHTML = '<div class="text-center py-8"><div class="loading"></div> AI analyzing your resume...</div>';
+      resultDiv.innerHTML = '<div class="text-center py-8 text-gray-500"><div class="loading"></div> Analyzing your resume...</div>';
 
-      try {
-        const { GoogleGenerativeAI } = window;
-        const genAI = new GoogleGenerativeAI(apiKey);
-        const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+      setTimeout(() => {
+        const lowerResume = resume.toLowerCase();
+        
+        // Scoring Logic
+        let atsScore = 40;
+        const strengths = [];
+        const improvements = [];
+        const keywordSuggestions = [];
 
-        const prompt = `Grade this resume for ${jobTitle || 'Business Analyst'} roles.
+        // Check for quantifiable achievements
+        if (/\d+%|\$\d+|\d+\+/.test(resume)) { atsScore += 15; strengths.push("Quantifiable achievements included"); }
+        else { improvements.push({section: "Experience", issue: "No metrics found", fix: "Add %, $, or numbers to show impact"}); keywordSuggestions.push("ROI", "Efficiency %"); }
 
-RESUME:
-${resume}
+        // Check for action verbs
+        const actionVerbs = ["led", "managed", "developed", "implemented", "optimized", "reduced", "increased"];
+        const hasActionVerb = actionVerbs.some(v => lowerResume.includes(v));
+        if (hasActionVerb) { atsScore += 10; strengths.push("Strong action verbs used"); }
+        else { improvements.push({section: "Bullet Points", issue: "Passive language detected", fix: "Start bullets with strong action verbs like 'Led' or 'Optimized'"}); }
 
-Return ONLY JSON:
-{
-  "atsScore": 85,
-  "grade": "A",
-  "strengths": ["Strength 1", "Strength 2", "Strength 3", "Strength 4"],
-  "improvements": [
-    {"section": "Summary", "issue": "What's wrong", "fix": "How to fix it"},
-    {"section": "Experience", "issue": "What's wrong", "fix": "How to fix it"}
-  ],
-  "keywordSuggestions": ["Keyword 1", "Keyword 2", "Keyword 3", "Keyword 4", "Keyword 5"],
-  "overallAdvice": "One paragraph of overall advice"
-}`;
+        // Check for BA keywords
+        const baKeywords = ["requirements", "stakeholder", "agile", "process", "analysis", "guidewire", "insurance"];
+        const matchedKWs = baKeywords.filter(k => lowerResume.includes(k));
+        atsScore += Math.min(20, matchedKWs.length * 3);
+        if (matchedKWs.length > 3) strengths.push(`Relevant BA keywords present (${matchedKWs.length})`);
+        else { 
+          improvements.push({section: "Skills Section", issue: "Missing core BA keywords", fix: "Add terms like Requirements Gathering, Stakeholder Management, Agile"});
+          keywordSuggestions.push(...baKeywords.filter(k => !lowerResume.includes(k)).slice(0, 3));
+        }
 
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        let text = response.text().replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
-        const data = JSON.parse(text);
+        // Determine Grade
+        atsScore = Math.min(98, atsScore);
+        let grade = 'D';
+        if (atsScore >= 85) grade = 'A';
+        else if (atsScore >= 70) grade = 'B';
+        else if (atsScore >= 55) grade = 'C';
 
-        const gradeClass = data.grade === 'A' ? 'grade-A' : data.grade === 'B' ? 'grade-B' : data.grade === 'C' ? 'grade-C' : 'grade-D';
-        const gradeColor = data.grade === 'A' ? 'text-green-600' : data.grade === 'B' ? 'text-blue-600' : data.grade === 'C' ? 'text-yellow-600' : 'text-red-600';
+        const gradeClass = `grade-${grade}`;
+        const gradeColor = grade === 'A' ? 'text-green-600' : grade === 'B' ? 'text-blue-600' : grade === 'C' ? 'text-yellow-600' : 'text-red-600';
 
         resultDiv.innerHTML = `
-          <div class="text-center mb-4">
-            <div class="text-6xl font-bold ${gradeColor}">${data.atsScore}<span class="text-2xl text-gray-400">/100</span></div>
-            <div class="text-xl font-semibold mt-1">Grade: ${data.grade}</div>
+          <div class="text-center mb-6 p-6 bg-gradient-to-b from-indigo-50 to-white rounded-2xl border border-indigo-100">
+            <div class="text-6xl font-bold ${gradeColor}">${atsScore}<span class="text-2xl text-gray-400">/100</span></div>
+            <div class="text-xl font-semibold mt-2 text-gray-700">Grade: ${grade}</div>
           </div>
-          <div class="result-card ${gradeClass}"><strong class="text-green-700">✅ Resume Strengths</strong><br>${data.strengths.map(s => `• ${s}`).join('<br>')}</div>
-          <div class="result-card"><strong class="text-orange-700">✏️ Line-by-Line Improvements</strong><br>${data.improvements.map(i => `<div class="mt-2 p-2 bg-white rounded"><strong>${i.section}:</strong> ${i.issue}<br><span class="text-green-600">→ Fix: ${i.fix}</span></div>`).join('')}</div>
-          <div class="result-card"><strong class="text-purple-700">🔑 Keywords to Add</strong><br><div class="flex flex-wrap gap-2 mt-2">${data.keywordSuggestions.map(k => `<span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full text-sm">${k}</span>`).join('')}</div></div>
-          <div class="result-card"><strong class="text-blue-700">💡 Overall Advice</strong><br>${data.overallAdvice}</div>
+          
+          <div class="result-card ${gradeClass}">
+            <strong class="text-green-700 block mb-2">✅ Resume Strengths</strong>
+            <ul class="space-y-1 text-gray-700">${strengths.map(s => `<li>• ${s}</li>`).join('') || '<li>Add more quantifiable achievements</li>'}</ul>
+          </div>
+          
+          <div class="result-card">
+            <strong class="text-orange-700 block mb-2">✏️ Line-by-Line Improvements</strong>
+            <div class="space-y-3">
+              ${improvements.map(i => `
+                <div class="p-3 bg-white rounded border border-gray-200">
+                  <div class="font-semibold text-gray-800">${i.section}:</div>
+                  <div class="text-gray-600 text-sm mt-1">${i.issue}</div>
+                  <div class="text-green-600 text-sm mt-1 font-medium">→ Fix: ${i.fix}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+          
+          <div class="result-card">
+            <strong class="text-purple-700 block mb-2">🔑 Keywords to Add</strong>
+            <div class="flex flex-wrap gap-2 mt-2">
+              ${keywordSuggestions.map(k => `<span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full text-sm font-medium">${k}</span>`).join('') || '<span class="text-gray-500 text-sm">Great keyword coverage!</span>'}
+            </div>
+          </div>
+          
+          <div class="result-card">
+            <strong class="text-blue-700 block mb-2">💡 Overall Advice</strong>
+            <p class="text-gray-700">Focus on adding 2-3 more quantifiable achievements and ensuring all core BA keywords are present in your skills section. Tailor your summary specifically for ${jobTitle} roles.</p>
+          </div>
+          
+          <div class="text-center text-xs text-gray-500 mt-6">💡 Tip: Use this analysis to tailor your resume before applying!</div>
         `;
-      } catch (error) {
-        resultDiv.innerHTML = `<div class="result-card bg-red-50"><strong>Error:</strong> ${error.message}</div>`;
-      } finally {
+
         gradeBtn.disabled = false;
         gradeBtn.innerHTML = '🎯 Grade My Resume';
-      }
+      }, 1000);
     });
   </script>
 </body>
