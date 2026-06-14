@@ -99,7 +99,7 @@
 ## 📬 Let's Connect
 - 🔗 (https://www.linkedin.com/in/prswaminathan/)
 - 📧 prswaminathan001@gmail.com
-- 🌐 [Portfolio](https://pkswaminathan001.github.io/portfolio)
+- 🌐 [Portfolio][(https://pkswaminathan001.github.io/portfolio)](https://pkswaminathan001.github.io/tras-ai/#projects)
 - 🐙 [GitHub](https://github.com/pkswaminathan001)
 
 ---
