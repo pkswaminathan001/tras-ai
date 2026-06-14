@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PR Swaminathan — Business Analyst</title>
+  <meta name="description" content="Business Analyst | Insurance Operations | Guidewire | 40% efficiency gain" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #000; color: #fff; overflow-x: hidden; }
+    html { scroll-behavior: smooth; }
+    
+    /* Animated Orbs */
+    .orb { position: fixed; border-radius: 50%; filter: blur(100px); z-index: -1; opacity: 0.3; animation: float 25s infinite ease-in-out; }
+    .orb-1 { width: 500px; height: 500px; background: #6366f1; top: -150px; left: -150px; animation-delay: 0s; }
+    .orb-2 { width: 600px; height: 600px; background: #a855f7; bottom: -200px; right: -200px; animation-delay: 7s; }
+    .orb-3 { width: 400px; height: 400px; background: #06b6d4; top: 50%; left: 50%; animation-delay: 14s; transform: translate(-50%, -50%); }
+    @keyframes float { 0%,100% { transform: translate(0,0) scale(1); } 33% { transform: translate(40px,-40px) scale(1.1); } 66% { transform: translate(-30px,30px) scale(0.9); } }
+    
+    /* Glass Card */
+    .glass-card { background: rgba(20,20,30,0.5); backdrop-filter: blur(20px); border-radius: 24px; border: 0.5px solid rgba(255,255,255,0.1); transition: all 0.4s ease; padding: 32px; }
+    .glass-card:hover { transform: translateY(-4px); border-color: rgba(139,92,246,0.4); background: rgba(30,30,45,0.6); }
+    
+    /* Navigation */
+    .nav-glass { background: rgba(0,0,0,0.7); backdrop-filter: blur(20px); border-radius: 24px; border: 0.5px solid rgba(255,255,255,0.1); padding: 6px; }
+    .nav-link { color: rgba(255,255,255,0.7); text-decoration: none; font-weight: 500; font-size: 0.9rem; padding: 8px 20px; border-radius: 24px; transition: all 0.2s; }
+    .nav-link:hover { color: white; background: rgba(255,255,255,0.1); }
+    
+    /* Buttons */
+    .btn-primary { background: linear-gradient(135deg, #6366f1, #a855f7); padding: 14px 32px; border-radius: 24px; font-weight: 600; color: white; display: inline-block; text-decoration: none; transition: all 0.3s; }
+    .btn-primary:hover { transform: scale(1.02); opacity: 0.9; }
+    .btn-outline { background: transparent; border: 1px solid rgba(168,85,247,0.5); padding: 14px 32px; border-radius: 24px; font-weight: 600; color: #e0e7ff; display: inline-block; text-decoration: none; transition: all 0.3s; }
+    .btn-outline:hover { background: rgba(168,85,247,0.1); transform: scale(1.02); }
+    
+    /* Badges */
+    .badge { display: inline-block; padding: 6px 16px; background: rgba(255,255,255,0.05); border-radius: 24px; font-size: 0.75rem; font-weight: 500; border: 0.5px solid rgba(255,255,255,0.1); }
+    
+    /* Stats */
+    .stat-number { font-size: 3rem; font-weight: 700; background: linear-gradient(135deg, #fff, #a855f7); background-clip: text; -webkit-background-clip: text; color: transparent; line-height: 1; }
+    
+    /* Grids */
+    .stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2rem; }
+    .expertise-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2rem; }
+    .projects-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 2rem; }
+    .visa-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
+    @media (max-width:768px) { .stats-grid, .expertise-grid, .projects-grid, .visa-grid { grid-template-columns: 1fr; gap: 1rem; } .stat-number { font-size: 2rem; } .btn-primary, .btn-outline { padding: 10px 20px; font-size: 0.9rem; } .glass-card { padding: 20px; } }
+    
+    /* Typography */
+    .gradient-text { background: linear-gradient(135deg, #a855f7, #6366f1, #06b6d4); background-size: 200% 200%; background-clip: text; -webkit-background-clip: text; color: transparent; animation: slowGradient 8s ease infinite; }
+    @keyframes slowGradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+    .section-header { font-size: clamp(1.75rem, 5vw, 2rem); font-weight: 600; margin-bottom: 1.5rem; letter-spacing: -0.01em; }
+    .custom-table td { padding: 1rem; border-bottom: 0.5px solid rgba(255,255,255,0.08); }
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <div style="position:relative; z-index:10">
+    <nav class="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-6">
+      <div class="nav-glass flex flex-wrap justify-center items-center gap-1 px-3 py-1">
+        <span class="text-lg font-semibold gradient-text px-3">PR Swaminathan</span>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#expertise" class="nav-link">Expertise</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#visa" class="nav-link">Visa</a>
+        <a href="tras.html" target="_blank" class="nav-link" style="background:rgba(139,92,246,0.2)">TRAS Tool</a>
+      </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-6 pt-28 pb-20">
+      <!-- Hero -->
+      <div class="text-center mb-24 reveal">
+        <div class="inline-block mb-4 px-4 py-2 bg-green-500/10 rounded-full text-green-400 text-sm font-medium border border-green-500/20">✅ Eligible for HSM (NL) / Critical Skills (IE) / EU Blue Card (LU)</div>
+        <h1 class="text-6xl md:text-7xl font-bold mb-6 tracking-tight"><span class="gradient-text">Business Analyst<br>Insurance Operations</span></h1>
+        <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-8">MBA | Ex-HCL (40% efficiency gain) | Guidewire | AI-Powered Automation</p>
+        <div class="flex flex-wrap justify-center gap-3 mb-10"><span class="badge">🇱🇺 Luxembourg</span><span class="badge">🇳🇱 Netherlands</span><span class="badge">🇮🇪 Ireland</span><span class="badge">⏰ CET/BST Overlap Ready</span></div>
+        <div class="flex flex-wrap justify-center gap-4"><a href="tras.html" class="btn-primary">Try TRAS Analyzer →</a><a href="#projects" class="btn-outline">View Projects</a></div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid mb-24 reveal">
+        <div class="glass-card p-8 text-center"><div class="stat-number">40%</div><div class="text-gray-400 text-sm mt-2">Efficiency Gain</div></div>
+        <div class="glass-card p-8 text-center"><div class="stat-number">99.2%</div><div class="text-gray-400 text-sm mt-2">Accuracy Rate</div></div>
+        <div class="glass-card p-8 text-center"><div class="stat-number">6,000+</div><div class="text-gray-400 text-sm mt-2">Transactions</div></div>
+        <div class="glass-card p-8 text-center"><div class="stat-number">25%</div><div class="text-gray-400 text-sm mt-2">Rework Reduction</div></div>
+      </div>
+
+      <!-- About -->
+      <div id="about" class="glass-card p-10 mb-20 reveal"><h2 class="section-header gradient-text">About Me</h2><p class="text-gray-300 text-lg leading-relaxed">Business Analyst with MBA and experience supporting insurance operations at <strong class="text-indigo-300">HCL Technologies (USAA project)</strong>. Contributed to the first AI automation — reducing manual claims processing by <strong class="text-green-400">40%</strong> across <strong class="text-green-400">6,000+ transactions</strong> while maintaining <strong class="text-green-400">99.2% accuracy</strong>.</p></div>
+
+      <!-- Recruiters -->
+      <div class="glass-card p-10 mb-20 reveal"><h2 class="section-header gradient-text">🎯 For Recruiters & Hiring Managers</h2><div class="overflow-x-auto"><table class="custom-table w-full"><tr><td class="py-3 font-semibold text-indigo-300" style="width:35%">What I deliver</td><td class="py-3">40% efficiency gains via process automation & workflow optimization</td></tr>
+        <tr class="border-t border-white/10"><td class="py-3 font-semibold text-indigo-300">Domain expertise</td><td class="py-3">Insurance Claims, Guidewire (GWCC), BFSI Operations</td></tr>
+        <tr class="border-t border-white/10"><td class="py-3 font-semibold text-indigo-300">Visa path</td><td class="py-3">Kennismigrant (NL), Critical Skills (IE), EU Blue Card (LU) — 2-4 weeks</td></tr>
+        <tr class="border-t border-white/10"><td class="py-3 font-semibold text-indigo-300">Core strengths</td><td class="py-3">Business Analysis, Process Improvement, Stakeholder Management, AI Workflow Design</td></tr>
+        </table></div></div>
+
+      <!-- Expertise -->
+      <div id="expertise" class="expertise-grid mb-20">
+        <div class="glass-card p-6 text-center reveal"><i class="fas fa-chart-line text-3xl text-indigo-400 mb-3"></i><h3 class="font-semibold text-lg">Business Analysis</h3><p class="text-gray-500 text-sm">Requirements gathering, process mapping, stakeholder management</p></div>
+        <div class="glass-card p-6 text-center reveal"><i class="fas fa-robot text-3xl text-cyan-400 mb-3"></i><h3 class="font-semibold text-lg">AI Workflow Automation</h3><p class="text-gray-500 text-sm">LLM pipelines, prompt engineering, workflow orchestration</p></div>
+        <div class="glass-card p-6 text-center reveal"><i class="fas fa-shield-alt text-3xl text-purple-400 mb-3"></i><h3 class="font-semibold text-lg">BFSI Operations</h3><p class="text-gray-500 text-sm">Insurance claims, Guidewire, KYC/AML compliance</p></div>
+        <div class="glass-card p-6 text-center reveal"><i class="fas fa-chart-simple text-3xl text-emerald-400 mb-3"></i><h3 class="font-semibold text-lg">Process Optimization</h3><p class="text-gray-500 text-sm">KPI tracking, QC frameworks, efficiency analysis</p></div>
+      </div>
+
+      <!-- Experience -->
+      <div id="experience" class="glass-card p-10 mb-20 reveal"><h2 class="section-header gradient-text">Professional Experience</h2>
+        <div class="mb-6"><h3 class="text-xl font-semibold text-indigo-300">Process Associate — AI Workflow & Automation Lead</h3><p class="text-gray-500 text-sm mb-2">HCL Technologies — USAA Insurance Project • Jan 2023 – Present</p><ul class="list-disc list-inside text-gray-400 space-y-1"><li>First AI automation → 40% reduction in manual claims processing time</li><li>99.2% claims accuracy maintained across 6,000+ transactions</li><li>QC frameworks reducing rework errors by 25% across analyst team</li></ul></div>
+        <div><h3 class="text-xl font-semibold text-indigo-300">AI Workflow Developer (Independent)</h3><p class="text-gray-500 text-sm mb-2">TRAS — Resume-to-Job Match Analyzer • 2024–2025</p><ul class="list-disc list-inside text-gray-400 space-y-1"><li>Built web-based tool with Google Gemini API for Business Analyst roles</li><li>ATS compatibility check, keyword detection, resume improvement suggestions</li></ul></div>
+      </div>
+
+      <!-- Projects -->
+      <div id="projects" class="projects-grid mb-20">
+        <div class="glass-card p-8 reveal"><i class="fas fa-chart-simple text-2xl text-purple-400 mb-3"></i><h3 class="text-xl font-semibold mb-2">🎯 TRAS AI</h3><p class="text-gray-500 text-sm mb-3">Gemini-powered resume-to-job match analyzer. ATS compatibility, skill gap analysis, improvement suggestions.</p><div class="flex flex-wrap gap-2 mb-3"><span class="badge">Gemini API</span><span class="badge">HTML/CSS/JS</span></div><a href="tras.html" class="text-indigo-400 text-sm">Try Tool →</a></div>
+        <div class="glass-card p-8 reveal"><i class="fas fa-search text-2xl text-indigo-400 mb-3"></i><h3 class="text-xl font-semibold mb-2">🇪🇺 EU Job Hunter AI</h3><p class="text-gray-500 text-sm mb-3">GitHub Actions workflow analyzing CV-JD fit for Luxembourg, Netherlands, and Ireland roles.</p><div class="flex flex-wrap gap-2 mb-3"><span class="badge">GitHub Actions</span><span class="badge">Python</span><span class="badge">Qwen-Max</span></div><a href="https://github.com/pkswaminathan001/Luxembourg" target="_blank" class="text-indigo-400 text-sm">View Repository →</a></div>
+      </div>
+
+      <!-- Visa -->
+      <div id="visa" class="visa-grid mb-20">
+        <div class="glass-card p-8 reveal"><i class="fas fa-wind text-2xl text-orange-400 mb-2"></i><h3 class="font-semibold text-lg">🇳🇱 Netherlands</h3><p class="text-gray-500 text-sm">Highly Skilled Migrant (Kennismigrant). Recognized sponsors: ING, Rabobank, NN Group, Aegon, Adyen.</p></div>
+        <div class="glass-card p-8 reveal"><i class="fas fa-music text-2xl text-emerald-400 mb-2"></i><h3 class="font-semibold text-lg">🇮🇪 Ireland</h3><p class="text-gray-500 text-sm">Critical Skills Employment Permit. AI and Technology roles on eligible list.</p></div>
+        <div class="glass-card p-8 reveal"><i class="fas fa-flag-checkered text-2xl text-green-400 mb-2"></i><h3 class="font-semibold text-lg">🇱🇺 Luxembourg</h3><p class="text-gray-500 text-sm">EU Blue Card / Salaried Worker Permit. Finance hub, English-friendly, high salaries.</p></div>
+      </div>
+
+      <!-- Connect -->
+      <div class="text-center reveal"><h2 class="text-3xl font-bold mb-4 gradient-text">Let's Connect</h2><p class="text-gray-400 mb-6">Open to Business Analyst, Process Analyst, or Operations Analyst roles in Luxembourg, Netherlands, or Ireland.</p><div class="flex flex-wrap justify-center gap-4"><a href="mailto:prswaminathan001@gmail.com" class="btn-primary"><i class="fas fa-envelope mr-2"></i> prswaminathan001@gmail.com</a><a href="https://linkedin.com/in/prswaminathan" target="_blank" class="btn-outline"><i class="fab fa-linkedin mr-2"></i> LinkedIn</a><a href="https://github.com/pkswaminathan001" target="_blank" class="btn-outline"><i class="fab fa-github mr-2"></i> GitHub</a></div><p class="mt-8 text-gray-600 text-sm">🌍 Based in India • CET/BST overlap ready • Open to hybrid relocation</p></div>
+    </main>
+  </div>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    function reveal() { reveals.forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active'); }); }
+    window.addEventListener('scroll', reveal);
+    reveal();
+  </script>
+</body>
+</html>
