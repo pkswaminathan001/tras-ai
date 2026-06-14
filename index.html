@@ -3,282 +3,660 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PR Swaminathan | Business Analyst | Insurance Operations | EU Visa Ready</title>
-  <meta name="description" content="Business Analyst with MBA & HCL insurance experience. 40% efficiency gains via AI workflow automation. Targeting Luxembourg, Netherlands, Ireland."/>
+  <title>PR Swaminathan | Cinematic Portfolio</title>
+  <meta name="description" content="Business Analyst | Insurance Operations | Guidewire | AI Automation"/>
   
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   
+  <!-- Three.js for 3D Background -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.128.0/build/three.module.js"
+      }
+    }
+  </script>
+  
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-      min-height: 100vh;
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-family: 'Inter', sans-serif;
+      background: #0a0a0a;
+      color: #ffffff;
+      overflow-x: hidden;
+      cursor: none;
     }
+
+    /* Custom Cursor */
+    .cursor {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #a855f7;
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.2s ease;
+      transform: translate(-50%, -50%);
+    }
+
+    .cursor-dot {
+      width: 4px;
+      height: 4px;
+      background: #a855f7;
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Canvas Background */
+    #canvas-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    /* Content Layer */
+    .content {
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Glassmorphism Cards */
     .glass-card {
-      background: rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.03);
       backdrop-filter: blur(12px);
-      border-radius: 1.5rem;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: all 0.3s ease;
+      border-radius: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      position: relative;
+      overflow: hidden;
     }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+      transition: left 0.7s;
+    }
+
+    .glass-card:hover::before {
+      left: 100%;
+    }
+
     .glass-card:hover {
-      border-color: rgba(139, 92, 246, 0.5);
-      transform: translateY(-4px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      transform: translateY(-8px) scale(1.02);
+      border-color: rgba(139, 92, 246, 0.6);
+      box-shadow: 0 25px 45px -12px rgba(139, 92, 246, 0.3);
     }
+
+    /* Animated Gradient Text */
     .gradient-text {
-      background: linear-gradient(135deg, #a855f7, #6366f1, #06b6d4);
-      background-size: 200% auto;
+      background: linear-gradient(135deg, #a855f7, #6366f1, #06b6d4, #a855f7);
+      background-size: 300% 300%;
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
-      animation: shine 3s linear infinite;
+      animation: gradientShift 5s ease infinite;
     }
-    @keyframes shine {
+
+    @keyframes gradientShift {
       0% { background-position: 0% 50%; }
-      100% { background-position: 200% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
-    .skill-badge {
-      display: inline-block;
-      padding: 0.4rem 1rem;
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.2));
-      border: 1px solid rgba(99, 102, 241, 0.4);
-      border-radius: 999px;
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: #e0e7ff;
-      transition: all 0.3s;
-    }
-    .skill-badge:hover {
-      background: linear-gradient(135deg, #6366f1, #a855f7);
-      transform: scale(1.05);
-    }
-    .country-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1.25rem;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 999px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
+
+    /* Glowing Button */
     .btn-primary {
       background: linear-gradient(135deg, #6366f1, #a855f7);
       padding: 0.875rem 2rem;
       border-radius: 9999px;
-      font-weight: 700;
+      font-weight: 600;
       color: white;
-      transition: all 0.3s;
       display: inline-block;
       text-decoration: none;
-      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
     }
+
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(99, 102, 241, 0.6);
+      box-shadow: 0 0 25px rgba(139, 92, 246, 0.6);
     }
+
     .btn-outline {
       background: transparent;
       border: 2px solid #a855f7;
       padding: 0.875rem 2rem;
       border-radius: 9999px;
-      font-weight: 700;
+      font-weight: 600;
       color: #e0e7ff;
-      transition: all 0.3s;
       display: inline-block;
       text-decoration: none;
+      transition: all 0.3s;
     }
+
     .btn-outline:hover {
       background: rgba(168, 85, 247, 0.15);
       transform: translateY(-2px);
+      border-color: #6366f1;
     }
+
+    /* Skill Badges */
+    .skill-badge {
+      display: inline-block;
+      padding: 0.5rem 1.25rem;
+      background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(168,85,247,0.15));
+      border: 1px solid rgba(139,92,246,0.3);
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+
+    .skill-badge:hover {
+      background: linear-gradient(135deg, #6366f1, #a855f7);
+      transform: scale(1.05);
+    }
+
+    /* Floating Elements */
+    .floating {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+    }
+
+    /* Typing Animation Container */
+    .typed-text {
+      min-height: 80px;
+    }
+
+    /* Section Headers */
     .section-header {
-      font-size: 1.8rem;
+      font-size: 2.2rem;
       font-weight: 700;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
       position: relative;
       display: inline-block;
     }
+
     .section-header:after {
       content: '';
       position: absolute;
-      bottom: -8px;
+      bottom: -10px;
       left: 0;
-      width: 60px;
+      width: 60%;
       height: 3px;
       background: linear-gradient(90deg, #6366f1, #a855f7);
       border-radius: 999px;
     }
-    .custom-table td {
-      padding: 1rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      vertical-align: top;
+
+    /* Scroll Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
     }
-    .custom-table td:first-child {
-      font-weight: 600;
-      color: #a855f7;
-      width: 35%;
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
     }
+
+    /* Navigation */
     .nav-link {
       color: #cbd5e1;
       text-decoration: none;
       font-weight: 500;
       transition: color 0.3s;
+      position: relative;
     }
+
     .nav-link:hover {
       color: #a855f7;
     }
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: #1e1b4b; }
-    ::-webkit-scrollbar-thumb { background: #6366f1; border-radius: 10px; }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #6366f1, #a855f7);
+      transition: width 0.3s;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* Country Badges */
+    .country-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.25rem;
+      background: rgba(255,255,255,0.05);
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.3s;
+    }
+
+    .country-badge:hover {
+      border-color: #a855f7;
+      transform: translateY(-2px);
+    }
+
+    /* Stats Counter */
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #a855f7, #6366f1);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
   </style>
 </head>
-<body class="text-gray-200">
+<body>
 
-  <!-- Navigation -->
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-black/40 backdrop-blur-md border-b border-white/10">
-    <div class="max-w-6xl mx-auto px-6 py-4 flex flex-wrap justify-between items-center">
-      <span class="text-xl font-bold gradient-text">PR Swaminathan</span>
-      <div class="flex gap-5 text-sm">
-        <a href="#about" class="nav-link">About</a>
-        <a href="#expertise" class="nav-link">Expertise</a>
-        <a href="#experience" class="nav-link">Experience</a>
-        <a href="#projects" class="nav-link">Projects</a>
-        <a href="#visa" class="nav-link">Visa & Relocation</a>
-        <a href="https://pkswaminathan001.github.io/tras-ai/tras.html" target="_blank" class="nav-link">TRAS Tool →</a>
-      </div>
-    </div>
-  </nav>
+  <!-- Custom Cursor -->
+  <div class="cursor"></div>
+  <div class="cursor-dot"></div>
 
-  <main class="max-w-6xl mx-auto px-6 pt-28 pb-16">
+  <!-- 3D Canvas Background -->
+  <div id="canvas-container"></div>
+
+  <!-- Main Content -->
+  <div class="content">
     
-    <!-- Hero Section -->
-    <div class="text-center mb-16" data-aos="fade-down">
-      <div class="inline-block mb-4 px-4 py-1.5 bg-green-500/10 rounded-full text-green-300 text-sm font-semibold border border-green-400/30">
-        ✅ Eligible for HSM (NL) / Critical Skills (IE) / EU Blue Card (LU) — Sponsorship Required
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-md border-b border-white/10">
+      <div class="max-w-6xl mx-auto px-6 py-4 flex flex-wrap justify-between items-center">
+        <span class="text-xl font-bold gradient-text floating">PR Swaminathan</span>
+        <div class="flex gap-6 text-sm">
+          <a href="#about" class="nav-link">About</a>
+          <a href="#expertise" class="nav-link">Expertise</a>
+          <a href="#experience" class="nav-link">Experience</a>
+          <a href="#projects" class="nav-link">Projects</a>
+          <a href="#visa" class="nav-link">Visa</a>
+          <a href="https://pkswaminathan001.github.io/tras-ai/tras.html" target="_blank" class="nav-link">TRAS Tool →</a>
+        </div>
       </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-6 pt-28 pb-16">
       
-      <h1 class="text-5xl md:text-6xl font-bold mb-6">
-        <span class="gradient-text">Business Analyst | Insurance Operations | Guidewire</span>
-      </h1>
+      <!-- Hero Section -->
+      <div class="text-center mb-20 reveal" data-aos-delay="0">
+        <div class="inline-block mb-4 px-4 py-1.5 bg-green-500/10 rounded-full text-green-300 text-sm font-semibold border border-green-400/30 floating">
+          ✅ Eligible for HSM (NL) / Critical Skills (IE) / EU Blue Card (LU)
+        </div>
+        
+        <div class="typed-text text-5xl md:text-7xl font-bold mb-6">
+          <span id="typed" class="gradient-text"></span>
+        </div>
+        
+        <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-8 leading-relaxed">
+          <span class="gradient-text font-bold">MBA</span> | Ex-HCL <span class="text-green-400">(40% efficiency gain)</span> | Process Improvement | AI-Powered Automation
+        </p>
+        
+        <div class="flex flex-wrap justify-center gap-3 mb-8">
+          <span class="country-badge"><i class="fas fa-flag-checkered text-green-400"></i> Luxembourg</span>
+          <span class="country-badge"><i class="fas fa-wind text-orange-400"></i> Netherlands</span>
+          <span class="country-badge"><i class="fas fa-music text-emerald-400"></i> Ireland</span>
+          <span class="country-badge"><i class="fas fa-clock text-blue-400"></i> CET/BST Overlap Ready</span>
+        </div>
+        
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="https://pkswaminathan001.github.io/tras-ai/tras.html" class="btn-primary"><i class="fas fa-chart-line mr-2"></i> Try TRAS Analyzer</a>
+          <a href="#projects" class="btn-outline"><i class="fas fa-play-circle mr-2"></i> View Projects</a>
+        </div>
+      </div>
+
+      <!-- Stats Counter Section -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16 reveal">
+        <div class="glass-card p-6 text-center">
+          <div class="stat-number"><span id="stat1">0</span>%</div>
+          <div class="text-gray-400 text-sm mt-2">Efficiency Gain</div>
+        </div>
+        <div class="glass-card p-6 text-center">
+          <div class="stat-number"><span id="stat2">0</span>%</div>
+          <div class="text-gray-400 text-sm mt-2">Accuracy Rate</div>
+        </div>
+        <div class="glass-card p-6 text-center">
+          <div class="stat-number"><span id="stat3">0</span>+</div>
+          <div class="text-gray-400 text-sm mt-2">Transactions</div>
+        </div>
+        <div class="glass-card p-6 text-center">
+          <div class="stat-number"><span id="stat4">0</span>%</div>
+          <div class="text-gray-400 text-sm mt-2">Rework Reduction</div>
+        </div>
+      </div>
+
+      <!-- About -->
+      <div id="about" class="glass-card p-8 mb-12 reveal">
+        <h2 class="section-header">About Me</h2>
+        <p class="text-gray-300 leading-relaxed mb-4">
+          <strong class="text-indigo-300">Business Analyst</strong> with MBA and experience supporting insurance operations at HCL Technologies (USAA project).
+        </p>
+        <p class="text-gray-300 leading-relaxed">
+          At HCL, I contributed to the first AI automation on the USAA project — reducing manual claims processing by <strong class="text-green-400">40%</strong> across 6,000+ transactions while maintaining <strong class="text-green-400">99.2% accuracy</strong>.
+        </p>
+      </div>
+
+      <!-- Recruiters Table -->
+      <div class="glass-card p-8 mb-12 reveal">
+        <h2 class="section-header">🎯 For Recruiters & Hiring Managers</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <tr><td class="py-3 font-semibold text-indigo-300 w-35%">What I deliver</td><td class="py-3">40% efficiency gains via process automation & workflow optimization</td></tr>
+            <tr class="border-t border-white/10"><td class="py-3 font-semibold text-indigo-300">Domain expertise</td><td class="py-3">Insurance Claims, Guidewire (GWCC), BFSI Operations</td></tr>
+            <tr class="border-t border-white/10"><td class="py-3 font-semibold text-indigo-300">Visa path</td><td class="py-3">Kennismigrant (NL), Critical Skills (IE), EU Blue Card (LU) — 2-4 weeks</td></tr>
+            <tr class="border-t border-white/10"><td class="py-3 font-semibold text-indigo-300">Core strengths</td><td class="py-3">Business Analysis, Process Improvement, Stakeholder Management, AI Workflow Design</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Expertise -->
+      <div id="expertise" class="grid md:grid-cols-4 gap-6 mb-12">
+        <div class="glass-card p-6 text-center reveal"><i class="fas fa-chart-line text-4xl text-indigo-400 mb-3"></i><h3 class="font-bold text-lg mb-2">Business Analysis</h3><p class="text-xs text-gray-400">Requirements, process mapping, stakeholder management</p></div>
+        <div class="glass-card p-6 text-center reveal"><i class="fas fa-robot text-4xl text-cyan-400 mb-3"></i><h3 class="font-bold text-lg mb-2">AI Workflow Automation</h3><p class="text-xs text-gray-400">LLM pipelines, prompt engineering, orchestration</p></div>
+        <div class="glass-card p-6 text-center reveal"><i class="fas fa-shield-alt text-4xl text-purple-400 mb-3"></i><h3 class="font-bold text-lg mb-2">BFSI Operations</h3><p class="text-xs text-gray-400">Insurance claims, Guidewire, KYC/AML</p></div>
+        <div class="glass-card p-6 text-center reveal"><i class="fas fa-chart-simple text-4xl text-emerald-400 mb-3"></i><h3 class="font-bold text-lg mb-2">Process Optimization</h3><p class="text-xs text-gray-400">KPI tracking, QC frameworks, efficiency analysis</p></div>
+      </div>
+
+      <!-- Experience -->
+      <div id="experience" class="glass-card p-8 mb-12 reveal">
+        <h2 class="section-header">Professional Experience</h2>
+        <div class="mb-6">
+          <h3 class="text-xl font-bold text-indigo-300">Process Associate — AI Workflow & Automation Lead</h3>
+          <p class="text-sm text-gray-400 mb-2">HCL Technologies — USAA Insurance Project • Jan 2023 – Present</p>
+          <ul class="list-disc list-inside text-gray-300 space-y-1 text-sm">
+            <li>First AI automation → 40% reduction in manual claims processing</li>
+            <li>99.2% claims accuracy across 6,000+ transactions</li>
+            <li>QC frameworks reducing rework errors by 25%</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Projects -->
+      <div id="projects" class="grid md:grid-cols-2 gap-6 mb-12">
+        <div class="glass-card p-6 reveal"><i class="fas fa-chart-simple text-3xl text-purple-400 mb-3"></i><h3 class="text-xl font-bold mb-2">🎯 TRAS AI</h3><p class="text-gray-400 text-sm mb-3">Resume-to-job match analyzer for Business Analyst roles. ATS compatibility, skill gaps.</p><div class="flex gap-2 flex-wrap"><span class="skill-badge">Gemini API</span><span class="skill-badge">HTML/CSS/JS</span></div><a href="https://pkswaminathan001.github.io/tras-ai/tras.html" class="inline-block mt-4 text-indigo-400 text-sm">Try Tool →</a></div>
+        <div class="glass-card p-6 reveal"><i class="fas fa-search text-3xl text-indigo-400 mb-3"></i><h3 class="text-xl font-bold mb-2">🇪🇺 EU Job Hunter AI</h3><p class="text-gray-400 text-sm mb-3">GitHub Actions workflow analyzing CV-JD fit for Luxembourg/NL/IE roles.</p><div class="flex gap-2 flex-wrap"><span class="skill-badge">GitHub Actions</span><span class="skill-badge">Python</span></div><a href="https://github.com/pkswaminathan001/Luxembourg" target="_blank" class="inline-block mt-4 text-indigo-400 text-sm">View Repo →</a></div>
+      </div>
+
+      <!-- Visa -->
+      <div id="visa" class="glass-card p-8 mb-12 reveal">
+        <h2 class="section-header">Visa Sponsorship Path</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div><i class="fas fa-wind text-2xl text-orange-400 mb-2"></i><h3 class="font-bold text-lg">🇳🇱 Netherlands</h3><p class="text-sm text-gray-400">Highly Skilled Migrant (Kennismigrant). Sponsors: ING, Rabobank, NN, Aegon.</p></div>
+          <div><i class="fas fa-music text-2xl text-emerald-400 mb-2"></i><h3 class="font-bold text-lg">🇮🇪 Ireland</h3><p class="text-sm text-gray-400">Critical Skills Employment Permit. AI on eligible list.</p></div>
+          <div><i class="fas fa-flag-checkered text-2xl text-green-400 mb-2"></i><h3 class="font-bold text-lg">🇱🇺 Luxembourg</h3><p class="text-sm text-gray-400">EU Blue Card. Finance hub, English-friendly.</p></div>
+        </div>
+      </div>
+
+      <!-- Let's Connect -->
+      <div class="text-center reveal">
+        <h2 class="text-3xl font-bold mb-4 gradient-text">Let's Connect</h2>
+        <p class="text-gray-300 mb-6">Open to Business Analyst, Process Analyst, or Operations Analyst roles in Luxembourg, Netherlands, or Ireland.</p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="mailto:prswaminathan001@gmail.com" class="btn-primary"><i class="fas fa-envelope mr-2"></i> prswaminathan001@gmail.com</a>
+          <a href="https://linkedin.com/in/prswaminathan" target="_blank" class="btn-outline"><i class="fab fa-linkedin mr-2"></i> LinkedIn</a>
+          <a href="https://github.com/pkswaminathan001" target="_blank" class="btn-outline"><i class="fab fa-github mr-2"></i> GitHub</a>
+        </div>
+        <p class="mt-6 text-gray-500 text-sm">🌍 Based in India • CET/BST overlap ready • Open to hybrid relocation</p>
+      </div>
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script type="module">
+    import * as THREE from 'three';
+
+    // Setup scene
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x050510);
+    
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 30;
+    
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    document.getElementById('canvas-container').appendChild(renderer.domElement);
+    
+    // Particles
+    const particlesGeometry = new THREE.BufferGeometry();
+    const particlesCount = 2000;
+    const posArray = new Float32Array(particlesCount * 3);
+    
+    for(let i = 0; i < particlesCount * 3; i += 3) {
+      posArray[i] = (Math.random() - 0.5) * 100;
+      posArray[i+1] = (Math.random() - 0.5) * 60;
+      posArray[i+2] = (Math.random() - 0.5) * 50;
+    }
+    
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+    
+    const particlesMaterial = new THREE.PointsMaterial({
+      size: 0.1,
+      color: 0x8b5cf6,
+      transparent: true,
+      opacity: 0.6,
+      blending: THREE.AdditiveBlending
+    });
+    
+    const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+    scene.add(particlesMesh);
+    
+    // Floating particles with color variation
+    const colors = [0x6366f1, 0xa855f7, 0x06b6d4];
+    const colorParticles = new THREE.BufferGeometry();
+    const colorPosArray = new Float32Array(800 * 3);
+    const colorArray = new Float32Array(800 * 3);
+    
+    for(let i = 0; i < 800; i++) {
+      colorPosArray[i*3] = (Math.random() - 0.5) * 80;
+      colorPosArray[i*3+1] = (Math.random() - 0.5) * 50;
+      colorPosArray[i*3+2] = (Math.random() - 0.5) * 40;
       
-      <p class="text-lg text-gray-300 max-w-3xl mx-auto mb-8 leading-relaxed">
-        MBA | Ex-HCL (40% efficiency gain) | Process Improvement | AI-Powered Automation
-      </p>
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      colorArray[i*3] = ((color >> 16) & 255) / 255;
+      colorArray[i*3+1] = ((color >> 8) & 255) / 255;
+      colorArray[i*3+2] = (color & 255) / 255;
+    }
+    
+    colorParticles.setAttribute('position', new THREE.BufferAttribute(colorPosArray, 3));
+    colorParticles.setAttribute('color', new THREE.BufferAttribute(colorArray, 3));
+    
+    const colorParticlesMaterial = new THREE.PointsMaterial({ size: 0.08, vertexColors: true, transparent: true, opacity: 0.5, blending: THREE.AdditiveBlending });
+    const colorParticlesMesh = new THREE.Points(colorParticles, colorParticlesMaterial);
+    scene.add(colorParticlesMesh);
+    
+    // Animation
+    let time = 0;
+    
+    function animate() {
+      requestAnimationFrame(animate);
+      time += 0.002;
       
-      <div class="flex flex-wrap justify-center gap-3 mb-8">
-        <span class="country-badge"><i class="fas fa-flag-checkered text-green-400"></i> Luxembourg</span>
-        <span class="country-badge"><i class="fas fa-wind text-orange-400"></i> Netherlands</span>
-        <span class="country-badge"><i class="fas fa-music text-emerald-400"></i> Ireland</span>
-        <span class="country-badge"><i class="fas fa-clock text-blue-400"></i> CET/BST Overlap Ready</span>
-      </div>
+      particlesMesh.rotation.y = time * 0.1;
+      particlesMesh.rotation.x = Math.sin(time * 0.2) * 0.1;
+      colorParticlesMesh.rotation.y = time * 0.15;
+      colorParticlesMesh.rotation.x = Math.cos(time * 0.1) * 0.05;
       
-      <div class="flex flex-wrap justify-center gap-4">
-        <a href="https://pkswaminathan001.github.io/tras-ai/tras.html" class="btn-primary"><i class="fas fa-chart-line mr-2"></i> Try TRAS Analyzer</a>
-        <a href="#projects" class="btn-outline"><i class="fas fa-play-circle mr-2"></i> View Projects</a>
-      </div>
-    </div>
+      renderer.render(scene, camera);
+    }
+    
+    animate();
+    
+    // Handle resize
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
 
-    <!-- About -->
-    <div id="about" class="glass-card p-8 mb-12" data-aos="fade-up">
-      <h2 class="section-header">About Me</h2>
-      <p class="text-gray-300 leading-relaxed mb-4">
-        <strong class="text-indigo-300">Business Analyst</strong> with MBA and experience supporting insurance operations and process improvement initiatives within the USAA account at HCL Technologies.
-      </p>
-      <p class="text-gray-300 leading-relaxed">
-        At HCL, I contributed to the first AI automation on the USAA project — reducing manual claims processing by <strong class="text-green-400">40%</strong> across 6,000+ transactions while maintaining <strong class="text-green-400">99.2% accuracy</strong>. I combine business analysis, process optimization, and AI workflow design to drive operational excellence.
-      </p>
-    </div>
+  <!-- Typing Animation -->
+  <script>
+    const phrases = [
+      'Business Analyst',
+      'Insurance Operations',
+      'Guidewire Specialist',
+      'AI Automation Expert'
+    ];
+    
+    let i = 0;
+    let j = 0;
+    let currentPhrase = [];
+    let isDeleting = false;
+    let isEnd = false;
+    
+    function loop() {
+      isEnd = false;
+      const typedElement = document.getElementById('typed');
+      
+      if (typedElement) {
+        if (i < phrases.length) {
+          if (!isDeleting && j <= phrases[i].length) {
+            currentPhrase.push(phrases[i][j]);
+            j++;
+            typedElement.innerHTML = currentPhrase.join('');
+          }
+          
+          if (isDeleting && j <= phrases[i].length) {
+            currentPhrase.pop();
+            j--;
+            typedElement.innerHTML = currentPhrase.join('');
+          }
+          
+          if (j == phrases[i].length) {
+            isEnd = true;
+            isDeleting = true;
+          }
+          
+          if (isDeleting && j === 0) {
+            currentPhrase = [];
+            isDeleting = false;
+            i++;
+            if (i === phrases.length) {
+              i = 0;
+            }
+          }
+        }
+      }
+      
+      const speed = isEnd ? 2000 : isDeleting ? 50 : 100;
+      setTimeout(loop, speed);
+    }
+    
+    loop();
+  </script>
 
-    <!-- Recruiters Table -->
-    <div class="glass-card p-8 mb-12" data-aos="fade-up" data-aos-delay="100">
-      <h2 class="section-header">🎯 For Recruiters & Hiring Managers</h2>
-      <table class="custom-table w-full">
-        <tr><td class="font-semibold">What I deliver</td><td>40% efficiency gains via process automation & workflow optimization</td></tr>
-        <tr><td class="font-semibold">Domain expertise</td><td>Insurance Claims, Guidewire (GWCC), BFSI Operations, KYC/AML awareness</td></tr>
-        <tr><td class="font-semibold">Visa path</td><td>Kennismigrant (NL), Critical Skills (IE), EU Blue Card (LU) — employer applies online, ~2-4 weeks</td></tr>
-        <tr><td class="font-semibold">Core strengths</td><td>Business Analysis, Process Improvement, Stakeholder Management, AI Workflow Design</td></tr>
-      </table>
-    </div>
+  <!-- Scroll Reveal -->
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    
+    function reveal() {
+      reveals.forEach(element => {
+        const windowHeight = window.innerHeight;
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 100;
+        
+        if (elementTop < windowHeight - elementVisible) {
+          element.classList.add('active');
+        }
+      });
+    }
+    
+    window.addEventListener('scroll', reveal);
+    reveal();
+  </script>
 
-    <!-- Expertise -->
-    <div id="expertise" class="grid md:grid-cols-4 gap-6 mb-12">
-      <div class="glass-card p-6 text-center" data-aos="flip-left"><i class="fas fa-chart-line text-4xl text-indigo-400 mb-3"></i><h3 class="font-bold text-lg mb-2">Business Analysis</h3><p class="text-xs text-gray-400">Requirements gathering, process mapping, stakeholder management</p></div>
-      <div class="glass-card p-6 text-center" data-aos="flip-left" data-aos-delay="100"><i class="fas fa-robot text-4xl text-cyan-400 mb-3"></i><h3 class="font-bold text-lg mb-2">AI Workflow Automation</h3><p class="text-xs text-gray-400">LLM pipelines, prompt engineering, workflow orchestration</p></div>
-      <div class="glass-card p-6 text-center" data-aos="flip-left" data-aos-delay="200"><i class="fas fa-shield-alt text-4xl text-purple-400 mb-3"></i><h3 class="font-bold text-lg mb-2">BFSI Operations</h3><p class="text-xs text-gray-400">Insurance claims, Guidewire, KYC/AML, USAA project experience</p></div>
-      <div class="glass-card p-6 text-center" data-aos="flip-left" data-aos-delay="300"><i class="fas fa-chart-simple text-4xl text-emerald-400 mb-3"></i><h3 class="font-bold text-lg mb-2">Process Optimization</h3><p class="text-xs text-gray-400">KPI tracking, QC frameworks, efficiency analysis</p></div>
-    </div>
+  <!-- Custom Cursor -->
+  <script>
+    const cursor = document.querySelector('.cursor');
+    const cursorDot = document.querySelector('.cursor-dot');
+    
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+      cursorDot.style.left = e.clientX + 'px';
+      cursorDot.style.top = e.clientY + 'px';
+    });
+    
+    document.querySelectorAll('a, button, .btn-primary, .btn-outline, .skill-badge, .country-badge').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+        cursor.style.borderColor = '#6366f1';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+        cursor.style.borderColor = '#a855f7';
+      });
+    });
+  </script>
 
-    <!-- Experience -->
-    <div id="experience" class="glass-card p-8 mb-12" data-aos="fade-up">
-      <h2 class="section-header">Professional Experience</h2>
-      <div class="mb-6">
-        <h3 class="text-xl font-bold text-indigo-300">Process Associate — AI Workflow & Automation Lead</h3>
-        <p class="text-sm text-gray-400 mb-2">HCL Technologies — USAA Insurance Project • Jan 2023 – Present</p>
-        <ul class="list-disc list-inside text-gray-300 space-y-1 text-sm">
-          <li>Contributed to first AI automation on the project → 40% reduction in manual claims processing time</li>
-          <li>Maintained 99.2% claims accuracy across 6,000+ insurance transactions with zero critical errors</li>
-          <li>Built QC frameworks reducing rework errors by 25% across analyst team</li>
-          <li>Supported requirements gathering and stakeholder communication for AI deployment initiatives</li>
-        </ul>
-      </div>
-      <div>
-        <h3 class="text-xl font-bold text-indigo-300">AI Workflow Developer (Independent)</h3>
-        <p class="text-sm text-gray-400 mb-2">TRAS — Resume-to-Job Match Analyzer • 2024–2025</p>
-        <ul class="list-disc list-inside text-gray-300 space-y-1 text-sm">
-          <li>Built web-based tool analyzing resume-JD fit with multi-dimensional scoring for Business Analyst roles</li>
-          <li>Features: match score, keyword detection, strengths & improvement suggestions, ATS compatibility</li>
-          <li>Tech: HTML/JS, Tailwind CSS, GitHub Pages, Gemini API</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Projects -->
-    <div id="projects" class="grid md:grid-cols-2 gap-6 mb-12">
-      <div class="glass-card p-6" data-aos="zoom-in">
-        <i class="fas fa-chart-simple text-3xl text-purple-400 mb-3"></i>
-        <h3 class="text-xl font-bold mb-2">🎯 TRAS — Resume-to-Job Match Analyzer</h3>
-        <p class="text-gray-400 text-sm mb-3">Web-based tool that analyzes resume-job description fit for Business Analyst roles. Outputs match score, detected keywords, strengths, and improvement suggestions.</p>
-        <div class="flex gap-2 flex-wrap"><span class="skill-badge">HTML/JS</span><span class="skill-badge">Tailwind</span><span class="skill-badge">Gemini API</span></div>
-        <a href="https://pkswaminathan001.github.io/tras-ai/tras.html" class="inline-block mt-4 text-indigo-400 hover:text-indigo-300 text-sm">Try Tool →</a>
-      </div>
-      <div class="glass-card p-6" data-aos="zoom-in" data-aos-delay="100">
-        <i class="fas fa-search text-3xl text-indigo-400 mb-3"></i>
-        <h3 class="text-xl font-bold mb-2">🇱🇺 EU Job Hunter AI</h3>
-        <p class="text-gray-400 text-sm mb-3">GitHub Actions workflow analyzing CV-JD fit using Qwen-Max. Outputs fit scores, keyword gaps, and tailored cover letters for Luxembourg/NL/IE roles.</p>
-        <div class="flex gap-2 flex-wrap"><span class="skill-badge">GitHub Actions</span><span class="skill-badge">Python</span><span class="skill-badge">Qwen</span></div>
-        <a href="https://github.com/pkswaminathan001/portfolio" target="_blank" class="inline-block mt-4 text-indigo-400 hover:text-indigo-300 text-sm">View Repo →</a>
-      </div>
-    </div>
-
-    <!-- Visa -->
-    <div id="visa" class="glass-card p-8 mb-12" data-aos="fade-up">
-      <h2 class="section-header">Visa Sponsorship Path</h2>
-      <div class="grid md:grid-cols-3 gap-6">
-        <div><i class="fas fa-wind text-2xl text-orange-400 mb-2"></i><h3 class="font-bold text-lg">🇳🇱 Netherlands</h3><p class="text-sm text-gray-400">Highly Skilled Migrant (Kennismigrant). Salary threshold met. Recognized sponsors: ING, Rabobank, NN, Aegon, Adyen.</p></div>
-        <div><i class="fas fa-music text-2xl text-emerald-400 mb-2"></i><h3 class="font-bold text-lg">🇮🇪 Ireland</h3><p class="text-sm text-gray-400">Critical Skills Employment Permit. AI/Tech on eligible list. Fast processing, family reunification.</p></div>
-        <div><i class="fas fa-flag-checkered text-2xl text-green-400 mb-2"></i><h3 class="font-bold text-lg">🇱🇺 Luxembourg</h3><p class="text-sm text-gray-400">EU Blue Card / Salaried Worker Permit. Finance hub, high salaries, English-friendly in Big 4 & Tech.</p></div>
-      </div>
-      <p class="mt-6 text-center text-gray-400 text-sm">📩 Happy to provide visa documentation templates, salary thresholds, and recognized sponsor lists upon request.</p>
-    </div>
-
-    <!-- Let's Connect -->
-    <div class="text-center" data-aos="fade-up">
-      <h2 class="text-3xl font-bold mb-4 gradient-text">Let's Connect</h2>
-      <p class="text-gray-300 mb-6">Open to Business Analyst, Process Analyst, or Operations Analyst roles in Luxembourg, Netherlands, or Ireland.</p>
-      <div class="flex flex-wrap justify-center gap-4">
-        <a href="mailto:prswaminathan001@gmail.com" class="btn-primary"><i class="fas fa-envelope mr-2"></i> prswaminathan001@gmail.com</a>
-        <a href="https://linkedin.com/in/prswaminathan" target="_blank" class="btn-outline"><i class="fab fa-linkedin mr-2"></i> LinkedIn</a>
-      </div>
-      <p class="mt-6 text-gray-500 text-sm">🌍 Based in India • CET/BST overlap ready • Open to hybrid relocation</p>
-    </div>
-  </main>
-
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script> AOS.init({ duration: 800, once: true, offset: 50 }); </script>
+  <!-- Counter Animation -->
+  <script>
+    function animateCounter(elementId, target, suffix = '') {
+      let current = 0;
+      const increment = target / 50;
+      const element = document.getElementById(elementId);
+      
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          element.textContent = target + suffix;
+          clearInterval(timer);
+        } else {
+          element.textContent = Math.floor(current) + suffix;
+        }
+      }, 30);
+    }
+    
+    // Start counters when visible
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounter('stat1', 40, '%');
+          animateCounter('stat2', 99, '%');
+          animateCounter('stat3', 6000, '+');
+          animateCounter('stat4', 25, '%');
+          observer.disconnect();
+        }
+      });
+    });
+    
+    const statsSection = document.querySelector('.grid-cols-2');
+    if (statsSection) observer.observe(statsSection);
+  </script>
 </body>
 </html>
