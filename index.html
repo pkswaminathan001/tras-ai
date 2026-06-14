@@ -31,7 +31,6 @@
       padding: 0 24px;
     }
 
-    /* Navigation */
     nav {
       position: fixed;
       top: 0;
@@ -56,7 +55,6 @@
     .logo {
       font-size: 1.2rem;
       font-weight: 600;
-      letter-spacing: -0.01em;
       color: #1d1d1f;
       text-decoration: none;
     }
@@ -78,7 +76,6 @@
       color: #0066cc;
     }
 
-    /* Hero */
     .hero {
       text-align: center;
       padding: 140px 0 80px;
@@ -104,15 +101,11 @@
     }
 
     @media (min-width: 768px) {
-      h1 {
-        font-size: 4rem;
-      }
+      h1 { font-size: 4rem; }
     }
 
     @media (min-width: 1024px) {
-      h1 {
-        font-size: 4.5rem;
-      }
+      h1 { font-size: 4.5rem; }
     }
 
     .hero-subtitle {
@@ -122,7 +115,6 @@
       margin: 0 auto 32px;
     }
 
-    /* Buttons */
     .btn-primary {
       display: inline-block;
       background: #0071e3;
@@ -133,8 +125,6 @@
       font-weight: 500;
       font-size: 0.9rem;
       transition: all 0.2s;
-      border: none;
-      cursor: pointer;
     }
 
     .btn-primary:hover {
@@ -160,7 +150,6 @@
       transform: scale(1.02);
     }
 
-    /* Stats */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -188,17 +177,15 @@
       }
     }
 
-    /* Cards */
     .card {
       background: #f5f5f7;
       border-radius: 24px;
       padding: 32px;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform 0.2s;
     }
 
     .card:hover {
       transform: scale(1.01);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
     }
 
     .card h2 {
@@ -218,7 +205,6 @@
       font-size: 0.9rem;
     }
 
-    /* AI Programs Grid - Product Card Style */
     .ai-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -293,7 +279,7 @@
     }
 
     /* ============================================ */
-    /* APPLE INTELLIGENCE STYLE SECTION - COMPLETE */
+    /* APPLE INTELLIGENCE STYLE SECTION */
     /* ============================================ */
     .apple-intel-section {
       background: linear-gradient(135deg, #f5f5f7 0%, #e8e8ed 100%);
@@ -301,18 +287,6 @@
       padding: 80px 48px;
       margin: 80px 0;
       position: relative;
-      overflow: hidden;
-    }
-
-    .apple-intel-section::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -20%;
-      width: 60%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(0,113,227,0.03) 0%, transparent 70%);
-      pointer-events: none;
     }
 
     .apple-badge {
@@ -344,10 +318,8 @@
       color: #6e6e73;
       max-width: 700px;
       margin-bottom: 60px;
-      line-height: 1.4;
     }
 
-    /* Feature Grid */
     .feature-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -360,7 +332,6 @@
       border-radius: 28px;
       padding: 40px;
       transition: all 0.3s ease;
-      border: 1px solid rgba(0,0,0,0.05);
     }
 
     .feature-card:hover {
@@ -379,12 +350,6 @@
       margin-bottom: 16px;
     }
 
-    .feature-card p {
-      color: #6e6e73;
-      margin-bottom: 20px;
-      line-height: 1.5;
-    }
-
     .feature-list {
       list-style: none;
       padding-left: 0;
@@ -399,17 +364,11 @@
       color: #1d1d1f;
     }
 
-    .feature-list li span:first-child {
-      font-size: 1.1rem;
-    }
-
-    /* Privacy Section */
     .privacy-section {
       background: white;
       border-radius: 28px;
       padding: 40px;
       margin-top: 20px;
-      border: 1px solid rgba(0,0,0,0.05);
     }
 
     .privacy-title {
@@ -437,7 +396,6 @@
       padding: 8px 20px;
       font-size: 0.85rem;
       font-weight: 500;
-      color: #1d1d1f;
     }
 
     .integration-box {
@@ -454,10 +412,6 @@
 
     .integration-text {
       flex: 1;
-    }
-
-    .integration-text strong {
-      color: #0071e3;
     }
 
     .device-note {
@@ -485,29 +439,16 @@
       .feature-card {
         padding: 28px;
       }
-      .privacy-title {
-        font-size: 1.3rem;
-      }
     }
 
-    /* Other sections */
-    .grid-2 {
+    .grid-2, .grid-3, .grid-4 {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
       gap: 40px;
     }
 
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 40px;
-    }
-
-    .grid-4 {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 40px;
-    }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
 
     @media (max-width: 768px) {
       .grid-2, .grid-3, .grid-4 {
@@ -527,7 +468,6 @@
     .section-header h2 {
       font-size: 2rem;
       font-weight: 700;
-      letter-spacing: -0.01em;
       margin-bottom: 12px;
     }
 
@@ -544,7 +484,6 @@
       border-radius: 20px;
       font-size: 0.7rem;
       font-weight: 500;
-      color: #1d1d1f;
     }
 
     .inline-badge-group {
@@ -561,7 +500,6 @@
       border-radius: 40px;
       font-size: 0.8rem;
       font-weight: 500;
-      color: #1d1d1f;
     }
 
     .custom-table {
@@ -586,7 +524,6 @@
 
     .experience-list li {
       margin-bottom: 8px;
-      color: #1d1d1f;
     }
 
     .meta-text {
@@ -673,8 +610,7 @@
     </section>
 
     <!-- ============================================ -->
-    <!-- APPLE INTELLIGENCE STYLE SECTION - COMPLETE  -->
-    <!-- Explains the AI technology behind TRAS AI   -->
+    <!-- APPLE INTELLIGENCE STYLE SECTION            -->
     <!-- ============================================ -->
     <section id="ai-intelligence" class="container reveal">
       <div class="apple-intel-section">
@@ -682,40 +618,33 @@
         <h2 class="apple-title">AI for the Modern<br>Business Analyst</h2>
         <p class="apple-subtitle">Built into your browser to help you analyze resumes, communicate fit, and get hired faster — designed with privacy at every step.</p>
 
-        <!-- Feature Grid - Architecture & Features -->
         <div class="feature-grid">
-          <!-- Architecture Card -->
           <div class="feature-card">
             <div class="feature-icon">🏗️</div>
             <h3>The Architecture: Local + Private Cloud</h3>
-            <p>How TRAS AI protects your data while delivering powerful analysis.</p>
             <ul class="feature-list">
-              <li><span>📱</span> <span><strong>On-Device Processing:</strong> Keyword extraction and ATS scoring runs locally in your browser. Your resume never leaves your device for initial analysis.</span></li>
-              <li><span>☁️</span> <span><strong>Private Cloud Compute:</strong> For complex semantic matching, we use Google's dedicated AI infrastructure. Your API key stays in your browser — we never store or log your data.</span></li>
-              <li><span>🔐</span> <span><strong>Verifiable Privacy Promise:</strong> Unlike traditional ATS tools, TRAS AI doesn't collect or sell your data. You're in full control.</span></li>
+              <li><span>📱</span> <span><strong>On-Device Processing:</strong> Keyword extraction runs locally. Your resume never leaves your device.</span></li>
+              <li><span>☁️</span> <span><strong>Private Cloud Compute:</strong> For complex matching using Gemini API. Your key stays in your browser.</span></li>
+              <li><span>🔐</span> <span><strong>Verifiable Privacy:</strong> We never store or log your data. You're in full control.</span></li>
             </ul>
           </div>
 
-          <!-- Generative Features Card -->
           <div class="feature-card">
             <div class="feature-icon">✨</div>
             <h3>Generative Intelligence</h3>
-            <p>Powerful AI features that help you stand out to recruiters.</p>
             <ul class="feature-list">
-              <li><span>✍️</span> <span><strong>Writing Tools:</strong> Resume rewrite suggestions, cover letter hooks, and professional summaries — system-wide quality.</span></li>
-              <li><span>🎯</span> <span><strong>Smart Context Awareness:</strong> Understands insurance, Guidewire, BFSI terminology — not just keyword matching.</span></li>
-              <li><span>📊</span> <span><strong>Visual Intelligence:</strong> Match score visualization, skill gap charts, and interview question generation.</span></li>
-              <li><span>🤖</span> <span><strong>Intelligent Assistant:</strong> Ask "How to improve my ATS score?" — contextual help coming soon.</span></li>
+              <li><span>✍️</span> <span><strong>Writing Tools:</strong> Resume rewrites, cover letters, professional summaries.</span></li>
+              <li><span>🎯</span> <span><strong>Smart Context:</strong> Understands insurance, Guidewire, BFSI terminology.</span></li>
+              <li><span>📊</span> <span><strong>Visual Intelligence:</strong> Match scores, skill gaps, interview questions.</span></li>
             </ul>
           </div>
         </div>
 
-        <!-- Privacy Section -->
         <div class="privacy-section">
           <div class="privacy-title">
             <span>🔒</span> Great powers come with great privacy.
           </div>
-          <p style="color: #6e6e73; margin-bottom: 20px;">TRAS AI is designed to protect your privacy at every step. It's integrated into your browser through on-device processing. So it's aware of your personal information without collecting your personal information.</p>
+          <p style="color: #6e6e73; margin-bottom: 20px;">TRAS AI is designed to protect your privacy at every step. On-device processing means your data stays with you.</p>
           
           <div class="privacy-badge-container">
             <span class="privacy-badge"><i class="fas fa-database"></i> Your data is never stored</span>
@@ -724,21 +653,18 @@
           </div>
         </div>
 
-        <!-- Gemini Integration (Like Apple's ChatGPT integration) -->
         <div class="integration-box">
           <div class="integration-text">
             <strong><i class="fab fa-google"></i> Google Gemini, seamlessly integrated.</strong>
-            <p style="margin-top: 8px; color: #6e6e73;">With Gemini API integrated into TRAS AI, you get even more expertise when it might be helpful for you — no need to jump between tools.</p>
-            <p style="margin-top: 12px; font-size: 0.85rem; color: #6e6e73;">You control when Gemini is used and will be asked before any of your information is shared. Anyone can use TRAS AI for free with their own Gemini API key.</p>
+            <p style="margin-top: 8px; color: #6e6e73;">With Gemini API integrated into TRAS AI, you get expert resume analysis. You control when Gemini is used.</p>
           </div>
           <div>
             <span class="privacy-badge" style="background: white;">🔑 Your API key stays local</span>
           </div>
         </div>
 
-        <!-- Compatible Devices Note -->
         <div class="device-note">
-          <i class="fas fa-desktop"></i> Works on any device with a modern browser • No app installation required • Free tier: 60 requests/minute
+          <i class="fas fa-desktop"></i> Works on any device • No installation • Free tier: 60 requests/minute
         </div>
       </div>
     </section>
@@ -751,7 +677,6 @@
       </div>
 
       <div class="ai-grid">
-        <!-- TRAS AI - Resume Analyzer -->
         <div class="ai-card">
           <div class="ai-icon">🤖</div>
           <div class="badge-new">✨ Free • Gemini-Powered</div>
@@ -761,52 +686,47 @@
           <a href="tras.html" class="ai-link">Try TRAS Analyzer →</a>
         </div>
 
-        <!-- EU Job Hunter AI -->
         <div class="ai-card">
           <div class="ai-icon">🇪🇺</div>
           <div class="badge-new">⚡ GitHub Actions</div>
           <h3>EU Job Hunter AI</h3>
-          <p>Automated CV-JD fit analyzer for Luxembourg, Netherlands, and Ireland roles. Outputs fit scores, keyword gaps, and cover letter hooks.</p>
+          <p>Automated CV-JD fit analyzer for Luxembourg, Netherlands, and Ireland roles.</p>
           <div class="price"><strong>₹0</strong> / open source</div>
           <a href="https://github.com/pkswaminathan001/Luxembourg" target="_blank" class="ai-link">View on GitHub →</a>
         </div>
 
-        <!-- AI Email Campaign Generator -->
         <div class="ai-card">
           <div class="ai-icon">📧</div>
           <div class="badge-new">🔨 Building</div>
           <h3>AI Email Campaign Generator</h3>
-          <p>Generate marketing emails for Business Analyst roles. ATS-optimized subject lines and body content.</p>
+          <p>Generate marketing emails for Business Analyst roles. ATS-optimized subject lines.</p>
           <div class="price"><strong>₹0</strong> / coming soon</div>
           <a href="#" class="ai-link">Preview →</a>
         </div>
 
-        <!-- AI Social Ad Creator -->
         <div class="ai-card">
           <div class="ai-icon">📱</div>
           <div class="badge-new">📅 Planned</div>
           <h3>AI Social Ad Creator</h3>
-          <p>Generate Facebook, Instagram, and LinkedIn ad copy with AI prompts tailored for insurance and BFSI roles.</p>
+          <p>Generate ad copy for Facebook, Instagram, and LinkedIn tailored for BFSI roles.</p>
           <div class="price"><strong>₹0</strong> / planned</div>
           <a href="#" class="ai-link">Coming soon →</a>
         </div>
 
-        <!-- AI Writing Tools -->
         <div class="ai-card">
           <div class="ai-icon">✍️</div>
           <div class="badge-new">✨ Gemini API</div>
           <h3>AI Writing Tools</h3>
-          <p>Proofread, summarize, and adjust tone of any text. Professional, friendly, or concise — powered by Gemini.</p>
+          <p>Proofread, summarize, and adjust tone of any text. Professional, friendly, or concise.</p>
           <div class="price"><strong>₹0</strong> / with API key</div>
           <a href="tras.html" class="ai-link">Try Writing Tools →</a>
         </div>
 
-        <!-- Resume Optimizer -->
         <div class="ai-card">
           <div class="ai-icon">📄</div>
           <div class="badge-new">🔥 ATS Ready</div>
           <h3>Resume Optimizer</h3>
-          <p>Upload your resume and get instant feedback on ATS compatibility, keyword density, and section alignment.</p>
+          <p>Get instant feedback on ATS compatibility, keyword density, and section alignment.</p>
           <div class="price"><strong>₹0</strong> / in beta</div>
           <a href="tras.html" class="ai-link">Optimize Resume →</a>
         </div>
@@ -820,10 +740,10 @@
       </div>
       <div class="card">
         <table class="custom-table">
-          <tr><td class="font-semibold">What I deliver</td><td>40% efficiency gains via process automation & workflow optimization</td></tr>
-          <tr><td class="font-semibold">Domain expertise</td><td>Insurance Claims, Guidewire (GWCC), BFSI Operations</td></tr>
-          <tr><td class="font-semibold">Visa path</td><td>Kennismigrant (NL), Critical Skills (IE), EU Blue Card (LU) — 2-4 weeks</td></tr>
-          <tr><td class="font-semibold">Core strengths</td><td>Business Analysis, Process Improvement, Stakeholder Management, AI Workflow Design</td></tr>
+          <tr><td>What I deliver</td><td>40% efficiency gains via process automation & workflow optimization</td></tr>
+          <tr><td>Domain expertise</td><td>Insurance Claims, Guidewire (GWCC), BFSI Operations</td></tr>
+          <tr><td>Visa path</td><td>Kennismigrant (NL), Critical Skills (IE), EU Blue Card (LU) — 2-4 weeks</td></tr>
+          <tr><td>Core strengths</td><td>Business Analysis, Process Improvement, Stakeholder Management, AI Workflow Design</td></tr>
         </table>
       </div>
     </section>
@@ -874,15 +794,15 @@
         <div class="card">
           <i class="fas fa-chart-simple" style="font-size: 24px; margin-bottom: 16px; color: #0071e3;"></i>
           <h3>🎯 TRAS AI</h3>
-          <p style="margin: 12px 0;">Gemini-powered resume-to-job match analyzer. ATS compatibility, skill gap analysis, improvement suggestions.</p>
+          <p style="margin: 12px 0;">Gemini-powered resume-to-job match analyzer.</p>
           <div style="display: flex; gap: 8px; margin: 16px 0;"><span class="badge">Gemini API</span><span class="badge">HTML/CSS/JS</span></div>
           <a href="tras.html" style="color: #0071e3; font-weight: 500;">Try Tool →</a>
         </div>
         <div class="card">
           <i class="fas fa-search" style="font-size: 24px; margin-bottom: 16px; color: #0071e3;"></i>
           <h3>🇪🇺 EU Job Hunter AI</h3>
-          <p style="margin: 12px 0;">GitHub Actions workflow analyzing CV-JD fit for Luxembourg, Netherlands, and Ireland roles.</p>
-          <div style="display: flex; gap: 8px; margin: 16px 0;"><span class="badge">GitHub Actions</span><span class="badge">Python</span><span class="badge">Qwen-Max</span></div>
+          <p style="margin: 12px 0;">GitHub Actions workflow for EU roles.</p>
+          <div style="display: flex; gap: 8px; margin: 16px 0;"><span class="badge">GitHub Actions</span><span class="badge">Python</span></div>
           <a href="https://github.com/pkswaminathan001/Luxembourg" target="_blank" style="color: #0071e3; font-weight: 500;">View Repository →</a>
         </div>
       </div>
