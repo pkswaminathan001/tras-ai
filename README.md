@@ -97,8 +97,7 @@
 ---
 
 ## 📬 Let's Connect
-- 🔗<img width="738" height="237" alt="image" src="https://github.com/user-attachments/assets/c08aa072-48c3-47a5-bd34-9b9f5c1286a3" />
- [LinkedIn](https://www.linkedin.com/in/prswaminathan/)
+- 🔗 https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fpngimg.com%2Fimage%2F55036&ved=0CBYQjRxqFwoTCJiM0sKdh5UDFQAAAAAdAAAAABA4&opi=89978449[LinkedIn](https://www.linkedin.com/in/prswaminathan/)
 - 📧 prswaminathan001@gmail.com
 - 🌐 [Portfolio](https://pkswaminathan001.github.io/portfolio)
 - 🐙 [GitHub](https://github.com/pkswaminathan001)
