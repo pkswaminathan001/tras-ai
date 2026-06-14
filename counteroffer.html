@@ -3,146 +3,146 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TRAS AI - Resume Analyzer</title>
+  <title>AI Resume Bullet Points - TRAS AI</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- VERIFIED: No external AI libraries loaded -->
+  <!-- FIX 1: Removed Google Generative AI CDN -->
   <style>
     body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
     .card { background: white; border-radius: 1.5rem; padding: 2rem; max-width: 1000px; margin: 2rem auto; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
-    .btn { background: linear-gradient(135deg, #6366f1, #a855f7); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; border: none; width: 100%; transition: all 0.2s; }
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3); }
+    .btn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; border: none; width: 100%; transition: all 0.2s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3); }
     .btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
-    textarea { width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 0.5rem; min-height: 150px; font-family: monospace; font-size: 0.85rem; transition: border-color 0.2s; }
-    textarea:focus { outline: none; border-color: #6366f1; }
-    .result-card { background: #f8fafc; padding: 1.5rem; margin-top: 1rem; border-radius: 0.75rem; border-left: 4px solid #6366f1; }
-    .loading { display: inline-block; width: 20px; height: 20px; border: 3px solid #e0e7ff; border-top: 3px solid #6366f1; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 8px; }
+    textarea, input, select { width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 0.5rem; transition: border-color 0.2s; }
+    textarea:focus, input:focus, select:focus { outline: none; border-color: #667eea; }
+    .result-card { background: #f8fafc; padding: 1.5rem; margin-top: 1rem; border-radius: 0.75rem; border-left: 4px solid #10b981; }
+    .loading { display: inline-block; width: 20px; height: 20px; border: 3px solid #e0e7ff; border-top: 3px solid #667eea; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 8px; }
     @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-    .badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; margin: 0.25rem; }
-    .badge-green { background: #dcfce7; color: #166534; }
-    .badge-blue { background: #dbeafe; color: #1e40af; }
   </style>
 </head>
 <body class="p-4">
   <div class="card">
-    <!-- VERIFIED: API Key Input Field Completely Removed -->
+    <!-- FIX 2: Removed API Key Input Field Entirely -->
     <div class="text-center mb-8">
-      <h1 class="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">🤖 TRAS AI</h1>
-      <p class="text-gray-600 mt-2">Resume-to-Job Match Analyzer — Instant & Free</p>
+      <h1 class="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">✍️ AI Resume Bullet Points</h1>
+      <p class="text-gray-600 mt-2">Transform boring descriptions into powerful, action-oriented bullets — Instant & Free</p>
       <a href="./" class="text-sm text-indigo-600 hover:underline mt-2 inline-block">← Back to Portfolio</a>
+    </div>
+
+    <div class="mb-6">
+      <label class="block text-sm font-semibold mb-2 text-gray-700">📝 Your Work Experience (Paste what you have)</label>
+      <textarea id="experience" rows="6" placeholder="Example:&#10;I was responsible for analyzing data and creating reports. I worked with stakeholders to gather requirements. I helped improve processes."></textarea>
     </div>
 
     <div class="grid md:grid-cols-2 gap-6 mb-6">
       <div>
-        <label class="block text-sm font-semibold mb-2 text-gray-700">📄 Your Resume/CV</label>
-        <textarea id="resume" placeholder="Paste your resume here..."></textarea>
-        <button onclick="loadDemo('resume')" class="mt-2 text-xs text-indigo-600 hover:underline">Load Demo Resume</button>
+        <label class="block text-sm font-semibold mb-2 text-gray-700">🎯 Job Title</label>
+        <input type="text" id="jobTitle" value="Business Analyst" placeholder="Business Analyst">
       </div>
       <div>
-        <label class="block text-sm font-semibold mb-2 text-gray-700">💼 Job Description</label>
-        <textarea id="jobdesc" placeholder="Paste the job description here..."></textarea>
-        <button onclick="loadDemo('job')" class="mt-2 text-xs text-indigo-600 hover:underline">Load Demo JD</button>
+        <label class="block text-sm font-semibold mb-2 text-gray-700">📊 Tone</label>
+        <select id="tone">
+          <option value="professional">Professional & Formal</option>
+          <option value="impact">Impact-Focused (Results)</option>
+          <option value="technical">Technical & Data-Driven</option>
+        </select>
       </div>
     </div>
 
-    <button id="analyzeBtn" class="btn">🚀 Analyze Match</button>
-    <div id="results" class="hidden"></div>
+    <button id="rewriteBtn" class="btn">✨ Generate Powerful Bullet Points</button>
+    <div id="result" class="hidden"></div>
   </div>
 
   <script>
-    const analyzeBtn = document.getElementById('analyzeBtn');
-    const resultsDiv = document.getElementById('results');
-    
-    // Demo data for instant testing
-    function loadDemo(type) {
-      if (type === 'resume') {
-        document.getElementById('resume').value = "Business Analyst with MBA and 3+ years in insurance operations. Led AI workflow automation at HCL Technologies reducing manual claims processing by 40%. Expert in Guidewire, stakeholder management, Agile, and KPI tracking.";
-      } else {
-        document.getElementById('jobdesc').value = "Seeking Business Analyst for Insurance Operations in Luxembourg. Requires Guidewire experience, process improvement, stakeholder management, and Agile methodologies. Must track KPIs and drive automation.";
-      }
-    }
+    const rewriteBtn = document.getElementById('rewriteBtn');
+    const resultDiv = document.getElementById('result');
 
-    // VERIFIED: Pure Rule-Based Simulation. Zero External Calls.
-    analyzeBtn.addEventListener('click', () => {
-      const resume = document.getElementById('resume').value.toLowerCase();
-      const job = document.getElementById('jobdesc').value.toLowerCase();
-      
-      if (!resume || !job) { 
-        alert('Please paste both resume and job description (or use Load Demo buttons)'); 
+    // FIX 3: Replaced Real AI with Rule-Based Simulation
+    rewriteBtn.addEventListener('click', () => {
+      const experience = document.getElementById('experience').value.trim();
+      const jobTitle = document.getElementById('jobTitle').value.trim() || 'Business Analyst';
+      const tone = document.getElementById('tone').value;
+
+      if (!experience) { 
+        alert('Please paste your work experience'); 
         return; 
       }
 
-      // Simulate processing time
-      analyzeBtn.disabled = true;
-      analyzeBtn.innerHTML = '<span class="loading"></span> Analyzing...';
-      resultsDiv.classList.remove('hidden');
-      resultsDiv.innerHTML = '<div class="text-center py-8 text-gray-500"><div class="loading"></div> Evaluating match...</div>';
+      // Simulate processing time for UX
+      rewriteBtn.disabled = true;
+      rewriteBtn.innerHTML = '<span class="loading"></span> Rewriting Bullet Points...';
+      resultDiv.classList.remove('hidden');
+      resultDiv.innerHTML = '<div class="text-center py-8 text-gray-500"><div class="loading"></div> Transforming your experience...</div>';
 
       setTimeout(() => {
-        // Keyword detection logic
-        const keywords = ['guidewire', 'claims', 'insurance', 'bfsi', 'automation', 'stakeholder', 'agile', 'kpi', 'requirements'];
-        const matched = keywords.filter(k => resume.includes(k));
-        const score = Math.min(100, Math.round((matched.length / keywords.length) * 100) + 20);
+        const lowerExp = experience.toLowerCase();
         
-        // Dynamic recommendation
-        let recommendation = '';
-        if (score >= 80) recommendation = '✅ Strong Match — Interview Recommended';
-        else if (score >= 65) recommendation = '📞 Good Match — Consider Interview';
-        else if (score >= 50) recommendation = '📋 Potential — Needs Tailoring';
-        else recommendation = '⚠️ Gap Detected — Revise Resume';
+        // Dynamic Action Verbs based on Tone
+        let verbs = {};
+        if (tone === 'impact') {
+          verbs = { analyze: 'Spearheaded analysis of', report: 'Delivered comprehensive reporting on', stakeholder: 'Partnered with cross-functional stakeholders to', process: 'Optimized end-to-end processes resulting in' };
+        } else if (tone === 'technical') {
+          verbs = { analyze: 'Executed quantitative analysis using', report: 'Generated automated KPI dashboards tracking', stakeholder: 'Translated complex stakeholder requirements into', process: 'Re-engineered operational workflows leveraging' };
+        } else {
+          verbs = { analyze: 'Conducted detailed analysis of', report: 'Prepared strategic reports for', stakeholder: 'Collaborated with key stakeholders to', process: 'Streamlined business processes to enhance' };
+        }
 
-        // Generate strengths
-        const strengths = [];
-        if (resume.includes('guidewire')) strengths.push('✅ Guidewire experience');
-        if (resume.includes('insurance') || resume.includes('claims')) strengths.push('✅ Insurance domain expertise');
-        if (resume.includes('40%') || resume.includes('efficiency')) strengths.push('✅ Quantifiable impact');
-        if (resume.includes('stakeholder')) strengths.push('✅ Stakeholder management');
+        // Smart Keyword Mapping
+        const mappings = [
+          { kw: 'analyz', verb: verbs.analyze, suffix: 'data-driven insights to support decision-making' },
+          { kw: 'report', verb: verbs.report, suffix: 'senior leadership, improving visibility by 30%' },
+          { kw: 'stakeholder', verb: verbs.stakeholder, suffix: 'define project scope and deliverables' },
+          { kw: 'process', verb: verbs.process, suffix: 'operational efficiency and reducing cycle time' },
+          { kw: 'requirement', verb: 'Elicited and documented comprehensive business', suffix: 'requirements, ensuring alignment with strategic goals' },
+          { kw: 'improv', verb: 'Identified critical gaps in existing', suffix: 'workflows, implementing solutions that boosted productivity' }
+        ];
 
-        // Generate improvements
-        const improvements = [];
-        if (!resume.includes('stakeholder')) improvements.push('📌 Add stakeholder management examples');
-        if (!resume.includes('requirements')) improvements.push('📌 Highlight business requirements gathering');
-        if (score < 70) improvements.push('📌 Add more keywords from job description');
+        // Generate Bullets
+        const generatedBullets = [];
+        mappings.forEach(map => {
+          if (lowerExp.includes(map.kw)) {
+            generatedBullets.push(`${map.verb} ${map.suffix}`);
+          }
+        });
 
-        // Render premium dashboard results
-        resultsDiv.innerHTML = `
-          <div class="text-center mb-6 p-6 bg-gradient-to-b from-indigo-50 to-white rounded-2xl border border-indigo-100">
-            <div class="text-6xl font-bold text-indigo-600">${score}<span class="text-2xl text-gray-400">/100</span></div>
-            <div class="text-lg font-semibold mt-2 text-gray-700">${recommendation}</div>
-            <div class="flex justify-center gap-3 mt-3 flex-wrap">
-              <span class="badge badge-green">ATS Score: ${Math.max(60, score - 5)}</span>
-              <span class="badge badge-blue">Interview Probability: ${score >= 70 ? 'High' : 'Medium'}</span>
+        // Fallback generic bullets if no keywords matched
+        if (generatedBullets.length === 0) {
+          generatedBullets.push(
+            `Led cross-functional initiatives as a ${jobTitle}, driving measurable improvements in operational efficiency`,
+            `Synthesized complex datasets into actionable strategic recommendations for senior management`,
+            `Facilitated stakeholder workshops to define project requirements and validate solution designs`
+          );
+        }
+
+        // Render Results
+        resultDiv.innerHTML = `
+          <div class="result-card">
+            <strong class="text-green-700 block mb-3">✨ Your Optimized Bullet Points</strong>
+            <div class="space-y-3">
+              ${generatedBullets.map((b, i) => `
+                <div class="p-3 bg-white rounded border border-gray-200 flex items-start gap-3 shadow-sm">
+                  <span class="text-indigo-600 font-bold text-lg shrink-0">${i+1}.</span> 
+                  <span class="text-gray-800 leading-relaxed">${b}</span>
+                </div>
+              `).join('')}
             </div>
+            <button onclick="copyBullets()" class="mt-4 px-4 py-2 bg-indigo-50 text-indigo-700 rounded-lg text-sm font-medium hover:bg-indigo-100 transition-colors">📋 Copy All Bullets</button>
           </div>
-          
-          <div class="grid md:grid-cols-2 gap-4">
-            <div class="result-card">
-              <strong class="text-green-700 block mb-2">✅ Strengths</strong>
-              <ul class="text-sm text-gray-700 space-y-1">
-                ${strengths.length ? strengths.map(s => `<li>${s}</li>`).join('') : '<li>Add more relevant keywords</li>'}
-              </ul>
-            </div>
-            <div class="result-card" style="border-left-color: #f59e0b;">
-              <strong class="text-amber-700 block mb-2">📌 Improvements</strong>
-              <ul class="text-sm text-gray-700 space-y-1">
-                ${improvements.length ? improvements.map(i => `<li>${i}</li>`).join('') : '<li>Great profile — ready to apply!</li>'}
-              </ul>
-            </div>
-          </div>
-          
-          <div class="result-card mt-4">
-            <strong class="text-indigo-700 block mb-2">🔑 Keywords Detected</strong>
-            <div class="flex flex-wrap gap-2">
-              ${matched.length ? matched.map(k => `<span class="badge badge-blue">${k}</span>`).join('') : '<span class="text-gray-500 text-sm">None yet</span>'}
-            </div>
-          </div>
-          
-          <div class="text-center text-xs text-gray-500 mt-4">💡 Tip: Use this analysis to tailor your resume before applying.</div>
+          <div class="text-center text-xs text-gray-500 mt-4">💡 Tip: Replace weak descriptions on your resume with these high-impact bullets!</div>
         `;
 
-        analyzeBtn.disabled = false;
-        analyzeBtn.innerHTML = ' Analyze Match';
+        window.bulletsText = generatedBullets.join('\n');
+        rewriteBtn.disabled = false;
+        rewriteBtn.innerHTML = '✨ Generate Powerful Bullet Points';
       }, 1000);
     });
+
+    window.copyBullets = () => { 
+      navigator.clipboard.writeText(window.bulletsText).then(() => {
+        alert('✅ Copied to clipboard!');
+      }).catch(() => {
+        alert('❌ Failed to copy. Please select and copy manually.');
+      });
+    };
   </script>
 </body>
 </html>
