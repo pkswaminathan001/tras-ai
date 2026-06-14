@@ -4,24 +4,24 @@
 > 🇱🇺🇳🇱🇮🇪 Targeting AI/ML, AI Operations & Business Analysis roles in Luxembourg • Netherlands • Ireland  
 > **🇪🇺 Visa Status:** EU Blue Card (LU) / HSM (NL) / Critical Skills (IE) eligible — employer applies online (~4 weeks)
 
-[![EU Focus](https://img.shields.io/badge/EU-BFSI_Ready-blue)](https://pkswaminathan001.github.io/portfolio)
-[![Live Demo](https://img.shields.io/badge/Demo-Portfolio-success)](https://pkswaminathan001.github.io/portfolio)
-[![Open to Work](https://img.shields.io/badge/Open_to_Work-EU-green)](https://linkedin.com/in/pkswaminathan)
+[![EU Focus](https://img.shields.io/badge/EU-BFSI_Ready-blue)](https://pkswaminathan001.github.io/tras-ai/)
+[![Live Demo](https://img.shields.io/badge/Demo-Portfolio-success)](https://pkswaminathan001.github.io/tras-ai/)
+[![Open to Work](https://img.shields.io/badge/Open_to_Work-EU-green)](https://linkedin.com/in/prswaminathan)
 
 ---
 
 ## 🎯 For Recruiters & Hiring Managers
 
-| Question     | Answer |
-|------------------------|---------|
+| Question | Answer |
+|----------|--------|
 | **What does this do?** | Auto-analyzes CV fit using GitHub Actions + Multi-LLM orchestration (GPT-4, Claude, Gemini, Qwen-Max) |
 | **LLM experience?** | 2+ years production — 40% processing reduction, 99.2% accuracy across 6,000+ transactions at **USAA (via HCL Technologies)** |
 | **Domain expertise?** | Insurance Operations (Guidewire Claims Center, USAA), BFSI, KYC/AML, claims processing |
-| **Live demo?** | ✅ [Portfolio](https://pkswaminathan001.github.io/portfolio) • [TRAS v2.0 Demo](https://pkswaminathan001.github.io/tras-ai/) |
+| **Live demo?** | ✅ [Portfolio](https://pkswaminathan001.github.io/tras-ai/) • [TRAS v2.0 Demo](https://pkswaminathan001.github.io/tras-ai/) • [Projects](https://pkswaminathan001.github.io/tras-ai/#projects) |
 | **Can I test it?** | Yes! Open a GitHub Issue with CV+JD → multi-LLM workflow auto-analyzes |
 | **Hire me for?** | AI/ML Engineer, Business Analyst, Prompt Engineer, Insurance Operations, LLM Evaluation, BFSI Automation |
 
-📬 **Contact**: pkswaminathan001@gmail.com • [LinkedIn](https://linkedin.com/in/pkswaminathan)
+📬 **Contact**: prswaminathan001@gmail.com • [LinkedIn](https://linkedin.com/in/prswaminathan)
 
 ---
 
@@ -73,7 +73,7 @@
 |------|-------------|----------|
 | **AI Workflow & Automation Lead** | HCL Technologies (USAA Project) | Architected production LLM pipeline; 40% processing reduction; 99.2% accuracy across 6,000+ claims |
 | **Process Associate — Claims** | HCL Technologies (USAA Project) | Guidewire claims processing, data validation, KPI tracking & reporting |
-| **Talent Acquisition (HR Intern)**| Linux Laboratory Pvt Ltd | 98% on-time BGV delivery across 300+ candidates; data-driven shortlisting |
+| **Talent Acquisition (HR Intern)** | Linux Laboratory Pvt Ltd | 98% on-time BGV delivery across 300+ candidates; data-driven shortlisting |
 
 ---
 
@@ -97,9 +97,10 @@
 ---
 
 ## 📬 Let's Connect
-- 🔗 (https://www.linkedin.com/in/prswaminathan/)
+- 🔗 [LinkedIn](https://linkedin.com/in/prswaminathan)
 - 📧 prswaminathan001@gmail.com
-- 🌐 [Portfolio]https://pkswaminathan001.github.io/tras-ai/
+- 🌐 [Portfolio](https://pkswaminathan001.github.io/tras-ai/)
+- 🎯 [My AI Projects](https://pkswaminathan001.github.io/tras-ai/#projects)
 - 🐙 [GitHub](https://github.com/pkswaminathan001)
 
 ---
