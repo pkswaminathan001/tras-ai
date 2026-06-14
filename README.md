@@ -13,7 +13,7 @@
 ## 🎯 For Recruiters & Hiring Managers
 
 | Question | Answer |
-|-------------|---------|
+|------------------------|---------|
 | **What does this do?** | Auto-analyzes CV fit using GitHub Actions + Multi-LLM orchestration (GPT-4, Claude, Gemini, Qwen-Max) |
 | **LLM experience?** | 2+ years production — 40% processing reduction, 99.2% accuracy across 6,000+ transactions at **USAA (via HCL Technologies)** |
 | **Domain expertise?** | Insurance Operations (Guidewire Claims Center, USAA), BFSI, KYC/AML, claims processing |
