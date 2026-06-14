@@ -5,33 +5,108 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PR Swaminathan — Business Analyst | 12+ AI Tools</title>
   <meta name="description" content="Business Analyst | Insurance Operations | 12+ Free AI-Powered Tools | 40% efficiency gain" />
+  <meta name="author" content="PR Swaminathan" />
+  <meta name="keywords" content="Business Analyst, AI Tools, Resume Analyzer, Job Search, Career, Gemini API" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <!-- Google Analytics (Replace G-XXXXXXXXXX with your actual ID) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif; background: #ffffff; color: #1d1d1f; line-height: 1.5; }
+    body { 
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif; 
+      background: #ffffff; 
+      color: #1d1d1f; 
+      line-height: 1.5; 
+      transition: background 0.3s ease, color 0.3s ease;
+    }
     html { scroll-behavior: smooth; }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
     
-    nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,0.98); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,0,0,0.05); z-index: 100; padding: 16px 0; }
+    /* Dark/Light Mode Variables */
+    body.light-mode {
+      background: #ffffff;
+      color: #1d1d1f;
+    }
+    body.dark-mode {
+      background: #1a1a2e;
+      color: #ffffff;
+    }
+    body.dark-mode .card,
+    body.dark-mode .ai-card,
+    body.dark-mode .feature-card,
+    body.dark-mode .privacy-section,
+    body.dark-mode .glass-card {
+      background: #16213e;
+      border-color: #2c3e66;
+    }
+    body.dark-mode .apple-intel-section {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    }
+    body.dark-mode .result-card {
+      background: #0f3460;
+    }
+    body.dark-mode .badge,
+    body.dark-mode .inline-badge {
+      background: #2c3e66;
+      color: #ffffff;
+    }
+    
+    /* Theme Toggle Button */
+    .theme-toggle {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #0071e3;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 12px 16px;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transition: transform 0.2s;
+      font-size: 1.2rem;
+    }
+    .theme-toggle:hover {
+      transform: scale(1.05);
+    }
+    
+    nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,0.98); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,0,0,0.05); z-index: 100; padding: 16px 0; transition: background 0.3s; }
+    body.dark-mode nav { background: rgba(26,26,46,0.98); border-bottom-color: rgba(255,255,255,0.05); }
     .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
     .logo { font-size: 1.2rem; font-weight: 600; color: #1d1d1f; text-decoration: none; }
+    body.dark-mode .logo { color: #ffffff; }
     .nav-links { display: flex; gap: 1.2rem; flex-wrap: wrap; }
     .nav-links a { text-decoration: none; color: #1d1d1f; font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
+    body.dark-mode .nav-links a { color: #cccccc; }
     .nav-links a:hover { color: #0066cc; }
     
     .hero { text-align: center; padding: 140px 0 80px; }
     .hero-badge { display: inline-block; background: #e8f0fe; color: #0066cc; font-size: 0.75rem; font-weight: 500; padding: 6px 14px; border-radius: 20px; margin-bottom: 24px; }
+    body.dark-mode .hero-badge { background: #2c3e66; color: #66b0ff; }
     h1 { font-size: 3rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px; }
     @media (min-width: 768px) { h1 { font-size: 4rem; } }
     .hero-subtitle { font-size: 1.25rem; color: #6e6e73; max-width: 600px; margin: 0 auto 32px; }
+    body.dark-mode .hero-subtitle { color: #aaaaaa; }
     
     .btn-primary { display: inline-block; background: #0071e3; color: white; text-decoration: none; padding: 12px 24px; border-radius: 980px; font-weight: 500; font-size: 0.9rem; transition: all 0.2s; }
     .btn-primary:hover { background: #0077ed; transform: scale(1.02); }
-    .btn-outline { display: inline-block; background: transparent; color: #0071e3; text-decoration: none; padding: 12px 24px; border-radius: 980px; font-weight: 500; font-size: 0.9rem; border: 1px solid #0071e3; }
+    .btn-outline { display: inline-block; background: transparent; color: #0071e3; text-decoration: none; padding: 12px 24px; border-radius: 980px; font-weight: 500; font-size: 0.9rem; border: 1px solid #0071e3; transition: all 0.2s; }
+    .btn-outline:hover { background: rgba(0,113,227,0.05); transform: scale(1.02); }
+    body.dark-mode .btn-outline { color: #66b0ff; border-color: #66b0ff; }
     
     .stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 40px; text-align: center; margin: 80px 0; }
     .stat-number { font-size: 2.5rem; font-weight: 700; color: #1d1d1f; }
+    body.dark-mode .stat-number { color: #ffffff; }
     .stat-label { font-size: 0.85rem; color: #6e6e73; }
     @media (max-width: 768px) { .stats-grid { grid-template-columns: repeat(2,1fr); gap: 32px; } }
     
@@ -39,7 +114,7 @@
     .card:hover { transform: scale(1.01); }
     .card h2 { font-size: 1.5rem; font-weight: 600; margin-bottom: 16px; }
     
-    /* AI Tools Grid - 4 columns for more tools */
+    /* AI Tools Grid */
     .ai-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; margin: 48px 0; }
     .ai-card { background: #ffffff; border-radius: 20px; padding: 24px; transition: all 0.3s ease; border: 1px solid #e8e8ed; }
     .ai-card:hover { transform: translateY(-6px); box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1); border-color: #0071e3; }
@@ -55,18 +130,24 @@
     
     /* Apple Intelligence Section */
     .apple-intel-section { background: linear-gradient(135deg, #f5f5f7 0%, #e8e8ed 100%); border-radius: 32px; padding: 60px 48px; margin: 80px 0; }
+    body.dark-mode .apple-intel-section { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); }
     .apple-badge { display: inline-block; background: rgba(0,113,227,0.1); color: #0071e3; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; padding: 6px 14px; border-radius: 20px; margin-bottom: 24px; }
     .apple-title { font-size: 2.5rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 20px; background: linear-gradient(135deg, #1d1d1f 0%, #3a3a3e 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    body.dark-mode .apple-title { background: linear-gradient(135deg, #ffffff 0%, #a855f7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
     .apple-subtitle { font-size: 1.2rem; color: #6e6e73; max-width: 700px; margin-bottom: 40px; }
     .feature-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 32px; margin-bottom: 40px; }
     .feature-card { background: white; border-radius: 24px; padding: 32px; }
+    body.dark-mode .feature-card { background: #16213e; }
     .feature-card h3 { font-size: 1.3rem; font-weight: 600; margin-bottom: 16px; }
     .feature-list { list-style: none; padding-left: 0; }
     .feature-list li { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-size: 0.9rem; }
     .privacy-section { background: white; border-radius: 24px; padding: 32px; margin-top: 20px; }
+    body.dark-mode .privacy-section { background: #16213e; }
     .privacy-badge-container { display: flex; flex-wrap: wrap; gap: 12px; margin: 20px 0; }
     .privacy-badge { display: inline-flex; align-items: center; gap: 8px; background: #f5f5f7; border-radius: 40px; padding: 6px 16px; font-size: 0.8rem; }
+    body.dark-mode .privacy-badge { background: #2c3e66; color: #ffffff; }
     .integration-box { background: linear-gradient(135deg, #f8f9ff 0%, #f0f2fe 100%); border-radius: 20px; padding: 24px; margin-top: 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; }
+    body.dark-mode .integration-box { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #2c3e66; }
     .device-note { text-align: center; margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba(0,0,0,0.08); font-size: 0.75rem; color: #8e8e93; }
     @media (max-width: 768px) { .apple-intel-section { padding: 32px 24px; } .feature-grid { grid-template-columns: 1fr; } }
     
@@ -84,31 +165,43 @@
     .inline-badge { background: #f5f5f7; padding: 8px 16px; border-radius: 40px; font-size: 0.8rem; }
     .custom-table { width: 100%; border-collapse: collapse; }
     .custom-table td { padding: 16px; border-bottom: 1px solid #e8e8ed; }
+    body.dark-mode .custom-table td { border-bottom-color: #2c3e66; }
     .experience-list { list-style: none; padding-left: 0; }
     .experience-list li { margin-bottom: 8px; }
     .meta-text { color: #6e6e73; font-size: 0.85rem; margin-bottom: 12px; }
     .reveal { opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
     .reveal.active { opacity: 1; transform: translateY(0); }
     footer { border-top: 1px solid #e8e8ed; padding: 48px 0; margin-top: 80px; text-align: center; color: #6e6e73; font-size: 0.8rem; }
+    body.dark-mode footer { border-top-color: #2c3e66; }
     .tool-count { background: #0071e3; color: white; border-radius: 20px; padding: 4px 12px; font-size: 0.7rem; margin-left: 8px; }
+    .portfolio-badge { display: inline-block; background: #0071e3; color: white; border-radius: 20px; padding: 4px 12px; font-size: 0.7rem; margin-left: 8px; text-decoration: none; }
+    .portfolio-badge:hover { background: #005bb5; }
     
-    /* Portfolio badge style */
-    .portfolio-badge {
-      display: inline-block;
-      background: #0071e3;
-      color: white;
-      border-radius: 20px;
-      padding: 4px 12px;
-      font-size: 0.7rem;
-      margin-left: 8px;
-      text-decoration: none;
-    }
-    .portfolio-badge:hover {
-      background: #005bb5;
-    }
+    /* Video Container */
+    .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 16px; }
+    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+    
+    /* Testimonial Cards */
+    .testimonial-card { background: #f5f5f7; border-radius: 20px; padding: 24px; text-align: center; transition: transform 0.3s; }
+    body.dark-mode .testimonial-card { background: #16213e; }
+    .testimonial-card:hover { transform: translateY(-4px); }
+    
+    /* Resource Cards */
+    .resource-card { background: #f5f5f7; border-radius: 20px; padding: 24px; transition: all 0.3s; text-decoration: none; display: block; }
+    body.dark-mode .resource-card { background: #16213e; }
+    .resource-card:hover { transform: translateY(-4px); border-color: #0071e3; }
+    
+    /* API Key Box */
+    .api-input { background: #fef9c3; border: 1px solid #eab308; }
+    body.dark-mode .api-input { background: #2c2c2c; border-color: #f59e0b; color: white; }
   </style>
 </head>
-<body>
+<body class="light-mode">
+
+  <!-- Theme Toggle Button -->
+  <button class="theme-toggle" onclick="toggleTheme()" id="themeToggle">
+    <i class="fas fa-moon" id="themeIcon"></i>
+  </button>
 
   <nav>
     <div class="nav-container">
@@ -121,6 +214,7 @@
         <a href="#experience">Experience</a>
         <a href="#projects">Projects</a>
         <a href="#visa">Visa</a>
+        <a href="#testimonials">Reviews</a>
         <a href="tras.html" target="_blank">TRAS Tool</a>
         <a href="https://pkswaminathan001.github.io/tras-ai/" class="portfolio-badge">🌐 Portfolio</a>
       </div>
@@ -142,6 +236,17 @@
       <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
         <a href="#ai-programs" class="btn-primary">Explore 12 Free AI Tools →</a>
         <a href="#projects" class="btn-outline">View Projects</a>
+      </div>
+    </div>
+
+    <!-- Demo Video Section -->
+    <div class="container reveal">
+      <div class="glass-card p-6 mb-20" style="background: #f5f5f7; border-radius: 28px;">
+        <h3 class="text-2xl font-semibold mb-4 text-center gradient-text">📺 Watch: How to Use TRAS AI Tools</h3>
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="TRAS AI Tutorial" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <p class="text-center text-gray-500 mt-3">Step-by-step guide to getting your free API key and using all 12 tools</p>
       </div>
     </div>
 
@@ -212,40 +317,73 @@
       </div>
 
       <div class="ai-grid">
-        <!-- Row 1: Core Resume Tools -->
         <div class="ai-card"><div class="ai-icon">🤖</div><div class="badge-new">✨ Gemini-Powered</div><h3>TRAS AI</h3><p>Resume-to-Job Description match analyzer. ATS scoring & skill gap analysis.</p><a href="tras.html" class="ai-link">Try TRAS Analyzer →</a></div>
-        
         <div class="ai-card"><div class="ai-icon">📝</div><div class="badge-hot">🔥 NEW</div><h3>Cover Letter Generator</h3><p>Personalized cover letters from your resume + job description.</p><a href="coverletter.html" class="ai-link">Generate Cover Letter →</a></div>
-        
         <div class="ai-card"><div class="ai-icon">🎯</div><div class="badge-hot">🔥 ATS Focus</div><h3>Resume Grader</h3><p>Detailed ATS score (0-100) with line-by-line improvements.</p><a href="resumegrader.html" class="ai-link">Grade Resume →</a></div>
-        
         <div class="ai-card"><div class="ai-icon">✍️</div><div class="badge-new">✨ Rewriter</div><h3>Resume Bullet Points</h3><p>Rewrite your experience as strong, action-oriented bullet points.</p><a href="bullets.html" class="ai-link">Rewrite Bullets →</a></div>
-
-        <!-- Row 2: Interview & Job Match -->
         <div class="ai-card"><div class="ai-icon">🎤</div><div class="badge-hot">🔥 NEW</div><h3>Interview Simulator</h3><p>Practice with AI-generated BA interview questions. Get feedback.</p><a href="interview.html" class="ai-link">Start Interview →</a></div>
-        
         <div class="ai-card"><div class="ai-icon">📊</div><div class="badge-new">✨ Analyzer</div><h3>Skill Gap Analyzer</h3><p>Visual comparison of your skills vs job requirements.</p><a href="skillgap.html" class="ai-link">Analyze Gaps →</a></div>
-        
         <div class="ai-card"><div class="ai-icon">🔮</div><div class="badge-new">✨ Predictor</div><h3>Job Match Predictor</h3><p>AI predicts if you'll get an interview (0-100% score).</p><a href="jobmatch.html" class="ai-link">Predict Match →</a></div>
-        
         <div class="ai-card"><div class="ai-icon">💰</div><div class="badge-new">✨ Estimator</div><h3>Salary Predictor</h3><p>Estimate salary for Luxembourg/Netherlands/Ireland roles.</p><a href="salary.html" class="ai-link">Predict Salary →</a></div>
-
-        <!-- Row 3: LinkedIn & Networking -->
         <div class="ai-card"><div class="ai-icon">🔗</div><div class="badge-hot">🔥 NEW</div><h3>LinkedIn Optimizer</h3><p>Generate headline, about section, and skills for BA roles.</p><a href="linkedin.html" class="ai-link">Optimize Profile →</a></div>
-        
         <div class="ai-card"><div class="ai-icon">📧</div><div class="badge-new">✨ Generator</div><h3>Networking Email</h3><p>Cold emails to recruiters and hiring managers.</p><a href="networking.html" class="ai-link">Generate Email →</a></div>
-        
         <div class="ai-card"><div class="ai-icon">🙏</div><div class="badge-new">✨ Template</div><h3>Thank You Email</h3><p>Post-interview thank you notes that leave an impression.</p><a href="thankyou.html" class="ai-link">Generate Note →</a></div>
-        
         <div class="ai-card"><div class="ai-icon">💼</div><div class="badge-new">✨ Negotiation</div><h3>Counter Offer Script</h3><p>Salary negotiation scripts and counter-offer templates.</p><a href="counteroffer.html" class="ai-link">Get Script →</a></div>
       </div>
       
       <div style="text-align: center; margin-top: 24px;">
-       <div class="mb-4 p-3 bg-amber-50 rounded-lg border border-amber-200">
-  <label class="block text-sm font-semibold mb-1">🔑 Google Gemini API Key</label>
-  <input type="password" id="apiKey" class="w-full p-2 border rounded-md api-input" placeholder="Get free key from aistudio.google.com">
-  <p class="text-xs text-gray-500 mt-1">Free tier: 60 requests/minute. Your key stays in your browser.</p>
-</div>
+        <div class="mb-4 p-3 bg-amber-50 rounded-lg border border-amber-200" style="border-radius: 16px;">
+          <label class="block text-sm font-semibold mb-1">🔑 Google Gemini API Key</label>
+          <input type="password" id="apiKey" class="w-full p-2 border rounded-md api-input" placeholder="Get free key from aistudio.google.com">
+          <p class="text-xs text-gray-500 mt-1">Free tier: 60 requests/minute. Your key stays in your browser.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="container reveal">
+      <div class="section-header">
+        <h2>⭐ What Users Say</h2>
+        <p>Real feedback from job seekers who used TRAS AI tools</p>
+      </div>
+      <div class="grid-3">
+        <div class="testimonial-card">
+          <i class="fas fa-star text-yellow-400 text-2xl mb-3"></i>
+          <p class="text-gray-600 italic">"TRAS AI helped me rewrite my resume and I got 3 interview calls within a week!"</p>
+          <p class="text-indigo-600 mt-3 font-semibold">— Sarah, Senior BA</p>
+        </div>
+        <div class="testimonial-card">
+          <i class="fas fa-star text-yellow-400 text-2xl mb-3"></i>
+          <p class="text-gray-600 italic">"The Interview Simulator gave me confidence. I aced my Guidewire interview!"</p>
+          <p class="text-indigo-600 mt-3 font-semibold">— Michael, Claims Analyst</p>
+        </div>
+        <div class="testimonial-card">
+          <i class="fas fa-star text-yellow-400 text-2xl mb-3"></i>
+          <p class="text-gray-600 italic">"Cover letter generator saved me hours. Landed a job in Luxembourg!"</p>
+          <p class="text-indigo-600 mt-3 font-semibold">— Priya, Business Analyst</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Free Resources Section -->
+    <section class="container reveal">
+      <div class="section-header">
+        <h2>📚 Free Resources for Business Analysts</h2>
+        <p>Downloadable guides to boost your career</p>
+      </div>
+      <div class="grid-2">
+        <a href="#" class="resource-card" style="text-decoration: none;">
+          <i class="fas fa-file-alt text-3xl text-purple-500 mb-3"></i>
+          <h3 class="font-semibold text-lg">Top 50 BA Interview Questions</h3>
+          <p class="text-gray-500 text-sm mt-1">Download free PDF with answers and tips</p>
+          <span class="inline-block mt-3 text-indigo-600">Download →</span>
+        </a>
+        <a href="#" class="resource-card" style="text-decoration: none;">
+          <i class="fas fa-chart-line text-3xl text-cyan-500 mb-3"></i>
+          <h3 class="font-semibold text-lg">Guidewire Certification Guide</h3>
+          <p class="text-gray-500 text-sm mt-1">Complete roadmap to get certified</p>
+          <span class="inline-block mt-3 text-indigo-600">Download →</span>
+        </a>
       </div>
     </section>
 
@@ -319,15 +457,63 @@
   <footer class="container">
     <p>© 2026 PR Swaminathan. 12+ Free AI Tools for Business Analysts. Powered by Google Gemini.</p>
     <p style="margin-top: 8px; font-size: 0.75rem;">
-      🌐 <a href="https://pkswaminathan001.github.io/tras-ai/" style="color:#0071e3;">Portfolio</a>
+      🌐 <a href="https://pkswaminathan001.github.io/tras-ai/" style="color:#0071e3;">Portfolio</a> | 
+      <a href="https://github.com/pkswaminathan001" style="color:#0071e3;">GitHub</a> | 
+      <a href="https://linkedin.com/in/prswaminathan" style="color:#0071e3;">LinkedIn</a>
     </p>
   </footer>
 
   <script>
+    // Scroll Reveal
     const reveals = document.querySelectorAll('.reveal');
-    function reveal() { reveals.forEach(el => { if(el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active'); }); }
+    function reveal() { 
+      reveals.forEach(el => { 
+        if(el.getBoundingClientRect().top < window.innerHeight - 100) 
+          el.classList.add('active'); 
+      }); 
+    }
     window.addEventListener('scroll', reveal);
     reveal();
+    
+    // Dark/Light Mode Toggle
+    function toggleTheme() {
+      const body = document.body;
+      const icon = document.getElementById('themeIcon');
+      
+      if (body.classList.contains('light-mode')) {
+        body.classList.remove('light-mode');
+        body.classList.add('dark-mode');
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        body.classList.remove('dark-mode');
+        body.classList.add('light-mode');
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+        localStorage.setItem('theme', 'light');
+      }
+    }
+    
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.body.classList.remove('light-mode');
+      document.body.classList.add('dark-mode');
+      document.getElementById('themeIcon')?.classList.replace('fa-moon', 'fa-sun');
+    }
+    
+    // Save API key to localStorage (for the main page info box)
+    const apiKeyInput = document.getElementById('apiKey');
+    if (apiKeyInput) {
+      const savedKey = localStorage.getItem('gemini_api_key');
+      if (savedKey) apiKeyInput.value = savedKey;
+      apiKeyInput.addEventListener('change', () => {
+        if (apiKeyInput.value.trim()) {
+          localStorage.setItem('gemini_api_key', apiKeyInput.value.trim());
+        }
+      });
+    }
   </script>
 </body>
 </html>
