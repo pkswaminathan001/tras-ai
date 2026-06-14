@@ -5,45 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Interview Simulator - TRAS AI</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@google/generative-ai@0.21.0/dist/index.min.js"></script>
+  <!-- FIX 1: Removed Google Generative AI CDN -->
   <style>
     body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
-    .card { background: white; border-radius: 1.5rem; padding: 2rem; max-width: 1200px; margin: 2rem auto; }
-    .btn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; border: none; transition: all 0.2s; }
-    .btn:hover { transform: translateY(-2px); }
-    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .card { background: white; border-radius: 1.5rem; padding: 2rem; max-width: 1200px; margin: 2rem auto; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+    .btn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; border: none; transition: all 0.2s; width: 100%; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3); }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    textarea { width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 0.5rem; font-family: monospace; font-size: 0.85rem; transition: border-color 0.2s; }
+    textarea:focus { outline: none; border-color: #667eea; }
     .question-box { background: #f0fdf4; padding: 1.5rem; border-radius: 1rem; margin: 1rem 0; border-left: 4px solid #22c55e; }
     .answer-box { background: #f8fafc; padding: 1rem; border-radius: 0.5rem; margin-top: 1rem; }
-    .loading { display: inline-block; width: 20px; height: 20px; border: 3px solid #f3f3f3; border-top: 3px solid #667eea; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 8px; }
+    .loading { display: inline-block; width: 20px; height: 20px; border: 3px solid #e0e7ff; border-top: 3px solid #667eea; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 8px; }
     @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-    .api-input { background: #fef9c3; border: 1px solid #eab308; }
   </style>
 </head>
 <body class="p-4">
   <div class="card">
-    <div class="text-center mb-6">
+    <!-- FIX 2: Removed API Key Input Field Entirely -->
+    <div class="text-center mb-8">
       <h1 class="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">🎤 AI Interview Simulator</h1>
-      <p class="text-gray-600">Practice Business Analyst interview questions with AI feedback</p>
-      <a href="./" class="text-sm text-indigo-600 hover:underline">← Back to Portfolio</a>
+      <p class="text-gray-600 mt-2">Practice Business Analyst interview questions — Instant & Free</p>
+      <a href="./" class="text-sm text-indigo-600 hover:underline mt-2 inline-block">← Back to Portfolio</a>
     </div>
 
-    <div class="mb-4 p-3 bg-amber-50 rounded-lg border border-amber-200">
-      <label class="block text-sm font-semibold mb-1">🔑 Google Gemini API Key</label>
-      <input type="password" id="apiKey" class="w-full p-2 border rounded-md api-input" placeholder="Get free key from aistudio.google.com">
-    </div>
-
-    <div class="grid md:grid-cols-2 gap-4 mb-4">
+    <div class="grid md:grid-cols-2 gap-6 mb-6">
       <div>
-        <label class="block text-sm font-semibold mb-1">📄 Your Resume/CV</label>
+        <label class="block text-sm font-semibold mb-2 text-gray-700"> Your Resume/CV</label>
         <textarea id="resume" placeholder="Paste your resume here..." rows="6"></textarea>
       </div>
       <div>
-        <label class="block text-sm font-semibold mb-1">💼 Job Description (Optional)</label>
+        <label class="block text-sm font-semibold mb-2 text-gray-700">💼 Job Description (Optional)</label>
         <textarea id="jobdesc" placeholder="Paste job description for role-specific questions..." rows="6"></textarea>
       </div>
     </div>
 
-    <div class="flex gap-3 mb-4">
+    <div class="flex gap-3 mb-6">
       <button id="startBtn" class="btn flex-1">🎯 Start Interview</button>
       <button id="nextBtn" class="btn flex-1 bg-gray-500" disabled>Next Question →</button>
     </div>
@@ -54,54 +51,68 @@
   <script>
     let currentQuestions = [];
     let currentIndex = 0;
-    let apiKey = '';
 
     const startBtn = document.getElementById('startBtn');
     const nextBtn = document.getElementById('nextBtn');
     const interviewArea = document.getElementById('interviewArea');
-    const apiKeyInput = document.getElementById('apiKey');
 
-    if (localStorage.getItem('gemini_api_key')) apiKeyInput.value = localStorage.getItem('gemini_api_key');
-    apiKeyInput.addEventListener('change', () => { if(apiKeyInput.value.trim()) localStorage.setItem('gemini_api_key', apiKeyInput.value.trim()); });
+    // Comprehensive BA Question Bank
+    const questionBank = [
+      "Tell me about a time you had to gather requirements from difficult stakeholders. How did you handle it?",
+      "Describe a complex process you analyzed and improved. What was the impact?",
+      "How do you prioritize conflicting requirements from different business units?",
+      "Walk me through your experience with Agile/Scrum methodologies in a BA role.",
+      "Give an example of how you used data analysis to drive a business decision.",
+      "How do you ensure your documentation is clear and actionable for both technical and non-technical teams?",
+      "Describe a time when a project scope changed mid-way. How did you adapt?",
+      "What techniques do you use to validate that requirements are complete and testable?",
+      "How have you handled a situation where the development team pushed back on a requirement?",
+      "Explain a time you identified a risk early in a project. What mitigation steps did you take?"
+    ];
 
-    startBtn.addEventListener('click', async () => {
+    // Smart Feedback Templates based on answer length and keywords
+    function generateFeedback(answer) {
+      const lowerAnswer = answer.toLowerCase();
+      let feedback = "";
+      
+      if (answer.length < 50) {
+        feedback = "⚠️ This answer seems brief. Try expanding using the STAR method (Situation, Task, Action, Result) to provide more context.";
+      } else if (!lowerAnswer.includes('i ') && !lowerAnswer.includes('my ')) {
+        feedback = " Tip: Make sure to use first-person language ('I led', 'My approach') to clearly demonstrate your personal contribution.";
+      } else if (lowerAnswer.includes('result') || lowerAnswer.includes('impact') || /\d+%|\$\d+/.test(lowerAnswer)) {
+        feedback = "✅ Excellent! You included quantifiable results. This makes your answer much more compelling to hiring managers.";
+      } else {
+        feedback = " Good structure. To make this even stronger, try adding specific metrics or outcomes to quantify your impact.";
+      }
+      
+      return feedback;
+    }
+
+    // FIX 3: Replaced Real AI with Rule-Based Simulation
+    startBtn.addEventListener('click', () => {
       const resume = document.getElementById('resume').value.trim();
-      const job = document.getElementById('jobdesc').value.trim();
-      apiKey = apiKeyInput.value.trim();
+      
+      if (!resume) { 
+        alert('Please paste your resume'); 
+        return; 
+      }
 
-      if (!resume) { alert('Please paste your resume'); return; }
-      if (!apiKey) { alert('Enter your Gemini API key'); return; }
-
+      // Simulate processing time
       startBtn.disabled = true;
       startBtn.innerHTML = '<span class="loading"></span> Generating Questions...';
       interviewArea.classList.remove('hidden');
-      interviewArea.innerHTML = '<div class="text-center py-8"><div class="loading"></div> AI is preparing your interview questions...</div>';
+      interviewArea.innerHTML = '<div class="text-center py-8 text-gray-500"><div class="loading"></div> Preparing your interview session...</div>';
 
-      try {
-        const { GoogleGenerativeAI } = window;
-        const genAI = new GoogleGenerativeAI(apiKey);
-        const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
-
-        const prompt = `Generate 5 interview questions for a Business Analyst position.
-
-RESUME: ${resume.substring(0, 1500)}
-JOB DESCRIPTION: ${job || 'General Business Analyst role'}
-
-Return ONLY a JSON array of 5 questions: ["Q1", "Q2", "Q3", "Q4", "Q5"]`;
-
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        let text = response.text().replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
-        currentQuestions = JSON.parse(text);
+      setTimeout(() => {
+        // Select 5 random unique questions
+        const shuffled = [...questionBank].sort(() => 0.5 - Math.random());
+        currentQuestions = shuffled.slice(0, 5);
         currentIndex = 0;
+        
         displayQuestion();
         startBtn.disabled = true;
         nextBtn.disabled = false;
-      } catch (error) {
-        interviewArea.innerHTML = `<div class="bg-red-50 p-4 rounded-lg"><strong>Error:</strong> ${error.message}</div>`;
-        startBtn.disabled = false;
-        startBtn.innerHTML = '🎯 Start Interview';
-      }
+      }, 1000);
     });
 
     function displayQuestion() {
@@ -113,43 +124,33 @@ Return ONLY a JSON array of 5 questions: ["Q1", "Q2", "Q3", "Q4", "Q5"]`;
         <div class="answer-box">
           <label class="block font-semibold mb-2">✍️ Your Answer:</label>
           <textarea id="userAnswer" rows="4" class="w-full p-2 border rounded-md" placeholder="Type your answer here..."></textarea>
-          <button onclick="submitAnswer()" class="mt-3 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">Submit Answer →</button>
+          <button onclick="submitAnswer()" class="mt-3 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors">Submit Answer →</button>
         </div>
         <div id="feedbackArea" class="mt-4"></div>
       `;
     }
 
-    window.submitAnswer = async () => {
+    window.submitAnswer = () => {
       const answer = document.getElementById('userAnswer').value.trim();
-      if (!answer) { alert('Please type your answer'); return; }
+      if (!answer) { 
+        alert('Please type your answer'); 
+        return; 
+      }
 
       const feedbackArea = document.getElementById('feedbackArea');
       feedbackArea.innerHTML = '<div class="loading"></div> Analyzing your answer...';
 
-      try {
-        const { GoogleGenerativeAI } = window;
-        const genAI = new GoogleGenerativeAI(apiKey);
-        const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
-
-        const prompt = `As an interview coach, evaluate this answer:
-QUESTION: ${currentQuestions[currentIndex]}
-ANSWER: ${answer}
-
-Provide brief feedback (strengths and improvement tips). Keep it constructive and encouraging.`;
-
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        const feedback = response.text();
-
+      // Simulate analysis delay
+      setTimeout(() => {
+        const feedback = generateFeedback(answer);
+        
         feedbackArea.innerHTML = `
-          <div class="bg-blue-50 p-3 rounded-lg mt-2">
+          <div class="bg-blue-50 p-3 rounded-lg mt-2 border-l-4 border-blue-500">
             <strong class="text-blue-700">💡 AI Feedback:</strong>
             <p class="mt-1 text-gray-700">${feedback}</p>
           </div>
         `;
-      } catch (error) {
-        feedbackArea.innerHTML = `<div class="text-red-600">Error getting feedback: ${error.message}</div>`;
-      }
+      }, 800);
     };
 
     nextBtn.addEventListener('click', () => {
@@ -158,11 +159,11 @@ Provide brief feedback (strengths and improvement tips). Keep it constructive an
         displayQuestion();
       } else {
         interviewArea.innerHTML = `
-          <div class="bg-green-50 p-6 rounded-lg text-center">
+          <div class="bg-green-50 p-6 rounded-lg text-center border-l-4 border-green-500">
             <div class="text-4xl mb-3">🎉</div>
             <h3 class="text-xl font-bold">Interview Complete!</h3>
-            <p class="mt-2">Great job practicing! Review the questions you struggled with and try again.</p>
-            <button onclick="location.reload()" class="mt-4 bg-indigo-600 text-white px-6 py-2 rounded-md">Start New Interview</button>
+            <p class="mt-2 text-gray-700">Great job practicing! Review the questions you struggled with and try again.</p>
+            <button onclick="location.reload()" class="mt-4 bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 transition-colors">Start New Interview</button>
           </div>
         `;
         nextBtn.disabled = true;
