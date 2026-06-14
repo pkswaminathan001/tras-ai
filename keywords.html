@@ -5,113 +5,160 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Keyword Extractor - TRAS AI</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@google/generative-ai@0.21.0/dist/index.min.js"></script>
+  <!-- FIX 1: Removed Google Generative AI CDN -->
   <style>
     body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
-    .card { background: white; border-radius: 1.5rem; padding: 2rem; max-width: 1000px; margin: 2rem auto; }
-    .btn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; border: none; width: 100%; }
-    .btn:disabled { opacity: 0.5; }
-    .result-card { background: #f8fafc; padding: 1rem; margin: 0.75rem 0; border-radius: 0.5rem; border-left: 4px solid #8b5cf6; }
-    .loading { display: inline-block; width: 20px; height: 20px; border: 3px solid #f3f3f3; border-top: 3px solid #8b5cf6; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 8px; }
+    .card { background: white; border-radius: 1.5rem; padding: 2rem; max-width: 1000px; margin: 2rem auto; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+    .btn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; border: none; width: 100%; transition: all 0.2s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3); }
+    .btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+    textarea { width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 0.5rem; font-family: monospace; font-size: 0.85rem; transition: border-color 0.2s; }
+    textarea:focus { outline: none; border-color: #667eea; }
+    .result-card { background: #f8fafc; padding: 1.5rem; margin-top: 1rem; border-radius: 0.75rem; border-left: 4px solid #8b5cf6; }
+    .loading { display: inline-block; width: 20px; height: 20px; border: 3px solid #e0e7ff; border-top: 3px solid #8b5cf6; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 8px; }
     @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-    .api-input { background: #fef9c3; border: 1px solid #eab308; }
-    .keyword-tag { display: inline-block; background: #e0e7ff; color: #3730a3; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; margin: 4px; }
+    .keyword-tag { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin: 4px; }
+    .tag-red { background: #fee2e2; color: #991b1b; }
+    .tag-purple { background: #e0e7ff; color: #3730a3; }
+    .tag-green { background: #dcfce7; color: #166534; }
+    .tag-blue { background: #dbeafe; color: #1e40af; }
+    .tag-yellow { background: #fef9c3; color: #854d0e; }
   </style>
 </head>
 <body class="p-4">
   <div class="card">
-    <div class="text-center mb-6">
+    <!-- FIX 2: Removed API Key Input Field Entirely -->
+    <div class="text-center mb-8">
       <h1 class="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">🔑 AI Keyword Extractor</h1>
-      <p class="text-gray-600">Extract the most important keywords from any job description</p>
-      <a href="./" class="text-sm text-indigo-600 hover:underline">← Back to Portfolio</a>
+      <p class="text-gray-600 mt-2">Extract the most important keywords — Instant & Free</p>
+      <a href="./" class="text-sm text-indigo-600 hover:underline mt-2 inline-block">← Back to Portfolio</a>
     </div>
 
-    <div class="mb-4 p-3 bg-amber-50 rounded-lg border border-amber-200">
-      <label class="block text-sm font-semibold mb-1">🔑 Google Gemini API Key</label>
-      <input type="password" id="apiKey" class="w-full p-2 border rounded-md api-input">
-    </div>
-
-    <div class="mb-4">
-      <label class="block text-sm font-semibold mb-1">💼 Job Description</label>
-      <textarea id="jobdesc" rows="10" class="w-full p-2 border rounded-md" placeholder="Paste job description here..."></textarea>
+    <div class="mb-6">
+      <label class="block text-sm font-semibold mb-2 text-gray-700">💼 Job Description</label>
+      <textarea id="jobdesc" rows="10" placeholder="Paste job description here..."></textarea>
     </div>
 
     <button id="extractBtn" class="btn">🔑 Extract Keywords</button>
-    <div id="result" class="mt-6 hidden"></div>
+    <div id="result" class="hidden"></div>
   </div>
 
   <script>
     const extractBtn = document.getElementById('extractBtn');
     const resultDiv = document.getElementById('result');
-    const apiKeyInput = document.getElementById('apiKey');
 
-    if (localStorage.getItem('gemini_api_key')) apiKeyInput.value = localStorage.getItem('gemini_api_key');
-    apiKeyInput.addEventListener('change', () => { if(apiKeyInput.value.trim()) localStorage.setItem('gemini_api_key', apiKeyInput.value.trim()); });
+    // Comprehensive BA Keyword Bank for Categorization
+    const keywordBank = {
+      hardSkills: [
+        "requirements gathering", "process mapping", "data analysis", "gap analysis", 
+        "uat testing", "user stories", "workflow optimization", "kpi tracking", 
+        "stakeholder management", "business case development", "agile methodology", 
+        "scrum framework", "sprint planning", "backlog grooming", "sql", 
+        "excel", "tableau", "power bi", "jira", "confluence", "visio", 
+        "lucidchart", "guidewire", "salesforce", "sap", "oracle"
+      ],
+      softSkills: [
+        "communication", "collaboration", "problem solving", "critical thinking", 
+        "adaptability", "leadership", "teamwork", "negotiation", 
+        "presentation skills", "active listening", "conflict resolution", 
+        "time management", "analytical thinking", "attention to detail"
+      ],
+      tools: [
+        "jira", "confluence", "trello", "asana", "monday.com", 
+        "microsoft visio", "lucidchart", "draw.io", "figma", 
+        "tableau", "power bi", "google analytics", "splunk", 
+        "postman", "soapui", "git", "github", "slack", "teams"
+      ],
+      certifications: [
+        "cbap", "ccba", "ecba", "csmp", "pmp", "capm", 
+        "prince2", "scrum master", "csa", "csps", "sa", 
+        "aws certified", "azure certified", "gcp certified", 
+        "itil", "six sigma", "lean", "togaf"
+      ]
+    };
 
-    extractBtn.addEventListener('click', async () => {
+    // FIX 3: Replaced Real AI with Rule-Based Simulation
+    extractBtn.addEventListener('click', () => {
       const jobdesc = document.getElementById('jobdesc').value.trim();
-      const apiKey = apiKeyInput.value.trim();
 
-      if (!jobdesc) { alert('Please paste a job description'); return; }
-      if (!apiKey) { alert('Enter your Gemini API key'); return; }
+      if (!jobdesc) { 
+        alert('Please paste a job description'); 
+        return; 
+      }
 
+      // Simulate processing time
       extractBtn.disabled = true;
       extractBtn.innerHTML = '<span class="loading"></span> Extracting Keywords...';
       resultDiv.classList.remove('hidden');
-      resultDiv.innerHTML = '<div class="text-center py-8"><div class="loading"></div> AI analyzing job description...</div>';
+      resultDiv.innerHTML = '<div class="text-center py-8 text-gray-500"><div class="loading"></div> Analyzing job description...</div>';
 
-      try {
-        const { GoogleGenerativeAI } = window;
-        const genAI = new GoogleGenerativeAI(apiKey);
-        const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+      setTimeout(() => {
+        const lowerJob = jobdesc.toLowerCase();
+        
+        // Extract matched keywords by category
+        const results = {
+          priorityKeywords: [],
+          hardSkills: [],
+          softSkills: [],
+          tools: [],
+          certifications: []
+        };
 
-        const prompt = `Extract key keywords from this job description for ATS optimization.
+        // Check each keyword bank against JD
+        Object.keys(keywordBank).forEach(category => {
+          keywordBank[category].forEach(kw => {
+            if (lowerJob.includes(kw.toLowerCase())) {
+              results[category].push(kw);
+            }
+          });
+        });
 
-JOB DESCRIPTION: ${jobdesc}
+        // Priority keywords = first 5 hard skills found (most critical for ATS)
+        results.priorityKeywords = results.hardSkills.slice(0, 5);
 
-Return ONLY JSON:
-{
-  "hardSkills": ["Skill 1", "Skill 2", "Skill 3", "Skill 4", "Skill 5", "Skill 6", "Skill 7", "Skill 8", "Skill 9", "Skill 10"],
-  "softSkills": ["Skill 1", "Skill 2", "Skill 3", "Skill 4", "Skill 5"],
-  "tools": ["Tool 1", "Tool 2", "Tool 3", "Tool 4", "Tool 5"],
-  "certifications": ["Cert 1", "Cert 2", "Cert 3"],
-  "priorityKeywords": ["Most important keyword 1", "Most important keyword 2", "Most important keyword 3", "Most important keyword 4", "Most important keyword 5"]
-}`;
-
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        let text = response.text().replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
-        const data = JSON.parse(text);
-
+        // Render Results
         resultDiv.innerHTML = `
           <div class="result-card">
-            <strong class="text-purple-700">⭐ Priority Keywords (Must Include)</strong>
-            <div class="flex flex-wrap gap-2 mt-2">${data.priorityKeywords.map(k => `<span class="keyword-tag bg-red-100 text-red-800">${k}</span>`).join('')}</div>
+            <strong class="text-purple-700 block mb-2">⭐ Priority Keywords (Must Include)</strong>
+            <div class="flex flex-wrap gap-2">
+              ${results.priorityKeywords.length ? results.priorityKeywords.map(k => `<span class="keyword-tag tag-red">${k}</span>`).join('') : '<span class="text-gray-500 text-sm">No priority keywords detected</span>'}
+            </div>
           </div>
+          
           <div class="result-card">
-            <strong class="text-purple-700">🛠️ Hard Skills & Technical Keywords</strong>
-            <div class="flex flex-wrap gap-2 mt-2">${data.hardSkills.map(k => `<span class="keyword-tag">${k}</span>`).join('')}</div>
+            <strong class="text-purple-700 block mb-2">️ Hard Skills & Technical Keywords</strong>
+            <div class="flex flex-wrap gap-2">
+              ${results.hardSkills.length ? results.hardSkills.map(k => `<span class="keyword-tag tag-purple">${k}</span>`).join('') : '<span class="text-gray-500 text-sm">No hard skills detected</span>'}
+            </div>
           </div>
+          
           <div class="result-card">
-            <strong class="text-purple-700">🤝 Soft Skills</strong>
-            <div class="flex flex-wrap gap-2 mt-2">${data.softSkills.map(k => `<span class="keyword-tag bg-green-100 text-green-800">${k}</span>`).join('')}</div>
+            <strong class="text-purple-700 block mb-2">🤝 Soft Skills</strong>
+            <div class="flex flex-wrap gap-2">
+              ${results.softSkills.length ? results.softSkills.map(k => `<span class="keyword-tag tag-green">${k}</span>`).join('') : '<span class="text-gray-500 text-sm">No soft skills detected</span>'}
+            </div>
           </div>
+          
           <div class="result-card">
-            <strong class="text-purple-700">💻 Tools & Technologies</strong>
-            <div class="flex flex-wrap gap-2 mt-2">${data.tools.map(k => `<span class="keyword-tag bg-blue-100 text-blue-800">${k}</span>`).join('')}</div>
+            <strong class="text-purple-700 block mb-2">💻 Tools & Technologies</strong>
+            <div class="flex flex-wrap gap-2">
+              ${results.tools.length ? results.tools.map(k => `<span class="keyword-tag tag-blue">${k}</span>`).join('') : '<span class="text-gray-500 text-sm">No tools detected</span>'}
+            </div>
           </div>
+          
           <div class="result-card">
-            <strong class="text-purple-700">📜 Certifications Required/Preferred</strong>
-            <div class="flex flex-wrap gap-2 mt-2">${data.certifications.map(k => `<span class="keyword-tag bg-yellow-100 text-yellow-800">${k}</span>`).join('')}</div>
+            <strong class="text-purple-700 block mb-2">📜 Certifications Required/Preferred</strong>
+            <div class="flex flex-wrap gap-2">
+              ${results.certifications.length ? results.certifications.map(k => `<span class="keyword-tag tag-yellow">${k}</span>`).join('') : '<span class="text-gray-500 text-sm">No certifications detected</span>'}
+            </div>
           </div>
-          <div class="text-center text-xs text-gray-500 mt-4">💡 Add these keywords to your resume to improve ATS score!</div>
+          
+          <div class="text-center text-xs text-gray-500 mt-6">💡 Add these keywords to your resume to improve ATS score!</div>
         `;
-      } catch (error) {
-        resultDiv.innerHTML = `<div class="result-card bg-red-50"><strong>Error:</strong> ${error.message}</div>`;
-      } finally {
+
         extractBtn.disabled = false;
         extractBtn.innerHTML = '🔑 Extract Keywords';
-      }
+      }, 800);
     });
   </script>
 </body>
