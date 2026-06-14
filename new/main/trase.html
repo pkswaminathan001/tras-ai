@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRAS AI - Resume Analyzer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+    .card { background: white; border-radius: 1.5rem; padding: 2rem; max-width: 1000px; margin: 2rem auto; }
+    .btn { background: #4f46e5; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; border: none; width: 100%; }
+    textarea { width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 0.5rem; min-height: 180px; }
+    .result-card { background: #f8fafc; padding: 1rem; margin: 0.75rem 0; border-radius: 0.5rem; border-left: 4px solid #4f46e5; }
+  </style>
+</head>
+<body class="p-4">
+  <div class="card">
+    <div class="text-center mb-6">
+      <h1 class="text-2xl font-bold">🤖 TRAS AI</h1>
+      <p class="text-gray-600">Resume-to-Job Analyzer for Business Analyst Roles</p>
+      <a href="./" class="text-sm text-indigo-600 hover:underline">← Back to Portfolio</a>
+    </div>
+    <div class="grid md:grid-cols-2 gap-4 mb-4">
+      <textarea id="resume" placeholder="Paste your resume here..."></textarea>
+      <textarea id="jobdesc" placeholder="Paste job description here..."></textarea>
+    </div>
+    <button id="analyzeBtn" class="btn">🚀 Analyze Match</button>
+    <div id="results" class="mt-6 hidden"></div>
+  </div>
+  <script>
+    document.getElementById('analyzeBtn').onclick = () => {
+      const resume = document.getElementById('resume').value.toLowerCase();
+      const job = document.getElementById('jobdesc').value.toLowerCase();
+      if (!resume || !job) { alert('Paste both resume and job description'); return; }
+      const keywords = ['guidewire', 'claims', 'insurance', 'bfsi', 'automation', 'process improvement', 'business requirements', 'stakeholder', 'agile', 'kpi', 'metrics'];
+      const matched = keywords.filter(k => resume.includes(k));
+      const score = Math.min(100, Math.round((matched.length / keywords.length) * 100) + 20);
+      let recommendation = '';
+      if (score >= 80) recommendation = '✅ Strong Match — Interview Recommended';
+      else if (score >= 65) recommendation = '📞 Good Match — Consider Interview';
+      else if (score >= 50) recommendation = '📋 Potential — Needs Tailoring';
+      else recommendation = '⚠️ Gap Detected — Revise Resume';
+      let strengths = [];
+      if (resume.includes('guidewire')) strengths.push('✅ Guidewire experience');
+      if (resume.includes('insurance') || resume.includes('claims')) strengths.push('✅ Insurance domain expertise');
+      if (resume.includes('40%')) strengths.push('✅ Quantifiable impact (40% reduction)');
+      if (resume.includes('stakeholder')) strengths.push('✅ Stakeholder management');
+      if (matched.length > 3) strengths.push('✅ Strong keyword match');
+      let improvements = [];
+      if (!resume.includes('stakeholder')) improvements.push('📌 Add stakeholder management examples');
+      if (!resume.includes('business requirements') && !resume.includes('requirements')) improvements.push('📌 Highlight business requirements gathering');
+      if (score < 70) improvements.push('📌 Add more keywords from job description');
+      document.getElementById('results').innerHTML = `
+        <div class="text-center mb-4"><div class="text-5xl font-bold text-indigo-600">${score}<span class="text-2xl text-gray-400">/100</span></div><div class="text-gray-600 mt-1">${recommendation}</div></div>
+        <div class="result-card"><strong>✅ Strengths:</strong><br>${strengths.length ? strengths.join('<br>') : '• Add more relevant keywords'}</div>
+        <div class="result-card"><strong>⚠️ Improvements:</strong><br>${improvements.length ? improvements.join('<br>') : '• Great profile — ready to apply!'}</div>
+        <div class="result-card"><strong>📌 Keywords detected:</strong><br>${matched.join(', ') || 'None yet'}</div>
+        <div class="text-center text-xs text-gray-500 mt-4">🔐 Analysis runs in your browser.</div>
+      `;
+      document.getElementById('results').classList.remove('hidden');
+    };
+  </script>
+</body>
+</html>
