@@ -5,111 +5,172 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Job Match Predictor - TRAS AI</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@google/generative-ai@0.21.0/dist/index.min.js"></script>
+  <!-- FIX 1: Removed Google Generative AI CDN -->
   <style>
     body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
-    .card { background: white; border-radius: 1.5rem; padding: 2rem; max-width: 1000px; margin: 2rem auto; }
-    .btn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; border: none; width: 100%; }
-    .btn:disabled { opacity: 0.5; }
-    .result-card { background: #f8fafc; padding: 1rem; margin: 0.75rem 0; border-radius: 0.5rem; }
-    .loading { display: inline-block; width: 20px; height: 20px; border: 3px solid #f3f3f3; border-top: 3px solid #667eea; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 8px; }
+    .card { background: white; border-radius: 1.5rem; padding: 2rem; max-width: 1000px; margin: 2rem auto; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+    .btn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; border: none; width: 100%; transition: all 0.2s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3); }
+    .btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+    textarea { width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 0.5rem; font-family: monospace; font-size: 0.85rem; transition: border-color 0.2s; }
+    textarea:focus { outline: none; border-color: #667eea; }
+    .result-card { background: #f8fafc; padding: 1.5rem; margin-top: 1rem; border-radius: 0.75rem; border-left: 4px solid #667eea; }
+    .loading { display: inline-block; width: 20px; height: 20px; border: 3px solid #e0e7ff; border-top: 3px solid #667eea; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 8px; }
     @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-    .api-input { background: #fef9c3; border: 1px solid #eab308; }
   </style>
 </head>
 <body class="p-4">
   <div class="card">
-    <div class="text-center mb-6">
+    <!-- FIX 2: Removed API Key Input Field Entirely -->
+    <div class="text-center mb-8">
       <h1 class="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">🔮 AI Job Match Predictor</h1>
-      <p class="text-gray-600">Will you get an interview? AI predicts your chances</p>
-      <a href="./" class="text-sm text-indigo-600 hover:underline">← Back to Portfolio</a>
+      <p class="text-gray-600 mt-2">Will you get an interview? Instant prediction — No API Key</p>
+      <a href="./" class="text-sm text-indigo-600 hover:underline mt-2 inline-block">← Back to Portfolio</a>
     </div>
 
-    <div class="mb-4 p-3 bg-amber-50 rounded-lg border border-amber-200">
-      <label class="block text-sm font-semibold mb-1">🔑 Google Gemini API Key</label>
-      <input type="password" id="apiKey" class="w-full p-2 border rounded-md api-input">
-    </div>
-
-    <div class="grid md:grid-cols-2 gap-4 mb-4">
+    <div class="grid md:grid-cols-2 gap-6 mb-6">
       <div>
-        <label class="block text-sm font-semibold mb-1">📄 Your Resume</label>
+        <label class="block text-sm font-semibold mb-2 text-gray-700">📄 Your Resume</label>
         <textarea id="resume" rows="8" placeholder="Paste your resume here..."></textarea>
       </div>
       <div>
-        <label class="block text-sm font-semibold mb-1">💼 Job Description</label>
+        <label class="block text-sm font-semibold mb-2 text-gray-700">💼 Job Description</label>
         <textarea id="jobdesc" rows="8" placeholder="Paste job description here..."></textarea>
       </div>
     </div>
 
     <button id="predictBtn" class="btn">🔮 Predict Interview Chance</button>
-    <div id="result" class="mt-6 hidden"></div>
+    <div id="result" class="hidden"></div>
   </div>
 
   <script>
     const predictBtn = document.getElementById('predictBtn');
     const resultDiv = document.getElementById('result');
-    const apiKeyInput = document.getElementById('apiKey');
 
-    if (localStorage.getItem('gemini_api_key')) apiKeyInput.value = localStorage.getItem('gemini_api_key');
-    apiKeyInput.addEventListener('change', () => { if(apiKeyInput.value.trim()) localStorage.setItem('gemini_api_key', apiKeyInput.value.trim()); });
+    // Comprehensive BA Keyword Bank for Scoring
+    const keywordBank = [
+      "guidewire", "claims", "insurance", "bfsi", "automation", 
+      "stakeholder", "agile", "scrum", "kpi", "requirements", 
+      "process improvement", "data analysis", "sql", "user stories",
+      "uat", "gap analysis", "workflow", "efficiency"
+    ];
 
-    predictBtn.addEventListener('click', async () => {
+    // FIX 3: Replaced Real AI with Rule-Based Simulation
+    predictBtn.addEventListener('click', () => {
       const resume = document.getElementById('resume').value.trim();
       const job = document.getElementById('jobdesc').value.trim();
-      const apiKey = apiKeyInput.value.trim();
 
-      if (!resume || !job) { alert('Please paste both resume and job description'); return; }
-      if (!apiKey) { alert('Enter your Gemini API key'); return; }
+      if (!resume || !job) { 
+        alert('Please paste both resume and job description'); 
+        return; 
+      }
 
+      // Simulate processing time
       predictBtn.disabled = true;
       predictBtn.innerHTML = '<span class="loading"></span> Analyzing Match...';
       resultDiv.classList.remove('hidden');
-      resultDiv.innerHTML = '<div class="text-center py-8"><div class="loading"></div> AI predicting your chances...</div>';
+      resultDiv.innerHTML = '<div class="text-center py-8 text-gray-500"><div class="loading"></div> Predicting your chances...</div>';
 
-      try {
-        const { GoogleGenerativeAI } = window;
-        const genAI = new GoogleGenerativeAI(apiKey);
-        const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+      setTimeout(() => {
+        const resumeLower = resume.toLowerCase();
+        const jobLower = job.toLowerCase();
+        
+        // Calculate weighted match score
+        let matchScore = 40; // Base score
+        const matchedKeywords = [];
+        const missingKeywords = [];
+        
+        keywordBank.forEach(kw => {
+          if (jobLower.includes(kw)) {
+            if (resumeLower.includes(kw)) {
+              matchScore += 3;
+              matchedKeywords.push(kw);
+            } else {
+              matchScore -= 1;
+              missingKeywords.push(kw);
+            }
+          }
+        });
 
-        const prompt = `Predict interview chances for this candidate.
+        // Bonus points for quantifiable achievements
+        if (/\d+%|\$\d+|\d+\+/.test(resume)) matchScore += 10;
+        if (resumeLower.includes('mba') || resumeLower.includes('certified')) matchScore += 5;
+        
+        // Clamp score between 0-100
+        matchScore = Math.max(0, Math.min(100, matchScore));
+        
+        // Determine likelihood and styling
+        let likelihood = '';
+        let emoji = '';
+        let colorClass = '';
+        
+        if (matchScore >= 75) {
+          likelihood = 'High';
+          emoji = '🎉';
+          colorClass = 'text-green-600';
+        } else if (matchScore >= 50) {
+          likelihood = 'Medium';
+          emoji = '';
+          colorClass = 'text-yellow-600';
+        } else {
+          likelihood = 'Low';
+          emoji = '⚠️';
+          colorClass = 'text-red-600';
+        }
 
-RESUME: ${resume}
-JOB: ${job}
+        // Generate dynamic reasoning
+        let reasoning = '';
+        if (matchedKeywords.length > 8) {
+          reasoning = `Your resume aligns strongly with ${matchedKeywords.length} key requirements from the job description. Your quantifiable achievements significantly boost your profile.`;
+        } else if (matchedKeywords.length > 4) {
+          reasoning = `You meet several core requirements but are missing some critical keywords like ${missingKeywords.slice(0, 3).join(', ')}. Adding these could substantially increase your chances.`;
+        } else {
+          reasoning = `There is a significant gap between your resume and the job requirements. Focus on adding the missing keywords and quantifying your past achievements.`;
+        }
 
-Return ONLY JSON:
-{
-  "matchPercentage": 78,
-  "interviewLikelihood": "High/Medium/Low",
-  "reasoning": "Why this score",
-  "strengths": ["Strength 1", "Strength 2"],
-  "weaknesses": ["Weakness 1", "Weakness 2"],
-  "actionItems": ["Action 1", "Action 2", "Action 3"]
-}`;
-
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        let text = response.text().replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
-        const data = JSON.parse(text);
-
-        const color = data.matchPercentage >= 70 ? 'text-green-600' : data.matchPercentage >= 50 ? 'text-yellow-600' : 'text-red-600';
-        const emoji = data.matchPercentage >= 70 ? '🎉' : data.matchPercentage >= 50 ? '📋' : '⚠️';
-
+        // Render Results
         resultDiv.innerHTML = `
-          <div class="text-center mb-4">
-            <div class="text-6xl font-bold ${color}">${data.matchPercentage}<span class="text-2xl">%</span></div>
-            <div class="text-xl mt-1">${emoji} ${data.interviewLikelihood} Chance of Interview</div>
+          <div class="text-center mb-6 p-6 bg-gradient-to-b from-indigo-50 to-white rounded-2xl border border-indigo-100">
+            <div class="text-6xl font-bold ${colorClass}">${matchScore}<span class="text-2xl text-gray-400">%</span></div>
+            <div class="text-xl font-semibold mt-2 text-gray-700">${emoji} ${likelihood} Chance of Interview</div>
           </div>
-          <div class="result-card"><strong>📊 AI Reasoning:</strong><br>${data.reasoning}</div>
-          <div class="result-card"><strong class="text-green-700">✅ Your Advantages</strong><br>${data.strengths.map(s => `• ${s}`).join('<br>')}</div>
-          <div class="result-card"><strong class="text-red-700">⚠️ Areas to Improve</strong><br>${data.weaknesses.map(w => `• ${w}`).join('<br>')}</div>
-          <div class="result-card"><strong class="text-blue-700">📌 Action Items to Increase Chances</strong><br>${data.actionItems.map(a => `• ${a}`).join('<br>')}</div>
+          
+          <div class="result-card">
+            <strong class="text-indigo-700 block mb-2">📊 Prediction Reasoning</strong>
+            <p class="text-gray-700">${reasoning}</p>
+          </div>
+          
+          <div class="grid md:grid-cols-2 gap-4 mt-4">
+            <div class="result-card" style="border-left-color: #10b981;">
+              <strong class="text-green-700 block mb-2">✅ Matched Keywords (${matchedKeywords.length})</strong>
+              <div class="flex flex-wrap gap-2">
+                ${matchedKeywords.map(k => `<span class="inline-block bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">${k}</span>`).join('')}
+              </div>
+            </div>
+            
+            <div class="result-card" style="border-left-color: #f59e0b;">
+              <strong class="text-amber-700 block mb-2">⚠️ Missing Keywords (${missingKeywords.length})</strong>
+              <div class="flex flex-wrap gap-2">
+                ${missingKeywords.map(k => `<span class="inline-block bg-amber-100 text-amber-800 px-2 py-1 rounded-full text-xs font-medium">${k}</span>`).join('')}
+              </div>
+            </div>
+          </div>
+          
+          <div class="result-card mt-4" style="border-left-color: #3b82f6;">
+            <strong class="text-blue-700 block mb-2">📌 Action Items to Increase Chances</strong>
+            <ul class="space-y-2 text-gray-700">
+              ${missingKeywords.slice(0, 3).map(k => `<li>• Add "${k}" to your resume skills or experience section</li>`).join('')}
+              <li>• Quantify at least 2 more achievements with specific metrics</li>
+              <li>• Tailor your professional summary to mirror the job description's language</li>
+            </ul>
+          </div>
+          
+          <div class="text-center text-xs text-gray-500 mt-6">💡 Tip: Use this analysis to tailor your resume before applying!</div>
         `;
-      } catch (error) {
-        resultDiv.innerHTML = `<div class="result-card bg-red-50"><strong>Error:</strong> ${error.message}</div>`;
-      } finally {
+
         predictBtn.disabled = false;
         predictBtn.innerHTML = '🔮 Predict Interview Chance';
-      }
+      }, 1000);
     });
   </script>
 </body>
