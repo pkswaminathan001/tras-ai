@@ -8,144 +8,498 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #000; color: #fff; overflow-x: hidden; }
-    html { scroll-behavior: smooth; }
-    
-    /* Apple-style spacing */
-    :root { --space-sm: 16px; --space-md: 24px; --space-lg: 40px; --space-xl: 64px; }
-    
-    /* Animated Orbs */
-    .orb { position: fixed; border-radius: 50%; filter: blur(100px); z-index: -1; opacity: 0.3; animation: float 25s infinite ease-in-out; }
-    .orb-1 { width: 500px; height: 500px; background: #6366f1; top: -150px; left: -150px; animation-delay: 0s; }
-    .orb-2 { width: 600px; height: 600px; background: #a855f7; bottom: -200px; right: -200px; animation-delay: 7s; }
-    .orb-3 { width: 400px; height: 400px; background: #06b6d4; top: 50%; left: 50%; animation-delay: 14s; transform: translate(-50%, -50%); }
-    @keyframes float { 0%,100% { transform: translate(0,0) scale(1); } 33% { transform: translate(40px,-40px) scale(1.1); } 66% { transform: translate(-30px,30px) scale(0.9); } }
-    
-    /* Apple Glass Card - 24px radius */
-    .glass-card { background: rgba(20,20,30,0.5); backdrop-filter: blur(20px); border-radius: 24px; border: 0.5px solid rgba(255,255,255,0.1); transition: all 0.4s ease; padding: var(--space-lg); }
-    .glass-card:hover { transform: translateY(-4px); border-color: rgba(139,92,246,0.4); background: rgba(30,30,45,0.6); }
-    
-    /* Navigation - 24px radius */
-    .nav-glass { background: rgba(0,0,0,0.7); backdrop-filter: blur(20px); border-radius: 24px; border: 0.5px solid rgba(255,255,255,0.1); padding: 6px; }
-    .nav-link { color: rgba(255,255,255,0.7); text-decoration: none; font-weight: 500; font-size: 0.9rem; padding: 8px 20px; border-radius: 24px; transition: all 0.2s; }
-    .nav-link:hover { color: white; background: rgba(255,255,255,0.1); }
-    
-    /* Buttons - 24px radius, subtle hover */
-    .btn-primary { background: linear-gradient(135deg, #6366f1, #a855f7); padding: 14px 32px; border-radius: 24px; font-weight: 600; color: white; display: inline-block; text-decoration: none; transition: all 0.3s; }
-    .btn-primary:hover { transform: scale(1.02); opacity: 0.9; }
-    .btn-outline { background: transparent; border: 1px solid rgba(168,85,247,0.5); padding: 14px 32px; border-radius: 24px; font-weight: 600; color: #e0e7ff; display: inline-block; text-decoration: none; transition: all 0.3s; }
-    .btn-outline:hover { background: rgba(168,85,247,0.1); transform: scale(1.02); }
-    
-    /* Badges - 24px radius */
-    .badge { display: inline-block; padding: 6px 16px; background: rgba(255,255,255,0.05); border-radius: 24px; font-size: 0.75rem; font-weight: 500; border: 0.5px solid rgba(255,255,255,0.1); }
-    
-    /* Stats */
-    .stat-number { font-size: 3rem; font-weight: 700; background: linear-gradient(135deg, #fff, #a855f7); background-clip: text; -webkit-background-clip: text; color: transparent; line-height: 1; }
-    
-    /* Grids - Apple 32px gaps */
-    .stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2rem; }
-    .expertise-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2rem; }
-    .projects-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 2rem; }
-    .visa-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
-    @media (max-width:768px) { .stats-grid, .expertise-grid, .projects-grid, .visa-grid { grid-template-columns: 1fr; gap: 1rem; } .stat-number { font-size: 2rem; } .btn-primary, .btn-outline { padding: 10px 20px; font-size: 0.9rem; } .glass-card { padding: 20px; } }
-    
-    /* Typography - Apple scale */
-    .gradient-text { background: linear-gradient(135deg, #a855f7, #6366f1, #06b6d4); background-size: 200% 200%; background-clip: text; -webkit-background-clip: text; color: transparent; animation: slowGradient 8s ease infinite; }
-    @keyframes slowGradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-    .section-header { font-size: clamp(1.75rem, 5vw, 2rem); font-weight: 600; margin-bottom: 1.5rem; letter-spacing: -0.01em; }
-    h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 600; letter-spacing: -0.02em; }
-    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+      background: #ffffff;
+      color: #1d1d1f;
+      line-height: 1.4;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Apple-style container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Apple-style navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      z-index: 100;
+      padding: 12px 0;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.2rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: #1d1d1f;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #1d1d1f;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #0066cc;
+    }
+
+    /* Apple-style hero */
+    .hero {
+      text-align: center;
+      padding: 120px 0 80px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: #e8f0fe;
+      color: #0066cc;
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #1d1d1f;
+      margin-bottom: 16px;
+    }
+
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 4rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      h1 {
+        font-size: 4.5rem;
+      }
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: #6e6e73;
+      max-width: 600px;
+      margin: 0 auto 32px;
+    }
+
+    /* Apple-style buttons */
+    .btn-primary {
+      display: inline-block;
+      background: #0071e3;
+      color: white;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 980px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background: #0077ed;
+      transform: scale(1.02);
+    }
+
+    .btn-outline {
+      display: inline-block;
+      background: transparent;
+      color: #0071e3;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 980px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      border: 1px solid #0071e3;
+      transition: all 0.2s;
+    }
+
+    .btn-outline:hover {
+      background: rgba(0, 113, 227, 0.05);
+      transform: scale(1.02);
+    }
+
+    /* Apple-style stats grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      text-align: center;
+      margin: 80px 0;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #1d1d1f;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: #6e6e73;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+    }
+
+    /* Apple-style cards */
+    .card {
+      background: #f5f5f7;
+      border-radius: 24px;
+      padding: 32px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: scale(1.01);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: #6e6e73;
+      line-height: 1.4;
+    }
+
+    /* Apple-style grid layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+
+    @media (max-width: 768px) {
+      .grid-2, .grid-3, .grid-4 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Apple-style section headers */
+    .section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .section-header h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 12px;
+    }
+
+    .section-header p {
+      color: #6e6e73;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Apple-style badge */
+    .badge {
+      display: inline-block;
+      background: #e8e8ed;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #1d1d1f;
+    }
+
     /* Table */
-    .custom-table td { padding: 1rem; border-bottom: 0.5px solid rgba(255,255,255,0.08); }
-    
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .custom-table td {
+      padding: 16px;
+      border-bottom: 1px solid #e8e8ed;
+    }
+
+    .custom-table td:first-child {
+      font-weight: 600;
+      width: 35%;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid #e8e8ed;
+      padding: 40px 0;
+      margin-top: 80px;
+      text-align: center;
+      color: #6e6e73;
+      font-size: 0.8rem;
+    }
+
+    /* Responsive spacing */
+    section {
+      margin: 80px 0;
+    }
+
+    .inline-badge-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin: 32px 0;
+    }
+
+    .inline-badge {
+      background: #f5f5f7;
+      padding: 8px 16px;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #1d1d1f;
+    }
+
     /* Reveal animation */
-    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
-    .reveal.active { opacity: 1; transform: translateY(0); }
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    a {
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
 
-  <div style="position:relative; z-index:10">
-    <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-6">
-      <div class="nav-glass flex flex-wrap justify-center items-center gap-1 px-3 py-1">
-        <span class="text-lg font-semibold gradient-text px-3">PR Swaminathan</span>
-        <a href="#about" class="nav-link">About</a>
-        <a href="#expertise" class="nav-link">Expertise</a>
-        <a href="#experience" class="nav-link">Experience</a>
-        <a href="#projects" class="nav-link">Projects</a>
-        <a href="#visa" class="nav-link">Visa</a>
-        <a href="tras.html" target="_blank" class="nav-link" style="background:rgba(139,92,246,0.2)">TRAS Tool</a>
+  <!-- Apple-style navigation -->
+  <nav>
+    <div class="nav-container">
+      <a href="/" class="logo">PR Swaminathan</a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#expertise">Expertise</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#visa">Visa</a>
+        <a href="tras.html" target="_blank">TRAS Tool</a>
       </div>
-    </nav>
+    </div>
+  </nav>
 
-    <main class="max-w-6xl mx-auto px-6 pt-28 pb-20">
-      <!-- Hero -->
-      <div class="text-center mb-24 reveal">
-        <div class="inline-block mb-4 px-4 py-2 bg-green-500/10 rounded-full text-green-400 text-sm font-medium border border-green-500/20">✅ Eligible for HSM (NL) / Critical Skills (IE) / EU Blue Card (LU)</div>
-        <h1 class="text-6xl md:text-7xl font-bold mb-6 tracking-tight"><span class="gradient-text">Business Analyst<br>Insurance Operations</span></h1>
-        <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-8">MBA | Ex-HCL (40% efficiency gain) | Guidewire | AI-Powered Automation</p>
-        <div class="flex flex-wrap justify-center gap-3 mb-10"><span class="badge">🇱🇺 Luxembourg</span><span class="badge">🇳🇱 Netherlands</span><span class="badge">🇮🇪 Ireland</span><span class="badge">⏰ CET/BST Overlap Ready</span></div>
-        <div class="flex flex-wrap justify-center gap-4"><a href="tras.html" class="btn-primary">Try TRAS Analyzer →</a><a href="#projects" class="btn-outline">View Projects</a></div>
+  <main>
+    <!-- Hero Section -->
+    <div class="hero container reveal">
+      <div class="hero-badge">✨ Open to work</div>
+      <h1>Business Analyst<br>Insurance Operations</h1>
+      <p class="hero-subtitle">MBA | Ex-HCL (40% efficiency gain) | Guidewire | AI-Powered Automation</p>
+      <div class="inline-badge-group">
+        <span class="inline-badge">🇱🇺 Luxembourg</span>
+        <span class="inline-badge">🇳🇱 Netherlands</span>
+        <span class="inline-badge">🇮🇪 Ireland</span>
+        <span class="inline-badge">⏰ CET/BST Overlap Ready</span>
       </div>
-
-      <!-- Stats -->
-      <div class="stats-grid mb-24 reveal">
-        <div class="glass-card p-8 text-center"><div class="stat-number">40%</div><div class="text-gray-400 text-sm mt-2">Efficiency Gain</div></div>
-        <div class="glass-card p-8 text-center"><div class="stat-number">99.2%</div><div class="text-gray-400 text-sm mt-2">Accuracy Rate</div></div>
-        <div class="glass-card p-8 text-center"><div class="stat-number">6,000+</div><div class="text-gray-400 text-sm mt-2">Transactions</div></div>
-        <div class="glass-card p-8 text-center"><div class="stat-number">25%</div><div class="text-gray-400 text-sm mt-2">Rework Reduction</div></div>
+      <div style="display: flex; gap: 16px; justify-content: center;">
+        <a href="tras.html" class="btn-primary">Try TRAS Analyzer →</a>
+        <a href="#projects" class="btn-outline">View Projects</a>
       </div>
+    </div>
 
-      <!-- About -->
-      <div id="about" class="glass-card p-10 mb-20 reveal"><h2 class="section-header gradient-text">About Me</h2><p class="text-gray-300 text-lg leading-relaxed">Business Analyst with MBA and experience supporting insurance operations at <strong class="text-indigo-300">HCL Technologies (USAA project)</strong>. Contributed to the first AI automation — reducing manual claims processing by <strong class="text-green-400">40%</strong> across <strong class="text-green-400">6,000+ transactions</strong> while maintaining <strong class="text-green-400">99.2% accuracy</strong>.</p></div>
+    <!-- Stats Section -->
+    <div class="container stats-grid reveal">
+      <div><div class="stat-number">40%</div><div class="stat-label">Efficiency Gain</div></div>
+      <div><div class="stat-number">99.2%</div><div class="stat-label">Accuracy Rate</div></div>
+      <div><div class="stat-number">6,000+</div><div class="stat-label">Transactions</div></div>
+      <div><div class="stat-number">25%</div><div class="stat-label">Rework Reduction</div></div>
+    </div>
 
-      <!-- Recruiters -->
-      <div class="glass-card p-10 mb-20 reveal"><h2 class="section-header gradient-text">🎯 For Recruiters & Hiring Managers</h2><div class="overflow-x-auto"><table class="custom-table w-full"><tr><td class="py-3 font-semibold text-indigo-300" style="width:35%">What I deliver</td><td class="py-3">40% efficiency gains via process automation & workflow optimization</td></tr>
-        <tr class="border-t border-white/10"><td class="py-3 font-semibold text-indigo-300">Domain expertise</td><td class="py-3">Insurance Claims, Guidewire (GWCC), BFSI Operations</td></tr>
-        <tr class="border-t border-white/10"><td class="py-3 font-semibold text-indigo-300">Visa path</td><td class="py-3">Kennismigrant (NL), Critical Skills (IE), EU Blue Card (LU) — 2-4 weeks</td></tr>
-        <tr class="border-t border-white/10"><td class="py-3 font-semibold text-indigo-300">Core strengths</td><td class="py-3">Business Analysis, Process Improvement, Stakeholder Management, AI Workflow Design</td></tr>
-       </table></div></div>
-
-      <!-- Expertise -->
-      <div id="expertise" class="expertise-grid mb-20">
-        <div class="glass-card p-6 text-center reveal"><i class="fas fa-chart-line text-3xl text-indigo-400 mb-3"></i><h3 class="font-semibold text-lg">Business Analysis</h3><p class="text-gray-500 text-sm">Requirements gathering, process mapping, stakeholder management</p></div>
-        <div class="glass-card p-6 text-center reveal"><i class="fas fa-robot text-3xl text-cyan-400 mb-3"></i><h3 class="font-semibold text-lg">AI Workflow Automation</h3><p class="text-gray-500 text-sm">LLM pipelines, prompt engineering, workflow orchestration</p></div>
-        <div class="glass-card p-6 text-center reveal"><i class="fas fa-shield-alt text-3xl text-purple-400 mb-3"></i><h3 class="font-semibold text-lg">BFSI Operations</h3><p class="text-gray-500 text-sm">Insurance claims, Guidewire, KYC/AML compliance</p></div>
-        <div class="glass-card p-6 text-center reveal"><i class="fas fa-chart-simple text-3xl text-emerald-400 mb-3"></i><h3 class="font-semibold text-lg">Process Optimization</h3><p class="text-gray-500 text-sm">KPI tracking, QC frameworks, efficiency analysis</p></div>
+    <!-- About Section -->
+    <section id="about" class="container reveal">
+      <div class="card">
+        <h2 style="margin-bottom: 16px;">About Me</h2>
+        <p>Business Analyst with MBA and experience supporting insurance operations at <strong>HCL Technologies (USAA project)</strong>. Contributed to the first AI automation — reducing manual claims processing by <strong>40%</strong> across <strong>6,000+ transactions</strong> while maintaining <strong>99.2% accuracy</strong>.</p>
       </div>
+    </section>
 
-      <!-- Experience -->
-      <div id="experience" class="glass-card p-10 mb-20 reveal"><h2 class="section-header gradient-text">Professional Experience</h2>
-        <div class="mb-6"><h3 class="text-xl font-semibold text-indigo-300">Process Associate — AI Workflow & Automation Lead</h3><p class="text-gray-500 text-sm mb-2">HCL Technologies — USAA Insurance Project • Jan 2023 – Present</p><ul class="list-disc list-inside text-gray-400 space-y-1"><li>First AI automation → 40% reduction in manual claims processing time</li><li>99.2% claims accuracy maintained across 6,000+ transactions</li><li>QC frameworks reducing rework errors by 25% across analyst team</li></ul></div>
-        <div><h3 class="text-xl font-semibold text-indigo-300">AI Workflow Developer (Independent)</h3><p class="text-gray-500 text-sm mb-2">TRAS — Resume-to-Job Match Analyzer • 2024–2025</p><ul class="list-disc list-inside text-gray-400 space-y-1"><li>Built web-based tool with Google Gemini API for Business Analyst roles</li><li>ATS compatibility check, keyword detection, resume improvement suggestions</li></ul></div>
+    <!-- Recruiters Table -->
+    <section class="container reveal">
+      <div class="section-header">
+        <h2>🎯 For Recruiters & Hiring Managers</h2>
       </div>
-
-      <!-- Projects -->
-      <div id="projects" class="projects-grid mb-20">
-        <div class="glass-card p-8 reveal"><i class="fas fa-chart-simple text-2xl text-purple-400 mb-3"></i><h3 class="text-xl font-semibold mb-2">🎯 TRAS AI</h3><p class="text-gray-500 text-sm mb-3">Gemini-powered resume-to-job match analyzer. ATS compatibility, skill gap analysis, improvement suggestions.</p><div class="flex flex-wrap gap-2 mb-3"><span class="badge">Gemini API</span><span class="badge">HTML/CSS/JS</span></div><a href="tras.html" class="text-indigo-400 text-sm">Try Tool →</a></div>
-        <div class="glass-card p-8 reveal"><i class="fas fa-search text-2xl text-indigo-400 mb-3"></i><h3 class="text-xl font-semibold mb-2">🇪🇺 EU Job Hunter AI</h3><p class="text-gray-500 text-sm mb-3">GitHub Actions workflow analyzing CV-JD fit for Luxembourg, Netherlands, and Ireland roles.</p><div class="flex flex-wrap gap-2 mb-3"><span class="badge">GitHub Actions</span><span class="badge">Python</span><span class="badge">Qwen-Max</span></div><a href="https://github.com/pkswaminathan001/Luxembourg" target="_blank" class="text-indigo-400 text-sm">View Repository →</a></div>
+      <div class="card">
+        <table class="custom-table">
+          <tr><td>What I deliver</td><td>40% efficiency gains via process automation & workflow optimization</td></tr>
+          <tr><td>Domain expertise</td><td>Insurance Claims, Guidewire (GWCC), BFSI Operations</td></tr>
+          <tr><td>Visa path</td><td>Kennismigrant (NL), Critical Skills (IE), EU Blue Card (LU) — 2-4 weeks</td></tr>
+          <tr><td>Core strengths</td><td>Business Analysis, Process Improvement, Stakeholder Management, AI Workflow Design</td></tr>
+        </table>
       </div>
+    </section>
 
-      <!-- Visa -->
-      <div id="visa" class="visa-grid mb-20">
-        <div class="glass-card p-8 reveal"><i class="fas fa-wind text-2xl text-orange-400 mb-2"></i><h3 class="font-semibold text-lg">🇳🇱 Netherlands</h3><p class="text-gray-500 text-sm">Highly Skilled Migrant (Kennismigrant). Recognized sponsors: ING, Rabobank, NN Group, Aegon, Adyen.</p></div>
-        <div class="glass-card p-8 reveal"><i class="fas fa-music text-2xl text-emerald-400 mb-2"></i><h3 class="font-semibold text-lg">🇮🇪 Ireland</h3><p class="text-gray-500 text-sm">Critical Skills Employment Permit. AI and Technology roles on eligible list.</p></div>
-        <div class="glass-card p-8 reveal"><i class="fas fa-flag-checkered text-2xl text-green-400 mb-2"></i><h3 class="font-semibold text-lg">🇱🇺 Luxembourg</h3><p class="text-gray-500 text-sm">EU Blue Card / Salaried Worker Permit. Finance hub, English-friendly, high salaries.</p></div>
+    <!-- Expertise Grid -->
+    <section id="expertise" class="container reveal">
+      <div class="section-header">
+        <h2>Core Expertise</h2>
       </div>
+      <div class="grid-4">
+        <div class="card"><i class="fas fa-chart-line" style="font-size: 24px; margin-bottom: 12px; color: #0071e3;"></i><h3>Business Analysis</h3><p>Requirements gathering, process mapping, stakeholder management</p></div>
+        <div class="card"><i class="fas fa-robot" style="font-size: 24px; margin-bottom: 12px; color: #0071e3;"></i><h3>AI Workflow Automation</h3><p>LLM pipelines, prompt engineering, workflow orchestration</p></div>
+        <div class="card"><i class="fas fa-shield-alt" style="font-size: 24px; margin-bottom: 12px; color: #0071e3;"></i><h3>BFSI Operations</h3><p>Insurance claims, Guidewire, KYC/AML compliance</p></div>
+        <div class="card"><i class="fas fa-chart-simple" style="font-size: 24px; margin-bottom: 12px; color: #0071e3;"></i><h3>Process Optimization</h3><p>KPI tracking, QC frameworks, efficiency analysis</p></div>
+      </div>
+    </section>
 
-      <!-- Connect -->
-      <div class="text-center reveal"><h2 class="text-3xl font-bold mb-4 gradient-text">Let's Connect</h2><p class="text-gray-400 mb-6">Open to Business Analyst, Process Analyst, or Operations Analyst roles in Luxembourg, Netherlands, or Ireland.</p><div class="flex flex-wrap justify-center gap-4"><a href="mailto:prswaminathan001@gmail.com" class="btn-primary"><i class="fas fa-envelope mr-2"></i> prswaminathan001@gmail.com</a><a href="https://linkedin.com/in/prswaminathan" target="_blank" class="btn-outline"><i class="fab fa-linkedin mr-2"></i> LinkedIn</a><a href="https://github.com/pkswaminathan001" target="_blank" class="btn-outline"><i class="fab fa-github mr-2"></i> GitHub</a></div><p class="mt-8 text-gray-600 text-sm">🌍 Based in India • CET/BST overlap ready • Open to hybrid relocation</p></div>
-    </main>
-  </div>
+    <!-- Experience -->
+    <section id="experience" class="container reveal">
+      <div class="card">
+        <h2 style="margin-bottom: 24px;">Professional Experience</h2>
+        <div style="margin-bottom: 24px;">
+          <h3 style="font-weight: 600;">Process Associate — AI Workflow & Automation Lead</h3>
+          <p style="color: #6e6e73; margin-bottom: 12px;">HCL Technologies — USAA Insurance Project • Jan 2023 – Present</p>
+          <ul style="padding-left: 20px; color: #1d1d1f;">
+            <li>First AI automation → 40% reduction in manual claims processing time</li>
+            <li>99.2% claims accuracy maintained across 6,000+ transactions</li>
+            <li>QC frameworks reducing rework errors by 25% across analyst team</li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="font-weight: 600;">AI Workflow Developer (Independent)</h3>
+          <p style="color: #6e6e73; margin-bottom: 12px;">TRAS — Resume-to-Job Match Analyzer • 2024–2025</p>
+          <ul style="padding-left: 20px;">
+            <li>Built web-based tool with Google Gemini API for Business Analyst roles</li>
+            <li>ATS compatibility check, keyword detection, resume improvement suggestions</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="container reveal">
+      <div class="section-header">
+        <h2>Featured Projects</h2>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <i class="fas fa-chart-simple" style="font-size: 24px; margin-bottom: 12px; color: #0071e3;"></i>
+          <h3>🎯 TRAS AI</h3>
+          <p style="margin: 8px 0;">Gemini-powered resume-to-job match analyzer. ATS compatibility, skill gap analysis, improvement suggestions.</p>
+          <div style="display: flex; gap: 8px; margin: 12px 0;"><span class="badge">Gemini API</span><span class="badge">HTML/CSS/JS</span></div>
+          <a href="tras.html" style="color: #0071e3; font-weight: 500;">Try Tool →</a>
+        </div>
+        <div class="card">
+          <i class="fas fa-search" style="font-size: 24px; margin-bottom: 12px; color: #0071e3;"></i>
+          <h3>🇪🇺 EU Job Hunter AI</h3>
+          <p style="margin: 8px 0;">GitHub Actions workflow analyzing CV-JD fit for Luxembourg, Netherlands, and Ireland roles.</p>
+          <div style="display: flex; gap: 8px; margin: 12px 0;"><span class="badge">GitHub Actions</span><span class="badge">Python</span><span class="badge">Qwen-Max</span></div>
+          <a href="https://github.com/pkswaminathan001/Luxembourg" target="_blank" style="color: #0071e3; font-weight: 500;">View Repository →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visa Sponsorship -->
+    <section id="visa" class="container reveal">
+      <div class="section-header">
+        <h2>Visa Sponsorship Path</h2>
+      </div>
+      <div class="grid-3">
+        <div class="card"><i class="fas fa-wind" style="font-size: 24px; margin-bottom: 12px; color: #0071e3;"></i><h3>🇳🇱 Netherlands</h3><p>Highly Skilled Migrant (Kennismigrant). Sponsors: ING, Rabobank, NN, Aegon, Adyen.</p></div>
+        <div class="card"><i class="fas fa-music" style="font-size: 24px; margin-bottom: 12px; color: #0071e3;"></i><h3>🇮🇪 Ireland</h3><p>Critical Skills Employment Permit. AI on eligible list.</p></div>
+        <div class="card"><i class="fas fa-flag-checkered" style="font-size: 24px; margin-bottom: 12px; color: #0071e3;"></i><h3>🇱🇺 Luxembourg</h3><p>EU Blue Card. Finance hub, English-friendly.</p></div>
+      </div>
+    </section>
+
+    <!-- Let's Connect -->
+    <section class="container reveal" style="text-align: center;">
+      <div class="card">
+        <h2 style="margin-bottom: 16px;">Let's Connect</h2>
+        <p style="margin-bottom: 24px;">Open to Business Analyst, Process Analyst, or Operations Analyst roles in Luxembourg, Netherlands, or Ireland.</p>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;">
+          <a href="mailto:prswaminathan001@gmail.com" class="btn-primary"><i class="fas fa-envelope"></i> prswaminathan001@gmail.com</a>
+          <a href="https://linkedin.com/in/prswaminathan" target="_blank" class="btn-outline"><i class="fab fa-linkedin"></i> LinkedIn</a>
+          <a href="https://github.com/pkswaminathan001" target="_blank" class="btn-outline"><i class="fab fa-github"></i> GitHub</a>
+        </div>
+        <p style="margin-top: 24px; color: #6e6e73; font-size: 0.8rem;">🌍 Based in India • CET/BST overlap ready • Open to hybrid relocation</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    <p>© 2026 PR Swaminathan. Built with care.</p>
+  </footer>
 
   <script>
     const reveals = document.querySelectorAll('.reveal');
-    function reveal() { reveals.forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active'); }); }
+    function reveal() {
+      reveals.forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight - 100) {
+          el.classList.add('active');
+        }
+      });
+    }
     window.addEventListener('scroll', reveal);
     reveal();
   </script>
