@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PR Swaminathan — Business Analyst</title>
-  <meta name="description" content="Business Analyst | Insurance Operations | Guidewire | 40% efficiency gain" />
+  <title>PR Swaminathan — Business Analyst | AI Programs</title>
+  <meta name="description" content="Business Analyst | Insurance Operations | AI-Powered Tools | 40% efficiency gain" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
@@ -25,14 +25,13 @@
       scroll-behavior: smooth;
     }
 
-    /* Apple-style container */
     .container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 24px;
     }
 
-    /* Apple-style navigation */
+    /* Navigation */
     nav {
       position: fixed;
       top: 0;
@@ -79,7 +78,7 @@
       color: #0066cc;
     }
 
-    /* Hero section */
+    /* Hero */
     .hero {
       text-align: center;
       padding: 140px 0 80px;
@@ -193,7 +192,7 @@
     .card {
       background: #f5f5f7;
       border-radius: 24px;
-      padding: 40px;
+      padding: 32px;
       transition: transform 0.2s, box-shadow 0.2s;
     }
 
@@ -211,15 +210,89 @@
     .card h3 {
       font-size: 1.1rem;
       font-weight: 600;
-      margin-bottom: 4px;
+      margin-bottom: 8px;
     }
 
     .card p {
       color: #6e6e73;
-      line-height: 1.5;
+      font-size: 0.9rem;
     }
 
-    /* Grids */
+    /* AI Programs Grid - Product Card Style */
+    .ai-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin: 48px 0;
+    }
+
+    .ai-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 28px;
+      transition: all 0.3s ease;
+      border: 1px solid #e8e8ed;
+    }
+
+    .ai-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+      border-color: #0071e3;
+    }
+
+    .ai-icon {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .ai-card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .ai-card .badge-new {
+      display: inline-block;
+      background: #e8f0fe;
+      color: #0066cc;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    .ai-card .price {
+      font-size: 0.85rem;
+      color: #6e6e73;
+      margin: 12px 0;
+    }
+
+    .ai-card .price strong {
+      color: #1d1d1f;
+      font-weight: 600;
+    }
+
+    .ai-link {
+      display: inline-block;
+      margin-top: 16px;
+      color: #0071e3;
+      font-weight: 500;
+      text-decoration: none;
+      font-size: 0.85rem;
+    }
+
+    .ai-link:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .ai-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Other sections */
     .grid-2 {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -244,7 +317,6 @@
       }
     }
 
-    /* Section spacing */
     section {
       margin: 120px 0;
     }
@@ -267,7 +339,6 @@
       margin: 0 auto;
     }
 
-    /* Badges */
     .badge {
       display: inline-block;
       background: #e8e8ed;
@@ -295,7 +366,6 @@
       color: #1d1d1f;
     }
 
-    /* Table */
     .custom-table {
       width: 100%;
       border-collapse: collapse;
@@ -311,7 +381,6 @@
       width: 35%;
     }
 
-    /* Experience list */
     .experience-list {
       list-style: none;
       padding-left: 0;
@@ -328,7 +397,6 @@
       margin-bottom: 12px;
     }
 
-    /* Reveal animation */
     .reveal {
       opacity: 0;
       transform: translateY(20px);
@@ -340,7 +408,6 @@
       transform: translateY(0);
     }
 
-    /* Footer */
     footer {
       border-top: 1px solid #e8e8ed;
       padding: 48px 0;
@@ -353,10 +420,6 @@
     a {
       text-decoration: none;
     }
-
-    .icon {
-      margin-right: 8px;
-    }
   </style>
 </head>
 <body>
@@ -366,6 +429,7 @@
       <a href="/" class="logo">PR Swaminathan</a>
       <div class="nav-links">
         <a href="#about">About</a>
+        <a href="#ai-programs">AI Programs</a>
         <a href="#expertise">Expertise</a>
         <a href="#experience">Experience</a>
         <a href="#projects">Projects</a>
@@ -376,10 +440,11 @@
   </nav>
 
   <main>
+    <!-- Hero -->
     <div class="hero container reveal">
-      <div class="hero-badge">✨ Open to work</div>
-      <h1>Business Analyst<br>Insurance Operations</h1>
-      <p class="hero-subtitle">MBA | Ex-HCL (40% efficiency gain) | Guidewire | AI-Powered Automation</p>
+      <div class="hero-badge">✨ AI-Powered Portfolio</div>
+      <h1>Business Analyst<br>AI Programs & Automation</h1>
+      <p class="hero-subtitle">MBA | Ex-HCL (40% efficiency gain) | Guidewire | Building AI Tools for Business</p>
       <div class="inline-badge-group">
         <span class="inline-badge">🇱🇺 Luxembourg</span>
         <span class="inline-badge">🇳🇱 Netherlands</span>
@@ -387,11 +452,12 @@
         <span class="inline-badge">⏰ CET/BST Overlap Ready</span>
       </div>
       <div style="display: flex; gap: 16px; justify-content: center;">
-        <a href="tras.html" class="btn-primary">Try TRAS Analyzer →</a>
+        <a href="#ai-programs" class="btn-primary">Explore AI Programs →</a>
         <a href="#projects" class="btn-outline">View Projects</a>
       </div>
     </div>
 
+    <!-- Stats -->
     <div class="container stats-grid reveal">
       <div><div class="stat-number">40%</div><div class="stat-label">Efficiency Gain</div></div>
       <div><div class="stat-number">99.2%</div><div class="stat-label">Accuracy Rate</div></div>
@@ -399,27 +465,100 @@
       <div><div class="stat-number">25%</div><div class="stat-label">Rework Reduction</div></div>
     </div>
 
+    <!-- About -->
     <section id="about" class="container reveal">
       <div class="card">
         <h2>About Me</h2>
-        <p>Business Analyst with MBA and experience supporting insurance operations at <strong>HCL Technologies (USAA project)</strong>. Contributed to the first AI automation — reducing manual claims processing by <strong>40%</strong> across <strong>6,000+ transactions</strong> while maintaining <strong>99.2% accuracy</strong>.</p>
+        <p>Business Analyst with MBA and experience supporting insurance operations at <strong>HCL Technologies (USAA project)</strong>. Contributed to the first AI automation — reducing manual claims processing by <strong>40%</strong> across <strong>6,000+ transactions</strong> while maintaining <strong>99.2% accuracy</strong>. Now building AI-powered tools for business analysis and recruitment.</p>
       </div>
     </section>
 
+    <!-- AI PROGRAMS SECTION - Apple Intelligence Style -->
+    <section id="ai-programs" class="container reveal">
+      <div class="section-header">
+        <h2>AI Programs & Tools</h2>
+        <p>Production-ready AI applications built for business analysis, recruitment, and automation. Free to use.</p>
+      </div>
+
+      <div class="ai-grid">
+        <!-- TRAS AI - Resume Analyzer -->
+        <div class="ai-card">
+          <div class="ai-icon">🤖</div>
+          <div class="badge-new">✨ Free • Gemini-Powered</div>
+          <h3>TRAS AI</h3>
+          <p>Resume-to-Job Description match analyzer. ATS compatibility scoring, skill gap analysis, and resume rewrite suggestions.</p>
+          <div class="price"><strong>₹0</strong> / free • API key required</div>
+          <a href="tras.html" class="ai-link">Try TRAS Analyzer →</a>
+        </div>
+
+        <!-- EU Job Hunter AI -->
+        <div class="ai-card">
+          <div class="ai-icon">🇪🇺</div>
+          <div class="badge-new">⚡ GitHub Actions</div>
+          <h3>EU Job Hunter AI</h3>
+          <p>Automated CV-JD fit analyzer for Luxembourg, Netherlands, and Ireland roles. Outputs fit scores, keyword gaps, and cover letter hooks.</p>
+          <div class="price"><strong>₹0</strong> / open source</div>
+          <a href="https://github.com/pkswaminathan001/Luxembourg" target="_blank" class="ai-link">View on GitHub →</a>
+        </div>
+
+        <!-- AI Email Campaign Generator -->
+        <div class="ai-card">
+          <div class="ai-icon">📧</div>
+          <div class="badge-new">🔨 Building</div>
+          <h3>AI Email Campaign Generator</h3>
+          <p>Generate marketing emails for Business Analyst roles. ATS-optimized subject lines and body content.</p>
+          <div class="price"><strong>₹0</strong> / coming soon</div>
+          <a href="#" class="ai-link">Preview →</a>
+        </div>
+
+        <!-- AI Social Ad Creator -->
+        <div class="ai-card">
+          <div class="ai-icon">📱</div>
+          <div class="badge-new">📅 Planned</div>
+          <h3>AI Social Ad Creator</h3>
+          <p>Generate Facebook, Instagram, and LinkedIn ad copy with AI prompts tailored for insurance and BFSI roles.</p>
+          <div class="price"><strong>₹0</strong> / planned</div>
+          <a href="#" class="ai-link">Coming soon →</a>
+        </div>
+
+        <!-- AI Writing Tools (Apple Intelligence style) -->
+        <div class="ai-card">
+          <div class="ai-icon">✍️</div>
+          <div class="badge-new">✨ Gemini API</div>
+          <h3>AI Writing Tools</h3>
+          <p>Proofread, summarize, and adjust tone of any text. Professional, friendly, or concise — powered by Gemini.</p>
+          <div class="price"><strong>₹0</strong> / with API key</div>
+          <a href="tras.html" class="ai-link">Try Writing Tools →</a>
+        </div>
+
+        <!-- Resume Optimizer -->
+        <div class="ai-card">
+          <div class="ai-icon">📄</div>
+          <div class="badge-new">🔥 ATS Ready</div>
+          <h3>Resume Optimizer</h3>
+          <p>Upload your resume and get instant feedback on ATS compatibility, keyword density, and section alignment.</p>
+          <div class="price"><strong>₹0</strong> / in beta</div>
+          <a href="tras.html" class="ai-link">Optimize Resume →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recruiters Table -->
     <section class="container reveal">
       <div class="section-header">
         <h2>🎯 For Recruiters & Hiring Managers</h2>
       </div>
       <div class="card">
         <table class="custom-table">
-          <tr><td>What I deliver</td><td>40% efficiency gains via process automation & workflow optimization</td></tr>
-          <tr class="border-t"><td>Domain expertise</td><td>Insurance Claims, Guidewire (GWCC), BFSI Operations</td></tr>
-          <tr class="border-t"><td>Visa path</td><td>Kennismigrant (NL), Critical Skills (IE), EU Blue Card (LU) — 2-4 weeks</td></tr>
-          <tr class="border-t"><td>Core strengths</td><td>Business Analysis, Process Improvement, Stakeholder Management, AI Workflow Design</td></tr>
+          <tr><td class="font-semibold">What I deliver</td><td>40% efficiency gains via process automation & workflow optimization</td></tr>
+          <tr><td class="font-semibold">Domain expertise</td><td>Insurance Claims, Guidewire (GWCC), BFSI Operations</td></tr>
+          <tr><td class="font-semibold">Visa path</td><td>Kennismigrant (NL), Critical Skills (IE), EU Blue Card (LU) — 2-4 weeks</td></tr>
+          <tr><td class="font-semibold">Core strengths</td><td>Business Analysis, Process Improvement, Stakeholder Management, AI Workflow Design</td></tr>
         </table>
       </div>
     </section>
 
+    <!-- Expertise -->
     <section id="expertise" class="container reveal">
       <div class="section-header">
         <h2>Core Expertise</h2>
@@ -432,6 +571,7 @@
       </div>
     </section>
 
+    <!-- Experience -->
     <section id="experience" class="container reveal">
       <div class="card">
         <h2>Professional Experience</h2>
@@ -455,6 +595,7 @@
       </div>
     </section>
 
+    <!-- Projects -->
     <section id="projects" class="container reveal">
       <div class="section-header">
         <h2>Featured Projects</h2>
@@ -477,6 +618,7 @@
       </div>
     </section>
 
+    <!-- Visa -->
     <section id="visa" class="container reveal">
       <div class="section-header">
         <h2>Visa Sponsorship Path</h2>
@@ -488,6 +630,7 @@
       </div>
     </section>
 
+    <!-- Connect -->
     <section class="container reveal" style="text-align: center;">
       <div class="card">
         <h2>Let's Connect</h2>
@@ -503,7 +646,7 @@
   </main>
 
   <footer class="container">
-    <p>© 2026 PR Swaminathan. Designed for clarity and impact.</p>
+    <p>© 2026 PR Swaminathan. AI Programs — free tools for business analysis.</p>
   </footer>
 
   <script>
