@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Salary Predictor - TRAS AI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@google/generative-ai@0.21.0/dist/index.min.js"></script>
+  <style>
+    body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+    .card { background: white; border-radius: 1.5rem; padding: 2rem; max-width: 1000px; margin: 2rem auto; }
+    .btn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; border: none; width: 100%; }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .result-card { background: #f8fafc; padding: 1rem; margin: 0.75rem 0; border-radius: 0.5rem; border-left: 4px solid #10b981; }
+    .loading { display: inline-block; width: 20px; height: 20px; border: 3px solid #f3f3f3; border-top: 3px solid #667eea; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 8px; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .api-input { background: #fef9c3; border: 1px solid #eab308; }
+  </style>
+</head>
+<body class="p-4">
+  <div class="card">
+    <div class="text-center mb-6">
+      <h1 class="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">💰 AI Salary Predictor</h1>
+      <p class="text-gray-600">Estimate your market salary for BA roles in Europe</p>
+      <a href="./" class="text-sm text-indigo-600 hover:underline">← Back to Portfolio</a>
+    </div>
+
+    <div class="mb-4 p-3 bg-amber-50 rounded-lg border border-amber-200">
+      <label class="block text-sm font-semibold mb-1">🔑 Google Gemini API Key</label>
+      <input type="password" id="apiKey" class="w-full p-2 border rounded-md api-input">
+    </div>
+
+    <div class="space-y-4 mb-4">
+      <div>
+        <label class="block text-sm font-semibold mb-1">💼 Job Title</label>
+        <input type="text" id="jobTitle" class="w-full p-2 border rounded-md" placeholder="e.g., Business Analyst, Senior BA, Operations Analyst">
+      </div>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-semibold mb-1">📍 Country</label>
+          <select id="country" class="w-full p-2 border rounded-md">
+            <option value="Luxembourg">🇱🇺 Luxembourg</option>
+            <option value="Netherlands">🇳🇱 Netherlands</option>
+            <option value="Ireland">🇮🇪 Ireland</option>
+            <option value="Germany">🇩🇪 Germany</option>
+            <option value="Belgium">🇧🇪 Belgium</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold mb-1">📅 Years of Experience</label>
+          <input type="number" id="experience" class="w-full p-2 border rounded-md" placeholder="Years" min="0" max="30">
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm font-semibold mb-1">📄 Your Resume (Optional - for better accuracy)</label>
+        <textarea id="resume" rows="4" class="w-full p-2 border rounded-md" placeholder="Paste your resume for personalized prediction..."></textarea>
+      </div>
+    </div>
+
+    <button id="predictBtn" class="btn">💰 Predict My Salary</button>
+    <div id="result" class="mt-6 hidden"></div>
+  </div>
+
+  <script>
+    const predictBtn = document.getElementById('predictBtn');
+    const resultDiv = document.getElementById('result');
+    const apiKeyInput = document.getElementById('apiKey');
+
+    if (localStorage.getItem('gemini_api_key')) apiKeyInput.value = localStorage.getItem('gemini_api_key');
+    apiKeyInput.addEventListener('change', () => { if(apiKeyInput.value.trim()) localStorage.setItem('gemini_api_key', apiKeyInput.value.trim()); });
+
+    predictBtn.addEventListener('click', async () => {
+      const jobTitle = document.getElementById('jobTitle').value.trim();
+      const country = document.getElementById('country').value;
+      const experience = document.getElementById('experience').value;
+      const resume = document.getElementById('resume').value.trim();
+      const apiKey = apiKeyInput.value.trim();
+
+      if (!jobTitle) { alert('Please enter a job title'); return; }
+      if (!apiKey) { alert('Enter your Gemini API key'); return; }
+
+      predictBtn.disabled = true;
+      predictBtn.innerHTML = '<span class="loading"></span> Analyzing Market Data...';
+      resultDiv.classList.remove('hidden');
+      resultDiv.innerHTML = '<div class="text-center py-8"><div class="loading"></div> AI is calculating salary range...</div>';
+
+      try {
+        const { GoogleGenerativeAI } = window;
+        const genAI = new GoogleGenerativeAI(apiKey);
+        const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+
+        const prompt = `Estimate salary for: ${jobTitle} in ${country} with ${experience} years experience.
+${resume ? `Resume context: ${resume.substring(0, 1000)}` : ''}
+
+Return ONLY valid JSON:
+{
+  "minSalary": 45000,
+  "maxSalary": 75000,
+  "currency": "EUR",
+  "marketRate": "Competitive",
+  "factors": ["Factor 1", "Factor 2", "Factor 3"],
+  "negotiationTip": "Brief negotiation advice"
+}`;
+
+        const result = await model.generateContent(prompt);
+        const response = await result.response;
+        let text = response.text().replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+        const data = JSON.parse(text);
+
+        resultDiv.innerHTML = `
+          <div class="text-center mb-4">
+            <div class="text-5xl font-bold text-green-600">${data.minSalary} - ${data.maxSalary} <span class="text-2xl">${data.currency}</span></div>
+            <div class="text-gray-600 mt-1">${data.marketRate}</div>
+          </div>
+          <div class="result-card"><strong>📊 Factors Affecting This Range:</strong><br>${data.factors.map(f => `• ${f}`).join('<br>')}</div>
+          <div class="result-card"><strong>💡 Negotiation Tip:</strong><br>${data.negotiationTip}</div>
+          <div class="text-center text-xs text-gray-500 mt-4">💰 Salaries based on market data for ${country} | Updated 2026</div>
+        `;
+      } catch (error) {
+        resultDiv.innerHTML = `<div class="result-card bg-red-50 border-l-red-500"><strong>Error:</strong> ${error.message}</div>`;
+      } finally {
+        predictBtn.disabled = false;
+        predictBtn.innerHTML = '💰 Predict My Salary';
+      }
+    });
+  </script>
+</body>
+</html>
