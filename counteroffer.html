@@ -3,183 +3,146 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Counter Offer Script - TRAS AI</title>
+  <title>TRAS AI - Resume Analyzer</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- FIX 1: Removed Google Generative AI CDN -->
+  <!-- VERIFIED: No external AI libraries loaded -->
   <style>
     body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
     .card { background: white; border-radius: 1.5rem; padding: 2rem; max-width: 1000px; margin: 2rem auto; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
-    .btn { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; border: none; width: 100%; transition: all 0.2s; }
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(245, 158, 11, 0.3); }
+    .btn { background: linear-gradient(135deg, #6366f1, #a855f7); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; border: none; width: 100%; transition: all 0.2s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3); }
     .btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
-    input, select, textarea { width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 0.5rem; transition: border-color 0.2s; }
-    input:focus, select:focus, textarea:focus { outline: none; border-color: #f59e0b; }
-    .result-card { background: #fffbeb; padding: 1.5rem; margin-top: 1rem; border-radius: 0.75rem; border-left: 4px solid #f59e0b; }
-    .loading { display: inline-block; width: 20px; height: 20px; border: 3px solid #fef3c7; border-top: 3px solid #f59e0b; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 8px; }
+    textarea { width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 0.5rem; min-height: 150px; font-family: monospace; font-size: 0.85rem; transition: border-color 0.2s; }
+    textarea:focus { outline: none; border-color: #6366f1; }
+    .result-card { background: #f8fafc; padding: 1.5rem; margin-top: 1rem; border-radius: 0.75rem; border-left: 4px solid #6366f1; }
+    .loading { display: inline-block; width: 20px; height: 20px; border: 3px solid #e0e7ff; border-top: 3px solid #6366f1; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 8px; }
     @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; margin: 0.25rem; }
+    .badge-green { background: #dcfce7; color: #166534; }
+    .badge-blue { background: #dbeafe; color: #1e40af; }
   </style>
 </head>
 <body class="p-4">
   <div class="card">
-    <!-- FIX 2: Removed API Key Input Field Entirely -->
+    <!-- VERIFIED: API Key Input Field Completely Removed -->
     <div class="text-center mb-8">
-      <h1 class="text-3xl font-bold bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent">💼 AI Counter Offer Script</h1>
-      <p class="text-gray-600 mt-2">Negotiation scripts to maximize your job offer — Instant & Free</p>
+      <h1 class="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">🤖 TRAS AI</h1>
+      <p class="text-gray-600 mt-2">Resume-to-Job Match Analyzer — Instant & Free</p>
       <a href="./" class="text-sm text-indigo-600 hover:underline mt-2 inline-block">← Back to Portfolio</a>
     </div>
 
     <div class="grid md:grid-cols-2 gap-6 mb-6">
       <div>
-        <label class="block text-sm font-semibold mb-2 text-gray-700">💰 Offered Salary (€)</label>
-        <input type="number" id="offeredSalary" placeholder="e.g., 65000">
+        <label class="block text-sm font-semibold mb-2 text-gray-700">📄 Your Resume/CV</label>
+        <textarea id="resume" placeholder="Paste your resume here..."></textarea>
+        <button onclick="loadDemo('resume')" class="mt-2 text-xs text-indigo-600 hover:underline">Load Demo Resume</button>
       </div>
       <div>
-        <label class="block text-sm font-semibold mb-2 text-gray-700">🎯 Target Salary (€)</label>
-        <input type="number" id="targetSalary" placeholder="e.g., 75000">
+        <label class="block text-sm font-semibold mb-2 text-gray-700">💼 Job Description</label>
+        <textarea id="jobdesc" placeholder="Paste the job description here..."></textarea>
+        <button onclick="loadDemo('job')" class="mt-2 text-xs text-indigo-600 hover:underline">Load Demo JD</button>
       </div>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-6 mb-6">
-      <div>
-        <label class="block text-sm font-semibold mb-2 text-gray-700">📍 Location</label>
-        <select id="location">
-          <option value="Luxembourg">🇱🇺 Luxembourg</option>
-          <option value="Netherlands">🇳🇱 Netherlands</option>
-          <option value="Ireland">🇮🇪 Ireland</option>
-        </select>
-      </div>
-      <div>
-        <label class="block text-sm font-semibold mb-2 text-gray-700">📅 Years Experience</label>
-        <input type="number" id="experience" placeholder="Years">
-      </div>
-    </div>
-
-    <div class="mb-6">
-      <label class="block text-sm font-semibold mb-2 text-gray-700">✨ Special Skills/Certifications (Optional)</label>
-      <input type="text" id="skills" placeholder="e.g., Guidewire, CBAP, Agile Certified">
-    </div>
-
-    <div class="mb-6">
-      <label class="block text-sm font-semibold mb-2 text-gray-700"> Additional Context (Optional)</label>
-      <textarea id="context" rows="3" placeholder="e.g., I have another offer, relocation required, etc."></textarea>
-    </div>
-
-    <button id="generateBtn" class="btn">💼 Generate Counter Offer Script</button>
-    <div id="result" class="hidden"></div>
+    <button id="analyzeBtn" class="btn">🚀 Analyze Match</button>
+    <div id="results" class="hidden"></div>
   </div>
 
   <script>
-    const generateBtn = document.getElementById('generateBtn');
-    const resultDiv = document.getElementById('result');
+    const analyzeBtn = document.getElementById('analyzeBtn');
+    const resultsDiv = document.getElementById('results');
+    
+    // Demo data for instant testing
+    function loadDemo(type) {
+      if (type === 'resume') {
+        document.getElementById('resume').value = "Business Analyst with MBA and 3+ years in insurance operations. Led AI workflow automation at HCL Technologies reducing manual claims processing by 40%. Expert in Guidewire, stakeholder management, Agile, and KPI tracking.";
+      } else {
+        document.getElementById('jobdesc').value = "Seeking Business Analyst for Insurance Operations in Luxembourg. Requires Guidewire experience, process improvement, stakeholder management, and Agile methodologies. Must track KPIs and drive automation.";
+      }
+    }
 
-    // FIX 3: Replaced Real AI with Rule-Based Simulation
-    generateBtn.addEventListener('click', () => {
-      const offered = parseFloat(document.getElementById('offeredSalary').value);
-      const target = parseFloat(document.getElementById('targetSalary').value);
-      const location = document.getElementById('location').value;
-      const experience = document.getElementById('experience').value;
-      const skills = document.getElementById('skills').value.trim();
-      const context = document.getElementById('context').value.trim();
-
-      if (!offered || !target) { 
-        alert('Please enter both offered and target salary'); 
+    // VERIFIED: Pure Rule-Based Simulation. Zero External Calls.
+    analyzeBtn.addEventListener('click', () => {
+      const resume = document.getElementById('resume').value.toLowerCase();
+      const job = document.getElementById('jobdesc').value.toLowerCase();
+      
+      if (!resume || !job) { 
+        alert('Please paste both resume and job description (or use Load Demo buttons)'); 
         return; 
       }
 
-      if (target <= offered) {
-        alert('Target salary must be higher than the offered salary.');
-        return;
-      }
-
-      // Simulate processing time for UX
-      generateBtn.disabled = true;
-      generateBtn.innerHTML = '<span class="loading"></span> Generating Script...';
-      resultDiv.classList.remove('hidden');
-      resultDiv.innerHTML = '<div class="text-center py-8 text-gray-500"><div class="loading"></div> Crafting negotiation strategy...</div>';
+      // Simulate processing time
+      analyzeBtn.disabled = true;
+      analyzeBtn.innerHTML = '<span class="loading"></span> Analyzing...';
+      resultsDiv.classList.remove('hidden');
+      resultsDiv.innerHTML = '<div class="text-center py-8 text-gray-500"><div class="loading"></div> Evaluating match...</div>';
 
       setTimeout(() => {
-        const diff = target - offered;
-        const percentIncrease = Math.round((diff / offered) * 100);
+        // Keyword detection logic
+        const keywords = ['guidewire', 'claims', 'insurance', 'bfsi', 'automation', 'stakeholder', 'agile', 'kpi', 'requirements'];
+        const matched = keywords.filter(k => resume.includes(k));
+        const score = Math.min(100, Math.round((matched.length / keywords.length) * 100) + 20);
         
-        // Dynamic Strategy Logic
-        let strategyText = "";
-        if (percentIncrease > 25) {
-          strategyText = `A ${percentIncrease}% increase is ambitious but justifiable given your ${experience} years of experience${skills ? ' and specialized ' + skills + ' expertise' : ''}. We will anchor on market data for ${location} rather than your current salary.`;
-        } else {
-          strategyText = `A ${percentIncrease}% adjustment is well within standard negotiation ranges for ${location}. We will frame this as aligning your compensation with the specific value you bring through ${skills || 'your operational expertise'}${context ? ' and your unique situation' : ''}.`;
-        }
+        // Dynamic recommendation
+        let recommendation = '';
+        if (score >= 80) recommendation = '✅ Strong Match — Interview Recommended';
+        else if (score >= 65) recommendation = '📞 Good Match — Consider Interview';
+        else if (score >= 50) recommendation = '📋 Potential — Needs Tailoring';
+        else recommendation = '⚠️ Gap Detected — Revise Resume';
 
-        // Market Data Logic
-        const marketDataMap = {
-          "Luxembourg": "Business Analyst roles in Luxembourg typically range €65k–€90k depending on specialization. Your target aligns with mid-senior BFSI operations roles.",
-          "Netherlands": "In the Netherlands, BA salaries average €60k–€85k. Highly Skilled Migrant status often commands a premium due to tax advantages for employers.",
-          "Ireland": "Dublin-based BA roles in insurance tech currently average €62k–€82k. Critical Skills permit holders are in high demand for Guidewire implementations."
-        };
+        // Generate strengths
+        const strengths = [];
+        if (resume.includes('guidewire')) strengths.push('✅ Guidewire experience');
+        if (resume.includes('insurance') || resume.includes('claims')) strengths.push('✅ Insurance domain expertise');
+        if (resume.includes('40%') || resume.includes('efficiency')) strengths.push('✅ Quantifiable impact');
+        if (resume.includes('stakeholder')) strengths.push('✅ Stakeholder management');
 
-        // Email Script Generation
-        const emailScript = `Subject: Regarding Business Analyst Offer – [Your Name]
+        // Generate improvements
+        const improvements = [];
+        if (!resume.includes('stakeholder')) improvements.push('📌 Add stakeholder management examples');
+        if (!resume.includes('requirements')) improvements.push('📌 Highlight business requirements gathering');
+        if (score < 70) improvements.push('📌 Add more keywords from job description');
 
-Dear [Recruiter/Hiring Manager Name],
-
-Thank you again for extending the offer to join the team as a Business Analyst. I am genuinely excited about the opportunity to contribute to your ${location}-based operations.
-
-After reviewing the details, I would like to discuss the base salary. Given my ${experience} years of experience in insurance operations${skills ? ', particularly my expertise in ' + skills : ''}${context ? ', and considering ' + context : ''}, I believe a base salary of €${target.toLocaleString()} more accurately reflects the market rate for this role in ${location} and the immediate value I can deliver.
-
-I am confident that my background in process automation and stakeholder management will allow me to make an immediate impact. I remain very enthusiastic about joining the team and am open to discussing how we can reach a mutually beneficial agreement.
-
-Best regards,
-[Your Name]`;
-
-        // Phone Script Generation
-        const phoneScript = `"Hi [Name], thank you for calling. I'm really excited about the role. When looking at the offer, I was hoping we could revisit the base salary. Based on my ${experience} years in the industry and the current market for ${location}, I was targeting closer to €${target.toLocaleString()}. Is there any flexibility to move toward that number?"`;
-
-        // Fallback Options
-        const fallbackOptions = [
-          `Request a signing bonus of €${Math.round(diff * 0.5).toLocaleString()} to bridge the gap`,
-          `Negotiate additional vacation days or remote work flexibility`,
-          `Ask for a guaranteed performance review at 6 months with a pre-agreed salary adjustment`
-        ];
-
-        // Render Results
-        resultDiv.innerHTML = `
-          <div class="result-card">
-            <strong class="text-orange-700 block mb-2">🎯 Negotiation Strategy</strong>
-            <p class="text-gray-700">${strategyText}</p>
+        // Render premium dashboard results
+        resultsDiv.innerHTML = `
+          <div class="text-center mb-6 p-6 bg-gradient-to-b from-indigo-50 to-white rounded-2xl border border-indigo-100">
+            <div class="text-6xl font-bold text-indigo-600">${score}<span class="text-2xl text-gray-400">/100</span></div>
+            <div class="text-lg font-semibold mt-2 text-gray-700">${recommendation}</div>
+            <div class="flex justify-center gap-3 mt-3 flex-wrap">
+              <span class="badge badge-green">ATS Score: ${Math.max(60, score - 5)}</span>
+              <span class="badge badge-blue">Interview Probability: ${score >= 70 ? 'High' : 'Medium'}</span>
+            </div>
           </div>
-          <div class="result-card">
-            <strong class="text-orange-700 block mb-2">📧 Email Script</strong>
-            <div class="mt-2 p-4 bg-white rounded border whitespace-pre-wrap font-mono text-sm text-gray-800">${emailScript}</div>
-            <button onclick="copyToClipboard(\`${emailScript.replace(/`/g, '\\`')}\`)" class="mt-3 text-sm text-indigo-600 hover:text-indigo-800 font-medium">📋 Copy Email Script</button>
+          
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="result-card">
+              <strong class="text-green-700 block mb-2">✅ Strengths</strong>
+              <ul class="text-sm text-gray-700 space-y-1">
+                ${strengths.length ? strengths.map(s => `<li>${s}</li>`).join('') : '<li>Add more relevant keywords</li>'}
+              </ul>
+            </div>
+            <div class="result-card" style="border-left-color: #f59e0b;">
+              <strong class="text-amber-700 block mb-2">📌 Improvements</strong>
+              <ul class="text-sm text-gray-700 space-y-1">
+                ${improvements.length ? improvements.map(i => `<li>${i}</li>`).join('') : '<li>Great profile — ready to apply!</li>'}
+              </ul>
+            </div>
           </div>
-          <div class="result-card">
-            <strong class="text-orange-700 block mb-2">📞 Phone Call Script</strong>
-            <div class="mt-2 p-4 bg-white rounded border italic text-gray-700">${phoneScript}</div>
+          
+          <div class="result-card mt-4">
+            <strong class="text-indigo-700 block mb-2">🔑 Keywords Detected</strong>
+            <div class="flex flex-wrap gap-2">
+              ${matched.length ? matched.map(k => `<span class="badge badge-blue">${k}</span>`).join('') : '<span class="text-gray-500 text-sm">None yet</span>'}
+            </div>
           </div>
-          <div class="result-card">
-            <strong class="text-orange-700 block mb-2">🔄 Fallback Options (If They Say No)</strong>
-            <ul class="mt-2 space-y-1 text-gray-700">
-              ${fallbackOptions.map(o => `<li>• ${o}</li>`).join('')}
-            </ul>
-          </div>
-          <div class="result-card">
-            <strong class="text-orange-700 block mb-2">📊 Market Data for ${location}</strong>
-            <p class="text-gray-700">${marketDataMap[location]}</p>
-          </div>
-          <div class="text-center text-xs text-gray-500 mt-4">💡 Tip: Always negotiate via email first to create a written record.</div>
+          
+          <div class="text-center text-xs text-gray-500 mt-4">💡 Tip: Use this analysis to tailor your resume before applying.</div>
         `;
 
-        generateBtn.disabled = false;
-        generateBtn.innerHTML = '💼 Generate Counter Offer Script';
+        analyzeBtn.disabled = false;
+        analyzeBtn.innerHTML = ' Analyze Match';
       }, 1000);
     });
-
-    window.copyToClipboard = (text) => {
-      navigator.clipboard.writeText(text).then(() => {
-        alert('✅ Copied to clipboard!');
-      }).catch(() => {
-        alert('❌ Failed to copy. Please select and copy manually.');
-      });
-    };
   </script>
 </body>
 </html>
