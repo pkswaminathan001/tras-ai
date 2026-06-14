@@ -97,8 +97,8 @@
 ---
 
 ## 📬 Let's Connect
-- 🔗 [LinkedIn](https://linkedin.com/in/pkswaminathan)
-- 📧 pkswaminathan001@gmail.com
+- 🔗 [LinkedIn](https://www.linkedin.com/in/prswaminathan/)
+- 📧 prswaminathan001@gmail.com
 - 🌐 [Portfolio](https://pkswaminathan001.github.io/portfolio)
 - 🐙 [GitHub](https://github.com/pkswaminathan001)
 
