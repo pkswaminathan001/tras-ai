@@ -1,4 +1,4 @@
-# 🙏🏻 Hi, I'm PK Swaminathan
+# 🙏🏻 Hi, I'm PR Swaminathan
 
 > **AI/ML Engineer | Business Analyst | Insurance Operations | LLM Evaluation & GenAI Pipeline Automation**  
 > 🇱🇺🇳🇱🇮🇪 Targeting AI/ML, AI Operations & Business Analysis roles in Luxembourg • Netherlands • Ireland  
