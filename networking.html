@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Networking Email - TRAS AI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@google/generative-ai@0.21.0/dist/index.min.js"></script>
+  <style>
+    body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+    .card { background: white; border-radius: 1.5rem; padding: 2rem; max-width: 1000px; margin: 2rem auto; }
+    .btn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; border: none; width: 100%; }
+    .btn:disabled { opacity: 0.5; }
+    .result-card { background: #f8fafc; padding: 1rem; margin: 0.75rem 0; border-radius: 0.5rem; border-left: 4px solid #3b82f6; }
+    .loading { display: inline-block; width: 20px; height: 20px; border: 3px solid #f3f3f3; border-top: 3px solid #667eea; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 8px; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .api-input { background: #fef9c3; border: 1px solid #eab308; }
+  </style>
+</head>
+<body class="p-4">
+  <div class="card">
+    <div class="text-center mb-6">
+      <h1 class="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">📧 AI Networking Email Generator</h1>
+      <p class="text-gray-600">Craft cold emails that get responses from recruiters and hiring managers</p>
+      <a href="./" class="text-sm text-indigo-600 hover:underline">← Back to Portfolio</a>
+    </div>
+
+    <div class="mb-4 p-3 bg-amber-50 rounded-lg border border-amber-200">
+      <label class="block text-sm font-semibold mb-1">🔑 Google Gemini API Key</label>
+      <input type="password" id="apiKey" class="w-full p-2 border rounded-md api-input">
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-4 mb-4">
+      <div>
+        <label class="block text-sm font-semibold mb-1">👤 Recipient Name</label>
+        <input type="text" id="recipientName" class="w-full p-2 border rounded-md" placeholder="e.g., Sarah Johnson">
+      </div>
+      <div>
+        <label class="block text-sm font-semibold mb-1">🏢 Recipient Role</label>
+        <input type="text" id="recipientRole" class="w-full p-2 border rounded-md" placeholder="e.g., Senior Recruiter, Hiring Manager">
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-sm font-semibold mb-1">🏢 Company Name</label>
+      <input type="text" id="company" class="w-full p-2 border rounded-md" placeholder="e.g., ING, Rabobank, Deloitte">
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-sm font-semibold mb-1">📄 Your Resume/CV (For personalization)</label>
+      <textarea id="resume" rows="5" placeholder="Paste your resume here..."></textarea>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-sm font-semibold mb-1">🎯 Position You're Interested In</label>
+      <input type="text" id="position" class="w-full p-2 border rounded-md" placeholder="Business Analyst">
+    </div>
+
+    <button id="generateBtn" class="btn">📧 Generate Networking Email</button>
+    <div id="result" class="mt-6 hidden"></div>
+  </div>
+
+  <script>
+    const generateBtn = document.getElementById('generateBtn');
+    const resultDiv = document.getElementById('result');
+    const apiKeyInput = document.getElementById('apiKey');
+
+    if (localStorage.getItem('gemini_api_key')) apiKeyInput.value = localStorage.getItem('gemini_api_key');
+    apiKeyInput.addEventListener('change', () => { if(apiKeyInput.value.trim()) localStorage.setItem('gemini_api_key', apiKeyInput.value.trim()); });
+
+    generateBtn.addEventListener('click', async () => {
+      const recipientName = document.getElementById('recipientName').value.trim() || 'Hiring Manager';
+      const recipientRole = document.getElementById('recipientRole').value.trim() || 'Recruiter';
+      const company = document.getElementById('company').value.trim() || '[Company Name]';
+      const resume = document.getElementById('resume').value.trim();
+      const position = document.getElementById('position').value.trim() || 'Business Analyst';
+      const apiKey = apiKeyInput.value.trim();
+
+      if (!apiKey) { alert('Enter your Gemini API key'); return; }
+
+      generateBtn.disabled = true;
+      generateBtn.innerHTML = '<span class="loading"></span> Writing Email...';
+      resultDiv.classList.remove('hidden');
+      resultDiv.innerHTML = '<div class="text-center py-8"><div class="loading"></div> AI crafting your email...</div>';
+
+      try {
+        const { GoogleGenerativeAI } = window;
+        const genAI = new GoogleGenerativeAI(apiKey);
+        const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+
+        const prompt = `Write a professional cold email to ${recipientName} (${recipientRole}) at ${company}.
+
+CONTEXT: I am interested in a ${position} role.
+${resume ? `MY BACKGROUND: ${resume.substring(0, 800)}` : ''}
+
+Write a concise, respectful email that:
+1. Has a clear subject line
+2. Briefly introduces my background
+3. Explains why I'm interested in ${company}
+4. Asks for a 15-minute informational interview or job referral
+5. Includes a professional signature
+
+Keep tone professional but warm. Return ONLY the email text.`;
+
+        const result = await model.generateContent(prompt);
+        const response = await result.response;
+        const email = response.text();
+
+        resultDiv.innerHTML = `
+          <div class="result-card">
+            <strong class="text-blue-700">📧 Your Networking Email</strong>
+            <div class="mt-3 p-4 bg-white rounded-lg border whitespace-pre-wrap font-mono text-sm">${email}</div>
+            <button onclick="copyEmail()" class="mt-3 text-sm text-indigo-600 hover:underline">📋 Copy to Clipboard</button>
+          </div>
+          <div class="text-center text-xs text-gray-500 mt-4">💡 Tip: Customize the email with specific details about the company for best results!</div>
+        `;
+
+        window.emailText = email;
+      } catch (error) {
+        resultDiv.innerHTML = `<div class="result-card bg-red-50"><strong>Error:</strong> ${error.message}</div>`;
+      } finally {
+        generateBtn.disabled = false;
+        generateBtn.innerHTML = '📧 Generate Networking Email';
+      }
+    });
+
+    window.copyEmail = () => { navigator.clipboard.writeText(window.emailText); alert('✅ Copied to clipboard!'); };
+  </script>
+</body>
+</html>
