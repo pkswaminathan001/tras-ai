@@ -98,7 +98,7 @@
 
 ## 📬 Let's Connect
 - 🔗 [LinkedIn](https://linkedin.com/in/prswaminathan)
-- 📧 prswaminathan001@gmail.com
+- 📧 [Email](prswaminathan001@gmail.com)
 - 🌐 [Portfolio](https://pkswaminathan001.github.io/tras-ai/)
 - 🎯 [My AI Projects](https://pkswaminathan001.github.io/tras-ai/#projects)
 - 🐙 [GitHub](https://github.com/pkswaminathan001)
