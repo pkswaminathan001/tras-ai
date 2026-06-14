@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Counter Offer Script - TRAS AI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@google/generative-ai@0.21.0/dist/index.min.js"></script>
+  <style>
+    body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+    .card { background: white; border-radius: 1.5rem; padding: 2rem; max-width: 1000px; margin: 2rem auto; }
+    .btn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; border: none; width: 100%; }
+    .btn:disabled { opacity: 0.5; }
+    .result-card { background: #f8fafc; padding: 1rem; margin: 0.75rem 0; border-radius: 0.5rem; border-left: 4px solid #f59e0b; }
+    .loading { display: inline-block; width: 20px; height: 20px; border: 3px solid #f3f3f3; border-top: 3px solid #f59e0b; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 8px; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .api-input { background: #fef9c3; border: 1px solid #eab308; }
+  </style>
+</head>
+<body class="p-4">
+  <div class="card">
+    <div class="text-center mb-6">
+      <h1 class="text-3xl font-bold bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent">💼 AI Counter Offer Script</h1>
+      <p class="text-gray-600">Negotiation scripts to maximize your job offer</p>
+      <a href="./" class="text-sm text-indigo-600 hover:underline">← Back to Portfolio</a>
+    </div>
+
+    <div class="mb-4 p-3 bg-amber-50 rounded-lg border border-amber-200">
+      <label class="block text-sm font-semibold mb-1">🔑 Google Gemini API Key</label>
+      <input type="password" id="apiKey" class="w-full p-2 border rounded-md api-input">
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-4 mb-4">
+      <div>
+        <label class="block text-sm font-semibold mb-1">💰 Offered Salary</label>
+        <input type="number" id="offeredSalary" class="w-full p-2 border rounded-md" placeholder="e.g., 65000">
+      </div>
+      <div>
+        <label class="block text-sm font-semibold mb-1">🎯 Target Salary</label>
+        <input type="number" id="targetSalary" class="w-full p-2 border rounded-md" placeholder="e.g., 75000">
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-4 mb-4">
+      <div>
+        <label class="block text-sm font-semibold mb-1">📍 Location</label>
+        <select id="location" class="w-full p-2 border rounded-md">
+          <option value="Luxembourg">🇱🇺 Luxembourg</option>
+          <option value="Netherlands">🇳🇱 Netherlands</option>
+          <option value="Ireland">🇮🇪 Ireland</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-semibold mb-1">📅 Years Experience</label>
+        <input type="number" id="experience" class="w-full p-2 border rounded-md" placeholder="Years">
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-sm font-semibold mb-1">✨ Special Skills/Certifications (Optional)</label>
+      <input type="text" id="skills" class="w-full p-2 border rounded-md" placeholder="e.g., Guidewire, CBAP, Agile Certified">
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-sm font-semibold mb-1">📝 Additional Context (Optional)</label>
+      <textarea id="context" rows="3" class="w-full p-2 border rounded-md" placeholder="e.g., I have another offer, relocation required, etc."></textarea>
+    </div>
+
+    <button id="generateBtn" class="btn">💼 Generate Counter Offer Script</button>
+    <div id="result" class="mt-6 hidden"></div>
+  </div>
+
+  <script>
+    const generateBtn = document.getElementById('generateBtn');
+    const resultDiv = document.getElementById('result');
+    const apiKeyInput = document.getElementById('apiKey');
+
+    if (localStorage.getItem('gemini_api_key')) apiKeyInput.value = localStorage.getItem('gemini_api_key');
+    apiKeyInput.addEventListener('change', () => { if(apiKeyInput.value.trim()) localStorage.setItem('gemini_api_key', apiKeyInput.value.trim()); });
+
+    generateBtn.addEventListener('click', async () => {
+      const offered = document.getElementById('offeredSalary').value;
+      const target = document.getElementById('targetSalary').value;
+      const location = document.getElementById('location').value;
+      const experience = document.getElementById('experience').value;
+      const skills = document.getElementById('skills').value.trim();
+      const context = document.getElementById('context').value.trim();
+      const apiKey = apiKeyInput.value.trim();
+
+      if (!offered || !target) { alert('Please enter offered and target salary'); return; }
+      if (!apiKey) { alert('Enter your Gemini API key'); return; }
+
+      generateBtn.disabled = true;
+      generateBtn.innerHTML = '<span class="loading"></span> Generating Script...';
+      resultDiv.classList.remove('hidden');
+      resultDiv.innerHTML = '<div class="text-center py-8"><div class="loading"></div> AI creating negotiation strategy...</div>';
+
+      try {
+        const { GoogleGenerativeAI } = window;
+        const genAI = new GoogleGenerativeAI(apiKey);
+        const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+
+        const prompt = `Create a salary negotiation counter-offer script.
+
+OFFER: €${offered}
+TARGET: €${target}
+LOCATION: ${location}
+EXPERIENCE: ${experience} years
+${skills ? `SKILLS: ${skills}` : ''}
+${context ? `CONTEXT: ${context}` : ''}
+
+Return ONLY JSON:
+{
+  "strategy": "Negotiation strategy explanation (2-3 sentences)",
+  "emailScript": "Full email script to send to recruiter",
+  "phoneScript": "What to say on a phone call",
+  "fallbackOptions": ["Option 1", "Option 2", "Option 3"],
+  "marketData": "Brief market salary context for ${location}"
+}`;
+
+        const result = await model.generateContent(prompt);
+        const response = await result.response;
+        let text = response.text().replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+        const data = JSON.parse(text);
+
+        resultDiv.innerHTML = `
+          <div class="result-card">
+            <strong class="text-orange-700">🎯 Negotiation Strategy</strong>
+            <div class="mt-2">${data.strategy}</div>
+          </div>
+          <div class="result-card">
+            <strong class="text-orange-700">📧 Email Script</strong>
+            <div class="mt-2 p-3 bg-white rounded border whitespace-pre-wrap font-mono text-sm">${data.emailScript}</div>
+            <button onclick="copyText('${data.emailScript.replace(/'/g, "\\'")}')" class="mt-2 text-sm text-indigo-600">📋 Copy Email Script</button>
+          </div>
+          <div class="result-card">
+            <strong class="text-orange-700">📞 Phone Call Script</strong>
+            <div class="mt-2 p-3 bg-white rounded border whitespace-pre-wrap">${data.phoneScript}</div>
+          </div>
+          <div class="result-card">
+            <strong class="text-orange-700">🔄 Fallback Options (If They Say No)</strong>
+            <div class="mt-2">${data.fallbackOptions.map(o => `• ${o}`).join('<br>')}</div>
+          </div>
+          <div class="result-card">
+            <strong class="text-orange-700">📊 Market Data for ${location}</strong>
+            <div class="mt-2">${data.marketData}</div>
+          </div>
+        `;
+      } catch (error) {
+        resultDiv.innerHTML = `<div class="result-card bg-red-50"><strong>Error:</strong> ${error.message}</div>`;
+      } finally {
+        generateBtn.disabled = false;
+        generateBtn.innerHTML = '💼 Generate Counter Offer Script';
+      }
+    });
+
+    window.copyText = (text) => { navigator.clipboard.writeText(text); alert('✅ Copied to clipboard!'); };
+  </script>
+</body>
+</html>
