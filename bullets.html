@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Resume Bullet Points - TRAS AI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@google/generative-ai@0.21.0/dist/index.min.js"></script>
+  <style>
+    body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+    .card { background: white; border-radius: 1.5rem; padding: 2rem; max-width: 1000px; margin: 2rem auto; }
+    .btn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; border: none; width: 100%; }
+    .btn:disabled { opacity: 0.5; }
+    .result-card { background: #f8fafc; padding: 1rem; margin: 0.75rem 0; border-radius: 0.5rem; border-left: 4px solid #10b981; }
+    .loading { display: inline-block; width: 20px; height: 20px; border: 3px solid #f3f3f3; border-top: 3px solid #667eea; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 8px; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .api-input { background: #fef9c3; border: 1px solid #eab308; }
+  </style>
+</head>
+<body class="p-4">
+  <div class="card">
+    <div class="text-center mb-6">
+      <h1 class="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">✍️ AI Resume Bullet Points</h1>
+      <p class="text-gray-600">Transform boring descriptions into powerful, action-oriented bullets</p>
+      <a href="./" class="text-sm text-indigo-600 hover:underline">← Back to Portfolio</a>
+    </div>
+
+    <div class="mb-4 p-3 bg-amber-50 rounded-lg border border-amber-200">
+      <label class="block text-sm font-semibold mb-1">🔑 Google Gemini API Key</label>
+      <input type="password" id="apiKey" class="w-full p-2 border rounded-md api-input">
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-sm font-semibold mb-1">📝 Your Work Experience (Paste what you have)</label>
+      <textarea id="experience" rows="6" class="w-full p-2 border rounded-md" placeholder="Example:&#10;I was responsible for analyzing data and creating reports. I worked with stakeholders to gather requirements. I helped improve processes."></textarea>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-4 mb-4">
+      <div>
+        <label class="block text-sm font-semibold mb-1">🎯 Job Title</label>
+        <input type="text" id="jobTitle" class="w-full p-2 border rounded-md" placeholder="Business Analyst">
+      </div>
+      <div>
+        <label class="block text-sm font-semibold mb-1">📊 Tone</label>
+        <select id="tone" class="w-full p-2 border rounded-md">
+          <option value="professional">Professional & Formal</option>
+          <option value="impact">Impact-Focused (Results)</option>
+          <option value="technical">Technical & Data-Driven</option>
+        </select>
+      </div>
+    </div>
+
+    <button id="rewriteBtn" class="btn">✨ Generate Powerful Bullet Points</button>
+    <div id="result" class="mt-6 hidden"></div>
+  </div>
+
+  <script>
+    const rewriteBtn = document.getElementById('rewriteBtn');
+    const resultDiv = document.getElementById('result');
+    const apiKeyInput = document.getElementById('apiKey');
+
+    if (localStorage.getItem('gemini_api_key')) apiKeyInput.value = localStorage.getItem('gemini_api_key');
+    apiKeyInput.addEventListener('change', () => { if(apiKeyInput.value.trim()) localStorage.setItem('gemini_api_key', apiKeyInput.value.trim()); });
+
+    rewriteBtn.addEventListener('click', async () => {
+      const experience = document.getElementById('experience').value.trim();
+      const jobTitle = document.getElementById('jobTitle').value.trim();
+      const tone = document.getElementById('tone').value;
+      const apiKey = apiKeyInput.value.trim();
+
+      if (!experience) { alert('Please paste your work experience'); return; }
+      if (!apiKey) { alert('Enter your Gemini API key'); return; }
+
+      rewriteBtn.disabled = true;
+      rewriteBtn.innerHTML = '<span class="loading"></span> Rewriting Bullet Points...';
+      resultDiv.classList.remove('hidden');
+      resultDiv.innerHTML = '<div class="text-center py-8"><div class="loading"></div> AI transforming your experience...</div>';
+
+      try {
+        const { GoogleGenerativeAI } = window;
+        const genAI = new GoogleGenerativeAI(apiKey);
+        const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+
+        const prompt = `Rewrite this experience into 4-5 powerful resume bullet points for a ${jobTitle} role. Tone: ${tone}.
+
+ORIGINAL: ${experience}
+
+Rules:
+- Start each bullet with a strong action verb
+- Include quantifiable results where possible (%, $, numbers)
+- Keep each bullet under 2 lines
+- Be specific and impactful
+
+Return ONLY the bullet points as JSON array: ["Bullet 1", "Bullet 2", "Bullet 3", "Bullet 4", "Bullet 5"]`;
+
+        const result = await model.generateContent(prompt);
+        const response = await result.response;
+        let text = response.text().replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+        const bullets = JSON.parse(text);
+
+        resultDiv.innerHTML = `
+          <div class="result-card">
+            <strong class="text-green-700">✨ Your Optimized Bullet Points</strong>
+            <div class="mt-3 space-y-2">
+              ${bullets.map((b, i) => `<div class="p-2 bg-white rounded border flex items-start gap-2"><span class="text-indigo-600 font-bold">${i+1}.</span> <span>${b}</span></div>`).join('')}
+            </div>
+            <button onclick="copyBullets()" class="mt-3 text-sm text-indigo-600 hover:underline">📋 Copy All Bullets</button>
+          </div>
+          <div class="text-center text-xs text-gray-500 mt-4">💡 Tip: Use these bullets to replace weak descriptions on your resume!</div>
+        `;
+
+        window.bulletsText = bullets.join('\n');
+      } catch (error) {
+        resultDiv.innerHTML = `<div class="result-card bg-red-50"><strong>Error:</strong> ${error.message}</div>`;
+      } finally {
+        rewriteBtn.disabled = false;
+        rewriteBtn.innerHTML = '✨ Generate Powerful Bullet Points';
+      }
+    });
+
+    window.copyBullets = () => { navigator.clipboard.writeText(window.bulletsText); alert('✅ Copied to clipboard!'); };
+  </script>
+</body>
+</html>
