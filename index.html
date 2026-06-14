@@ -292,6 +292,204 @@
       }
     }
 
+    /* ============================================ */
+    /* APPLE INTELLIGENCE STYLE SECTION - COMPLETE */
+    /* ============================================ */
+    .apple-intel-section {
+      background: linear-gradient(135deg, #f5f5f7 0%, #e8e8ed 100%);
+      border-radius: 32px;
+      padding: 80px 48px;
+      margin: 80px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .apple-intel-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 60%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0,113,227,0.03) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .apple-badge {
+      display: inline-block;
+      background: rgba(0,113,227,0.1);
+      color: #0071e3;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+
+    .apple-title {
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #1d1d1f 0%, #3a3a3e 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .apple-subtitle {
+      font-size: 1.3rem;
+      color: #6e6e73;
+      max-width: 700px;
+      margin-bottom: 60px;
+      line-height: 1.4;
+    }
+
+    /* Feature Grid */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    .feature-card {
+      background: white;
+      border-radius: 28px;
+      padding: 40px;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 24px;
+    }
+
+    .feature-card h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .feature-card p {
+      color: #6e6e73;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .feature-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      font-size: 0.9rem;
+      color: #1d1d1f;
+    }
+
+    .feature-list li span:first-child {
+      font-size: 1.1rem;
+    }
+
+    /* Privacy Section */
+    .privacy-section {
+      background: white;
+      border-radius: 28px;
+      padding: 40px;
+      margin-top: 20px;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .privacy-title {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .privacy-badge-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .privacy-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #f5f5f7;
+      border-radius: 40px;
+      padding: 8px 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #1d1d1f;
+    }
+
+    .integration-box {
+      background: linear-gradient(135deg, #f8f9ff 0%, #f0f2fe 100%);
+      border-radius: 24px;
+      padding: 32px;
+      margin-top: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .integration-text {
+      flex: 1;
+    }
+
+    .integration-text strong {
+      color: #0071e3;
+    }
+
+    .device-note {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 30px;
+      border-top: 1px solid rgba(0,0,0,0.08);
+      font-size: 0.8rem;
+      color: #8e8e93;
+    }
+
+    @media (max-width: 768px) {
+      .apple-intel-section {
+        padding: 40px 24px;
+      }
+      .apple-title {
+        font-size: 2rem;
+      }
+      .apple-subtitle {
+        font-size: 1rem;
+      }
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+      .feature-card {
+        padding: 28px;
+      }
+      .privacy-title {
+        font-size: 1.3rem;
+      }
+    }
+
     /* Other sections */
     .grid-2 {
       display: grid;
@@ -429,6 +627,7 @@
       <a href="/" class="logo">PR Swaminathan</a>
       <div class="nav-links">
         <a href="#about">About</a>
+        <a href="#ai-intelligence">AI Intelligence</a>
         <a href="#ai-programs">AI Programs</a>
         <a href="#expertise">Expertise</a>
         <a href="#experience">Experience</a>
@@ -473,7 +672,78 @@
       </div>
     </section>
 
-    <!-- AI PROGRAMS SECTION - Apple Intelligence Style -->
+    <!-- ============================================ -->
+    <!-- APPLE INTELLIGENCE STYLE SECTION - COMPLETE  -->
+    <!-- Explains the AI technology behind TRAS AI   -->
+    <!-- ============================================ -->
+    <section id="ai-intelligence" class="container reveal">
+      <div class="apple-intel-section">
+        <div class="apple-badge">⚡ TRAS AI INTELLIGENCE</div>
+        <h2 class="apple-title">AI for the Modern<br>Business Analyst</h2>
+        <p class="apple-subtitle">Built into your browser to help you analyze resumes, communicate fit, and get hired faster — designed with privacy at every step.</p>
+
+        <!-- Feature Grid - Architecture & Features -->
+        <div class="feature-grid">
+          <!-- Architecture Card -->
+          <div class="feature-card">
+            <div class="feature-icon">🏗️</div>
+            <h3>The Architecture: Local + Private Cloud</h3>
+            <p>How TRAS AI protects your data while delivering powerful analysis.</p>
+            <ul class="feature-list">
+              <li><span>📱</span> <span><strong>On-Device Processing:</strong> Keyword extraction and ATS scoring runs locally in your browser. Your resume never leaves your device for initial analysis.</span></li>
+              <li><span>☁️</span> <span><strong>Private Cloud Compute:</strong> For complex semantic matching, we use Google's dedicated AI infrastructure. Your API key stays in your browser — we never store or log your data.</span></li>
+              <li><span>🔐</span> <span><strong>Verifiable Privacy Promise:</strong> Unlike traditional ATS tools, TRAS AI doesn't collect or sell your data. You're in full control.</span></li>
+            </ul>
+          </div>
+
+          <!-- Generative Features Card -->
+          <div class="feature-card">
+            <div class="feature-icon">✨</div>
+            <h3>Generative Intelligence</h3>
+            <p>Powerful AI features that help you stand out to recruiters.</p>
+            <ul class="feature-list">
+              <li><span>✍️</span> <span><strong>Writing Tools:</strong> Resume rewrite suggestions, cover letter hooks, and professional summaries — system-wide quality.</span></li>
+              <li><span>🎯</span> <span><strong>Smart Context Awareness:</strong> Understands insurance, Guidewire, BFSI terminology — not just keyword matching.</span></li>
+              <li><span>📊</span> <span><strong>Visual Intelligence:</strong> Match score visualization, skill gap charts, and interview question generation.</span></li>
+              <li><span>🤖</span> <span><strong>Intelligent Assistant:</strong> Ask "How to improve my ATS score?" — contextual help coming soon.</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Privacy Section -->
+        <div class="privacy-section">
+          <div class="privacy-title">
+            <span>🔒</span> Great powers come with great privacy.
+          </div>
+          <p style="color: #6e6e73; margin-bottom: 20px;">TRAS AI is designed to protect your privacy at every step. It's integrated into your browser through on-device processing. So it's aware of your personal information without collecting your personal information.</p>
+          
+          <div class="privacy-badge-container">
+            <span class="privacy-badge"><i class="fas fa-database"></i> Your data is never stored</span>
+            <span class="privacy-badge"><i class="fas fa-lock"></i> Used only for your requests</span>
+            <span class="privacy-badge"><i class="fas fa-check-circle"></i> Verifiable privacy promise</span>
+          </div>
+        </div>
+
+        <!-- Gemini Integration (Like Apple's ChatGPT integration) -->
+        <div class="integration-box">
+          <div class="integration-text">
+            <strong><i class="fab fa-google"></i> Google Gemini, seamlessly integrated.</strong>
+            <p style="margin-top: 8px; color: #6e6e73;">With Gemini API integrated into TRAS AI, you get even more expertise when it might be helpful for you — no need to jump between tools.</p>
+            <p style="margin-top: 12px; font-size: 0.85rem; color: #6e6e73;">You control when Gemini is used and will be asked before any of your information is shared. Anyone can use TRAS AI for free with their own Gemini API key.</p>
+          </div>
+          <div>
+            <span class="privacy-badge" style="background: white;">🔑 Your API key stays local</span>
+          </div>
+        </div>
+
+        <!-- Compatible Devices Note -->
+        <div class="device-note">
+          <i class="fas fa-desktop"></i> Works on any device with a modern browser • No app installation required • Free tier: 60 requests/minute
+        </div>
+      </div>
+    </section>
+
+    <!-- AI PROGRAMS SECTION -->
     <section id="ai-programs" class="container reveal">
       <div class="section-header">
         <h2>AI Programs & Tools</h2>
@@ -521,7 +791,7 @@
           <a href="#" class="ai-link">Coming soon →</a>
         </div>
 
-        <!-- AI Writing Tools (Apple Intelligence style) -->
+        <!-- AI Writing Tools -->
         <div class="ai-card">
           <div class="ai-icon">✍️</div>
           <div class="badge-new">✨ Gemini API</div>
