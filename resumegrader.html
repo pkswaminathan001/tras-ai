@@ -16,4 +16,108 @@
     .grade-B { border-left: 4px solid #3b82f6; }
     .grade-C { border-left: 4px solid #f59e0b; }
     .grade-D { border-left: 4px solid #ef4444; }
-    .
+    .loading { display: inline-block; width: 20px; height: 20px; border: 3px solid #f3f3f3; border-top: 3px solid #667eea; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 8px; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .api-input { background: #fef9c3; border: 1px solid #eab308; }
+  </style>
+</head>
+<body class="p-4">
+  <div class="card">
+    <div class="text-center mb-6">
+      <h1 class="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">🎯 AI Resume Grader</h1>
+      <p class="text-gray-600">Get your ATS score and line-by-line improvements</p>
+      <a href="./" class="text-sm text-indigo-600 hover:underline">← Back to Portfolio</a>
+    </div>
+
+    <div class="mb-4 p-3 bg-amber-50 rounded-lg border border-amber-200">
+      <label class="block text-sm font-semibold mb-1">🔑 Google Gemini API Key</label>
+      <input type="password" id="apiKey" class="w-full p-2 border rounded-md api-input">
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-sm font-semibold mb-1">📄 Your Resume</label>
+      <textarea id="resume" rows="10" placeholder="Paste your entire resume here..."></textarea>
+      <p class="text-xs text-gray-500 mt-1">Include your work experience, skills, education, and certifications</p>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-sm font-semibold mb-1">💼 Target Job Title (Optional)</label>
+      <input type="text" id="jobTitle" class="w-full p-2 border rounded-md" placeholder="e.g., Business Analyst, Data Analyst, Product Manager">
+    </div>
+
+    <button id="gradeBtn" class="btn">🎯 Grade My Resume</button>
+    <div id="result" class="mt-6 hidden"></div>
+  </div>
+
+  <script>
+    const gradeBtn = document.getElementById('gradeBtn');
+    const resultDiv = document.getElementById('result');
+    const apiKeyInput = document.getElementById('apiKey');
+
+    if (localStorage.getItem('gemini_api_key')) apiKeyInput.value = localStorage.getItem('gemini_api_key');
+    apiKeyInput.addEventListener('change', () => { if(apiKeyInput.value.trim()) localStorage.setItem('gemini_api_key', apiKeyInput.value.trim()); });
+
+    gradeBtn.addEventListener('click', async () => {
+      const resume = document.getElementById('resume').value.trim();
+      const jobTitle = document.getElementById('jobTitle').value.trim();
+      const apiKey = apiKeyInput.value.trim();
+
+      if (!resume) { alert('Please paste your resume'); return; }
+      if (!apiKey) { alert('Enter your Gemini API key'); return; }
+
+      gradeBtn.disabled = true;
+      gradeBtn.innerHTML = '<span class="loading"></span> Grading Resume...';
+      resultDiv.classList.remove('hidden');
+      resultDiv.innerHTML = '<div class="text-center py-8"><div class="loading"></div> AI analyzing your resume...</div>';
+
+      try {
+        const { GoogleGenerativeAI } = window;
+        const genAI = new GoogleGenerativeAI(apiKey);
+        const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+
+        const prompt = `Grade this resume for ${jobTitle || 'Business Analyst'} roles.
+
+RESUME:
+${resume}
+
+Return ONLY JSON:
+{
+  "atsScore": 85,
+  "grade": "A",
+  "strengths": ["Strength 1", "Strength 2", "Strength 3", "Strength 4"],
+  "improvements": [
+    {"section": "Summary", "issue": "What's wrong", "fix": "How to fix it"},
+    {"section": "Experience", "issue": "What's wrong", "fix": "How to fix it"}
+  ],
+  "keywordSuggestions": ["Keyword 1", "Keyword 2", "Keyword 3", "Keyword 4", "Keyword 5"],
+  "overallAdvice": "One paragraph of overall advice"
+}`;
+
+        const result = await model.generateContent(prompt);
+        const response = await result.response;
+        let text = response.text().replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+        const data = JSON.parse(text);
+
+        const gradeClass = data.grade === 'A' ? 'grade-A' : data.grade === 'B' ? 'grade-B' : data.grade === 'C' ? 'grade-C' : 'grade-D';
+        const gradeColor = data.grade === 'A' ? 'text-green-600' : data.grade === 'B' ? 'text-blue-600' : data.grade === 'C' ? 'text-yellow-600' : 'text-red-600';
+
+        resultDiv.innerHTML = `
+          <div class="text-center mb-4">
+            <div class="text-6xl font-bold ${gradeColor}">${data.atsScore}<span class="text-2xl text-gray-400">/100</span></div>
+            <div class="text-xl font-semibold mt-1">Grade: ${data.grade}</div>
+          </div>
+          <div class="result-card ${gradeClass}"><strong class="text-green-700">✅ Resume Strengths</strong><br>${data.strengths.map(s => `• ${s}`).join('<br>')}</div>
+          <div class="result-card"><strong class="text-orange-700">✏️ Line-by-Line Improvements</strong><br>${data.improvements.map(i => `<div class="mt-2 p-2 bg-white rounded"><strong>${i.section}:</strong> ${i.issue}<br><span class="text-green-600">→ Fix: ${i.fix}</span></div>`).join('')}</div>
+          <div class="result-card"><strong class="text-purple-700">🔑 Keywords to Add</strong><br><div class="flex flex-wrap gap-2 mt-2">${data.keywordSuggestions.map(k => `<span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full text-sm">${k}</span>`).join('')}</div></div>
+          <div class="result-card"><strong class="text-blue-700">💡 Overall Advice</strong><br>${data.overallAdvice}</div>
+        `;
+      } catch (error) {
+        resultDiv.innerHTML = `<div class="result-card bg-red-50"><strong>Error:</strong> ${error.message}</div>`;
+      } finally {
+        gradeBtn.disabled = false;
+        gradeBtn.innerHTML = '🎯 Grade My Resume';
+      }
+    });
+  </script>
+</body>
+</html>
