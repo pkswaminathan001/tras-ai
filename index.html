@@ -18,7 +18,7 @@
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
       background: #ffffff;
       color: #1d1d1f;
-      line-height: 1.4;
+      line-height: 1.5;
     }
 
     html {
@@ -42,7 +42,7 @@
       backdrop-filter: blur(10px);
       border-bottom: 1px solid rgba(0, 0, 0, 0.05);
       z-index: 100;
-      padding: 12px 0;
+      padding: 16px 0;
     }
 
     .nav-container {
@@ -79,10 +79,10 @@
       color: #0066cc;
     }
 
-    /* Apple-style hero */
+    /* Hero section */
     .hero {
       text-align: center;
-      padding: 120px 0 80px;
+      padding: 140px 0 80px;
     }
 
     .hero-badge {
@@ -123,7 +123,7 @@
       margin: 0 auto 32px;
     }
 
-    /* Apple-style buttons */
+    /* Buttons */
     .btn-primary {
       display: inline-block;
       background: #0071e3;
@@ -161,11 +161,11 @@
       transform: scale(1.02);
     }
 
-    /* Apple-style stats grid */
+    /* Stats */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 32px;
+      gap: 40px;
       text-align: center;
       margin: 80px 0;
     }
@@ -185,15 +185,15 @@
     @media (max-width: 768px) {
       .stats-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 24px;
+        gap: 32px;
       }
     }
 
-    /* Apple-style cards */
+    /* Cards */
     .card {
       background: #f5f5f7;
       border-radius: 24px;
-      padding: 32px;
+      padding: 40px;
       transition: transform 0.2s, box-shadow 0.2s;
     }
 
@@ -202,35 +202,40 @@
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
     }
 
-    .card h3 {
-      font-size: 1.25rem;
+    .card h2 {
+      font-size: 1.5rem;
       font-weight: 600;
-      margin-bottom: 8px;
+      margin-bottom: 16px;
+    }
+
+    .card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 4px;
     }
 
     .card p {
-      font-size: 0.9rem;
       color: #6e6e73;
-      line-height: 1.4;
+      line-height: 1.5;
     }
 
-    /* Apple-style grid layouts */
+    /* Grids */
     .grid-2 {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 32px;
+      gap: 40px;
     }
 
     .grid-3 {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
+      gap: 40px;
     }
 
     .grid-4 {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 32px;
+      gap: 40px;
     }
 
     @media (max-width: 768px) {
@@ -239,10 +244,14 @@
       }
     }
 
-    /* Apple-style section headers */
+    /* Section spacing */
+    section {
+      margin: 120px 0;
+    }
+
     .section-header {
       text-align: center;
-      margin-bottom: 48px;
+      margin-bottom: 60px;
     }
 
     .section-header h2 {
@@ -258,13 +267,30 @@
       margin: 0 auto;
     }
 
-    /* Apple-style badge */
+    /* Badges */
     .badge {
       display: inline-block;
       background: #e8e8ed;
       padding: 4px 12px;
       border-radius: 20px;
       font-size: 0.7rem;
+      font-weight: 500;
+      color: #1d1d1f;
+    }
+
+    .inline-badge-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin: 32px 0;
+    }
+
+    .inline-badge {
+      background: #f5f5f7;
+      padding: 8px 16px;
+      border-radius: 40px;
+      font-size: 0.8rem;
       font-weight: 500;
       color: #1d1d1f;
     }
@@ -285,36 +311,21 @@
       width: 35%;
     }
 
-    /* Footer */
-    footer {
-      border-top: 1px solid #e8e8ed;
-      padding: 40px 0;
-      margin-top: 80px;
-      text-align: center;
-      color: #6e6e73;
-      font-size: 0.8rem;
+    /* Experience list */
+    .experience-list {
+      list-style: none;
+      padding-left: 0;
     }
 
-    /* Responsive spacing */
-    section {
-      margin: 80px 0;
-    }
-
-    .inline-badge-group {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-      margin: 32px 0;
-    }
-
-    .inline-badge {
-      background: #f5f5f7;
-      padding: 8px 16px;
-      border-radius: 40px;
-      font-size: 0.8rem;
-      font-weight: 500;
+    .experience-list li {
+      margin-bottom: 8px;
       color: #1d1d1f;
+    }
+
+    .meta-text {
+      color: #6e6e73;
+      font-size: 0.85rem;
+      margin-bottom: 12px;
     }
 
     /* Reveal animation */
@@ -329,14 +340,27 @@
       transform: translateY(0);
     }
 
+    /* Footer */
+    footer {
+      border-top: 1px solid #e8e8ed;
+      padding: 48px 0;
+      margin-top: 80px;
+      text-align: center;
+      color: #6e6e73;
+      font-size: 0.8rem;
+    }
+
     a {
       text-decoration: none;
+    }
+
+    .icon {
+      margin-right: 8px;
     }
   </style>
 </head>
 <body>
 
-  <!-- Apple-style navigation -->
   <nav>
     <div class="nav-container">
       <a href="/" class="logo">PR Swaminathan</a>
@@ -352,7 +376,6 @@
   </nav>
 
   <main>
-    <!-- Hero Section -->
     <div class="hero container reveal">
       <div class="hero-badge">✨ Open to work</div>
       <h1>Business Analyst<br>Insurance Operations</h1>
@@ -369,7 +392,6 @@
       </div>
     </div>
 
-    <!-- Stats Section -->
     <div class="container stats-grid reveal">
       <div><div class="stat-number">40%</div><div class="stat-label">Efficiency Gain</div></div>
       <div><div class="stat-number">99.2%</div><div class="stat-label">Accuracy Rate</div></div>
@@ -377,15 +399,13 @@
       <div><div class="stat-number">25%</div><div class="stat-label">Rework Reduction</div></div>
     </div>
 
-    <!-- About Section -->
     <section id="about" class="container reveal">
       <div class="card">
-        <h2 style="margin-bottom: 16px;">About Me</h2>
+        <h2>About Me</h2>
         <p>Business Analyst with MBA and experience supporting insurance operations at <strong>HCL Technologies (USAA project)</strong>. Contributed to the first AI automation — reducing manual claims processing by <strong>40%</strong> across <strong>6,000+ transactions</strong> while maintaining <strong>99.2% accuracy</strong>.</p>
       </div>
     </section>
 
-    <!-- Recruiters Table -->
     <section class="container reveal">
       <div class="section-header">
         <h2>🎯 For Recruiters & Hiring Managers</h2>
@@ -393,43 +413,41 @@
       <div class="card">
         <table class="custom-table">
           <tr><td>What I deliver</td><td>40% efficiency gains via process automation & workflow optimization</td></tr>
-          <tr><td>Domain expertise</td><td>Insurance Claims, Guidewire (GWCC), BFSI Operations</td></tr>
-          <tr><td>Visa path</td><td>Kennismigrant (NL), Critical Skills (IE), EU Blue Card (LU) — 2-4 weeks</td></tr>
-          <tr><td>Core strengths</td><td>Business Analysis, Process Improvement, Stakeholder Management, AI Workflow Design</td></tr>
+          <tr class="border-t"><td>Domain expertise</td><td>Insurance Claims, Guidewire (GWCC), BFSI Operations</td></tr>
+          <tr class="border-t"><td>Visa path</td><td>Kennismigrant (NL), Critical Skills (IE), EU Blue Card (LU) — 2-4 weeks</td></tr>
+          <tr class="border-t"><td>Core strengths</td><td>Business Analysis, Process Improvement, Stakeholder Management, AI Workflow Design</td></tr>
         </table>
       </div>
     </section>
 
-    <!-- Expertise Grid -->
     <section id="expertise" class="container reveal">
       <div class="section-header">
         <h2>Core Expertise</h2>
       </div>
       <div class="grid-4">
-        <div class="card"><i class="fas fa-chart-line" style="font-size: 24px; margin-bottom: 12px; color: #0071e3;"></i><h3>Business Analysis</h3><p>Requirements gathering, process mapping, stakeholder management</p></div>
-        <div class="card"><i class="fas fa-robot" style="font-size: 24px; margin-bottom: 12px; color: #0071e3;"></i><h3>AI Workflow Automation</h3><p>LLM pipelines, prompt engineering, workflow orchestration</p></div>
-        <div class="card"><i class="fas fa-shield-alt" style="font-size: 24px; margin-bottom: 12px; color: #0071e3;"></i><h3>BFSI Operations</h3><p>Insurance claims, Guidewire, KYC/AML compliance</p></div>
-        <div class="card"><i class="fas fa-chart-simple" style="font-size: 24px; margin-bottom: 12px; color: #0071e3;"></i><h3>Process Optimization</h3><p>KPI tracking, QC frameworks, efficiency analysis</p></div>
+        <div class="card"><i class="fas fa-chart-line" style="font-size: 24px; margin-bottom: 16px; color: #0071e3;"></i><h3>Business Analysis</h3><p>Requirements gathering, process mapping, stakeholder management</p></div>
+        <div class="card"><i class="fas fa-robot" style="font-size: 24px; margin-bottom: 16px; color: #0071e3;"></i><h3>AI Workflow Automation</h3><p>LLM pipelines, prompt engineering, workflow orchestration</p></div>
+        <div class="card"><i class="fas fa-shield-alt" style="font-size: 24px; margin-bottom: 16px; color: #0071e3;"></i><h3>BFSI Operations</h3><p>Insurance claims, Guidewire, KYC/AML compliance</p></div>
+        <div class="card"><i class="fas fa-chart-simple" style="font-size: 24px; margin-bottom: 16px; color: #0071e3;"></i><h3>Process Optimization</h3><p>KPI tracking, QC frameworks, efficiency analysis</p></div>
       </div>
     </section>
 
-    <!-- Experience -->
     <section id="experience" class="container reveal">
       <div class="card">
-        <h2 style="margin-bottom: 24px;">Professional Experience</h2>
-        <div style="margin-bottom: 24px;">
-          <h3 style="font-weight: 600;">Process Associate — AI Workflow & Automation Lead</h3>
-          <p style="color: #6e6e73; margin-bottom: 12px;">HCL Technologies — USAA Insurance Project • Jan 2023 – Present</p>
-          <ul style="padding-left: 20px; color: #1d1d1f;">
+        <h2>Professional Experience</h2>
+        <div style="margin-bottom: 32px;">
+          <h3>Process Associate — AI Workflow & Automation Lead</h3>
+          <div class="meta-text">HCL Technologies — USAA Insurance Project • Jan 2023 – Present</div>
+          <ul class="experience-list">
             <li>First AI automation → 40% reduction in manual claims processing time</li>
             <li>99.2% claims accuracy maintained across 6,000+ transactions</li>
             <li>QC frameworks reducing rework errors by 25% across analyst team</li>
           </ul>
         </div>
         <div>
-          <h3 style="font-weight: 600;">AI Workflow Developer (Independent)</h3>
-          <p style="color: #6e6e73; margin-bottom: 12px;">TRAS — Resume-to-Job Match Analyzer • 2024–2025</p>
-          <ul style="padding-left: 20px;">
+          <h3>AI Workflow Developer (Independent)</h3>
+          <div class="meta-text">TRAS — Resume-to-Job Match Analyzer • 2024–2025</div>
+          <ul class="experience-list">
             <li>Built web-based tool with Google Gemini API for Business Analyst roles</li>
             <li>ATS compatibility check, keyword detection, resume improvement suggestions</li>
           </ul>
@@ -437,58 +455,55 @@
       </div>
     </section>
 
-    <!-- Projects -->
     <section id="projects" class="container reveal">
       <div class="section-header">
         <h2>Featured Projects</h2>
       </div>
       <div class="grid-2">
         <div class="card">
-          <i class="fas fa-chart-simple" style="font-size: 24px; margin-bottom: 12px; color: #0071e3;"></i>
+          <i class="fas fa-chart-simple" style="font-size: 24px; margin-bottom: 16px; color: #0071e3;"></i>
           <h3>🎯 TRAS AI</h3>
-          <p style="margin: 8px 0;">Gemini-powered resume-to-job match analyzer. ATS compatibility, skill gap analysis, improvement suggestions.</p>
-          <div style="display: flex; gap: 8px; margin: 12px 0;"><span class="badge">Gemini API</span><span class="badge">HTML/CSS/JS</span></div>
+          <p style="margin: 12px 0;">Gemini-powered resume-to-job match analyzer. ATS compatibility, skill gap analysis, improvement suggestions.</p>
+          <div style="display: flex; gap: 8px; margin: 16px 0;"><span class="badge">Gemini API</span><span class="badge">HTML/CSS/JS</span></div>
           <a href="tras.html" style="color: #0071e3; font-weight: 500;">Try Tool →</a>
         </div>
         <div class="card">
-          <i class="fas fa-search" style="font-size: 24px; margin-bottom: 12px; color: #0071e3;"></i>
+          <i class="fas fa-search" style="font-size: 24px; margin-bottom: 16px; color: #0071e3;"></i>
           <h3>🇪🇺 EU Job Hunter AI</h3>
-          <p style="margin: 8px 0;">GitHub Actions workflow analyzing CV-JD fit for Luxembourg, Netherlands, and Ireland roles.</p>
-          <div style="display: flex; gap: 8px; margin: 12px 0;"><span class="badge">GitHub Actions</span><span class="badge">Python</span><span class="badge">Qwen-Max</span></div>
+          <p style="margin: 12px 0;">GitHub Actions workflow analyzing CV-JD fit for Luxembourg, Netherlands, and Ireland roles.</p>
+          <div style="display: flex; gap: 8px; margin: 16px 0;"><span class="badge">GitHub Actions</span><span class="badge">Python</span><span class="badge">Qwen-Max</span></div>
           <a href="https://github.com/pkswaminathan001/Luxembourg" target="_blank" style="color: #0071e3; font-weight: 500;">View Repository →</a>
         </div>
       </div>
     </section>
 
-    <!-- Visa Sponsorship -->
     <section id="visa" class="container reveal">
       <div class="section-header">
         <h2>Visa Sponsorship Path</h2>
       </div>
       <div class="grid-3">
-        <div class="card"><i class="fas fa-wind" style="font-size: 24px; margin-bottom: 12px; color: #0071e3;"></i><h3>🇳🇱 Netherlands</h3><p>Highly Skilled Migrant (Kennismigrant). Sponsors: ING, Rabobank, NN, Aegon, Adyen.</p></div>
-        <div class="card"><i class="fas fa-music" style="font-size: 24px; margin-bottom: 12px; color: #0071e3;"></i><h3>🇮🇪 Ireland</h3><p>Critical Skills Employment Permit. AI on eligible list.</p></div>
-        <div class="card"><i class="fas fa-flag-checkered" style="font-size: 24px; margin-bottom: 12px; color: #0071e3;"></i><h3>🇱🇺 Luxembourg</h3><p>EU Blue Card. Finance hub, English-friendly.</p></div>
+        <div class="card"><i class="fas fa-wind" style="font-size: 24px; margin-bottom: 16px; color: #0071e3;"></i><h3>🇳🇱 Netherlands</h3><p>Highly Skilled Migrant (Kennismigrant). Sponsors: ING, Rabobank, NN, Aegon, Adyen.</p></div>
+        <div class="card"><i class="fas fa-music" style="font-size: 24px; margin-bottom: 16px; color: #0071e3;"></i><h3>🇮🇪 Ireland</h3><p>Critical Skills Employment Permit. AI on eligible list.</p></div>
+        <div class="card"><i class="fas fa-flag-checkered" style="font-size: 24px; margin-bottom: 16px; color: #0071e3;"></i><h3>🇱🇺 Luxembourg</h3><p>EU Blue Card. Finance hub, English-friendly.</p></div>
       </div>
     </section>
 
-    <!-- Let's Connect -->
     <section class="container reveal" style="text-align: center;">
       <div class="card">
-        <h2 style="margin-bottom: 16px;">Let's Connect</h2>
-        <p style="margin-bottom: 24px;">Open to Business Analyst, Process Analyst, or Operations Analyst roles in Luxembourg, Netherlands, or Ireland.</p>
-        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;">
+        <h2>Let's Connect</h2>
+        <p style="margin: 16px 0 32px;">Open to Business Analyst, Process Analyst, or Operations Analyst roles in Luxembourg, Netherlands, or Ireland.</p>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 16px;">
           <a href="mailto:prswaminathan001@gmail.com" class="btn-primary"><i class="fas fa-envelope"></i> prswaminathan001@gmail.com</a>
           <a href="https://linkedin.com/in/prswaminathan" target="_blank" class="btn-outline"><i class="fab fa-linkedin"></i> LinkedIn</a>
           <a href="https://github.com/pkswaminathan001" target="_blank" class="btn-outline"><i class="fab fa-github"></i> GitHub</a>
         </div>
-        <p style="margin-top: 24px; color: #6e6e73; font-size: 0.8rem;">🌍 Based in India • CET/BST overlap ready • Open to hybrid relocation</p>
+        <p style="margin-top: 32px; color: #6e6e73; font-size: 0.8rem;">🌍 Based in India • CET/BST overlap ready • Open to hybrid relocation</p>
       </div>
     </section>
   </main>
 
   <footer class="container">
-    <p>© 2026 PR Swaminathan. Built with care.</p>
+    <p>© 2026 PR Swaminathan. Designed for clarity and impact.</p>
   </footer>
 
   <script>
