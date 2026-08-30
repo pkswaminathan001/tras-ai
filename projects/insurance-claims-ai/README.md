@@ -17,6 +17,8 @@ Accident / Police Report
           v
 Extraction + normalization
           |
+          +---- optional LLM extraction
+          |
           v
  Structured ClaimRecord
           |
@@ -31,7 +33,7 @@ Validation + mismatch detection
              Human analyst
 ```
 
-The public MVP keeps extraction deterministic so the repository runs without an API key. The extraction boundary is intentionally isolated, making a future LLM adapter replaceable without changing validation and review logic.
+The default path is deterministic, so reviewers can run it without an API key. `llm_adapter.py` adds an optional OpenAI Responses API extraction path using strict JSON schema output; the same validation and review layer is applied afterward.
 
 ## Extracted fields
 
@@ -50,6 +52,15 @@ pytest -q
 python benchmark.py
 ```
 
+### Optional LLM mode
+
+```bash
+export OPENAI_API_KEY="your-key"
+python demo.py --llm
+```
+
+The model can be changed with `OPENAI_MODEL`; the default is `gpt-5.6-luna` for a cost-sensitive extraction workload.
+
 ## Web demo
 
 ```bash
@@ -62,23 +73,23 @@ Open `http://127.0.0.1:8000`. Paste a report, run analysis, and inspect the stru
 
 The included benchmark contains synthetic cases covering exact matches, field mismatches, and missing fields. It is a regression test for workflow behavior, **not** a claim of production model accuracy.
 
-Current local benchmark: **4/4 expected workflow outcomes (100%)** across the four included synthetic cases.
+Current benchmark: **4/4 expected workflow outcomes (100%)** across four synthetic cases.
 
 ## Engineering decisions
 
-- **Offline-first:** reviewers can run the demo without a model API key.
-- **Validation-first:** AI/extracted data is treated as a proposal and compared against reference data.
-- **Human-in-the-loop:** mismatches and incomplete records are routed to review.
+- **Offline-first:** reviewers can run the core workflow without a model API key.
+- **LLM as an adapter:** model-specific logic is isolated from business validation.
+- **Validation-first:** extracted values are proposals that must pass checks.
+- **Human-in-the-loop:** mismatches and incomplete records are routed for review.
 - **Synthetic public data:** no confidential employer or customer documents are included.
-- **Provider boundary:** model-specific logic can be added without coupling it to business validation.
 
 ## Impact evidence
 
 My professional insurance-operations work motivated this design. I have reported approximately **40% processing-time reduction** and **25% reduction in rework/errors** for an AI-assisted workflow. Those are experience-based figures and are not represented as benchmark measurements from this repository.
 
-## Next production-oriented increments
+## Production-oriented roadmap
 
-PDF ingestion, OCR adapter, optional LLM structured extraction, field-level provenance, persistent review queue, batch API, and a richer operations dashboard.
+PDF ingestion → OCR → LLM extraction → field-level provenance → persistent review queue → batch processing → richer operations dashboard → model evaluation and regression suite.
 
 ## Important scope note
 
