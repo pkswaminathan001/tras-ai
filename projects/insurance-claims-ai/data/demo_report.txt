@@ -1,0 +1,8 @@
+# Demo report
+VIN: 1HGCM82633A004352
+Make: Honda
+Model: Accord
+Drivable: No
+Insured Name: Arun Kumar
+Tow Location: Chennai Central Yard
+Impact Point: Front-left
